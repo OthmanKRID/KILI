@@ -1,0 +1,26 @@
+﻿@model Kili.Models.Vente.Catalogue
+
+@{
+    Layout = null;
+    
+}
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Créer votre catalogue de produits </legend><br />
+        @Html.LabelFor(c => Model.CatalogueName)
+        @Html.TextBoxFor(c => Model.CatalogueName)
+        @Html.ValidationMessageFor(c => Model.CatalogueName)
+        <br /><br />
+        @Html.LabelFor(c => Model.Description)
+        @Html.TextAreaFor(c => Model.Description)
+        @Html.ValidationMessageFor(c => Model.Description)
+        <br /><br />
+        <input type="submit" value="Créer" />
+
+
+    </fieldset>
+     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}

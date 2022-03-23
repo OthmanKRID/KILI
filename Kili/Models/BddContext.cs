@@ -1,5 +1,6 @@
 ﻿using Kili.Models.General;
 using Microsoft.EntityFrameworkCore;
+using Kili.Models.Vente;
 
 namespace Kili.Models
 {
@@ -9,9 +10,14 @@ namespace Kili.Models
         public DbSet<Association> Associations { get; set; }
         public DbSet<Adresse> Adresses { get; set; }
 
+        //Vente 
+        public DbSet<Produit> Produits { get; set; }
+        public DbSet<Catalogue> Catalogues { get; set; }
+        
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=Kili");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=RRRRR;database=BDDKili");
         }
 
         public void InitializeDb()
