@@ -1,0 +1,46 @@
+﻿@using Kili.Models.General
+@model Kili.ViewModels.CreerAssociationViewModel
+
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "AjouterAssociation";
+}
+
+    <h1>
+       Créer une association
+    </h1>
+
+    <p>
+        Compléter les champs ci-dessous :
+    </p>
+@using (Html.BeginForm("AjouterAssociation","Association"))
+{
+    <fieldset>
+        <Label>Nom de l'association</Label>
+        @Html.TextBoxFor(m => m.association.Nom)
+        @Html.ValidationMessageFor(m => m.association.Nom)
+        <br />
+        <Label>Adresse de l'association</Label><br />
+        <Label>Numéro :</Label>
+        @Html.TextBoxFor(m => m.association.Adresse.Numero)
+        <Label>Voie :</Label>
+        @Html.TextBoxFor(m => m.association.Adresse.Voie)<br />
+        <Label>Compléments :</Label>
+        @Html.TextBoxFor(m => m.association.Adresse.Complement)<br />
+        <Label>Code Postal :</Label>
+        @Html.TextBoxFor(m => m.association.Adresse.CodePostal)
+        <Label>Ville :</Label>
+        @Html.TextBoxFor(m => m.association.Adresse.Ville)<br /><br />
+        <Label>Thème :</Label>
+        @Html.DropDownListFor(m => m.association.Theme, new SelectList(Enum.GetValues(typeof(ThemeAssociation))), "Choisir le thème")<br /><br />
+        @Html.HiddenFor(m => m.association.UserAccountId);
+        <br />
+        <input type="submit" value="Continuer" />
+    </fieldset>
+
+}
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+

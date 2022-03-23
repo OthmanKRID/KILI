@@ -1,0 +1,35 @@
+﻿@model Kili.ViewModels.UserAccountViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Authentification";
+}
+
+@if (Model.Authentifie)
+{
+    <h3>
+        Vous êtes déjà authentifié avec le login :
+        @Model.UserAccount.UserName
+    </h3>
+    @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
+}
+else
+{
+    <p>
+        Veuillez vous authentifier :
+    </p>
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Connexion : </legend>
+        @Html.LabelFor(m => m.UserAccount.UserName)
+        @Html.TextBoxFor(m => m.UserAccount.UserName)
+        @Html.ValidationMessageFor(m => m.UserAccount.UserName)
+        <br />
+        @Html.LabelFor(m => m.UserAccount.Password)
+        @Html.PasswordFor(m => m.UserAccount.Password)
+        @Html.ValidationMessageFor(m => m.UserAccount.Password)
+        <br />
+        <input type="submit" value="Se Connecter..." />
+    </fieldset>
+}
+}

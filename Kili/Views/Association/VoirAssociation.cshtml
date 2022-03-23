@@ -1,0 +1,27 @@
+﻿@model Kili.ViewModels.CreerAssociationViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Détails Association";
+}
+
+    <h1>
+       Détails de l'association
+    </h1>
+
+    <p>
+    
+    </p>
+
+        <Label>Nom de l'association : @Model.association.Nom</Label><br /><br />
+        <Label>Adresse de l'association : @Model.association.Adresse.Numero, </Label><Label>@Model.association.Adresse.Voie</Label><br />
+        @if (@Model.association.Adresse.Complement != null)
+        {
+        <Label>                           @Model.association.Adresse.Complement</Label><br />
+        }
+        <Label>@Model.association.Adresse.CodePostal @Model.association.Adresse.Ville</Label><br /><br /><br />
+        <Label>Thème : @Model.association.Theme</Label>
+        <br />
+        @Html.ActionLink("Modifier", "ModifierAssociation")
+        @Html.ActionLink("Index", "Home")
+
+}
