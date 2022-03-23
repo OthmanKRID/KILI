@@ -3,9 +3,18 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="~/css/Content/Image/favicon.ico">
     <title>@ViewBag.Title</title>
+    <link href="~/css/SiteGeneral.css" rel="stylesheet" />
 </head>
 <body>
+    <div id="menu">
+            <ul>
+                <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
+                <li>@Html.ActionLink("Accéder à son compte", "Authentification", "Login")</li>
+                <li>@Html.ActionLink("Créer son compte", "CreerUserAccount", "UserAccount")</li>
+            </ul>
+        </div><br />
     <div>
         @RenderBody()
     </div>

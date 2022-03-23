@@ -1,4 +1,5 @@
-﻿using Kili.Models.General;
+﻿using Kili.Models.Dons;
+using Kili.Models.General;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kili.Models
@@ -8,10 +9,12 @@ namespace Kili.Models
         public DbSet<UserAccount> UserAccounts { get; set; }
         public DbSet<Association> Associations { get; set; }
         public DbSet<Adresse> Adresses { get; set; }
+        public DbSet<Don> Dons { get; set; }
+        public DbSet<Donateur> Donateurs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=Kili");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=P@ssw0rd5;database=Kili");
         }
 
         public void InitializeDb()

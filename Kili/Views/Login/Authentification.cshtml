@@ -11,6 +11,8 @@
         @Model.UserAccount.UserName
     </h3>
     @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
+     <br/>
+    @Html.ActionLink("Mon profil", "ModifierUserAccount", "UserAccount",new { id = Model.UserAccount.Id })
 }
 else
 {
