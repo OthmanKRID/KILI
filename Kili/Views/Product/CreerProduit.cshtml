@@ -1,0 +1,42 @@
+﻿@model Kili.Models.Vente.Produit
+
+@{
+    Layout = null;
+    
+}
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Créer votre produit </legend><br />
+        @Html.LabelFor(p => p.Designation)
+        @Html.TextBoxFor(p=> p.Designation)
+        @Html.ValidationMessageFor(p=> p.Designation)
+        <br /><br />
+        @Html.LabelFor(p=> p.Format)
+        @Html.TextBoxFor(p=>p.Format)
+        @Html.ValidationMessageFor(p =>p.Format)
+        <br /><br />
+        @Html.LabelFor(p=> p.Description)
+        @Html.TextAreaFor(p=> p.Description)
+        @Html.ValidationMessageFor(p=> p.Description)
+        <br /><br />
+        @Html.LabelFor(p=> p.PrixUnitaire)
+        @Html.TextBoxFor(p=> p.PrixUnitaire)
+        @Html.ValidationMessageFor(p=>p.PrixUnitaire)
+        <br /><br />
+        @Html.LabelFor(p=>p.Devise)
+        @Html.TextBoxFor(p=>p.Devise)
+        @Html.ValidationMessageFor(p=>p.Devise)
+        <br /><br />
+        @Html.LabelFor(p=>p.CatalogueID)
+        @Html.TextBoxFor(p=>p.CatalogueID)
+        @Html.ValidationMessageFor(p=>p.PrixUnitaire)
+        <br /><br />
+        <input type="submit" value="Créer" />
+
+
+    </fieldset>
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}

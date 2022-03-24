@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Bruno\\Repository projet 2\\KILI\\Kili\\Kili.csproj": {}
+    "C:\\Users\\tolot\\source\\repos\\KILI NEW GITHUB\\Kili\\Kili.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Bruno\\Repository projet 2\\KILI\\Kili\\Kili.csproj": {
+    "C:\\Users\\tolot\\source\\repos\\KILI NEW GITHUB\\Kili\\Kili.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Bruno\\Repository projet 2\\KILI\\Kili\\Kili.csproj",
+        "projectUniqueName": "C:\\Users\\tolot\\source\\repos\\KILI NEW GITHUB\\Kili\\Kili.csproj",
         "projectName": "Kili",
-        "projectPath": "C:\\Users\\Bruno\\Repository projet 2\\KILI\\Kili\\Kili.csproj",
-        "packagesPath": "C:\\Users\\Bruno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Bruno\\Repository projet 2\\KILI\\Kili\\obj\\",
+        "projectPath": "C:\\Users\\tolot\\source\\repos\\KILI NEW GITHUB\\Kili\\Kili.csproj",
+        "packagesPath": "C:\\Users\\tolot\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tolot\\source\\repos\\KILI NEW GITHUB\\Kili\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Bruno\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tolot\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,6 +44,26 @@
               "target": "Package",
               "version": "[6.4.4, )"
             },
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Http.Extensions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Razor.Design": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Razor.Language": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.15, )"
@@ -54,13 +74,25 @@
               "target": "Package",
               "version": "[3.1.15, )"
             },
+            "Microsoft.NETCore.App": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.5, )"
             },
+            "OwinRequestScopeContext": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[3.2.5, )"
+            },
+            "System.Web.Http.Common": {
+              "target": "Package",
+              "version": "[4.0.20126.16343, )"
             }
           },
           "imports": [
