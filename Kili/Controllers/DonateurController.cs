@@ -1,4 +1,6 @@
-﻿using Kili.Models.Dons;
+﻿using Kili.Models;
+using Kili.Models.Dons;
+using Kili.Models.General;
 using Kili.Models.Services;
 using Kili.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +10,7 @@ namespace Kili.Controllers
 {
     public class DonateurController : Controller
     {
-        public IActionResult CreerDon()
+        public IActionResult CreerDonateur()
         {
 
             return View();
@@ -19,12 +21,19 @@ namespace Kili.Controllers
         public IActionResult CreerDonateur(DonateurViewModel viewModel)
         {
             //if (!ModelState.IsValid) { 
+            UserAccount_Services userAccount_Services = new UserAccount_Services();
+            UserAccount user = new UserAccount();
+            user = userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
+            
 
             DonServices donServices = new DonServices();
             {
-                int id = donServices.CreerDonateur(viewModel.Donateur.AdresseFacuration, viewModel.Donateur.Telephone, viewModel.Donateur.UserAccountId);
+                int id = donServices.CreerDonateur(viewModel.Donateur.AdresseFacuration, viewModel.Donateur.Telephone, user.Id);
+                
+                // Ne semble pas fonctionner
+                userAccount_Services.AjouterDonateur(user.Id, id);
 
-                return Redirect("/home/index");
+                return Redirect("/don/creerdon");
             }
             // } return View();
         }
@@ -48,7 +57,7 @@ namespace Kili.Controllers
             return View("Error");
         }
 
-        public IActionResult AfficherDons()
+        public IActionResult AfficherDonateurs()
         {
             DonServices donServices = new DonServices();
             {

@@ -1,23 +1,43 @@
-﻿using Kili.Models.Dons;
+﻿using Kili.Models;
+using Kili.Models.Dons;
 using Kili.Models.Services;
 using Kili.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using Kili.Models.General;
 
 namespace Kili.Controllers
 {
     //[Authorize]
     public class DonController : Controller 
-    { 
-            
+    {
 
         public IActionResult CreerDon()
         {
+            UserAccount_Services UserAccount_Services = new UserAccount_Services();
+            DonServices donServices = new DonServices();
 
-        return View();
+            UserAccountViewModel viewModel = new UserAccountViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
+            DonViewModel donviewModel = new DonViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
+            if (viewModel.Authentifie)
+            {
+                viewModel.UserAccount = UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
+
+                                
+                Donateur donateur = donServices.ObtenirDonateurs().Where(r => r.UserAccountId == viewModel.UserAccount.Id).FirstOrDefault();
+
+                if (donateur == null)
+                {
+                    return Redirect("/donateur/creerdonateur");
+                }
+
+                return View(donviewModel);
+            }
+            return Redirect("/login/authentification");
         }
 
 

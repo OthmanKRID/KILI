@@ -1,4 +1,5 @@
 ﻿using Kili.Models.General;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Kili.Models.Dons
@@ -13,6 +14,8 @@ namespace Kili.Models.Dons
         //public string Mail { get; set; }
         public int? UserAccountId { get; set; }
         public virtual UserAccount UserAccount { get; set; }
+
+        public ICollection<Don> Dons { get; set; }
 
     }
 }
