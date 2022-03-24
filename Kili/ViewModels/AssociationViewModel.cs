@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace Kili.ViewModels
 {
-    public class CreerAssociationViewModel
+    public class AssociationViewModel
     {
+        public List<Association> Associations { get; set; }
         public Association association { get; set; }
-        //public UserAccount AssociationAccount { get; set; }
+
         public bool Authentifie { get; set; }
+
+        public AssociationViewModel()
+        {
+            association = new Association();
+        }
     }
 }

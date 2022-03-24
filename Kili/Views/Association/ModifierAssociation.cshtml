@@ -1,5 +1,5 @@
 ﻿@using Kili.Models.General
-@model Kili.ViewModels.CreerAssociationViewModel
+@model Kili.Models.General.Association
 
 
 @{
@@ -18,24 +18,24 @@
 {
     <fieldset>
         <Label>Nom de l'association</Label>
-        @Html.TextBoxFor(m => m.association.Nom)
-        @Html.ValidationMessageFor(m => m.association.Nom)
+        @Html.TextBoxFor(m => m.Nom)
+        @Html.ValidationMessageFor(m => m.Nom)
         <br /><br />
         <Label>Adresse de l'association</Label><br />
         <Label>Numéro :</Label>
-        @Html.TextBoxFor(m => m.association.Adresse.Numero)
+        @Html.TextBoxFor(m => m.Adresse.Numero)
         <Label>Voie :</Label>
-        @Html.TextBoxFor(m => m.association.Adresse.Voie)<br />
+        @Html.TextBoxFor(m => m.Adresse.Voie)<br />
         <Label>Compléments :</Label>
-        @Html.TextBoxFor(m => m.association.Adresse.Complement)<br />
+        @Html.TextBoxFor(m => m.Adresse.Complement)<br />
         <Label>Code Postal :</Label>
-        @Html.TextBoxFor(m => m.association.Adresse.CodePostal)
+        @Html.TextBoxFor(m => m.Adresse.CodePostal)
         <Label>Ville :</Label>
-        @Html.TextBoxFor(m => m.association.Adresse.Ville)<br /><br />
+        @Html.TextBoxFor(m => m.Adresse.Ville)<br /><br />
         <Label>Thème :</Label>
-        @Html.DropDownListFor(m => m.association.Theme, new SelectList(Enum.GetValues(typeof(ThemeAssociation))), "Choisir le thème")<br /><br />
-        @Html.HiddenFor(m => m.association.Id);
-        @Html.HiddenFor(m => m.association.AdresseId);
+        @Html.DropDownListFor(m => m.Theme, new SelectList(Enum.GetValues(typeof(ThemeAssociation))), "Choisir le thème")<br /><br />
+        @Html.HiddenFor(m => m.Id);
+        @Html.HiddenFor(m => m.AdresseId);
         <br />
         <input type="submit" value="Enregistrer" />
     </fieldset>

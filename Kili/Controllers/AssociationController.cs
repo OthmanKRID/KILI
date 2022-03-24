@@ -2,6 +2,7 @@
 using Kili.Models.General;
 using Kili.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Kili.Controllers
@@ -11,13 +12,17 @@ namespace Kili.Controllers
         private Association_Services Association_Services;
         private UserAccount_Services UserAccount_Services;
         private Adresse_Services Adresse_Services;
+        private Abonnement_Services Abonnement_Services;
 
         public AssociationController()
         {
             Association_Services = new Association_Services();
             UserAccount_Services = new UserAccount_Services();
             Adresse_Services = new Adresse_Services();
+            Abonnement_Services = new Abonnement_Services();
         }
+
+
 
         //Fonction GET permettant d'afficher le formulaire de création du compte associé à l'association
         public IActionResult AjouterCompteAssociation()
@@ -30,68 +35,86 @@ namespace Kili.Controllers
         [HttpPost]
         public IActionResult AjouterCompteAssociation(UserAccountViewModel viewModelUser, string returnUrl)
         {
-
-                ViewModels.CreerAssociationViewModel viewModelAsso = new CreerAssociationViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated, association = new Association() };
-                viewModelAsso.association.UserAccountId = UserAccount_Services.CreerUserAccount(viewModelUser.UserAccount.UserName, viewModelUser.UserAccount.Password, viewModelUser.UserAccount.Mail, TypeRole.Association);
-                return View("AjouterAssociation", viewModelAsso); 
+            Association association = new Association();
+            association.UserAccountId = UserAccount_Services.CreerUserAccount(viewModelUser.UserAccount.UserName, viewModelUser.UserAccount.Password, viewModelUser.UserAccount.Mail, TypeRole.Association);
+            return View("AjouterAssociation", association); 
         }
 
         //Fonction GET permettant d'afficher le formulaire de création de l'association
-        public IActionResult AjouterAssociation(CreerAssociationViewModel viewModelAsso)
+        public IActionResult AjouterAssociation(Association association)
         {            
-            return View(viewModelAsso);
+            return View(association);
         }
 
         //Fonction POST permettant de récupérer les données du formulaire et de créer l'association
         [HttpPost]
-        public IActionResult AjouterAssociation(CreerAssociationViewModel viewModel, string returnUrl)
+        public IActionResult AjouterAssociation(Association association, string returnUrl)
         {
-            //if (ModelState.IsValid)
-            //{                
-               Association_Services.CreerAssociation(viewModel.association.Nom, viewModel.association.Adresse, viewModel.association.Theme, viewModel.association.UserAccountId);
-            //}
+         
+            Association_Services.CreerAssociation(association.Nom, association.Adresse, association.Theme, association.UserAccountId);
 
             ViewModels.UserAccountViewModel viewModelUser = new ViewModels.UserAccountViewModel() { Authentifie = HttpContext.User.Identity.IsAuthenticated/*, Urlretour = "../Association/VoirAssociation" */};
             return RedirectToAction("Authentification","Login");
         }
 
-        //Fonction GET permettant d'afficher les informations de l'association
-        public IActionResult VoirAssociation()
+        //Fonction GET permettant d'afficher les informations de l'association du compte connecté
+        public IActionResult VoirInfosAssociation()
         {
-            UserAccount compteConnecte = new UserAccount();
-            compteConnecte = UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
+            Association association = Association_Services.ObtenirAssociationDuCompteConnecte(HttpContext.User.Identity.Name);
+            association.Adresse = Adresse_Services.ObtenirAdresses().Where(r => r.Id == association.AdresseId).FirstOrDefault();
+           
+            return View(association);
 
-            CreerAssociationViewModel viewModelAsso = new CreerAssociationViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated, association = Association_Services.ObtenirAssociations().Where(r => r.UserAccountId == compteConnecte.Id).FirstOrDefault() };
-            viewModelAsso.association.Adresse = Adresse_Services.ObtenirAdresses().Where(r => r.Id == viewModelAsso.association.AdresseId).FirstOrDefault();
-          
-            if (viewModelAsso.Authentifie)
-            {
-                return View(viewModelAsso);
-            }
-            return RedirectToAction("Authentification", "Login");
         }
 
-       public IActionResult ModifierAssociation()
+        //Fonction GET permettant de modifier les informations de l'association du compte connecté
+        public IActionResult ModifierAssociation()
         {
-            UserAccount compteConnecte = new UserAccount();
-            compteConnecte = UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
-
-            CreerAssociationViewModel viewModelAsso = new CreerAssociationViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated, association = Association_Services.ObtenirAssociations().Where(r => r.UserAccountId == compteConnecte.Id).FirstOrDefault() };
-            viewModelAsso.association.Adresse = Adresse_Services.ObtenirAdresses().Where(r => r.Id == viewModelAsso.association.AdresseId).FirstOrDefault();
+            Association association = Association_Services.ObtenirAssociationDuCompteConnecte(HttpContext.User.Identity.Name);
+            association.Adresse = Adresse_Services.ObtenirAdresses().Where(r => r.Id == association.AdresseId).FirstOrDefault();
             
-            if (viewModelAsso.Authentifie)
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
-                return View(viewModelAsso);               
+                return View(association);               
             }
             return RedirectToAction("Authentification", "Login");          
         }
 
+        //Fonction POST permettant de récupérer les modifications sur les informations de l'association du compte connecté
         [HttpPost]
-        public IActionResult ModifierAssociation(CreerAssociationViewModel viewModelAsso)
+        public IActionResult ModifierAssociation(Association association)
         {
-           Association_Services.ModifierAssociation(viewModelAsso.association.Id, viewModelAsso.association.Nom, viewModelAsso.association.Adresse, viewModelAsso.association.Theme);
-           //Adresse_Services.ModifierAdresse(viewModelAsso.association.AdresseId, viewModelAsso.association.Adresse);
-            return RedirectToAction("Authentification", "Login");
+           Association_Services.ModifierAssociation(association.Id, association.Nom, association.Adresse, association.Theme);
+           return RedirectToAction("Authentification", "Login");
+        }
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+        /// Gérér les services d'une association
+        //////////////////////////////////////////////////////////////////////////////////////////
+
+        public IActionResult VoirServices()
+        {
+            Abonnement abonnement = Abonnement_Services.ObtenirAbonnementDuCompteConnecte(HttpContext.User.Identity.Name);
+            ServicesViewModel viewModel = new ServicesViewModel() { abonnement = abonnement };        
+            return View(viewModel);
+        }
+
+        public IActionResult GererServices()
+        {
+            Abonnement abonnement = Abonnement_Services.ObtenirAbonnementDuCompteConnecte(HttpContext.User.Identity.Name);
+            ServicesViewModel viewModel = new ServicesViewModel() { abonnement = abonnement};
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult GererServices(ServicesViewModel viewModel)
+        {
+            Abonnement abonnement = Abonnement_Services.ObtenirAbonnementDuCompteConnecte(HttpContext.User.Identity.Name);
+            Abonnement_Services.AjouterServiceAdhesion(abonnement.Id, viewModel.ServiceAdhesion.duree);
+            viewModel.abonnement = abonnement;
+            viewModel.ServiceAdhesion = abonnement.serviceAdhesion;
+            return View("VoirServices", viewModel);
         }
 
     }

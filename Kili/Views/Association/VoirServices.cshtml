@@ -1,0 +1,26 @@
+﻿@using Kili.Models.General
+@model Kili.ViewModels.ServicesViewModel
+
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "GererServices";
+}
+
+    <h1>
+       Mes Services
+    </h1>
+
+    <p>
+        Mes services :
+    </p>
+    @if(@Model.abonnement.ServiceAdhesionId != null){
+    <Label>Services adhésion          --    </Label> <Label>Date de Fin : @Model.ServiceAdhesion.dateFinAbonnement</Label>
+    }
+    <br />
+    <br />
+
+
+    @Html.ActionLink("Gerer mes Services", "GererServices")
+
+

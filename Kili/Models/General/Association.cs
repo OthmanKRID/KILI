@@ -19,10 +19,36 @@ namespace Kili.Models.General
         public bool Actif { get; set; }
         public int? UserAccountId { get; set; }
         public virtual UserAccount UserAccount { get; set; }
+
+        public int? AbonnementId { get; set; }
+        public virtual Abonnement Abonnement { get; set; }
+
+        public Association()
+        {
+            Adresse = new Adresse();
+            Abonnement = new Abonnement();
+        }
+
     }
+
+
 
     public enum ThemeAssociation
     {
+        Sport,
+        [DefaultValue("Arts et culture")]
+        Arts_et_culture,
+        Environnement,
+        [DefaultValue(" Humanitaire-caritative")]
+        Humanitaire_caritative,
+        [DefaultValue("Club deloisirs")]
+        club_de_loisirs,
+        étudiante
+    }
+
+    public enum RechercheTheme
+    {
+        Tous,
         Sport,
         [DefaultValue("Arts et culture")]
         Arts_et_culture,

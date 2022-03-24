@@ -40,18 +40,6 @@ namespace Kili.Models
             return null;
         }
 
-        //Fonction permettant de créer une association
-        /* public int CreerAssociation(string nomAsso, Adresse adresse, ThemeAssociation Theme, int? IdCompteAsso)
-         {
-             //UserAccount_Services compteAssoUserService = new UserAccount_Services();
-             //int id = compteAssoUserService.CreerUserAccount(compteAsso.UserName, compteAsso.Password, compteAsso.Mail, TypeRole.Association);
-             Association Association = new Association() { Nom = nomAsso, Adresse = adresse, Theme = Theme, Actif = false, UserAccountId= IdCompteAsso };
-
-             _bddContext.Associations.Add(Association);
-             _bddContext.SaveChanges();
-             return Association.Id;
-         }
-        */
         //Fonction permettant de modifier une Adresse
         public void ModifierAdresse(int? id, Adresse NouvelleAdresse)
         {
@@ -67,42 +55,7 @@ namespace Kili.Models
                 _bddContext.SaveChanges();
             }
         }
-        /*
-        //Fonction permettant d'activer une association
-        public void ActiverAssociation(int id)
-        {
-            Association Association = _bddContext.Associations.Find(id);
-
-            if (Association != null)
-            {
-                Association.Actif = true;
-                _bddContext.SaveChanges();
-            }
-        }
-
-        //Fonction permettant de désactiver une association
-        public void DésactiverAssociation(int id)
-        {
-            Association Association = _bddContext.Associations.Find(id);
-
-            if (Association != null)
-            {
-                Association.Actif = false;
-                _bddContext.SaveChanges();
-            }
-        }
-
-        public void SupprimerAssociation(int id)
-        {
-            Association Association = _bddContext.Associations.Find(id);
-
-            if (Association != null)
-            {
-                _bddContext.Associations.Remove(Association);
-                _bddContext.SaveChanges();
-            }
-        }
-        */
+        
 
         public void Dispose()
         {
