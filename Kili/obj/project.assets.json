@@ -7648,19 +7648,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\Bruno\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\Kili\\Kili\\Kili.csproj",
+      "projectUniqueName": "C:\\Users\\Bruno\\Repository projet 2\\Kili\\Kili\\Kili.csproj",
       "projectName": "Kili",
-      "projectPath": "C:\\Users\\User\\Source\\Repos\\Kili\\Kili\\Kili.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Source\\Repos\\Kili\\Kili\\obj\\",
+      "projectPath": "C:\\Users\\Bruno\\Repository projet 2\\Kili\\Kili\\Kili.csproj",
+      "packagesPath": "C:\\Users\\Bruno\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Bruno\\Repository projet 2\\Kili\\Kili\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Bruno\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

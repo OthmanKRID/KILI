@@ -4,6 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Views\Association\AjouterAssociation_old.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Association\AjouterAssociation_old.cshtml" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="EntityFramework" Version="6.4.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.15" />

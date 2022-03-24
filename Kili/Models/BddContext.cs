@@ -21,7 +21,7 @@ namespace Kili.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=P@ssw0rd5;database=Kili");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=Kili");
         }
 
         public void InitializeDb()
@@ -48,17 +48,17 @@ namespace Kili.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<UserAccount>()
-                .HasIndex(p => p.PersonneID)
-                .IsUnique();
+            //modelBuilder.Entity<UserAccount>()
+              //  .HasIndex(p => p.PersonneID)
+                //.IsUnique();
 
             modelBuilder.Entity<Association>()
                 .HasIndex(p => p.UserAccountId)
                 .IsUnique();
 
-            modelBuilder.Entity<Abonnement>()
+/*modelBuilder.Entity<Abonnement>()
                 .HasIndex(p => p.AssociationId)
-                .IsUnique();
+                .IsUnique();*/
 
             modelBuilder.Entity<Donateur>()
                 .HasIndex(p => p.UserAccountId)
