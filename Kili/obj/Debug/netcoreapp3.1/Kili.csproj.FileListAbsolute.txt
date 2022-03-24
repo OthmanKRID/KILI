@@ -551,3 +551,6 @@ C:\Users\User\Source\Repos\Kili\Kili\obj\Debug\netcoreapp3.1\Kili.RazorTargetAss
 C:\Users\User\Source\Repos\Kili\Kili\obj\Debug\netcoreapp3.1\Kili.Views.pdb
 C:\Users\User\Source\Repos\Kili\Kili\obj\Debug\netcoreapp3.1\Kili.csproj.CopyComplete
 C:\Users\User\Source\Repos\Kili\Kili\obj\Debug\netcoreapp3.1\Kili.genruntimeconfig.cache
+C:\Users\User\source\repos\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Don\CreerDon.cshtml.g.cs
+C:\Users\User\source\repos\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Don\AfficherDons.cshtml.g.cs
+C:\Users\User\source\repos\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Don\ModifierDon.cshtml.g.cs

@@ -48,28 +48,29 @@ namespace Kili.Models
         }
 
         //Fonction permettant de créer un UserAccount
-        public int CreerUserAccount(string username, string password, string email, TypeRole role)
+        public int CreerUserAccount(string prenom, string nom, string password, string email, TypeRole role)
         {
             string motDePasse = EncodeMD5(password);
-            UserAccount userAccount = new UserAccount() { UserName = username, Password = motDePasse, Mail = email, DateCreation = System.DateTime.Today, Actif = true, Role = role};
+            UserAccount userAccount = new UserAccount() { Prenom = prenom, Nom = nom, Password = motDePasse, Mail = email, DateCreation = System.DateTime.Today, Actif = true, Role = role};
             _bddContext.UserAccounts.Add(userAccount);
             _bddContext.SaveChanges();
             return userAccount.Id;
         }
 
-        public int CreerAdmin(string username, string password, string email)
+        public int CreerAdmin(string prenom, string nom, string password, string email)
         {
-            return CreerUserAccount(username, password, email, TypeRole.Admin);      
+            return CreerUserAccount(prenom, nom, password, email, TypeRole.Admin);      
         }
 
 
-        public void ModifierUserAccount(int id, string username, string password, string email, TypeRole role)
+        public void ModifierUserAccount(int id, string prenom, string nom, string password, string email, TypeRole role)
         {
             UserAccount userAccount = _bddContext.UserAccounts.Find(id);
 
             if (userAccount != null)
             {
-                userAccount.UserName = username;
+                userAccount.Prenom = prenom;
+                userAccount.Nom = nom;
                 userAccount.Password = password;
                 userAccount.Mail = email;
                 userAccount.Role = role;
@@ -102,7 +103,7 @@ namespace Kili.Models
         public UserAccount Authentifier(string username, string password)
         {
             string motDePasse = EncodeMD5(password);
-            UserAccount user = this._bddContext.UserAccounts.FirstOrDefault(u => u.UserName == username && u.Password == motDePasse);
+            UserAccount user = this._bddContext.UserAccounts.FirstOrDefault(u => u.Prenom == username && u.Password == motDePasse);
             return user;
         }
 
