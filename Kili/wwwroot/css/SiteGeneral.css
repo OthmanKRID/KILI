@@ -1,0 +1,5 @@
+﻿namespace KiliVersion1.wwwroot
+
+header, footer, main {
+    padding: 1px 0;
+}

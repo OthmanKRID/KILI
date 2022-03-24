@@ -1,0 +1,38 @@
+﻿@model Kili.ViewModels.DonateurViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Ajouter Coordonnées";
+}
+
+    <p>
+        Compléter vos coordonnées avec les champs ci-dessous :
+    </p>
+
+@using (Html.BeginForm("CreerDonateur","Donateur"))
+    {
+        <fieldset>
+            <legend>Remplissez les champs correspondants </legend><br />
+            @Html.LabelFor(m => Model.Donateur.AdresseFacuration.Numero)
+            @Html.TextBoxFor(m => Model.Donateur.AdresseFacuration.Numero)
+            <br /><br />
+            @Html.LabelFor(m => Model.Donateur.AdresseFacuration.Voie)
+            @Html.TextBoxFor(m => Model.Donateur.AdresseFacuration.Voie)
+            <br /><br />
+            @Html.LabelFor(m => Model.Donateur.AdresseFacuration.Complement)
+            @Html.TextBoxFor(m => Model.Donateur.AdresseFacuration.Complement)
+            <br /><br />
+            @Html.LabelFor(m => Model.Donateur.AdresseFacuration.CodePostal)
+            @Html.TextBoxFor(m => Model.Donateur.AdresseFacuration.CodePostal)
+            <br /><br />
+            @Html.LabelFor(m => Model.Donateur.AdresseFacuration.Ville)
+            @Html.TextBoxFor(m => Model.Donateur.AdresseFacuration.Ville)
+            <br /><br />
+            @Html.LabelFor(m => Model.Donateur.Telephone)
+            @Html.TextBoxFor(m => Model.Donateur.Telephone)
+            <br /><br />
+            <input type="submit" value="Modifier" />
+            @Html.HiddenFor(m => Model.Donateur.Id)
+        </fieldset>
+    }
+

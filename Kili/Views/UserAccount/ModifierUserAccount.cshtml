@@ -1,0 +1,42 @@
+﻿@model Kili.ViewModels.UserAccountViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Mon profil";
+}
+
+ @using (Html.BeginForm())
+    {
+        <fieldset>
+            <legend>Modifier votre compte utilisateur </legend><br />
+            @Html.LabelFor(m => Model.UserAccount.Prenom)
+            @Html.TextBoxFor(m => Model.UserAccount.Prenom)
+            @Html.ValidationMessageFor(m => Model.UserAccount.Prenom)
+            <br /><br />
+            @Html.LabelFor(m => Model.UserAccount.Nom)
+            @Html.TextBoxFor(m => Model.UserAccount.Nom)
+            @Html.ValidationMessageFor(m => Model.UserAccount.Nom)
+            <br /><br />
+            <label for="pwd">Nouveau mot de passe</label>
+            <input type="password" id="pwd" name="pwd" value="@Model.UserAccount.Password" autocomplete="current-password"> 
+            @Html.ValidationMessageFor(m => Model.UserAccount.Password)
+            <br /><br />
+            <label for="pwd">Confirmer le nouveau mot de passe</label>
+            <input type="password" id="pwd" name="pwd"> 
+            @Html.ValidationMessageFor(pwd => Model.UserAccount.Password)
+            <br /><br />
+            @Html.LabelFor(m => Model.UserAccount.Mail)
+            @Html.TextBoxFor(m => Model.UserAccount.Mail)
+            @Html.ValidationMessageFor(m => Model.UserAccount.Mail)
+            <br /><br />
+            @Html.HiddenFor(m=>Model.UserAccount.Id)
+            <input type="submit" value="Modifier" />
+        </fieldset>
+
+        <br/>
+    @Html.ActionLink("Supprimer mon profil", "SupprimerUserAccount", "UserAccount", new { id = Model.UserAccount.Id })
+    }
+
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
