@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Bruno\\Repository projet 2\\Kili\\Kili\\Kili.csproj": {}
+    "C:\\Users\\romy\\Documents\\ISIKA\\PROJET 2\\KiliProject\\Kili\\Kili.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Bruno\\Repository projet 2\\Kili\\Kili\\Kili.csproj": {
+    "C:\\Users\\romy\\Documents\\ISIKA\\PROJET 2\\KiliProject\\Kili\\Kili.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Bruno\\Repository projet 2\\Kili\\Kili\\Kili.csproj",
+        "projectUniqueName": "C:\\Users\\romy\\Documents\\ISIKA\\PROJET 2\\KiliProject\\Kili\\Kili.csproj",
         "projectName": "Kili",
-        "projectPath": "C:\\Users\\Bruno\\Repository projet 2\\Kili\\Kili\\Kili.csproj",
-        "packagesPath": "C:\\Users\\Bruno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Bruno\\Repository projet 2\\Kili\\Kili\\obj\\",
+        "projectPath": "C:\\Users\\romy\\Documents\\ISIKA\\PROJET 2\\KiliProject\\Kili\\Kili.csproj",
+        "packagesPath": "C:\\Users\\romy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\romy\\Documents\\ISIKA\\PROJET 2\\KiliProject\\Kili\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Bruno\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\romy\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
