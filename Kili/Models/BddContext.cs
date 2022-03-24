@@ -21,7 +21,7 @@ namespace Kili.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=Kili");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=RRRRR;database=MergedKili");
         }
 
         public void InitializeDb()
