@@ -1,0 +1,32 @@
+﻿@model List<Kili.Models.General.Association>
+@using Kili.Models
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Détails Association";
+}
+
+    <h1>
+       Voici toutes les associations partenaires
+    </h1>
+
+    <table border=1> 
+        <tr>
+        <th>Association</th>
+        <th>Localisation</th>
+        <th>Theme</th>
+        </tr>
+        @foreach(var association in Model)
+        {
+            <tr>
+            <td>@association.Nom</td>
+            <td>@association.Adresse.Ville</td>
+            <td>@association.Theme</td>
+            </tr>
+        }
+     </table>
+     <Label>  
+
+      @Html.ActionLink("Home", "Index")
+
+

@@ -1,0 +1,30 @@
+﻿@model Kili.Models.General.Association
+@using Kili.Models
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Détails Association";
+}
+
+    <h1>
+       Détails de l'association
+    </h1>
+
+    <p>
+    
+    </p>
+
+        <Label>Nom de l'association : @Model.Nom</Label><br /><br />
+        <Label>Adresse de l'association : @Model.Adresse.Numero, </Label><Label>@Model.Adresse.Voie</Label><br />
+        @if (@Model.Adresse.Complement != null)
+        {
+        <Label>                           @Model.Adresse.Complement</Label><br />
+        }
+        <Label>@Model.Adresse.CodePostal @Model.Adresse.Ville</Label><br /><br /><br />
+        <Label>Thème : @Model.Theme</Label>
+        <br />
+        @Html.ActionLink("Modifier", "ModifierAssociation")
+        @Html.ActionLink("Mes services", "VoirServices")
+        @Html.ActionLink("Index", "Home")
+
+

@@ -394,7 +394,6 @@ C:\Users\Bruno\Repository projet 2\KILI\Kili\obj\Debug\netcoreapp3.1\Kili.TagHel
 C:\Users\Bruno\Repository projet 2\KILI\Kili\obj\Debug\netcoreapp3.1\Kili.RazorCoreGenerate.cache
 C:\Users\Bruno\Repository projet 2\KILI\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\AjouterAssociation.cshtml.g.cs
 C:\Users\Bruno\Repository projet 2\KILI\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\ModifierAssociation.cshtml.g.cs
-C:\Users\Bruno\Repository projet 2\KILI\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\VoirAssociation.cshtml.g.cs
 C:\Users\Bruno\Repository projet 2\KILI\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Bruno\Repository projet 2\KILI\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Login\Authentification.cshtml.g.cs
 C:\Users\Bruno\Repository projet 2\KILI\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Shared\CreerUserAccount.cshtml.g.cs
@@ -406,6 +405,12 @@ C:\Users\Bruno\Repository projet 2\KILI\Kili\obj\Debug\netcoreapp3.1\Kili.csproj
 C:\Users\Bruno\Repository projet 2\KILI\Kili\obj\Debug\netcoreapp3.1\Kili.dll
 C:\Users\Bruno\Repository projet 2\KILI\Kili\obj\Debug\netcoreapp3.1\Kili.pdb
 C:\Users\Bruno\Repository projet 2\KILI\Kili\obj\Debug\netcoreapp3.1\Kili.genruntimeconfig.cache
+<<<<<<< HEAD
+C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\GererServices.cshtml.g.cs
+C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\VoirServices.cshtml.g.cs
+C:\Users\Bruno\Repository projet 2\KILI\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Home\VoirAssociations.cshtml.g.cs
+C:\Users\Bruno\Repository projet 2\KILI\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\VoirInfosAssociation.cshtml.g.cs
+=======
 C:\Users\User\Source\Repos\Kili\Kili\obj\Debug\netcoreapp3.1\Kili.csproj.AssemblyReference.cache
 C:\Users\User\Source\Repos\Kili\Kili\obj\Debug\netcoreapp3.1\Kili.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\User\Source\Repos\Kili\Kili\obj\Debug\netcoreapp3.1\Kili.AssemblyInfoInputs.cache
@@ -555,3 +560,4 @@ C:\Users\User\source\repos\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Don\Cre
 C:\Users\User\source\repos\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Don\AfficherDons.cshtml.g.cs
 C:\Users\User\source\repos\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Don\ModifierDon.cshtml.g.cs
 C:\Users\User\source\repos\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Donateur\CreerDonateur.cshtml.g.cs
+>>>>>>> 2f408ca13149e637990cf7d21fc9de29fa8d2631

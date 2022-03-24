@@ -33,9 +33,11 @@ namespace Kili
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             using (BddContext _bddContext = new BddContext()) {
-
+<<<<<<< HEAD
                 _bddContext.InitializeDb();
-
+=======
+               _bddContext.InitializeDb();
+>>>>>>> 2f408ca13149e637990cf7d21fc9de29fa8d2631
         };
 
             if (env.IsDevelopment())

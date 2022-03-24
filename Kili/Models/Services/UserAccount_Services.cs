@@ -31,6 +31,12 @@ namespace Kili.Models
             return _bddContext.UserAccounts.Find(id);
         }
 
+        //Fonction permettant d'obtenir un UserAccount à partir de son Id
+        public UserAccount ObtenirUserAccountConnecte(string idUser)
+        {
+            return ObtenirUserAccount(idUser);
+        }
+
         //Fonction permettant d'obtenir un UserAccount à partir de son Id en format string
         public UserAccount ObtenirUserAccount(string idStr)
         {

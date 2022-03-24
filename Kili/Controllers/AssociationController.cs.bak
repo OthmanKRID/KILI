@@ -35,15 +35,16 @@ namespace Kili.Controllers
         [HttpPost]
         public IActionResult AjouterCompteAssociation(UserAccountViewModel viewModelUser, string returnUrl)
         {
+<<<<<<< HEAD
             Association association = new Association();
             association.UserAccountId = UserAccount_Services.CreerUserAccount(viewModelUser.UserAccount.UserName, viewModelUser.UserAccount.Password, viewModelUser.UserAccount.Mail, TypeRole.Association);
             return View("AjouterAssociation", association); 
+=======
 
-
-        //        ViewModels.CreerAssociationViewModel viewModelAsso = new CreerAssociationViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated, association = new Association() };
-        //        viewModelAsso.association.UserAccountId = UserAccount_Services.CreerUserAccount(viewModelUser.UserAccount.Prenom, viewModelUser.UserAccount.Nom, viewModelUser.UserAccount.Password, viewModelUser.UserAccount.Mail, TypeRole.Association);
-        //        return View("AjouterAssociation", viewModelAsso); 
-
+                ViewModels.CreerAssociationViewModel viewModelAsso = new CreerAssociationViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated, association = new Association() };
+                viewModelAsso.association.UserAccountId = UserAccount_Services.CreerUserAccount(viewModelUser.UserAccount.Prenom, viewModelUser.UserAccount.Nom, viewModelUser.UserAccount.Password, viewModelUser.UserAccount.Mail, TypeRole.Association);
+                return View("AjouterAssociation", viewModelAsso); 
+>>>>>>> 2f408ca13149e637990cf7d21fc9de29fa8d2631
         }
 
         //Fonction GET permettant d'afficher le formulaire de création de l'association
