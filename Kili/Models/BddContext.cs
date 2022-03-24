@@ -26,10 +26,10 @@ namespace Kili.Models
 
             //associationServices.CreerAssociation("Première Asso", new Adresse() { Numero = 1, Voie="rue du sport", CodePostal=34000, Ville="Montpellier" }, "Sport", new UserAccount() {UserName="username première asso", Password="aaa",Mail="1ere@mail.com" }); 
 
-            userAccountServices.CreerAdmin("Admin", "Admin", "Kili@mail.com");
-            userAccountServices.CreerUserAccount("Fara", "P@ssFara1", "Fara@gmail.com", TypeRole.Utilisateur);
-            userAccountServices.CreerUserAccount("Romy", "P@ssRomy1", "Romy@gmail.com", TypeRole.Utilisateur);
-            userAccountServices.CreerUserAccount("Othman", "P@ssOthman1", "Othman@gmail.com", TypeRole.Utilisateur);
+            userAccountServices.CreerAdmin("M.","Admin", "Admin", "Kili@mail.com");
+            userAccountServices.CreerUserAccount("Fara", "Raza", "P@ssFara1", "Fara@gmail.com", TypeRole.Utilisateur);
+            userAccountServices.CreerUserAccount("Romy","Kombet", "P@ssRomy1", "Romy@gmail.com", TypeRole.Utilisateur);
+            userAccountServices.CreerUserAccount("Othman","Krid", "P@ssOthman1", "Othman@gmail.com", TypeRole.Utilisateur);
 
 
             userAccountServices.DésactiverUserAccount(1);
@@ -37,12 +37,12 @@ namespace Kili.Models
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserAccount>()
-                .HasIndex(p => p.PersonneID)
-                .IsUnique();
-
             modelBuilder.Entity<Abonnement>()
                 .HasIndex(p => p.AssociationId)
+                .IsUnique();
+
+            modelBuilder.Entity<Donateur>()
+                .HasIndex(p => p.UserAccountId)
                 .IsUnique();
         }
 

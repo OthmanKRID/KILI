@@ -2,10 +2,12 @@
 using Kili.Models.General;
 using Kili.ViewModels;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Kili.Controllers
 {
@@ -14,6 +16,7 @@ namespace Kili.Controllers
         
        public IActionResult CreerUserAccount()
         {
+            
             return View();
         }
 
@@ -25,7 +28,7 @@ namespace Kili.Controllers
 
             UserAccount_Services userAccount_Services = new UserAccount_Services();
             {
-                int id = userAccount_Services.CreerUserAccount(viewModel.UserAccount.UserName, viewModel.UserAccount.Password, viewModel.UserAccount.Mail, viewModel.UserAccount.Role);
+                int id = userAccount_Services.CreerUserAccount(viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Password, viewModel.UserAccount.Mail, viewModel.UserAccount.Role);
 
                 
                  var userClaims = new List<Claim>()
@@ -72,7 +75,8 @@ namespace Kili.Controllers
             {
                 UserAccount_Services userAccount_Services = new UserAccount_Services();
                 {
-                    userAccount_Services.ModifierUserAccount(viewModel.UserAccount.Id, viewModel.UserAccount.UserName, viewModel.UserAccount.Password, viewModel.UserAccount.Mail, viewModel.UserAccount.Role);
+                    userAccount_Services.ModifierUserAccount(viewModel.UserAccount.Id, viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Password, viewModel.UserAccount.Mail, viewModel.UserAccount.Role);
+                    
                     return RedirectToAction("ModifierUserAccount", new { @id = viewModel.UserAccount.Id });
                 }
             }
@@ -124,25 +128,6 @@ namespace Kili.Controllers
         }
 
 
-        /*
-        public IActionResult AfficherActions(int id)
-        {
-            if (id != 0)
-            {
-                UserAccount_Services userAccount_Services = new UserAccount_Services();
-                {
-                    UserAccount userAccount = userAccount_Services.ObtenirUserAccounts().Where(r => r.Id == id).FirstOrDefault();
-                    if (userAccount == null)
-                    {
-                        return View("Error");
-                    }
-                    return View(new UserAccountViewModel() { UserAccount = userAccount });
-                }
-
-            }
-            return View("Error");
-        }
-        */
 
 
 

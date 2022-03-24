@@ -1,0 +1,22 @@
+﻿@model Kili.ViewModels.DonViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Faites un don";
+}
+
+ @using (Html.BeginForm())
+    {
+        <fieldset>
+            <legend>Sélectionnez le type de don </legend><br />
+            @Html.LabelFor(m => Model.Don.Montant)
+            @Html.TextBoxFor(m => Model.Don.Montant)
+            <br /><br />
+            @Html.DropDownListFor(m => Model.Don.Recurrence, new SelectList(Enum.GetValues(typeof(Kili.Models.Dons.TypeRecurrence))), "Sélectionner une récurrence")
+            <br /><br />
+            <br /><br />
+            <input type="submit" value="Créer"/>
+            @Html.HiddenFor(m => Model.Don.DonateurId)
+        </fieldset>
+    }
+

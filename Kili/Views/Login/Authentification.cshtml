@@ -8,7 +8,7 @@
 {
     <h3>
         Vous êtes déjà authentifié avec le login :
-        @Model.UserAccount.UserName
+        @Model.UserAccount.Prenom
     </h3>
     @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
      <br/>
@@ -23,9 +23,9 @@ else
 {
     <fieldset>
         <legend>Connexion : </legend>
-        @Html.LabelFor(m => m.UserAccount.UserName)
-        @Html.TextBoxFor(m => m.UserAccount.UserName)
-        @Html.ValidationMessageFor(m => m.UserAccount.UserName)
+        @Html.LabelFor(m => m.UserAccount.Prenom)
+        @Html.TextBoxFor(m => m.UserAccount.Prenom)
+        @Html.ValidationMessageFor(m => m.UserAccount.Prenom)
         <br />
         @Html.LabelFor(m => m.UserAccount.Password)
         @Html.PasswordFor(m => m.UserAccount.Password)

@@ -9,12 +9,16 @@
     {
         <fieldset>
             <legend>Modifier votre compte utilisateur </legend><br />
-            @Html.LabelFor(m => Model.UserAccount.UserName)
-            @Html.TextBoxFor(m => Model.UserAccount.UserName)
-            @Html.ValidationMessageFor(m => Model.UserAccount.UserName)
+            @Html.LabelFor(m => Model.UserAccount.Prenom)
+            @Html.TextBoxFor(m => Model.UserAccount.Prenom)
+            @Html.ValidationMessageFor(m => Model.UserAccount.Prenom)
+            <br /><br />
+            @Html.LabelFor(m => Model.UserAccount.Nom)
+            @Html.TextBoxFor(m => Model.UserAccount.Nom)
+            @Html.ValidationMessageFor(m => Model.UserAccount.Nom)
             <br /><br />
             <label for="pwd">Nouveau mot de passe</label>
-            <input type="password" id="pwd" name="pwd" value="@Model.UserAccount.Password"> 
+            <input type="password" id="pwd" name="pwd" value="@Model.UserAccount.Password" autocomplete="current-password"> 
             @Html.ValidationMessageFor(m => Model.UserAccount.Password)
             <br /><br />
             <label for="pwd">Confirmer le nouveau mot de passe</label>

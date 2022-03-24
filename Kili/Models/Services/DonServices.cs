@@ -1,4 +1,5 @@
 ﻿using Kili.Models.Dons;
+using Kili.Models.General;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -27,7 +28,7 @@ namespace Kili.Models.Services
         }
 
         //Fonction permettant de créer un don
-        public int CreerDon(int montant, TypeRecurrence recurrence, int donateurId)
+        public int CreerDon(int montant, TypeRecurrence recurrence, int? donateurId)
         {
             
             Don don = new Don() { Montant = montant, Recurrence = recurrence, DonateurId = donateurId , Date = System.DateTime.Today };
@@ -49,13 +50,58 @@ namespace Kili.Models.Services
         }
 
         // Fonction permettant de supprimer un don. 
-        public void SupprimerUserAccount(int id)
+        public void SupprimerDon(int id)
         {
             Don don = _bddContext.Dons.Find(id);
 
             if (don != null)
             {
                 _bddContext.Dons.Remove(don);
+                _bddContext.SaveChanges();
+            }
+        }
+
+        public List<Donateur> ObtenirDonateurs()
+        {
+            return _bddContext.Donateurs.ToList();
+        }
+
+        //Fonction permettant d'obtenir un donateurs à partir de son Id
+        public Donateur ObtenirDonateur(int id)
+        {
+            return _bddContext.Donateurs.Find(id);
+        }
+
+        //Fonction permettant de créer un donateur
+        public int CreerDonateur(Adresse adresse, string telephone, int? useraccountId)
+        {
+
+            Donateur donateur = new Donateur() { AdresseFacuration = adresse, Telephone = telephone, UserAccountId = useraccountId };
+            _bddContext.Donateurs.Add(donateur);
+            _bddContext.SaveChanges();
+            return donateur.Id;
+        }
+
+        // Fonction permettant de modifier un donateur. 
+        public void ModifierDonateur(int id, Adresse adresse, string telephone)
+        {
+            Donateur donateur = _bddContext.Donateurs.Find(id);
+            if (donateur != null)
+            {
+                donateur.AdresseFacuration = adresse;
+                donateur.Telephone = telephone;
+                _bddContext.SaveChanges();
+            }
+        }
+
+        // Fonction permettant de supprimer un donateur. 
+        public void SupprimerDonateur(int id)
+        {
+            Donateur donateur = _bddContext.Donateurs.Find(id);
+
+            if (donateur != null)
+            {
+                _bddContext.Donateurs.Remove(donateur);
                 _bddContext.SaveChanges();
             }
         }

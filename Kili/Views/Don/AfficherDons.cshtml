@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Kili.Models.Dons.Don>
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Faites un don";
+}
+
+ <div><b>Liste des dons</b><br /></div>  
+    <table class="table table-bordered table-responsive table-hover">  
+    <tr>  
+        <th>Montant</th>  
+        <th>Date</th>  
+        <th>Recurrence</th>   
+    </tr>  
+    @foreach (var v in Model)  
+    {  
+        <tr>  
+            <td>@v.Montant</td>  
+            <td>@v.Date</td>  
+            <td>@v.Recurrence</td>    
+        </tr>  
+    }  
+</table>  

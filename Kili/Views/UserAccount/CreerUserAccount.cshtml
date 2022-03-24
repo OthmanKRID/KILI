@@ -9,9 +9,13 @@
     {
         <fieldset>
             <legend>Créer votre compte utilisateur </legend><br />
-            @Html.LabelFor(m => Model.UserAccount.UserName)
-            @Html.TextBoxFor(m => Model.UserAccount.UserName)
-            @Html.ValidationMessageFor(m => Model.UserAccount.UserName)
+            @Html.LabelFor(m => Model.UserAccount.Prenom)
+            @Html.TextBoxFor(m => Model.UserAccount.Prenom)
+            @Html.ValidationMessageFor(m => Model.UserAccount.Prenom)
+            <br /><br />
+            @Html.LabelFor(m => Model.UserAccount.Nom)
+            @Html.TextBoxFor(m => Model.UserAccount.Nom)
+            @Html.ValidationMessageFor(m => Model.UserAccount.Nom)
             <br /><br />
             @Html.LabelFor(m => Model.UserAccount.Password)
             @Html.TextBoxFor(m => Model.UserAccount.Password)

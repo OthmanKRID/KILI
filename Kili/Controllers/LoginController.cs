@@ -35,7 +35,7 @@ namespace Kili.Controllers
         {
             //if (ModelState.IsValid)
             // {
-                UserAccount utilisateur = UserAccount_Services.Authentifier(viewModel.UserAccount.UserName, viewModel.UserAccount.Password);
+                UserAccount utilisateur = UserAccount_Services.Authentifier(viewModel.UserAccount.Prenom, viewModel.UserAccount.Password);
                 if (utilisateur != null)
                 {
                     var userClaims = new List<Claim>()
