@@ -554,3 +554,4 @@ C:\Users\User\Source\Repos\Kili\Kili\obj\Debug\netcoreapp3.1\Kili.genruntimeconf
 C:\Users\User\source\repos\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Don\CreerDon.cshtml.g.cs
 C:\Users\User\source\repos\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Don\AfficherDons.cshtml.g.cs
 C:\Users\User\source\repos\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Don\ModifierDon.cshtml.g.cs
+C:\Users\User\source\repos\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Donateur\CreerDonateur.cshtml.g.cs

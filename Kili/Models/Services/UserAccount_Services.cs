@@ -1,4 +1,6 @@
-﻿using Kili.Models.General;
+﻿using Kili.Models.Dons;
+using Kili.Models.General;
+using Kili.Models.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,6 +76,21 @@ namespace Kili.Models
                 userAccount.Password = password;
                 userAccount.Mail = email;
                 userAccount.Role = role;
+                _bddContext.SaveChanges();
+            }
+        }
+
+
+        // Fonction servant notamment à ajouter un donateur au UserAccount lors de la création du donateur au moment de la création du don
+        public void AjouterDonateur(int idUserAccount, int idDonateur)
+        {
+            UserAccount userAccount = _bddContext.UserAccounts.Find(idUserAccount);
+
+            if (userAccount != null)
+            {
+                DonServices donServices = new DonServices();
+                userAccount.Donateur = new Donateur();
+                userAccount.Donateur = (donServices.ObtenirDonateur(idDonateur));
                 _bddContext.SaveChanges();
             }
         }

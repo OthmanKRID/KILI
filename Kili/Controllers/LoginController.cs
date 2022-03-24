@@ -21,7 +21,7 @@ namespace Kili.Controllers
         public IActionResult Authentification()
         {
 
-                UserAccountViewModel viewModel = new UserAccountViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated, UserAccount = new UserAccount() };
+                UserAccountViewModel viewModel = new UserAccountViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
                 if (viewModel.Authentifie)
                 {
                     viewModel.UserAccount = UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
