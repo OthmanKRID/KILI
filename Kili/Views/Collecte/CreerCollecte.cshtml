@@ -1,0 +1,26 @@
+﻿@model Kili.Models.Dons.Collecte
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Créez votre collecte";
+}
+
+ @using (Html.BeginForm())
+    {
+        <fieldset>
+            <legend>Créez votre collecte </legend><br />
+            @Html.LabelFor(m => Model.Nom)
+            @Html.TextBoxFor(m => Model.Nom)
+            <br /><br />
+            @Html.LabelFor(m => Model.MontantCollecte)
+            @Html.TextBoxFor(m => Model.MontantCollecte)
+            <br /><br />
+            @Html.LabelFor(m => Model.Descriptif)
+            @Html.TextAreaFor(m => Model.Descriptif)
+            <br /><br />
+            <label for="datecol">Date de fin</label>
+            <!--<input type="datetime" id="datecol" name="datecol" value="_____Model.Date"/>-->
+            <br /><br />
+            <input type="submit" value="Créer" />
+        </fieldset>
+    }

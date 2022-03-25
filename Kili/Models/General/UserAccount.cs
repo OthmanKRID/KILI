@@ -9,11 +9,14 @@ namespace Kili.Models.General
     {
         public int Id { get; set; }
         [MaxLength(20)]
+        [Required]
         public string Prenom { get; set; }
         [MaxLength(25)]
+        [Required]
         public string Nom { get; set; }
 
         [MaxLength(50)]
+        [Required]
         [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$", ErrorMessage = "Votre mot de passe doit avoir au moins 8 caractères dont une lettre en majuscule, un nombre et un caractère spécial")]
         public string Password { get; set; }
 
@@ -22,10 +25,15 @@ namespace Kili.Models.General
         public bool Actif { get; set; }
 
         [EmailAddress(ErrorMessage = "L'adresse email saisie n'est pas valide")]
+        [Required]
         public string Mail { get; set; }
         public string URLPhoto { get; set; }
 
+        public int? AssociationId { get; set; }
+        public virtual Association Association { get; set; }
+
         public TypeRole Role { get; set; }
+        public int? DonateurId { get; set; }
         public virtual Donateur Donateur { get; set; }
 
     }

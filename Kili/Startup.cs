@@ -25,7 +25,7 @@ namespace Kili
 
              });
 
-
+            services.AddSession();
             services.AddControllersWithViews();
         }
 
@@ -45,6 +45,7 @@ namespace Kili
 
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseSession();
 
             //AJoute les fonctionnalités d'authentification
             app.UseAuthentication();

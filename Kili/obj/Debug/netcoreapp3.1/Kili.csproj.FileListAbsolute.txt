@@ -280,12 +280,6 @@ C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\staticwebassets\Ki
 C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Kili.TagHelpers.input.cache
 C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Kili.TagHelpers.output.cache
 C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Kili.RazorCoreGenerate.cache
-C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\AjouterAssociation.cshtml.g.cs
-C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\AjouterAssociation1.cshtml.g.cs
-C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\GererServices.cshtml.g.cs
-C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\ModifierAssociation.cshtml.g.cs
-C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\VoirInfosAssociation.cshtml.g.cs
-C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\VoirServices.cshtml.g.cs
 C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Donateur\CreerDonateur.cshtml.g.cs
 C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Don\AfficherDons.cshtml.g.cs
 C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Don\CreerDon.cshtml.g.cs
@@ -304,3 +298,7 @@ C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Kili.csproj.CopyCo
 C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Kili.dll
 C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Kili.pdb
 C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Kili.genruntimeconfig.cache
+C:\Users\User\source\repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Collecte\CreerCollecte.cshtml.g.cs
+C:\Users\User\source\repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Collecte\ModifierCollecte.cshtml.g.cs
+C:\Users\User\source\repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Donateur\ModifierDonateur.cshtml.g.cs
+C:\Users\User\source\repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Collecte\AfficherCollectes.cshtml.g.cs

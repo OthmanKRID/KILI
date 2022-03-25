@@ -1,0 +1,28 @@
+﻿@model Kili.Models.Dons.Collecte
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Modifiez votre collecte";
+}
+
+ @using (Html.BeginForm())
+    {
+        <fieldset>
+            <legend>Modifiez votre collecte </legend><br />
+            @Html.LabelFor(m => Model.Nom)
+            @Html.TextBoxFor(m => Model.Nom)
+            <br /><br />
+            @Html.LabelFor(m => Model.MontantCollecte)
+            @Html.TextBoxFor(m => Model.MontantCollecte)
+            <br /><br />
+            @Html.LabelFor(m => Model.Descriptif)
+            @Html.TextAreaFor(m => Model.Descriptif)
+            <br /><br />
+            <label for="datecol">Date</label>
+            <input type="date" id="datecol" name="datecol" value="@Model.Date"/>
+            <br /><br />
+            <input type="submit" value="Modifier" />
+            @Html.HiddenFor(m => Model.Id)
+        </fieldset>
+        @Html.ActionLink("Supprimer votre collecte", "SupprimerCollecte", "Collecte", new { id = Model.Id })
+    }

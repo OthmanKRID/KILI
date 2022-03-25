@@ -17,8 +17,8 @@ namespace Kili.Models.General
         public ThemeAssociation Theme { get; set; }
 
         public bool Actif { get; set; }
-        public int? UserAccountId { get; set; }
-        public virtual UserAccount UserAccount { get; set; }
+        //public int? UserAccountId { get; set; }
+        //public virtual UserAccount UserAccount { get; set; }
 
         public int? AbonnementId { get; set; }
         public virtual Abonnement Abonnement { get; set; }

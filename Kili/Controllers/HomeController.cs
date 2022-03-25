@@ -9,17 +9,17 @@ namespace Kili.Controllers
 {
     public class HomeController : Controller
     {
-        private Association_Services Association_Services;
+        //private Association_Services Association_Services;
         private UserAccount_Services UserAccount_Services;
         private Adresse_Services Adresse_Services;
-        private Abonnement_Services Abonnement_Services;
+       // private Abonnement_Services Abonnement_Services;
 
         public HomeController()
         {            
-            Association_Services = new Association_Services();
+            //Association_Services = new Association_Services();
             UserAccount_Services = new UserAccount_Services();
             Adresse_Services = new Adresse_Services();
-            Abonnement_Services = new Abonnement_Services();
+            //Abonnement_Services = new Abonnement_Services();
         }
 
         public IActionResult Index()
@@ -32,6 +32,7 @@ namespace Kili.Controllers
 
 
         //Fonction permettant d'afficher les association en fonction de la localisation et du theme
+        /*
         public IActionResult VoirAssociations(string ville, RechercheTheme Theme)
         {
             List<Association> listeAssociations = new List<Association>();
@@ -58,6 +59,6 @@ namespace Kili.Controllers
             }
             return View(listeAssociations);
         }
-
+        */
     }
 }

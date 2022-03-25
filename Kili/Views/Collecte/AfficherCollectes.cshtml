@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Kili.Models.Dons.Collecte>
+
+    @{
+    Layout = "_Layout";
+    ViewBag.Title = "Visualisez vos collectes";
+}
+
+ <div><b>Liste des collecte</b><br /></div>  
+    <table class="table table-bordered table-responsive table-hover">  
+    <tr>  
+        <th>Montant</th>  
+        <th>Date</th>  
+        <th>Recurrence</th>   
+    </tr>  
+    @foreach (var v in Model)  
+    {  
+        <tr>
+            <td>@v.Nom</td>  
+            <td>@v.MontantCollecte</td>  
+            <td>@v.Date</td>  
+            <td>@v.Descriptif</td>
+            <td>@Html.ActionLink("Supprimer", "SupprimerCollecte", "Collecte", new { id = @v.Id })</td>
+            <td>@Html.ActionLink("Modifier", "ModifierCollecte", "Collecte", new { id = @v.Id })</td>
+        </tr>  
+    }  
+     <!-- id = 1 à changer pour l'Id de la collecte sélecionnée dans le tableau-->
+</table> 

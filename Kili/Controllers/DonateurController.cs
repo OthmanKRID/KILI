@@ -22,16 +22,12 @@ namespace Kili.Controllers
         {
             //if (!ModelState.IsValid) { 
             UserAccount_Services userAccount_Services = new UserAccount_Services();
-            UserAccount user = new UserAccount();
-            user = userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
             
-
             DonServices donServices = new DonServices();
             {
-                int id = donServices.CreerDonateur(viewModel.Donateur.AdresseFacuration, viewModel.Donateur.Telephone, user.Id);
-                
-                // Ne semble pas fonctionner
-                userAccount_Services.AjouterDonateur(user.Id, id);
+                int id = donServices.CreerDonateur(viewModel.Donateur.AdresseFacuration, viewModel.Donateur.Telephone);
+                UserAccount ua =  userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
+                userAccount_Services.ModifierUserAccount(ua.Id, ua.Prenom, ua.Nom, ua.Password, ua.Mail, ua.Role, id);
 
                 return Redirect("/don/creerdon");
             }

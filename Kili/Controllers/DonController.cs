@@ -19,18 +19,12 @@ namespace Kili.Controllers
         public IActionResult CreerDon()
         {
             UserAccount_Services UserAccount_Services = new UserAccount_Services();
-            DonServices donServices = new DonServices();
 
             UserAccountViewModel viewModel = new UserAccountViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
             DonViewModel donviewModel = new DonViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
             if (viewModel.Authentifie)
             {
-                viewModel.UserAccount = UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
-
-                                
-                Donateur donateur = donServices.ObtenirDonateurs().Where(r => r.UserAccountId == viewModel.UserAccount.Id).FirstOrDefault();
-
-                if (donateur == null)
+                if (UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).DonateurId == null)
                 {
                     return Redirect("/donateur/creerdonateur");
                 }
@@ -46,9 +40,10 @@ namespace Kili.Controllers
         {
             //if (!ModelState.IsValid) { 
 
+            UserAccount_Services UserAccount_Services = new UserAccount_Services();
             DonServices donServices = new DonServices();
             {
-                int id = donServices.CreerDon(viewModel.Don.Montant, viewModel.Don.Recurrence, viewModel.Don.DonateurId);
+                int id = donServices.CreerDon(viewModel.Don.Montant, viewModel.Don.Recurrence, UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).DonateurId);               
 
                 return Redirect("/home/index");
             }

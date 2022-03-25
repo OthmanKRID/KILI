@@ -3,6 +3,7 @@
 using Kili.Models.GestionAdhesion;
 ﻿using Kili.Models.Dons;
 using Microsoft.EntityFrameworkCore;
+using Kili.Models.Services;
 
 namespace Kili.Models
 {
@@ -18,6 +19,7 @@ namespace Kili.Models
         public DbSet<ServiceAdhesion> ServicesAdhesion { get; set; }
         public DbSet<Don> Dons { get; set; }
         public DbSet<Donateur> Donateurs { get; set; }
+        public DbSet<Collecte> Collectes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,39 +31,37 @@ namespace Kili.Models
             this.Database.EnsureDeleted();
             this.Database.EnsureCreated();
             UserAccount_Services userAccountServices = new UserAccount_Services();
-            Association_Services associationServices = new Association_Services();
+            DonServices donServices = new DonServices();
 
 
             userAccountServices.CreerAdmin("M.","Admin", "Admin", "Kili@mail.com");
             userAccountServices.CreerUserAccount("Fara", "Raza", "P@ssFara1", "Fara@gmail.com", TypeRole.Utilisateur);
             userAccountServices.CreerUserAccount("Romy","Kombet", "P@ssRomy1", "Romy@gmail.com", TypeRole.Utilisateur);
             userAccountServices.CreerUserAccount("Othman","Krid", "P@ssOthman1", "Othman@gmail.com", TypeRole.Utilisateur);
+            
 
+            //donServices.CreerDon(1000, TypeRecurrence.Unique, 1);
+            //donServices.CreerDon(2000, TypeRecurrence.Unique, 1);
+            //donServices.CreerDon(200, TypeRecurrence.Mensuel, 2);
+            donServices.CreerCollecte("Collecte pour moi", 300000, "Une collecte intéressée");
+            donServices.CreerCollecte("Collecte pour les millionnaires en détresse", 6000, "Une collecte généreuse");
 
             userAccountServices.DésactiverUserAccount(1);
 
-            associationServices.CreerAssociation("Première Asso", new Adresse() { Numero = 1, Voie = "rue du sport", CodePostal = 34000, Ville = "Montpellier" }, ThemeAssociation.Sport, 1 );
-            associationServices.CreerAssociation("Deuxième Asso", new Adresse() { Numero = 20, Voie = "rue de la mer", CodePostal = 13000, Ville = "Marseille" }, ThemeAssociation.Arts_et_culture, 2 );
-            associationServices.CreerAssociation("Troisièeme Asso", new Adresse() { Numero = 30, Voie = "champs elysés", CodePostal = 75000, Ville = "Paris" }, ThemeAssociation.Environnement, 3);
-            associationServices.CreerAssociation("4eme Asso", new Adresse() { Numero = 1, Voie = "rue du sport", CodePostal = 34000, Ville = "Montpellier" }, ThemeAssociation.Environnement, 4);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            //modelBuilder.Entity<UserAccount>()
-              //  .HasIndex(p => p.PersonneID)
-                //.IsUnique();
-
-            modelBuilder.Entity<Association>()
-                .HasIndex(p => p.UserAccountId)
+            modelBuilder.Entity<UserAccount>()
+                .HasIndex(p => p.AssociationId)
                 .IsUnique();
 
-/*modelBuilder.Entity<Abonnement>()
-                .HasIndex(p => p.AssociationId)
-                .IsUnique();*/
+            modelBuilder.Entity<UserAccount>()
+                .HasIndex(p => p.DonateurId)
+                .IsUnique();
 
-            modelBuilder.Entity<Donateur>()
-                .HasIndex(p => p.UserAccountId)
+            modelBuilder.Entity<Don>()
+                .HasIndex(p => p.PaiementId)
                 .IsUnique();
         }
 
