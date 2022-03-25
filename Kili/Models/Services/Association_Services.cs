@@ -1,4 +1,5 @@
 ﻿using Kili.Models.General;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,16 +24,9 @@ namespace Kili.Models
         //Fonction permettant d'obtenir la liste de tout les Associations
        public List<Association> ObtenirAssociations()
         {
-            return _bddContext.Associations.ToList();
+            return _bddContext.Associations.Include(A => A.Adresse).Include(A => A.Abonnement).ToList();
         }
 
-        public Association ObtenirAssociationDuCompteConnecte(string idUSer)
-        {
-            UserAccount compteConnecte = _UserAccount_Services.ObtenirUserAccountConnecte(idUSer);
-            return ObtenirAssociations().Where(r => r.UserAccountId == compteConnecte.Id).FirstOrDefault();
-        }
-
-        //Fonction permettant d'obtenir la liste de tout les Associations dans une ville
         public List<Association> ObtenirAssociationsParLocalisation(string Localisation)
         {
 
@@ -41,8 +35,8 @@ namespace Kili.Models
 
             foreach (Association association in listeTouteAssociation)
             {
-                Adresse adresse = _adresseService.ObtenirAdresse((int)association.AdresseId);
-                if (adresse.Ville.Equals(Localisation))
+                //Adresse adresse = _adresseService.ObtenirAdresse((int)association.AdresseId);
+                if (association.Adresse.Ville.Equals(Localisation))
                 {
                     listeParVille.Add(association);
                 }
@@ -102,12 +96,13 @@ namespace Kili.Models
         }
 
         //Fonction permettant de créer une association
-        public int CreerAssociation(string nomAsso, Adresse adresse, ThemeAssociation Theme, int? IdCompteAsso)
+        public int CreerAssociation(string nomAsso, Adresse adresse, ThemeAssociation Theme, UserAccount compte/*, int? IdCompteAsso*/)
         {
-            Association Association = new Association() { Nom = nomAsso, Adresse = adresse, Theme = Theme, Actif = false, UserAccountId= IdCompteAsso };
-            Abonnement_Services abonnement_services = new Abonnement_Services();
+            Association Association = new Association() { Nom = nomAsso, Adresse = adresse, Theme = Theme, Actif = false};         
             _bddContext.Associations.Add(Association);
             _bddContext.SaveChanges();
+            compte.AssociationId = Association.Id;
+            _UserAccount_Services.ModifierUserAccount(compte.Id, compte.Prenom, compte.Nom, compte.Password, compte.Mail, compte.Role, compte.AssociationId);
             return Association.Id;
         }
 
@@ -123,7 +118,6 @@ namespace Kili.Models
 
                 Adresse_Services Adresse_Services = new Adresse_Services();
                 Adresse_Services.ModifierAdresse(Association.AdresseId, adresse);
-                //Association.Adresse = adresse;
                 _bddContext.SaveChanges();
             }
         }
@@ -155,11 +149,12 @@ namespace Kili.Models
         public void SupprimerAssociation(int id)
         {
             Association Association = _bddContext.Associations.Find(id);
-
+            UserAccount compteAssocie = _bddContext.UserAccounts.Where(UA=>UA.AssociationId == Association.Id).FirstOrDefault();
             if (Association != null)
             {
                 _bddContext.Associations.Remove(Association);
                 _bddContext.SaveChanges();
+                _UserAccount_Services.ModifierUserAccount(compteAssocie.Id, compteAssocie.Prenom, compteAssocie.Nom, compteAssocie.Password, compteAssocie.Mail, compteAssocie.Role, null);
             }
         }
 

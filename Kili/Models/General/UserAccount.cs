@@ -27,6 +27,9 @@ namespace Kili.Models.General
 
         public TypeRole Role { get; set; }
         public virtual Donateur Donateur { get; set; }
+        public int? AssociationId { get; set; }
+        public virtual Association Association { get; set; }
+
 
     }
 

@@ -149,5 +149,5 @@ C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Kili.csproj
 C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Kili.dll
 C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Kili.pdb
 C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Kili.genruntimeconfig.cache
-C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\AjouterAssociation1.cshtml.g.cs
 C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\AjouterAssociation.cshtml.g.cs
+C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\PanierService.cshtml.g.cs

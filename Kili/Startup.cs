@@ -19,13 +19,14 @@ namespace Kili
             public void ConfigureServices(IServiceCollection services)
         {
             //Ajoute le service d'authentification par cookies
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {
                  options.LoginPath = "/Login/Authentification";
 
              });
 
-
+            services.AddSession();
             services.AddControllersWithViews();
         }
 
@@ -46,6 +47,7 @@ namespace Kili
             app.UseStaticFiles();
             app.UseRouting();
 
+            app.UseSession();
             //AJoute les fonctionnalités d'authentification
             app.UseAuthentication();
             app.UseAuthorization();

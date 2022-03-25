@@ -14,8 +14,12 @@
     <p>
         Mes services :
     </p>
-    @if(@Model.abonnement.ServiceAdhesionId != null){
-    <Label>Services adhésion          --    </Label> <Label>Date de Fin : @Model.ServiceAdhesion.dateFinAbonnement</Label>
+@if (@Model.abonnement.serviceAdhesion.IsActive)
+{
+    <Label>Services adhésion          --    </Label> <Label>Date de Fin : @Model.abonnement.serviceAdhesion.dateFinAbonnement</Label>
+}
+     @if(@Model.abonnement.serviceDon.IsActive){
+    <Label>Services adhésion          --    </Label> <Label>Date de Fin : @Model.abonnement.serviceDon.dateFinAbonnement</Label>
     }
     <br />
     <br />

@@ -1,13 +1,13 @@
 ﻿using Kili.Models;
-using Kili.Models.GestionAdhesion;
+using Kili.Models.Dons;
 using System;
 using System.Collections.Generic;
 
-namespace Kili.Models.General
+namespace Kili.Models.Dons
 {
-    public class ServiceAdhesion
+    public class ServiceDon
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public bool IsActive { get; set; }
         public DateTime dateAbonnement { get; set; }
@@ -16,5 +16,6 @@ namespace Kili.Models.General
 
     }
 
+    
 }
 

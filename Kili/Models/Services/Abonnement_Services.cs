@@ -23,18 +23,17 @@ namespace Kili.Models
             Association_Services = new Association_Services();
         }
 
-        
-       //Fonction permettant de récupérer l'abonnement d'une Association
-       public Abonnement ObtenirAbonnement(Association association)
+        public Abonnement ObtenirAbonnement(int id)
+        {
+            return _bddContext.Abonnements.Find(id);
+        }
+
+        //Fonction permettant de récupérer l'abonnement d'une Association
+        public Abonnement ObtenirAbonnement(Association association)
         {
             return _bddContext.Abonnements.Where(m => m.Id == association.AbonnementId).FirstOrDefault();
         }
-        public Abonnement ObtenirAbonnementDuCompteConnecte(string IdUSer)
-        {
-            UserAccount compteConnecte = UserAccount_Services.ObtenirUserAccount(IdUSer);
-            Association association = Association_Services.ObtenirAssociations().Where(r => r.UserAccountId == compteConnecte.Id).FirstOrDefault();
-            return ObtenirAbonnement(association);
-        }
+ 
         //Fonction permettant de créer un abonnement
         public int CreerAbonnement()
          {
@@ -82,6 +81,42 @@ namespace Kili.Models
             _bddContext.SaveChanges();
         }
 
+
+        //////////////////////////////////////////////////////////////////////////////////////////////
+        ///  
+        ///                    Gestion des service proposé dans l'offre
+        ///                    
+        //////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //Fonctions permettant d'obtenir toutes les offres de services proposées
+        public List<Service> ObtenirToutLesServicesDansOffre()
+        {
+            return _bddContext.Services.ToList();
+        }
+
+        //Fonctions permettant d'obtenir un offre de service proposée
+        public Service ObtenirServiceDansOffre(int id)
+        {
+            return _bddContext.Services.Where(m => m.Id == id).FirstOrDefault();
+        }
+
+        //Fonctions permettant d'ajouter un offre de service 
+        public int AjouterServiceDansOffre(double prix, int duree_mois, TypeService Typeservice)
+        {
+            Service service = new Service() { prix = prix, duree_mois = duree_mois, TypeService = Typeservice };        
+            _bddContext.Services.Add(service);
+            _bddContext.SaveChanges();
+            return service.Id;
+        }
+
+        //Fonctions permettant de supprimer un offre de service 
+        public void SupprimerServiceDansOffre(int Id)
+        {
+            Service service = ObtenirServiceDansOffre(Id);
+            _bddContext.Services.Remove(service);
+            _bddContext.SaveChanges();
+        }
 
         public void Dispose()
         {

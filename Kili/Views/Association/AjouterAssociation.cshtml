@@ -40,11 +40,14 @@
                 </div>
                 <div class="signup-form">
                     <img src="~/images/logo.png" class="logo" alt="">
-                    <form method="POST" class="register-form" id="register-form" action="/Association/AjouterAssociation">
+                    <!--<form method="POST" class="register-form" id="register-form" action="/Association/AjouterAssociation">-->
+                    @using (Html.BeginForm("AjouterAssociation","Association"))
+                        {
+                        <fieldset class="register-form" id="register-form">
                         <h2>Inscrire son association</h2>
                         <div class="form-row">
                             <div class="form-group">
-                                <input type="text" name="name" placeholder="Nom de l'association" id="nomAsso" value="@Model.Nom" required />
+                                @Html.TextBoxFor(m => m.Nom,  new { @id="nomAsso", @placeholder="Nom de l'association" , @required="required" })
                             </div>
 
                         </div>
@@ -53,43 +56,42 @@
 
                         <div class="form-row">
                             <div class="form-group">
-                                <input type="text" name="name" placeholder="Numéro" id="numAsso" value="@Model.Adresse.Numero" required />
+                                @Html.TextBoxFor(m => m.Adresse.Numero,  new { @id="numAsso", @placeholder="Nom de l'association", @required="required", @Type="number" })                        
                             </div>
                             <div class="form-group">
-                                <input type="text" name="name" placeholder="Voie" id="voieAsso" value="@Model.Adresse.Voie" required />
+                                 @Html.TextBoxFor(m => m.Adresse.Voie,  new { @id="voieAsso", @placeholder="Voie", @required="required" }) 
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <input type="text" name="name" placeholder="Complément" id="complementAsso" value="@Model.Adresse.Complement" required />
+                                @Html.TextBoxFor(m => m.Adresse.Complement,  new { @id="complementAsso", @placeholder="Compléments", @required="required" }) 
                             </div>
                             <div class="form-group">
-                                <input type="text" name="name" placeholder="Code Postal" id="codeAsso" value="@Model.Adresse.CodePostal" required />
+                                @Html.TextBoxFor(m => m.Adresse.CodePostal,  new { @id="codeAsso", @placeholder="Code Postal", @required="required" }) 
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <input type="text" name="name" placeholder="Ville" id="villeAsso" value="@Model.Adresse.Ville" required />
+                            @Html.TextBoxFor(m => m.Adresse.Ville,  new { @id="villeAsso", @placeholder="Ville", @required="required" }) 
                         </div>
 
                         <div class="form-group">
                             <label for="course">Théme</label>
                             <div class="form-select">
-                                <select name="course" id="course">
-                                    <option value="Sport">Sport</option>
-                                    <option value="Culture">Culture</option>
-                                    <option value="Humanitaire">Humanitaire</option>
-                                </select>
+                                @Html.DropDownListFor(m => m.Theme, new SelectList(Enum.GetValues(typeof(ThemeAssociation))), new { @id="course"})<br /><br />
                                 <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
                             </div>
                         </div>
-
+                        @Html.HiddenFor(m => m.AbonnementId);
                         <div class="form-submit">
                             <!--<input type="submit" value="Reset All" class="submit" name="reset" id="reset" />-->
-                            <input type="submit" value="Submit Form" class="submit" name="submit" id="submit" />
+                            <input type="submit" value="Valider" class="submit" name="submit" id="submit" />
                         </div>
-                    </form>
+                        </fieldset>
+
+}
+                    <!--</form>-->
                 </div>
             </div>
         </div>

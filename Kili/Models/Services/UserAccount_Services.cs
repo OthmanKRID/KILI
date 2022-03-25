@@ -1,6 +1,7 @@
 ﻿using Kili.Models.Dons;
 using Kili.Models.General;
 using Kili.Models.Services;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace Kili.Models
         //Fonction permettant d'obtenir un UserAccount à partir de son Id
         public UserAccount ObtenirUserAccount(int id)
         {
-            return _bddContext.UserAccounts.Find(id);
+            return _bddContext.UserAccounts.Include(UA => UA.Association).ThenInclude(A => A.Adresse).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceAdhesion).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceDon).FirstOrDefault(UA => UA.Id == id);
         }
 
         //Fonction permettant d'obtenir un UserAccount à partir de son Id
@@ -71,7 +72,7 @@ namespace Kili.Models
         }
 
 
-        public void ModifierUserAccount(int id, string prenom, string nom, string password, string email, TypeRole role)
+        public void ModifierUserAccount(int id, string prenom, string nom, string password, string email, TypeRole role, int? AssociationId)
         {
             UserAccount userAccount = _bddContext.UserAccounts.Find(id);
 
@@ -82,6 +83,7 @@ namespace Kili.Models
                 userAccount.Password = password;
                 userAccount.Mail = email;
                 userAccount.Role = role;
+                userAccount.AssociationId = AssociationId;
                 _bddContext.SaveChanges();
             }
         }

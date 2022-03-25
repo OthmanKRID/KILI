@@ -30,6 +30,7 @@
             @Html.ValidationMessageFor(m => Model.UserAccount.Mail)
             <br /><br />
             @Html.HiddenFor(m=>Model.UserAccount.Id)
+            @Html.HiddenFor(m=>Model.UserAccount.AssociationId)
             <input type="submit" value="Modifier" />
         </fieldset>
 

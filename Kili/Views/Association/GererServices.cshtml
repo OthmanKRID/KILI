@@ -11,31 +11,38 @@
        Gestion des services
     </h1>
 
-    <p>
-        Mes services :
-    </p>
-    @if(@Model.abonnement.ServiceAdhesionId != null){
-    <Label>Services adhésion actif</Label>
-    }
-    <br />
-    <br />
 
-@using (Html.BeginForm())
-{
-    <fieldset>
-        <Label>Ajouter des Services :</Label>
+        <Label>Listes des Services Proposés :</Label>
+        <table border=1> 
+        <tr>
+        <th>Type de Service</th>
+        <th>Durée de l'abonnement</th>
+        <th>Prix</th>
+        <th></th>
+        </tr>
+        @foreach(var service in Model.listesServicesProposes)
+        {
+        
+            @Html.HiddenFor(a => a.abonnement)
+            @Html.HiddenFor(a => a.ServiceAdhesion)
+            @Html.HiddenFor(a => a.ServiceDon)
 
-        <Label>souscrire aux services Adhésion</Label><br />
-        <Label>Durée :</Label>
-        @Html.TextBoxFor(m => m.ServiceAdhesion.duree)
-        @Html.HiddenFor(m => m.ServiceAdhesion)
-        @Html.HiddenFor(m => m.abonnement)
+            @if ((Model.abonnement.serviceAdhesion.IsActive == false && @service.TypeService == TypeService.Adhesion) || (Model.abonnement.serviceDon.IsActive == false && @service.TypeService == TypeService.Don))
+            {
+            <tr>
+                <th>@service.TypeService</th>
+                <th>@service.duree_mois mois</th>
+                <th>@service.prix €</th>
+               @* <th>@Html.ActionLink("Souscrire", "MiseAJourSouscriptionAjout"+@service.TypeService.ToString(),"Association", new { idservice = @service.Id}, new { idabonnement = @Model.abonnement.Id})</th>*@
+                <th>@Html.ActionLink("Ajouter au panier", "AjouterService", "Abonnement", new { id = @service.Id})</th>
+            </tr>         
+            }
+        }
+        </table>   
          <input type="submit" value="Ajouter" /> <br />
-     
-    </fieldset>
     <br />
 
-}
+
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
