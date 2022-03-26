@@ -29,7 +29,7 @@ namespace Kili.Models
         //Fonction permettant d'obtenir un UserAccount à partir de son Id
         public UserAccount ObtenirUserAccount(int id)
         {
-            return _bddContext.UserAccounts.Include(UA => UA.Association).ThenInclude(A => A.Adresse).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceAdhesion).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceDon).FirstOrDefault(UA => UA.Id == id);
+            return _bddContext.UserAccounts.Include(UA => UA.Association).ThenInclude(A => A.Adresse).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceAdhesion).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceDon).Include(UA => UA.Donateur).ThenInclude(DO => DO.Dons).FirstOrDefault(UA => UA.Id == id);
         }
 
         //Fonction permettant d'obtenir un UserAccount à partir de son Id
@@ -72,7 +72,7 @@ namespace Kili.Models
         }
 
 
-        public void ModifierUserAccount(int id, string prenom, string nom, string password, string email, TypeRole role, int? AssociationId)
+        public void ModifierUserAccount(int id, string prenom, string nom, string password, string email, TypeRole role, int? AssociationId, int? donateurID)
         {
             UserAccount userAccount = _bddContext.UserAccounts.Find(id);
 
@@ -84,11 +84,12 @@ namespace Kili.Models
                 userAccount.Mail = email;
                 userAccount.Role = role;
                 userAccount.AssociationId = AssociationId;
+                userAccount.DonateurId = donateurID;
                 _bddContext.SaveChanges();
             }
         }
 
-
+        /*
         // Fonction servant notamment à ajouter un donateur au UserAccount lors de la création du donateur au moment de la création du don
         public void AjouterDonateur(int idUserAccount, int idDonateur)
         {
@@ -102,7 +103,7 @@ namespace Kili.Models
                 _bddContext.SaveChanges();
             }
         }
-
+        */
         public void SupprimerUserAccount(int id)
         {
             UserAccount userAccount = _bddContext.UserAccounts.Find(id);

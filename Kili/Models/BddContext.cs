@@ -2,6 +2,7 @@
 ﻿using Kili.Models.General;
 using Kili.Models.GestionAdhesion;
 ﻿using Kili.Models.Dons;
+using Kili.Models.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kili.Models
@@ -19,6 +20,7 @@ namespace Kili.Models
         public DbSet<ServiceDon> ServicesDon { get; set; }
         public DbSet<Don> Dons { get; set; }
         public DbSet<Donateur> Donateurs { get; set; }
+        public DbSet<Collecte> Collectes { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<PanierService> PaniersServices { get; set; }
@@ -35,12 +37,18 @@ namespace Kili.Models
             UserAccount_Services userAccountServices = new UserAccount_Services();
             Association_Services associationServices = new Association_Services();
             Abonnement_Services abonnement_Services = new Abonnement_Services();
+            DonServices donServices = new DonServices();
 
             userAccountServices.CreerAdmin("M.","Admin", "Admin", "Kili@mail.com");
             userAccountServices.CreerUserAccount("Fara", "Raza", "P@ssFara1", "Fara@gmail.com", TypeRole.Utilisateur);
             userAccountServices.CreerUserAccount("Romy","Kombet", "P@ssRomy1", "Romy@gmail.com", TypeRole.Utilisateur);
             userAccountServices.CreerUserAccount("Othman","Krid", "P@ssOthman1", "Othman@gmail.com", TypeRole.Utilisateur);
 
+            //donServices.CreerDon(1000, TypeRecurrence.Unique, 1);
+            //donServices.CreerDon(2000, TypeRecurrence.Unique, 1);
+            //donServices.CreerDon(200, TypeRecurrence.Mensuel, 2);
+            donServices.CreerCollecte("Collecte pour moi", 300000, "Une collecte intéressée");
+            donServices.CreerCollecte("Collecte pour les millionnaires en détresse", 6000, "Une collecte généreuse");
 
             userAccountServices.DésactiverUserAccount(1);
 
@@ -61,19 +69,23 @@ namespace Kili.Models
         {
 
             //modelBuilder.Entity<UserAccount>()
-              //  .HasIndex(p => p.PersonneID)
-                //.IsUnique();
+            //  .HasIndex(p => p.PersonneID)
+            //.IsUnique();
 
             /*modelBuilder.Entity<Association>()
                 .HasIndex(p => p.UserAccountId)
                 .IsUnique();*/
 
-/*modelBuilder.Entity<Abonnement>()
-                .HasIndex(p => p.AssociationId)
-                .IsUnique();*/
+            /*modelBuilder.Entity<Abonnement>()
+                            .HasIndex(p => p.AssociationId)
+                            .IsUnique();*/
 
-            modelBuilder.Entity<Donateur>()
-                .HasIndex(p => p.UserAccountId)
+            modelBuilder.Entity<UserAccount>()
+                .HasIndex(p => p.DonateurId)
+                .IsUnique();
+
+            modelBuilder.Entity<Don>()
+                .HasIndex(p => p.PaiementId)
                 .IsUnique();
         }
 

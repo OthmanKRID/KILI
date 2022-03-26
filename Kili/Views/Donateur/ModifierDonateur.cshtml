@@ -2,14 +2,14 @@
 
 @{
     Layout = "_Layout";
-    ViewBag.Title = "Ajouter Coordonnées";
+    ViewBag.Title = "Modifiez vos coordonnées";
 }
 
     <p>
-        Compléter vos coordonnées avec les champs ci-dessous :
+        Modifiez vos coordonnées avec les champs ci-dessous :
     </p>
 
-@using (Html.BeginForm("CreerDonateur","Donateur"))
+@using (Html.BeginForm("ModifierDonateur","Donateur"))
     {
         <fieldset>
             <legend>Remplissez les champs correspondants </legend><br />
@@ -31,8 +31,7 @@
             @Html.LabelFor(m => Model.Donateur.Telephone)
             @Html.TextBoxFor(m => Model.Donateur.Telephone)
             <br /><br />
-            <input type="submit" value="Ajouter" />
+            <input type="submit" value="Modifier" />
             @Html.HiddenFor(m => Model.Donateur.Id)
         </fieldset>
     }
-

@@ -2,7 +2,7 @@
 
 @{
     Layout = "_Layout";
-    ViewBag.Title = "Faites un don";
+    ViewBag.Title = "Visualisez vos dons";
 }
 
  <div><b>Liste des dons</b><br /></div>  
@@ -20,4 +20,11 @@
             <td>@v.Recurrence</td>    
         </tr>  
     }  
+        <tr>
+            <td align="right" colspan="6">Montant annuel</td>
+            <td>
+                @(Model.Sum(it => it.Montant))    <!-- Ne pas mettre sauf si complété avec des if en fonction de la mensualité et de la date de début-->
+            </td>
+        </tr>
+
 </table>  

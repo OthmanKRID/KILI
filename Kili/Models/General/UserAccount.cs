@@ -26,9 +26,12 @@ namespace Kili.Models.General
         public string URLPhoto { get; set; }
 
         public TypeRole Role { get; set; }
+        
+        public int? DonateurId { get; set; }
         public virtual Donateur Donateur { get; set; }
         public int? AssociationId { get; set; }
         public virtual Association Association { get; set; }
+
 
 
     }

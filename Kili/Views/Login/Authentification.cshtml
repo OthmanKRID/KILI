@@ -9,10 +9,10 @@
     <h3>
         Vous êtes déjà authentifié avec le login :
         @Model.UserAccount.Prenom
-    </h3>
-    @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
      <br/>
     @Html.ActionLink("Mon profil", "ModifierUserAccount", "UserAccount",new { id = Model.UserAccount.Id })
+        </h3>
+    @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
 }
 else
 {
