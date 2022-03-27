@@ -3,6 +3,7 @@
 using Kili.Models.GestionAdhesion;
 ﻿using Kili.Models.Dons;
 using Microsoft.EntityFrameworkCore;
+using Kili.Models.Vente;
 
 namespace Kili.Models
 {
@@ -19,9 +20,16 @@ namespace Kili.Models
         public DbSet<Don> Dons { get; set; }
         public DbSet<Donateur> Donateurs { get; set; }
 
+        //Vente 
+        public DbSet<Produit> Produits { get; set; }
+        public DbSet<Catalogue> Catalogues { get; set; }
+        public DbSet<Panier> Paniers { get; set; }
+        public DbSet<Article> Articles { get; set; }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=Kili");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=RRRRR;database=NewBaseKILI");
         }
 
         public void InitializeDb()
@@ -44,6 +52,53 @@ namespace Kili.Models
             associationServices.CreerAssociation("Deuxième Asso", new Adresse() { Numero = 20, Voie = "rue de la mer", CodePostal = 13000, Ville = "Marseille" }, ThemeAssociation.Arts_et_culture, 2 );
             associationServices.CreerAssociation("Troisièeme Asso", new Adresse() { Numero = 30, Voie = "champs elysés", CodePostal = 75000, Ville = "Paris" }, ThemeAssociation.Environnement, 3);
             associationServices.CreerAssociation("4eme Asso", new Adresse() { Numero = 1, Voie = "rue du sport", CodePostal = 34000, Ville = "Montpellier" }, ThemeAssociation.Environnement, 4);
+
+            //Vente en ligne
+            this.Catalogues.AddRange(
+                new Catalogue
+                {
+                    CatalogueID = 01,
+                    CatalogueName = "Epices",
+                    Description = "Epices et condiments du monde",
+
+                },
+               new Catalogue
+
+               {
+                   CatalogueID = 02,
+                   CatalogueName = "Sacs et accessoires",
+                   Description = "Sacs et accessoires du monde",
+
+               }
+
+                 );
+
+            this.Produits.AddRange(
+           new Produit
+           {
+               ProduitID = 001,
+               Designation = "Pili Pili",
+               Format = "100g",
+               Description = "Piment rouge en provenance de Madagascar, pour donner goût à vos plats.",
+               PrixUnitaire = 5,
+               Devise = "EUR",
+               ImagePath = "pilipili.jpg",
+               CatalogueID = 01,
+           },
+
+           new Produit
+           {
+               ProduitID = 002,
+               Designation = "Sac croco",
+               Format = "25.5 cm * 31 cm * 15 cm",
+               Description = "Sac fabriqué à partir de la peau de crocodile du Burkina Faso.",
+               PrixUnitaire = 50,
+               Devise = "EUR",
+               ImagePath = "saccroco.jpg",
+               CatalogueID = 02,
+           }
+            );
+            this.SaveChanges();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -62,6 +117,15 @@ namespace Kili.Models
 
             modelBuilder.Entity<Donateur>()
                 .HasIndex(p => p.UserAccountId)
+                .IsUnique();
+
+            //Vene en ligne
+            modelBuilder.Entity<Catalogue>()
+                .HasIndex(p => p.CatalogueID)
+                .IsUnique();
+
+            modelBuilder.Entity<Produit>()
+                .HasIndex(p => p.ProduitID)
                 .IsUnique();
         }
 

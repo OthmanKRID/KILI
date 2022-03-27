@@ -20,6 +20,19 @@
             </ul>
         </div><br />
     <div>
+        <h3>Espace Vendeur</h3>
+
+            <ul>          
+                <li>@Html.ActionLink("Vos catalogues de produits", "IndexCatalogue", "Vente" )</li>
+                <li>@Html.ActionLink("Vos produits", "IndexProduit", "Vente")</li>
+            </ul> <br /><br />
+
+        <h3>Espace Acheteur</h3>
+        <ul>          
+                <li>@Html.ActionLink("Votre Boutique en ligne", "IndexBoutique", "Vente" )</li>
+        </ul>
+    </div>
+    <div>
         @RenderBody()
     </div>
 </body>

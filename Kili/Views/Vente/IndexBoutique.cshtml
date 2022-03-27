@@ -1,0 +1,38 @@
+﻿@model List<Kili.Models.Vente.Produit>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Nos arrivages</title>
+</head>
+<body>
+
+    <h3>Produits d'exception</h3>
+    <table cellpadding="2" cellspacing="2" border="1">
+        <tr>
+            <th>Id</th>
+            <th>Désignation</th>
+            <th>Prix</th>
+            <th>Devise</th>
+        </tr>
+        @foreach(var produit in Model)
+        {
+            <tr>
+                <td>@produit.ProduitID</td>
+                <td>@produit.Designation</td>
+                <td>@produit.PrixUnitaire</td>
+                <td>@produit.Devise</td>
+                <td align="center">
+                    @Html.ActionLink("Acheter", "Acheter", "Vente", new { id = @produit.ProduitID })
+                </td>
+            </tr>
+        }
+    </table>
+ </body>
+</html>

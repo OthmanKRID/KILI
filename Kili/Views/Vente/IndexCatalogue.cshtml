@@ -1,0 +1,33 @@
+﻿@model List<Kili.Models.Vente.Catalogue>
+@{
+    Layout = null;
+}
+<h1> Vos catalogues de produits </h1>
+<table border ="1">
+    <tr>
+        <th>Id</th>
+        <th>Catalogue</th>
+        <th>Description</th>
+        <th>Options</th>
+    </tr>
+
+    @foreach(var cata in Model)
+    {
+        <tr>
+            <td>@cata.CatalogueID</td>
+            <td>@cata.CatalogueName</td>
+            <td>@cata.Description</td>
+                <td>
+                    @Html.ActionLink("Modifier", "ModifierCatalogue", "Vente", new { @id = cata.CatalogueID})
+                    @Html.ActionLink("Supprimer", "SupprimerCatalogue", "Vente", new {@id = cata.CatalogueID})
+                </td>
+        </tr>
+    }
+</table>
+<ul>
+    <li>@Html.ActionLink("Créer votre catalogue de produits", "CreerCatalogue", "Vente")</li><br />
+    <li>@Html.ActionLink("Revenir à l'accueil", "Index", "Home")</li>
+       
+
+
+</ul>
