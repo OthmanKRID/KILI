@@ -53,13 +53,6 @@ namespace Kili.Models.Services
             this._bddContext.SaveChanges();
             return catalogue.CatalogueID;
 
-            /*Catalogue catalogue = new Catalogue() { CatalogueName = cataloguename, Description = cataloguedescription};
-            if(catalogueid != 0)
-            {
-                catalogue.CatalogueID = catalogueid;
-            }
-            this._bddContext.Catalogues.Add(catalogue);
-            this._bddContext.SaveChanges();*/
         }
 
         //Fonction permettant de modifier un catalogue

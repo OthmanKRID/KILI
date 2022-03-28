@@ -13,7 +13,7 @@ namespace Kili.Models.Vente
         [Display(Name = "Format")]
         public string Format { get; set; }
 
-        [Required, StringLength(10000), Display(Name = "Déscription"), DataType(DataType.MultilineText)]
+        [StringLength(10000), Display(Name = "Déscription"), DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         public string ImagePath { get; set; }
@@ -25,8 +25,12 @@ namespace Kili.Models.Vente
         [Display(Name = "Devise")]
         public string Devise { get; set; }
 
+        [Required]
+        [Display(Name = "Catalogue")]
         public int CatalogueID { get; set; }
 
         public virtual Catalogue Catalogue { get; set; }
     }
+
+
 }

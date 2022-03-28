@@ -7,7 +7,8 @@
 @using (Html.BeginForm())
 {
     <fieldset>
-        <legend>Créer votre produit </legend><br />
+        <legend>Modifier le produit</legend><br />
+        @Html.HiddenFor(c => Model.ProduitID) 
         @Html.LabelFor(p => p.Designation)
         @Html.TextBoxFor(p=> p.Designation)
         @Html.ValidationMessageFor(p=> p.Designation)
@@ -28,10 +29,8 @@
         @Html.TextBoxFor(p=>p.Devise)
         @Html.ValidationMessageFor(p=>p.Devise)
         <br /><br />
-        @Html.LabelFor(p=>p.CatalogueID)
-        @Html.DropDownListFor(p => p.CatalogueID, (SelectList)ViewBag.Catalogue, "Sélectionner un catalogue")<br /><br />
 
-        <input type="submit" value="Créer" />
+        <input type="submit" value="Modifier" />
 
 
     </fieldset>

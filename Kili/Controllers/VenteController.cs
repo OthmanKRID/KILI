@@ -7,6 +7,7 @@ using Kili.Helpers;
 using Kili.Models;
 using System.Threading.Tasks;
 using System.IO;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Kili.Controllers
 {
@@ -102,6 +103,10 @@ namespace Kili.Controllers
         }
         public IActionResult CreerProduit()
         {
+            
+            CatalogueServices catservice = new CatalogueServices();
+            List<Catalogue> catalogues = catservice.ObtenirAllCatalogues();
+            ViewBag.Catalogue = new SelectList(catalogues, "CatalogueID", "CatalogueName"); ;
             return View();
         }
 
@@ -112,9 +117,48 @@ namespace Kili.Controllers
                 return View();
             ProduitServices produit_Services = new ProduitServices();
             {
-                produit_Services.CreerProduit(produit.Designation, produit.Format, produit.Description, produit.PrixUnitaire, produit.Devise, produit.CatalogueID);
+                produit_Services.CreerProduit(produit.Designation, produit.Format, produit.ImagePath, produit.Description, produit.PrixUnitaire, produit.Devise, produit.CatalogueID);
                 return RedirectToAction("IndexProduit");
             }
+        }
+
+        //GET Vue produit à modifier
+        public IActionResult ModifierProduit(int? id)
+        {
+            if (id != 0)
+            {
+                ProduitServices prodservice = new ProduitServices();
+                {
+                    Produit produit = prodservice.ObtenirAllProduits().Where(p => p.ProduitID == id).FirstOrDefault();
+                    if (produit == null)
+                    {
+                        return NotFound();
+                    }
+                    return View(produit);
+                }
+
+            }
+            return NotFound();
+        }
+
+        //POST Vue produit à modifier
+        [HttpPost]
+        public IActionResult ModifierProduit(Produit produit)
+        {
+            if (!ModelState.IsValid)
+                return View(produit);
+            ProduitServices produitServices = new ProduitServices();
+            produitServices.ModifierProduit(produit.ProduitID, produit.Designation, produit.Format, produit.ImagePath, produit.Description, produit.PrixUnitaire, produit.Devise);
+            return RedirectToAction("IndexProduit");
+        }
+
+        //Supprimer Produit
+
+        public IActionResult SupprimerProduit(int id)
+        {
+            ProduitServices prodservice = new ProduitServices();
+            prodservice.SupprimerProduit(id);
+            return RedirectToAction("IndexProduit");
         }
 
         //Fonctions GET POUR PANIER

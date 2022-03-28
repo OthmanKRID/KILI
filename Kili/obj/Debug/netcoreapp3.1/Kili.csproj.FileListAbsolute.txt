@@ -312,4 +312,4 @@ C:\Users\tolot\source\repos\NEW BEGINNING\Kili\obj\Debug\netcoreapp3.1\Razor\Vie
 C:\Users\tolot\source\repos\NEW BEGINNING\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Vente\IndexBoutique.cshtml.g.cs
 C:\Users\tolot\source\repos\NEW BEGINNING\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Vente\ModifierCatalogue.cshtml.g.cs
 C:\Users\tolot\source\repos\NEW BEGINNING\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Vente\NotFound.cshtml.g.cs
-C:\Users\tolot\source\repos\NEW BEGINNING\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Vente\_LayoutVendeur.cshtml.g.cs
+C:\Users\tolot\source\repos\NEW BEGINNING\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Vente\ModifierProduit.cshtml.g.cs

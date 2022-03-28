@@ -14,27 +14,27 @@
     <h3>Mon Panier</h3>
     <table cellpadding="2" cellspacing="2" border="1">
         <tr>
-            <th>Option</th>
             <th>Id</th>
             <th>Désignation</th>
             <th>Format</th>
             <th>Prix Unitaire</th>
-            <th>Devise</th>
             <th>Quantité</th>
             <th>Sous-Total</th>
+            <th>Devise</th>
+            <th>Option</th>
         </tr>
 
         @foreach (var article in Model.Articles)
         {
             <tr>
-                <td>@Html.ActionLink("Supprimer", "Supprimer", "Panier", new{id = @article.ArticleId}) </td>
                 <td>@article.Produit.ProduitID</td>
                 <td>@article.Produit.Designation</td>
                 <td>@article.Produit.Format</td>
                 <td>@article.Produit.PrixUnitaire</td>
-                <td>@article.Produit.Devise</td>
                 <td>@article.Quantite</td>
                 <td>@(article.Produit.PrixUnitaire*article.Quantite)</td>
+                <td>@article.Produit.Devise</td>
+                <td>@Html.ActionLink("Supprimer", "Supprimer", "Panier", new{id = @article.ArticleId}) </td>
             </tr>
         }
         <tr>

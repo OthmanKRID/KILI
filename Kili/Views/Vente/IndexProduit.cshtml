@@ -11,7 +11,7 @@
         <th>Description</th>
         <th>Prix Unitaire</th>
         <th>Devise</th>
-        <th>Catalogue ID</th>
+        <th>Options</th>
     </tr>
     @foreach(var prod in Model)
     {
@@ -22,13 +22,15 @@
             <td>@prod.Description</td>
             <td>@prod.PrixUnitaire</td>
             <td>@prod.Devise</td>
-            <td>@prod.CatalogueID</td>
+            <td>
+                    @Html.ActionLink("Modifier", "ModifierProduit", "Vente", new { @id = prod.ProduitID})
+                    @Html.ActionLink("Supprimer", "SupprimerProduit", "Vente", new {@id = prod.ProduitID})
+                </td>
         </tr>
     }
 </table>
 
 <ul>
-    <li>@Html.ActionLink("Créer vos produits", "CreerProduit", "Vente")</li>
-    <li>@Html.ActionLink("Modifier vos produits", "ModifierProduit", "Vente")</li><br />
+    <li>@Html.ActionLink("Créer vos produits", "CreerProduit", "Vente")</li><br />
     <li>@Html.ActionLink("Revenir à l'accueil", "Index", "Home")</li>
 </ul>
