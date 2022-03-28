@@ -78,9 +78,9 @@ namespace Kili.Models.Services
 
         //Fonction permettant de supprimer un catalogue
 
-        public void SupprimerCatalogue(int catalogueid)
+        public void SupprimerCatalogue(int id)
         {
-            Catalogue catalogue = this._bddContext.Catalogues.Find (catalogueid);
+            Catalogue catalogue = this._bddContext.Catalogues.Find (id);
             this._bddContext.Catalogues.Remove(catalogue);
             this._bddContext.SaveChanges();
         }
@@ -94,6 +94,7 @@ namespace Kili.Models.Services
                 this._bddContext.SaveChanges() ;
             }
         }
+
         
     }
 }

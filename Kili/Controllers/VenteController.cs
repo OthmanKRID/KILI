@@ -81,78 +81,14 @@ namespace Kili.Controllers
 
         }
 
-        //Supprimer Catalogue
-
-        /*[HttpGet] 
-        public IActionResult SupprimerCatalogue(int catalogueid)
-        {
-            /*if(catalogueid !=0 )
-            {
-                CatalogueServices catservice = new CatalogueServices();
-                {
-                    Catalogue catalogue = catservice.ObtenirAllCatalogues().Where(c=>c.CatalogueID == catalogueid).FirstOrDefault();
-                    if(catalogue == null)
-                    {
-                        return NotFound();
-                    }
-
-                    catservice.SupprimerCatalogue(catalogueid);
-                    return RedirectToAction("IndexCatalogue");
-                }
-            }
-            return NotFound();*/
-            
-            /*CatalogueServices catservice = new CatalogueServices();
-            
-            catservice.SupprimerCatalogue(catalogueid);
-            return RedirectToAction("IndexCatalogue");
-            var catalogue = _bddContext.Catalogues.FirstOrDefault(c=> c.CatalogueID == catalogueid);
-            _bddContext.Catalogues.Remove(catalogue);
-            _bddContext.SaveChanges();
-            return RedirectToAction(nameof(IndexCatalogue));
-        }*/
-
-        //GET supprimer
-
-        public IActionResult SupprimerCatalogue(int catalogueid)
+        public IActionResult SupprimerCatalogue(int id)
         {
             
             CatalogueServices catservice = new CatalogueServices();
-            catservice.SupprimerCatalogue(catalogueid);
+            catservice.SupprimerCatalogue(id);
             return RedirectToAction("IndexCatalogue");
         }
-        /*public IActionResult SupprimerCatalogue(int? catalogueid)
-        {
-          int testint = (int) catalogueid;
-            if(catalogueid.HasValue)
-            {
-                Catalogue catalogue = _bddContext.Catalogues.Find(catalogueid);
-                if (catalogue == null)
-                {
-                    return NotFound();
-                }
-                return View(catalogue);
-            }
-            return NotFound();
-        }*/
 
-        /*public IActionResult SupprimerCatalogue(int catalogueid)
-        {
-            CatalogueServices catservice = new CatalogueServices();
-            catservice.SupprimerCatalogue(catalogueid);
-            return RedirectToAction("IndexCatalogue");
-        }*/
-
-        //POST supprimer
-        /*[HttpPost]
-        public IActionResult ConfirmerSuppression(int catalogueid)
-        {
-            Catalogue catalogue = _bddContext.Catalogues.Find(catalogueid);
-            _bddContext.Catalogues.Remove(catalogue);
-            _bddContext.SaveChanges();
-            return RedirectToAction("IndexCatalogue");
-        }*/
-        
 
 
         //FONCTIONS POUR LES PRODUITS
