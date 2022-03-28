@@ -113,7 +113,15 @@ namespace Kili.Controllers
         }*/
 
         //GET supprimer
-        public IActionResult SupprimerCatalogue(int? catalogueid)
+
+        public IActionResult SupprimerCatalogue(int catalogueid)
+        {
+            
+            CatalogueServices catservice = new CatalogueServices();
+            catservice.SupprimerCatalogue(catalogueid);
+            return RedirectToAction("IndexCatalogue");
+        }
+        /*public IActionResult SupprimerCatalogue(int? catalogueid)
         {
           int testint = (int) catalogueid;
             if(catalogueid.HasValue)
@@ -126,7 +134,7 @@ namespace Kili.Controllers
                 return View(catalogue);
             }
             return NotFound();
-        }
+        }*/
 
         /*public IActionResult SupprimerCatalogue(int catalogueid)
         {

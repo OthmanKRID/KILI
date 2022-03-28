@@ -75,26 +75,6 @@ namespace Kili.Models.Services
             }
             
         }
-        //Fonction permettant d'activer un catalogue
-        /* public void ActiverCatalogue(int catalogueid)
-         {
-             Catalogue catalogue = _bddContext.Catalogues.Find(catalogueid);
-             if(catalogue != null)
-             {
-                 catalogue.Actif = true;
-                 _bddContext.SaveChanges();
-             }
-         }
-         //Fonction permettant de désactiver un catalogue
-         public void DesactiverCatalogue(int catalogueid)
-         {
-             Catalogue catalogue = _bddContext.Catalogues.Find(catalogueid);
-             if (catalogue != null)
-             {
-                 catalogue.Actif = false;
-                 _bddContext.SaveChanges();
-             }
-         }*/
 
         //Fonction permettant de supprimer un catalogue
 
@@ -115,14 +95,5 @@ namespace Kili.Models.Services
             }
         }
         
-        /*public void SupprimerCatalogue(int catalogueid)
-        {
-            Catalogue catalogue = _bddContext.Catalogues.Find(catalogueid);
-            if(catalogue != null)
-            {
-                _bddContext.Catalogues.Remove(catalogue);
-                _bddContext.SaveChanges();
-            }
-        }*/
     }
 }
