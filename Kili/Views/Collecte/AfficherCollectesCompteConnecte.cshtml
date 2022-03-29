@@ -7,7 +7,7 @@
 
  <div><b>Liste des collectes</b><br /></div>  
     <table class="table table-bordered table-responsive table-hover">  
-    <tr>  
+    <tr>
         <th>Nom</th>
         <th>Montant</th>  
         <th>Date</th>  
@@ -20,7 +20,8 @@
             <td>@v.MontantCollecte</td>  
             <td>@v.Date</td>  
             <td>@v.Descriptif</td>
-            <td>@Html.ActionLink("Faire un don", "CreerDon", "Don", new { idCollecte = @v.Id })</td>
+            <td>@Html.ActionLink("Supprimer", "SupprimerCollecte", "Collecte", new { id = @v.Id })</td>
+            <td>@Html.ActionLink("Modifier", "ModifierCollecte", "Collecte", new { id = @v.Id })</td>
         </tr>  
     }  
      <!-- id = 1 à changer pour l'Id de la collecte sélecionnée dans le tableau-->

@@ -7,6 +7,8 @@
 
  @using (Html.BeginForm())
     {
+        <p>@Html.DisplayTextFor(m => Model.Message)</p>
+
         <fieldset>
             <legend>Créer votre compte utilisateur </legend><br />
             @Html.LabelFor(m => Model.UserAccount.Prenom)

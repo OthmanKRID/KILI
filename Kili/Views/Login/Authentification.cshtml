@@ -8,7 +8,7 @@
 {
     <h3>
         Vous êtes déjà authentifié avec le login :
-        @Model.UserAccount.Prenom
+        @Model.UserAccount.Mail
      <br/>
     @Html.ActionLink("Mon profil", "ModifierUserAccount", "UserAccount",new { id = Model.UserAccount.Id })
         </h3>
@@ -23,9 +23,9 @@ else
 {
     <fieldset>
         <legend>Connexion : </legend>
-        @Html.LabelFor(m => m.UserAccount.Prenom)
-        @Html.TextBoxFor(m => m.UserAccount.Prenom)
-        @Html.ValidationMessageFor(m => m.UserAccount.Prenom)
+        @Html.LabelFor(m => m.UserAccount.Mail)
+        @Html.TextBoxFor(m => m.UserAccount.Mail)
+        @Html.ValidationMessageFor(m => m.UserAccount.Mail)
         <br />
         @Html.LabelFor(m => m.UserAccount.Password)
         @Html.PasswordFor(m => m.UserAccount.Password)

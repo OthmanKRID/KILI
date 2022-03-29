@@ -1,0 +1,47 @@
+﻿@model Kili.ViewModels.PaiementViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Réalisez votre paiement";
+}
+
+ @using (Html.BeginForm())
+    {
+        <fieldset>
+            <legend>Réalisez votre paiement </legend><br />
+            @Html.LabelFor(m => Model.Paiement.Montant)
+            @Html.TextBoxFor(m => Model.Paiement.Montant, new { @readonly = true })
+            <br /><br />
+            <br /><br />
+            @Html.LabelFor(m => Model.MoyenPaiement.Identifiant)
+            @Html.TextBoxFor(m => Model.MoyenPaiement.Identifiant)
+            <br /><br />
+            <br /><br />
+            @Html.LabelFor(m => Model.MoyenPaiement.NomTitulaire)
+            @Html.TextBoxFor(m => Model.MoyenPaiement.NomTitulaire)
+            <br /><br />
+            @Html.LabelFor(m => Model.MoyenPaiement.Numero)
+            @Html.TextBoxFor(m => Model.MoyenPaiement.Numero)
+            @Html.ValidationMessageFor(m => Model.MoyenPaiement.Numero)
+            <br /><br />
+            @Html.LabelFor(m => Model.MoyenPaiement.Cryptogramme)
+            @Html.TextBoxFor(m => Model.MoyenPaiement.Cryptogramme)
+            @Html.ValidationMessageFor(m => Model.MoyenPaiement.Cryptogramme)
+            <br /><br />
+            @Html.LabelFor(m => Model.MoyenPaiement.DateExpiration)
+            @Html.TextBoxFor(m => Model.MoyenPaiement.DateExpiration)
+            @Html.ValidationMessageFor(m => Model.MoyenPaiement.DateExpiration)
+            <br /><br />
+            @Html.HiddenFor(m=>Model.Action)
+            @Html.HiddenFor(m=>Model.ActionID)
+            @Html.HiddenFor(m=>Model.Paiement.Id)
+            @Html.HiddenFor(m=>Model.Paiement.DatePaiement)
+
+            <br /><br />
+            <input type="submit" value="Réaliser le paiement" />
+        </fieldset>
+    }
+
+     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>

@@ -96,7 +96,7 @@ namespace Kili.Controllers
             ServicesViewModel viewModel = new ServicesViewModel() { abonnement = CompteConnecte.Association.Abonnement };
             viewModel.abonnement = CompteConnecte.Association.Abonnement;
             viewModel.ServiceAdhesion = CompteConnecte.Association.Abonnement.serviceAdhesion;
-            viewModel.ServiceDon = CompteConnecte.Association.Abonnement.serviceDon;
+            viewModel.ServiceDon = CompteConnecte.Association.Abonnement.ServiceDon;
             return View(viewModel);
         }
 
@@ -108,7 +108,7 @@ namespace Kili.Controllers
             ServicesViewModel viewModel = new ServicesViewModel() {abonnement= CompteConnecte.Association.Abonnement, listesServicesProposes = Abonnement_Services.ObtenirToutLesServicesDansOffre()};
             viewModel.abonnement = CompteConnecte.Association.Abonnement;
             viewModel.ServiceAdhesion = CompteConnecte.Association.Abonnement.serviceAdhesion;
-            viewModel.ServiceDon = CompteConnecte.Association.Abonnement.serviceDon;
+            viewModel.ServiceDon = CompteConnecte.Association.Abonnement.ServiceDon;
 
             return View(viewModel);
         }
@@ -122,7 +122,7 @@ namespace Kili.Controllers
             //.Association.Abonnement.serviceAdhesion.IsActive = true;
             viewModel.abonnement = CompteConnecte.Association.Abonnement;
             viewModel.ServiceAdhesion = CompteConnecte.Association.Abonnement.serviceAdhesion;
-            viewModel.ServiceDon = CompteConnecte.Association.Abonnement.serviceDon;
+            viewModel.ServiceDon = CompteConnecte.Association.Abonnement.ServiceDon;
             return View("VoirServices", viewModel);
         }
 

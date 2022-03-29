@@ -15,7 +15,7 @@ namespace Kili.Models.Dons
         
         public DateTime Date { get; set; }
         public int? ServiceDonId { get; set; }
-        //public virtual ServiceDon ServiceDon { get; set; }
+        public virtual ServiceDon ServiceDon { get; set; }
         public ICollection<Don> Dons { get; set; }
 
     }

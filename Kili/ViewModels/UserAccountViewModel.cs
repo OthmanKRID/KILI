@@ -11,5 +11,11 @@ namespace Kili.ViewModels
         public UserAccount UserAccount { get; set; }
         public bool Authentifie { get; set; }
         //public string Urlretour { get; set; }
+        public string OldPassword   { get; set; }
+        public string ConfirmationPassword { get; set; }
+        public string NewPassword { get; set; }
+        public string Message { get; set; }
+
+
     }
 }

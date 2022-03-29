@@ -24,10 +24,13 @@ namespace Kili.Models
         public DbSet<Service> Services { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<PanierService> PaniersServices { get; set; }
+        public DbSet<Paiement> Paiements { get; set; }
+        public DbSet<MoyenPaiement> MoyenPaiements { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=Kili");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=P@ssw0rd5;database=Kili");
         }
 
         public void InitializeDb()
@@ -43,12 +46,9 @@ namespace Kili.Models
             userAccountServices.CreerUserAccount("Fara", "Raza", "P@ssFara1", "Fara@gmail.com", TypeRole.Utilisateur);
             userAccountServices.CreerUserAccount("Romy","Kombet", "P@ssRomy1", "Romy@gmail.com", TypeRole.Utilisateur);
             userAccountServices.CreerUserAccount("Othman","Krid", "P@ssOthman1", "Othman@gmail.com", TypeRole.Utilisateur);
+            donServices.CreerDonateur(new Adresse() { Numero = 15, Voie = "rue Gabriel", CodePostal = 93000, Ville = "Pantin" }, "0102030708");
+            donServices.CreerDonateur(new Adresse() { Numero = 25, Voie = "rue Péri", CodePostal = 93100, Ville = "Romainville" }, "0102030406");
 
-            //donServices.CreerDon(1000, TypeRecurrence.Unique, 1);
-            //donServices.CreerDon(2000, TypeRecurrence.Unique, 1);
-            //donServices.CreerDon(200, TypeRecurrence.Mensuel, 2);
-            donServices.CreerCollecte("Collecte pour moi", 300000, "Une collecte intéressée");
-            donServices.CreerCollecte("Collecte pour les millionnaires en détresse", 6000, "Une collecte généreuse");
 
             userAccountServices.DésactiverUserAccount(1);
 
@@ -64,6 +64,16 @@ namespace Kili.Models
             //abonnement_Services.AjouterServiceDansOffre(19.99, 1, TypeService.Boutique);
             abonnement_Services.AjouterServiceDansOffre(149.99, 12, TypeService.Boutique);
 
+
+            donServices.CreerCollecte("Collecte pour moi", 300000, "Une collecte intéressée", 1);
+            donServices.CreerCollecte("Collecte pour les millionnaires en détresse", 6000, "Une collecte généreuse", 3);
+            donServices.CreerDon(1000, TypeRecurrence.Unique, 1, 1);
+            donServices.CreerDon(2000, TypeRecurrence.Unique, 1, 2);
+            donServices.CreerDon(200, TypeRecurrence.Mensuel, 2, 2);
+
+            userAccountServices.ModifierUserAccount(1, "M.", "Admin", "Kili@mail.com", TypeRole.Admin, 1, 1);
+            userAccountServices.ModifierUserAccount(3, "Romy", "Kombet", "Romy@gmail.com", TypeRole.Utilisateur, 3, 2);
+            
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -80,12 +90,20 @@ namespace Kili.Models
                             .HasIndex(p => p.AssociationId)
                             .IsUnique();*/
 
+            modelBuilder.Entity<Abonnement>()
+                .HasIndex(p => p.ServiceDonId)
+                .IsUnique();
+
             modelBuilder.Entity<UserAccount>()
                 .HasIndex(p => p.DonateurId)
                 .IsUnique();
 
             modelBuilder.Entity<Don>()
                 .HasIndex(p => p.PaiementId)
+                .IsUnique();
+
+            modelBuilder.Entity<Paiement>()
+                .HasIndex(p => p.MoyenPaiementId)
                 .IsUnique();
         }
 
