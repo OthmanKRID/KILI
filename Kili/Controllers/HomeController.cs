@@ -2,6 +2,7 @@
 using Kili.Models.General;
 using Kili.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using SelectPdf;
 using System.Collections.Generic;
 using System.Security.Claims;
 
@@ -57,6 +58,16 @@ namespace Kili.Controllers
                 association.Adresse = Adresse_Services.ObtenirAdresse((int)association.AdresseId);
             }
             return View(listeAssociations);
+        }
+
+        public FileResult GeneratePdf(string html)
+        {
+            html = html.Replace("strtTag", "<").Replace("EndTag", ">");
+            HtmlToPdf objhtml = new HtmlToPdf();
+            PdfDocument objdoc = objhtml.ConvertHtmlString(html);
+            byte[] pdf = objdoc.Save();
+            objdoc.Close();
+            return File(pdf, "application/pdf", "HtmlContent.pdf");
         }
 
     }

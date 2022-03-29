@@ -7,6 +7,7 @@
 
  @using (Html.BeginForm())
     {
+        
         <fieldset>
             <legend>Réalisez votre paiement </legend><br />
             @Html.LabelFor(m => Model.Paiement.Montant)
@@ -36,12 +37,17 @@
             @Html.HiddenFor(m=>Model.ActionID)
             @Html.HiddenFor(m=>Model.Paiement.Id)
             @Html.HiddenFor(m=>Model.Paiement.DatePaiement)
+            @Html.HiddenFor(m=>Model.Paiement.AssociationId)
+            @Html.HiddenFor(m=>Model.Paiement.MoyenPaiementId)
+            
 
             <br /><br />
             <input type="submit" value="Réaliser le paiement" />
         </fieldset>
-    }
 
-     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+        }
+
+
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>

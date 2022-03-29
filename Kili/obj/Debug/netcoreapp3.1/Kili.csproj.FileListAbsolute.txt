@@ -311,3 +311,6 @@ C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Kili.genruntimecon
 C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\UserAccount\ModifierPassword.cshtml.g.cs
 C:\Users\User\source\repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Paiement\CreerPaiement.cshtml.g.cs
 C:\Users\User\source\repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Collecte\AfficherCollectesCompteConnecte.cshtml.g.cs
+C:\Users\User\source\repos\Kili2\Kili\bin\Debug\netcoreapp3.1\Select.Html.dep
+C:\Users\User\source\repos\Kili2\Kili\bin\Debug\netcoreapp3.1\Select.HtmlToPdf.dll
+C:\Users\User\source\repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Paiement\CreerAttestation.cshtml.g.cs

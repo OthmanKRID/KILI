@@ -39,11 +39,13 @@ namespace Kili.Controllers
 
                     int idCarte = paiementServices.CreerMoyenPaiement(viewModel.MoyenPaiement.NomTitulaire, viewModel.MoyenPaiement.Numero, viewModel.MoyenPaiement.Cryptogramme, viewModel.MoyenPaiement.DateExpiration);
                     id = paiementServices.CreerPaiement(viewModel.Paiement.Montant, idCarte);
+                    viewModel.MoyenPaiement.moyenPaiement = MoyenPaiement.TypeMoyenPaiement.CarteBancaire;
                 }
                 else
                 {
                     int idPaypal = paiementServices.CreerMoyenPaiement(viewModel.MoyenPaiement.Identifiant);
                     id = paiementServices.CreerPaiement(viewModel.Paiement.Montant, idPaypal);
+                    viewModel.MoyenPaiement.moyenPaiement = MoyenPaiement.TypeMoyenPaiement.Paypal;
                 }
                 
                 if (viewModel.Action == TypeAction.Commande)
@@ -69,9 +71,26 @@ namespace Kili.Controllers
                     paiementServices.ModifierPaiement(id, viewModel.Paiement.Montant, association.Id);
                 }
 
-                return Redirect("/home/index");
+                var viewmodel2 = viewModel;
+
+                return RedirectToAction("creerattestation", "paiement", viewmodel2); //new { ActionID = viewModel.ActionID, Action = viewModel.Action, Paiement = new Paiement() { Montant = viewModel.Paiement.Montant, DatePaiement = viewModel.Paiement.DatePaiement }, MoyenPaiement = new MoyenPaiement() { moyenPaiement = viewModel.MoyenPaiement.moyenPaiement } }
             }
             // } return View();
+        }
+
+
+        public IActionResult CreerAttestation(PaiementViewModel viewModel)
+        {
+
+            return View(viewModel);
+            
+        }
+
+        [HttpPost]
+        public IActionResult CreerAttestation()
+        {
+
+            return Redirect("/login/authentification");
         }
 
         /*

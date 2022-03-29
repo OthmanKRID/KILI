@@ -24,7 +24,7 @@ namespace Kili.Models
         //Fonction permettant d'obtenir la liste de tout les Associations
        public List<Association> ObtenirAssociations()
         {
-            return _bddContext.Associations.Include(A => A.Adresse).Include(A => A.Abonnement).ToList();
+            return _bddContext.Associations.Include(A => A.Adresse).Include(A => A.Abonnement).ThenInclude(A => A.ServiceDon).ThenInclude(SD => SD.Collectes).ToList();
         }
 
         public List<Association> ObtenirAssociationsParLocalisation(string Localisation)
