@@ -23,41 +23,88 @@ namespace Kili.Controllers
             Abonnement_Services = new Abonnement_Services();
         }
 
-        public IActionResult Index()
+        public IActionResult Index(IndexViewModel viewModel)
         {
+            viewModel.Authentifie = HttpContext.User.Identity.IsAuthenticated;
+
+            viewModel.Associations = Association_Services.Obtenir3DernièresAssociations();
+
             var Role = User.FindFirst(ClaimTypes.Role);
 
             bool isAdmin = User.IsInRole(TypeRole.Admin.ToString());
-            return View();
+            return View(viewModel);
+        }
+
+        public IActionResult Explorer()
+        {
+           return View(new AssociationViewModel());
         }
 
 
+        public IActionResult VoirAssociations(AssociationViewModel viewModel)
+        {
+            viewModel.Associations = Association_Services.ObtenirAssociations(); ;
+            return View(viewModel);
+        }
+
+        [HttpPost]
         //Fonction permettant d'afficher les association en fonction de la localisation et du theme
-        public IActionResult VoirAssociations(string ville, RechercheTheme Theme)
+        public IActionResult VoirAssociationsTriees(AssociationViewModel viewModel)
         {
             List<Association> listeAssociations = new List<Association>();
-            if (ville == null & Theme == RechercheTheme.Tous)
-            { 
-                listeAssociations = Association_Services.ObtenirAssociations();
-            }
-            else if (ville != null & Theme == RechercheTheme.Tous)
+            if (viewModel.association.Adresse.Ville == null)
             {
-                listeAssociations = Association_Services.ObtenirAssociationsParLocalisation(ville);
-            }
-            else if (ville == null & Theme != RechercheTheme.Tous)
-            {
-                listeAssociations = Association_Services.ObtenirAssociationsParTheme(Theme);
+                if (viewModel.RechercheTheme == RechercheTheme.Tous)
+                {
+                    if (viewModel.association.Nom == null)
+                    {
+                        listeAssociations = Association_Services.ObtenirAssociations();
+                    }
+                    else
+                    {
+                        listeAssociations = Association_Services.ObtenirAssociationsParNom(viewModel.association.Nom);
+                    }
+                }
+                else
+                {
+                    if (viewModel.association.Nom == null)
+                    {
+                        listeAssociations = Association_Services.ObtenirAssociationsParTheme(viewModel.RechercheTheme);
+                    }
+                    else
+                    {
+                        listeAssociations = Association_Services.ObtenirAssociationsParThemeEtNom(viewModel.association.Nom, viewModel.RechercheTheme);
+                    }
+                }
             }
             else
             {
-                listeAssociations = Association_Services.ObtenirAssociationsParThemeEtVille(ville, Theme);
+                if (viewModel.RechercheTheme == RechercheTheme.Tous)
+                {
+                    if (viewModel.association.Nom == null)
+                    {
+                        listeAssociations = Association_Services.ObtenirAssociationsParLocalisation(viewModel.association.Adresse.Ville);
+                    }
+                    else
+                    {
+                        listeAssociations = Association_Services.ObtenirAssociationsParVilleEtNom(viewModel.association.Adresse.Ville, viewModel.association.Nom);
+                    }
+                }
+                else
+                {
+                    if (viewModel.association.Nom == null)
+                    {
+                        listeAssociations = Association_Services.ObtenirAssociationsParThemeEtVille(viewModel.association.Adresse.Ville, viewModel.RechercheTheme);
+                    }
+                    else
+                    {
+                        listeAssociations = Association_Services.ObtenirAssociationsParThemeEtVilleEtNom(viewModel.association.Adresse.Ville, viewModel.association.Nom, viewModel.RechercheTheme);
+                    }
+                }
             }
 
-            foreach (Association association in listeAssociations)
-            {
-                association.Adresse = Adresse_Services.ObtenirAdresse((int)association.AdresseId);
-            }
-            return View(listeAssociations);
+            viewModel.Associations = listeAssociations;
+            return View("VoirAssociations", viewModel);
         }
 
         public FileResult GeneratePdf(string html)

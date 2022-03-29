@@ -35,19 +35,19 @@ namespace Kili.Controllers
 
             if (cartId == 0)
             {
-                // cart does not exist so we create it before adding item with product inside
+                // Le panier n'existe pas donc on le crée en ajoutant l'item dedans
                 cartId = PanierService_Services.CreateCart();
                 PanierService_Services.AddItem(cartId, new Item { ServiceId = id, Quantity = 1 });
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cartId", cartId);
             }
             else
             {
-                // cart exist then we just add item on it
+                // Le panier existe deja, on ajoute alors l'item
                 PanierService panier = PanierService_Services.GetCart(cartId);
                 int res = ServiceExisteDansPanier(panier, id);
                 if (res != -1)
                 {
-                    PanierService_Services.UpdateItemQuantity(res);
+                //    PanierService_Services.UpdateItemQuantity(res);
                 }
                 else
                 {
@@ -62,7 +62,20 @@ namespace Kili.Controllers
         {
             var panierId = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "cartId");
             new PanierService_Services().RemoveItem(panierId, id);
-            return View("Panier");
+            return View("../Association/PanierService", ObtenirPanierService());
+        }
+
+        private void CreerPanier()
+        {
+            var cartId = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "cartId");
+            PanierService_Services PanierService_Services = new PanierService_Services();
+
+            if (cartId == 0)
+            {
+                // Le panier n'existe pas donc on le crée en ajoutant l'item dedans
+                cartId = PanierService_Services.CreateCart();
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cartId", cartId);
+            }
         }
 
 
@@ -70,9 +83,9 @@ namespace Kili.Controllers
         {
             foreach (var item in panier.Items)
             {
-                if (item.Id == ServiceId)
+                if (item.Service.Id == ServiceId)
                 {
-                    return item.Id;
+                    return item.Service.Id;
                 }
             }
             return -1;

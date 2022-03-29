@@ -27,13 +27,14 @@
             @Html.HiddenFor(a => a.ServiceAdhesion)
             @Html.HiddenFor(a => a.ServiceDon)
 
-            @if ((Model.abonnement.serviceAdhesion.IsActive == false && @service.TypeService == TypeService.Adhesion) || (Model.abonnement.ServiceDon.IsActive == false && @service.TypeService == TypeService.Don))
+
+            @if ((Model.abonnement.serviceAdhesion.IsActive == false && @service.TypeService == TypeService.Adhesion ) || (Model.abonnement.serviceDon.IsActive == false && @service.TypeService == TypeService.Don) || (Model.abonnement.serviceBoutique.IsActive == false && @service.TypeService == TypeService.Boutique))
+
             {
             <tr>
                 <th>@service.TypeService</th>
                 <th>@service.duree_mois mois</th>
                 <th>@service.prix €</th>
-               @* <th>@Html.ActionLink("Souscrire", "MiseAJourSouscriptionAjout"+@service.TypeService.ToString(),"Association", new { idservice = @service.Id}, new { idabonnement = @Model.abonnement.Id})</th>*@
                 <th>@Html.ActionLink("Ajouter au panier", "AjouterService", "Abonnement", new { id = @service.Id})</th>
             </tr>         
             }

@@ -14,6 +14,8 @@
     <p>
         Compléter les champs ci-dessous :
     </p>
+
+<!--
 @using (Html.BeginForm("ModifierAssociation","Association"))
 {
     <fieldset>
@@ -34,13 +36,20 @@
         @Html.TextBoxFor(m => m.Adresse.Ville)<br /><br />
         <Label>Thème :</Label>
         @Html.DropDownListFor(m => m.Theme, new SelectList(Enum.GetValues(typeof(ThemeAssociation))), "Choisir le thème")<br /><br />
+        <Label>Description :</Label>
+        @Html.TextBoxFor(m => m.Description)<br /><br />
+
+
+        
+         
         @Html.HiddenFor(m => m.Id);
         @Html.HiddenFor(m => m.AdresseId);
         <br />
-        <input type="submit" value="Enregistrer" />
-    </fieldset>
+       <input type="submit" value="Enregistrer" />
+    </fieldset> 
 
 }
+-->
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>

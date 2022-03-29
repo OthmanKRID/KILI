@@ -20,6 +20,7 @@ namespace Kili.Models.General
         [Column(TypeName = "date")]
         public DateTime DateCreation { get; set; }
         public bool Actif { get; set; }
+        //public bool IsConnected { get; set; }
 
         [EmailAddress(ErrorMessage = "L'adresse email saisie n'est pas valide")]
         public string Mail { get; set; }

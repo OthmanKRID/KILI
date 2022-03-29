@@ -27,9 +27,7 @@ namespace Kili.Controllers
                 //Modifier la fonction pour faire le lien avec ServiceDon à partir de UserAccount
                 //userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association.Paiement.ServiceDon.Id;
 
-
-
-                return Redirect("/home/index"); 
+               return Redirect("/home/index"); 
             }
             // } return View();
         }
@@ -71,7 +69,7 @@ namespace Kili.Controllers
             List<Collecte> listcollecteAsso = new List<Collecte>();
             {
 
-                foreach (Collecte collecte in UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association.Abonnement.ServiceDon.Collectes)
+                foreach (Collecte collecte in UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association.Abonnement.serviceDon.Collectes)
                 {
                     listcollecteAsso.Add(collecte);
                 }

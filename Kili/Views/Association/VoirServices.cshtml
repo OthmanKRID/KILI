@@ -18,8 +18,14 @@
 {
     <Label>Services adhésion          --    </Label> <Label>Date de Fin : @Model.abonnement.serviceAdhesion.dateFinAbonnement</Label>
 }
-     @if(@Model.abonnement.ServiceDon.IsActive){
-    <Label>Services adhésion          --    </Label> <Label>Date de Fin : @Model.abonnement.ServiceDon.dateFinAbonnement</Label>
+
+     @if(@Model.abonnement.serviceDon.IsActive){
+    <Label>Services Don          --    </Label> <Label>Date de Fin : @Model.abonnement.serviceDon.dateFinAbonnement</Label>
+    }
+
+    @if(@Model.abonnement.serviceBoutique.IsActive){
+    <Label>Services Boutique          --    </Label> <Label>Date de Fin : @Model.abonnement.serviceBoutique.dateFinAbonnement</Label>
+
     }
     <br />
     <br />

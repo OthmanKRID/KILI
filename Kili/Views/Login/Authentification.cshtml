@@ -7,8 +7,10 @@
 @if (Model.Authentifie)
 {
     <h3>
-        Vous êtes déjà authentifié avec le login :
-        @Model.UserAccount.Mail
+
+        Vous êtes déjà authentifié en tant que :
+        @Model.UserAccount.Prenom @Model.UserAccount.Nom
+
      <br/>
     @Html.ActionLink("Mon profil", "ModifierUserAccount", "UserAccount",new { id = Model.UserAccount.Id })
         </h3>

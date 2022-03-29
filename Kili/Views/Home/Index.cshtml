@@ -1,7 +1,634 @@
-﻿
-@{
-    Layout = "_Layout";
-    ViewBag.Title = "Index";
-}
+﻿@model Kili.ViewModels.IndexViewModel
 
-<div>Je suis la vue index</div>
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+     <title>Kili</title>
+     <!--
+
+    Template 2106 Soft Landing
+
+	http://www.tooplate.com/view/2106-soft-landing
+
+    -->
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="team" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+     <link rel="stylesheet" href="~/css/bootstrap.min.css">
+     <link rel="stylesheet" href="~/css/owl.carousel.css">
+     <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+     <link rel="stylesheet" href="~/css/font-awesome.min.css">
+
+
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="~/css/tooplate-style.css">
+     <link rel="stylesheet" href="~/css/style.css">
+
+</head>
+
+<body>
+
+     <!-- PRE LOADER -->
+     <section class="preloader">
+          <div class="spinner">
+
+               <span class="spinner-rotate"></span>
+
+          </div>
+     </section>
+
+
+     <!-- MENU -->
+     <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
+          <div class="container">
+
+               <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                    </button>
+
+                    <!-- lOGO TEXT HERE -->
+                    <img src="/images/logo.png" class="navbar-brand" alt="">
+               </div>
+
+               <!-- MENU LINKS -->
+               <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+
+                         <li><a href="#about" class="smoothScroll">Les associations</a></li>
+                         <li><a href="#pricing" class="smoothScroll">Notre philosophie</a></li>
+                         <!--  <li><a href="#contact" class="smoothScroll">Connexion</a></li> -->
+
+                    </ul>
+                @if (@Model.Authentifie == false)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+
+                         <button type="button" class="btn btn-primary btn-lg show-modal" data-toggle="modal"
+                              data-target="#myModal">Connexion</button>
+
+                    </ul>
+
+
+                    <!-- pop up connexion -->
+                    @using (Html.BeginForm("Authentification", "Login"))
+                    {
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content clearfix">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                             aria-hidden="true">×</span></button>
+                                    <div class="modal-body">
+                                        <h3 class="title">Connexion</h3>
+                                        <p class="description">Saisir l'email et le mot de passe ! </p>
+                                        <div class="form-group">
+                                            <span class="input-icon"><i class="fa fa-user"></i></span>
+                                            <!--<input type="email" class="form-control" placeholder="Email">-->
+                                             @Html.TextBoxFor(m => m.UserAccount.Mail,  new { @placeholder="Email" , @class="form-control", @required="required"})
+                                        </div>
+                                        <div class="form-group">
+                                            <span class="input-icon"><i class="fa fa-shield"></i></span>
+                                            <!--<input type="password" class="form-control" placeholder="Mot de passe">-->
+                                             @Html.TextBoxFor(m => m.UserAccount.Password,  new { @placeholder="Mot de passe" , @class="form-control",@required="required"})
+                                        </div>
+                                        <div class="form-group checkbox">
+                                            <input type="checkbox">
+                                            <label>Sauvegarder</label>
+                                        </div>
+                                        <a href="" class="forgot-pass">Mot de passe oublié ?</a>
+                                        <input type="submit" value="Se connecter" class="btn" name="submit" id="submit" />
+                                        <a class="txtCompte" href="Create.html">Créer un compte</a>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    }
+                }
+                @if (@Model.Authentifie == true)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+
+                         <button type="button" class="btn btn-primary btn-lg show-modal" data-toggle="modal"
+                              data-target="#myModal">@Html.ActionLink("Deconnexion", "Deconnexion", "Login")</button>
+
+                    </ul>
+                    
+                }
+            </div>
+     </section>
+     <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+-->
+
+     <!-- intro site -->
+     <section id="home" data-stellar-background-ratio="0.5">
+          <div class="overlay"></div>
+          <div class="container">
+               <div class="row">
+                    <div class="col-sm-7">
+                         <div class="home-info">
+                              <h1><b>Découvrer les associations qui vous ressemblent !</b></h1>
+                              <h3>Kili vous aide à découvrir la diversité des activités proposées par 184 727
+                                   associations et clubs dans toute la France !</h3>
+                              <form action="" method="get" class="online-form">
+                                   <button type="button" class="form-control">@Html.ActionLink("Explorer", "VoirAssociations", "Home")</button>
+                              </form>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </section>
+
+
+     <!-- Associations à découvrir -->
+     <section id="feature" data-stellar-background-ratio="0.5">
+          <div class="container">
+
+               <div class="row">
+
+                    <div class="col-md-12 col-sm-12">
+                         <div class="section-title" id="new">
+                              <h1>Associations à découvrir</h1>
+
+
+                         </div>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12">
+
+                         <ul class="nav nav-tabs navbar-right" role="tablist">
+
+                              <li class="active"><a href="#tab01" aria-controls="tab01" role="tab" data-toggle="tab">Les
+                                        + récentes</a></li>
+
+                              <li><a href="#tab02" aria-controls="tab02" role="tab" data-toggle="tab">Collectes</a></li>
+
+                              <!-- <li><a href="#tab03" aria-controls="tab03" role="tab" data-toggle="tab">Boutiques</a></li> -->
+
+                              <li><a href="#tab04" aria-controls="tab04" role="tab" data-toggle="tab">Tous voir
+                                        &rarr;</a> </li>
+                         </ul>
+
+                         <div class="tab-content">
+                              <div class="tab-pane active" id="tab01" role="tabpanel">
+                                   <div class="tab-pane-item">
+                                        <!--<h2>Minimal Design</h2>
+                                        <p>Nam feugiat a ante sollicitudin luctus. Quisque eget placerat massa. Ut quis
+                                             ligula ornare, pellentesque velit eget, vestibulum est. Donec pretium
+                                             tristique elit eget sodales. Pellentesque posuere.</p>
+                                   </div>
+                                   <div class="tab-pane-item">
+                                        <h2>Easy to use</h2>
+                                        <p>Aliquam massa massa, consectetur non mattis fringilla, sodales ac turpis.
+                                             Morbi ac felis sagittis, faucibus mauris vitae, placerat mauris.</p>-->
+
+                                        <div class="row">
+                                            
+                              @foreach (var association in Model.Associations)
+                             {
+                                             <div class="column">
+                                                  <div class="card">
+                                                       <img src=@association.UrlPhoto alt="Jane" style="width:100%">
+                                                       <div class="container">
+                                                            <h2>@association.Nom</h2>
+                                                            <p class="title">@association.Theme</p>
+                                                            <p>@association.Description</p>
+                                                            <p>@association.Adresse.Ville</p>
+                                                            <p><button class="button">@Html.ActionLink("Découvrir", "VoirDetailsAssociation", "Association" , new { id = @association.Id})</button></p>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                             }
+ 
+                                        </div>
+                                   </div>
+                              </div>
+
+                              
+                              <div class="tab-pane" id="tab02" role="tabpanel">
+                                   <div class="tab-pane-item">
+                                        <h2>Collecte pour les orphelins</h2>
+                                        <p>Notre mission est de prendre en charge des fratries. En France, ce sont des
+                                             enfants qui nous sont confiés par l’Aide Sociale à l’Enfance
+                                             dans le cadre d’une mesure judiciaire. Dans le monde, ce sont des enfants
+                                             orphelins ou abandonnés.</p>
+                                        <a href="https://www.w3schools.com/">Visit W3Schools.com!</a>
+                                   </div>
+                                   <div class="tab-pane-item">
+                                        <h2>Une deuxième collecte à la une </h2>
+                                        <p>Nous avons ainsi pour vocation de sauvegarder les liens fraternels, qui,
+                                             après la séparation d’avec les parents,
+                                             sont fondamentaux pour l’évolution de chaque enfant. Ce faisant, nous nous
+                                             assurons toujours que le vécu familial
+                                             permet un maintien sous le même toit de l’ensemble de la fratrie et ne
+                                             présente aucun risque pour un ou plusieurs des enfants.</p>
+                                   </div>
+                                   <div class="tab-pane-item">
+                                        <h2>Une troisème collecte à la une</h2>
+                                        <p>Acteurs de la protection de l’enfance, profondément attachés à la défense des
+                                             droits de l’enfant,
+                                             nous militons pour que ce droit soit reconnu et appliqué et au-delà,
+                                             qu’il soit amélioré. Notre longue expérience d’accompagnement d’enfants,
+                                             ainsi que notre travail autour de l’amélioration de nos pratiques peuvent
+                                             contribuer aux débats et aux réflexions engagés
+                                             dans le domaine de la protection de l’enfance.</p>
+                                   </div>
+                              </div>
+
+                              <!--  <div class="tab-pane" id="tab03" role="tabpanel">
+                                   <div class="tab-pane-item">
+                                        <h2>Quick Support</h2>
+                                        <p>Mauris rutrum est at fringilla pulvinar. Nam ligula urna, lobortis non
+                                             scelerisque vel, molestie eu massa. Nullam mattis elit at tortor accumsan.
+                                        </p>
+                                   </div>
+                                   <div class="tab-pane-item">
+                                        <h2>Managed Stuffs</h2>
+                                        <p>Quisque ullamcorper sem quis sapien cursus efficitur. Sed id sodales ipsum.
+                                             Morbi eleifend tempus erat sit amet vehicula. Nulla at posuere tellus, non
+                                             mattis erat. Nulla id massa gravida.</p>
+                                   </div>-->
+
+                              <!-- Carroussel
+                                             <div class="slideshow-container">
+
+                                             <div class="mySlides fade">
+                                                  <div class="numbertext">1 / 3</div>
+                                                  <img src="/images/boutique1.jpg" style="width:100%">
+                                                  <div class="text">Caption Text</div>
+                                             </div>
+
+                                             <div class="mySlides fade">
+                                                  <div class="numbertext">2 / 3</div>
+                                                  <img src="/images/boutique2.jpg" style="width:100%">
+                                                  <div class="text">Caption Two</div>
+                                             </div>
+
+                                             <div class="mySlides fade">
+                                                  <div class="numbertext">3 / 3</div>
+                                                  <img src="/images/boutique3.jpg" style="width:100%">
+                                                  <div class="text">Caption Three</div>
+                                             </div>
+
+                                             <a class="prev" onclick="plusSlides(-1)">❮</a>
+                                             <a class="next" onclick="plusSlides(1)">❯</a>
+
+                                        </div>
+                                        <br>
+
+                                        <div style="text-align:center">
+                                             <span class="dot" onclick="currentSlide(1)"></span>
+                                             <span class="dot" onclick="currentSlide(2)"></span>
+                                             <span class="dot" onclick="currentSlide(3)"></span>
+                                        </div>
+
+                                        <script>
+                                             let slideIndex = 1;
+                                             showSlides(slideIndex);
+
+                                             function plusSlides(n) {
+                                                  showSlides(slideIndex += n);
+                                             }
+
+                                             function currentSlide(n) {
+                                                  showSlides(slideIndex = n);
+                                             }
+
+                                             function showSlides(n) {
+                                                  let i;
+                                                  let slides = document.getElementsByClassName("mySlides");
+                                                  let dots = document.getElementsByClassName("dot");
+                                                  if (n > slides.length) { slideIndex = 1 }
+                                                  if (n < 1) { slideIndex = slides.length }
+                                                  for (i = 0; i < slides.length; i++) {
+                                                       slides[i].style.display = "none";
+                                                  }
+                                                  for (i = 0; i < dots.length; i++) {
+                                                       dots[i].className = dots[i].className.replace(" active", "");
+                                                  }
+                                                  slides[slideIndex - 1].style.display = "block";
+                                                  dots[slideIndex - 1].className += " active";
+                                             }
+                                        </script> -->
+
+
+
+                         </div>
+                    </div>
+
+               </div>
+
+               <!-- <div class="col-md-6 col-sm-6">
+                         <div class="feature-image">
+                              <img src="/images/feature-mocku.png" class="img-responsive" alt="Thin Laptop">                             
+                         </div>
+                         
+                    </div>-->
+
+          </div>
+          </div>
+     </section>
+
+
+
+
+
+     <!-- TESTIMONIAL -->
+     <section id="testimonial" data-stellar-background-ratio="0.5">
+          <div class="row">
+
+               <div class="col-md-7 col-sm-12">
+                    <div class="testimonial-image"></div>
+
+               </div>
+
+               <div class="col-md-5 col-sm-12">
+                    <div class="testimonial-info">
+
+                         <div class="section-title">
+                              <h1>Parole de bénévole</h1>
+                         </div>
+
+                         <div class="owl-carousel owl-theme">
+                              <div class="item">
+                                   <h3>Après la fin de mon activité professionnelle en Juin 2018, j’ai souhaité donner
+                                        plus de sens à une partie de mon temps libre au travers d’activités bénévoles.
+
+                                        Je me suis alors mis en recherche d’organismes ou d’associations ayant besoin de
+                                        bénévoles dans le secteur social
+                                        (j’ai passé 35 ans de ma vie professionnelle dans le social et je souhaitais
+                                        poursuivre mes activités dans cette voie).
+                                   </h3>
+                                   <div class="testimonial-item">
+                                        <img src="/images/tst-image1.jpg" class="img-responsive" alt="Michael">
+                                        <h4>Michael</h4>
+                                   </div>
+                              </div>
+
+                              <div class="item">
+                                   <h3>Donec pretium tristique elit eget sodales. Pellentesque posuere, nunc id
+                                        interdum venenatis, leo odio cursus sapien, ac malesuada nisl libero eget
+                                        urna. leo odio cursus sapien, ac malesuada nisl libero eget
+                                        urna.</h3>
+                                   <div class="testimonial-item">
+                                        <img src="/images/tst-image2.jpg" class="img-responsive" alt="Sofia">
+                                        <h4>Sofia</h4>
+                                   </div>
+                              </div>
+
+                              <div class="item">
+                                   <h3>Lorem ipsum dolor sit amet, consectetur adipisicing eiusmod tempor
+                                        incididunt ut labore et dolore magna. Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing eiusmod tempor
+                                        incididunt ut labore et dolore magna.</h3>
+                                   <div class="testimonial-item">
+                                        <img src="/images/tst-image3.jpg" class="img-responsive" alt="Monica">
+                                        <h4>Monica</h4>
+                                   </div>
+                              </div>
+                         </div>
+
+                    </div>
+               </div>
+
+          </div>
+          </div>
+     </section>
+
+     <!-- ABOUT -->
+     <!-- <section id="about" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+                    <img src= "/images/asso3.jpg" alt="Monica">
+
+                    <div class="col-md-offset-3 col-md-6 col-sm-12">
+                         <div class="section-title">
+                              <h1>Professional Team for you</h1>
+                         </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                         <div class="team-thumb">
+                              <img src="/images/team-image1.jpg" class="img-responsive" alt="Andrew Orange">
+                              <div class="team-info team-thumb-up">
+                                   <h2>Andrew Orange</h2>
+                                   <small>Art Director</small>
+                                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing eiusmod tempor incididunt ut
+                                        labore et dolore magna.</p>
+                              </div>
+                         </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                         <div class="team-thumb">
+                              <div class="team-info team-thumb-down">
+                                   <h2>Catherine Soft</h2>
+                                   <small>Senior Manager</small>
+                                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing eiusmod tempor incididunt ut
+                                        labore et dolore magna.</p>
+                              </div>
+                              <img src="/images/team-image2.jpg" class="img-responsive" alt="Catherine Soft">
+                         </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                         <div class="team-thumb">
+                              <img src="/images/team-image3.jpg" class="img-responsive" alt="Jack Wilson">
+                              <div class="team-info team-thumb-up">
+                                   <h2>Jack Wilson</h2>
+                                   <small>CEO / Founder</small>
+                                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing eiusmod tempor incididunt ut
+                                        labore et dolore magna.</p>
+                              </div>
+                         </div>
+                    </div>-->
+
+     </div>
+     </div>
+     </section>
+
+     <!-- PRICING -->
+     <section id="pricing" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-12 col-sm-12">
+                         <div class="section-title">
+                              <h1>Au service des associations </h1>
+                         </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6">
+                         <div class="pricing-thumb">
+                              <div class="pricing-title">
+                                   <h2>Adhésion </h2>
+                              </div>
+                              <div class="pricing-info">
+                                   <p>Un bulletin d'adhésion personnalisé</p>
+                                   <p>Une gestion de vos adhésions centralisée et gratuite</p>
+                                   <p>Un accompagnement sur mesure</p>
+
+                              </div>
+                              <div class="pricing-bottom">
+                                   <span class="pricing-dollar">20€/mois</span>
+                                   <a href="#" class="section-btn pricing-btn">Souscrire</a>
+                              </div>
+                         </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6">
+                         <div class="pricing-thumb">
+                              <div class="pricing-title">
+                                   <h2>Collecte</h2>
+
+                              </div>
+                              <div class="pricing-info">
+                                   <p>0 commission, ni frais cachés</p>
+                                   <p>Une campagne personnalisée</p>
+                                   <p>Des paiements et versements sécurisés</p>
+
+                              </div>
+                              <div class="pricing-bottom">
+                                   <span class="pricing-dollar">50€/mois</span>
+                                   <a href="#" class="section-btn pricing-btn">Souscrire</a>
+                              </div>
+                         </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6">
+                         <div class="pricing-thumb">
+                              <div class="pricing-title">
+                                   <h2>Boutique</h2>
+                              </div>
+                              <div class="pricing-info">
+                                   <p>Une vitrine de vos activités</p>
+                                   <p>Une boutique personnalisée avec toutes les informations</p>
+                                   <p>Des ventes plus fluides</p>
+
+                              </div>
+                              <div class="pricing-bottom">
+                                   <span class="pricing-dollar">30€/mois</span>
+                                   <a href="#" class="section-btn pricing-btn">Souscrire</a>
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </section>
+
+
+     <!-- CONTACT 
+     <section id="contact" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-offset-1 col-md-10 col-sm-12">
+                         <form id="contact-form" role="form" action="" method="post">
+                              <div class="section-title">
+                                   <h1>Say hello to us</h1>
+                              </div>
+
+                              <div class="col-md-4 col-sm-4">
+                                   <input type="text" class="form-control" placeholder="Full name" name="name"
+                                        required="">
+                              </div>
+                              <div class="col-md-4 col-sm-4">
+                                   <input type="email" class="form-control" placeholder="Email address" name="email"
+                                        required="">
+                              </div>
+                              <div class="col-md-4 col-sm-4">
+                                   <input type="submit" class="form-control" name="send message" value="Send Message">
+                              </div>
+                              <div class="col-md-12 col-sm-12">
+                                   <textarea class="form-control" rows="8" placeholder="Your message" name="message"
+                                        required=""></textarea>
+                              </div>
+                         </form>
+                    </div>
+
+               </div>
+          </div>
+     </section>  -->
+
+
+     <!-- FOOTER -->
+     <footer id="footer" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="copyright-text col-md-12 col-sm-12">
+
+                         <div class="col-md-12 col-md-3">
+                              <ul>
+                                   <h3>Kili </h3>
+
+                                   <span class="glyphicon glyphicon-envelope"> contact@kili.fr</span></br>
+                                   <span class="glyphicon glyphicon-earphone"> +33 1 89 21 45 96 </span>
+                              </ul>
+                         </div>
+                         <div class="col-md-12 col-md-3">
+                              <ul>
+                                   <h3>Particulier </h3>
+                                   <a>Boutiques</a></br>
+                                   <a>Collectes</a></br>
+                                   <a>Adhésion</a></br>
+                              </ul>
+                         </div>
+                         <div class="col-md-3 col-md-3">
+                              <ul>
+                                   <h3>Associations </h3>
+                                   <a>Abonnement</a></br>
+                                   <a>Offres</a></br>
+                                   <a>Aide</a></br>
+                              </ul>
+                         </div>
+                         <div class="col-md-3 col-md-3">
+                              <ul>
+                                   <h3>A la une </h3>
+
+                                   <span class="glyphicon glyphicon-envelope"> contact@kili.fr</span></br>
+                                   <span class="glyphicon glyphicon-earphone"> +33 1 89 21 45 96 </span>
+                              </ul>
+                         </div>
+
+                         <div class="col-md-12 col-sm-12">
+                              <p>Copyright &copy; 2022 Company Kili - Project </p>
+
+                         </div>
+
+                         <div class="col-md-12 col-sm-12">
+                              <ul class="social-icon">
+                                   <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
+                                   <li><a href="#" class="fa fa-twitter"></a></li>
+                                   <li><a href="#" class="fa fa-instagram"></a></li>
+                              </ul>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </footer>
+
+
+     <!-- SCRIPTS -->
+     <script src="~/js/jquery.js"></script>
+     <script src="~/js/bootstrap.min.js"></script>
+     <script src="~/js/jquery.stellar.min.js"></script>
+     <script src="~/js/owl.carousel.min.js"></script>
+     <script src="~/js/smoothscroll.js"></script>
+     <script src="~/js/custom.js"></script>
+
+</body>
+
+</html>

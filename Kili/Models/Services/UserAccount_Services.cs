@@ -1,10 +1,12 @@
 ﻿using Kili.Models.Dons;
 using Kili.Models.General;
 using Kili.Models.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using static Kili.Models.General.UserAccount;
@@ -29,7 +31,7 @@ namespace Kili.Models
         //Fonction permettant d'obtenir un UserAccount à partir de son Id
         public UserAccount ObtenirUserAccount(int id)
         {
-            return _bddContext.UserAccounts.Include(UA => UA.Association).ThenInclude(A => A.Adresse).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceAdhesion).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.ServiceDon).ThenInclude(SD => SD.Collectes).Include(UA => UA.Donateur).ThenInclude(DO => DO.Dons).FirstOrDefault(UA => UA.Id == id);
+            return _bddContext.UserAccounts.Include(UA => UA.Association).ThenInclude(A => A.Adresse).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceAdhesion).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceDon).ThenInclude(SD => SD.Collectes).Include(UA => UA.Donateur).ThenInclude(DO => DO.Dons).FirstOrDefault(UA => UA.Id == id);
         }
 
         //Fonction permettant d'obtenir un UserAccount à partir de son Id
@@ -143,12 +145,13 @@ namespace Kili.Models
         public UserAccount Authentifier(string email, string password)
         {
             string motDePasse = EncodeMD5(password);
+
             UserAccount user = this._bddContext.UserAccounts.FirstOrDefault(u => u.Mail == email && u.Password == motDePasse);
+
             return user;
         }
 
-
-        public void Dispose()
+         public void Dispose()
         {
             _bddContext.Dispose();
         }

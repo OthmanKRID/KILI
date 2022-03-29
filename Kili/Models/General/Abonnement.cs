@@ -11,17 +11,20 @@ namespace Kili.Models.General
         public int? ServiceAdhesionId { get; set; }
         public virtual ServiceAdhesion serviceAdhesion { get; set; }
         public int? ServiceDonId { get; set; }
-        public virtual ServiceDon ServiceDon { get; set; }
-        //public virtual ServiceAdhesion serviceBoutique { get; set; }
 
-        //public virtual List<Service> ServicesSouscrit { get; set; }
+        public virtual ServiceDon serviceDon { get; set; }
+        public int? ServiceBoutiqueId { get; set; }
+        public virtual ServiceBoutique serviceBoutique { get; set; }
         public virtual Association Association { get; set; }    
 
-        
+      
+
+
         public Abonnement()
         {
-            serviceAdhesion = new ServiceAdhesion();
-            ServiceDon = new ServiceDon();
+            serviceAdhesion = new ServiceAdhesion() {IsActive = false};
+            serviceDon = new ServiceDon() { IsActive = false };
+            serviceBoutique = new ServiceBoutique() {IsActive = false};
         }
         
 

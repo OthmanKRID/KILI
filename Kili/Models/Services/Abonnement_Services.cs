@@ -7,6 +7,8 @@ using System.Security.Cryptography;
 using System.Text;
 using static Kili.Models.General.UserAccount;
 using Microsoft.AspNetCore.Http;
+using System.Data.Entity;
+using Kili.Models.Dons;
 
 namespace Kili.Models
 {
@@ -60,19 +62,57 @@ namespace Kili.Models
             }
         }
 
-        //Ajouter une service Adhésion à un abonnement
+        // Ajouter une service Adhésion à un abonnement
         // On passe en argument l'ID de l'abonnnement et la duree de l'adhésion au service
-        public void AjouterServiceAdhesion(int id, int duree)
+        public void AjouterService(int id, Service service)
         {
 
-            ServiceAdhesion adhesion = new ServiceAdhesion() { IsActive = true, duree = duree, dateAbonnement = DateTime.Today, dateFinAbonnement = DateTime.Today.AddDays(duree) };
-            _bddContext.ServicesAdhesion.Add(adhesion);
-            _bddContext.SaveChanges();
-            Abonnement Abonnement = _bddContext.Abonnements.Find(id);
-            if (Abonnement != null)
+            if (service.TypeService == TypeService.Adhesion)
             {
-                Abonnement.ServiceAdhesionId = adhesion.Id;             
+                //Abonnement Abonnement = _bddContext.Abonnements.Include(abo => abo.serviceAdhesion).FirstOrDefault(abo => abo.Id == id);
+                ServiceAdhesion serviceAdhesion = _bddContext.ServicesAdhesion.Find(id);
+                serviceAdhesion.IsActive = true;
+                serviceAdhesion.duree = service.duree_mois;
+                serviceAdhesion.dateAbonnement = DateTime.Today;
+                serviceAdhesion.dateFinAbonnement = DateTime.Today.AddDays(service.duree_mois);
+                //Abonnement.ServiceAdhesionId = Abonnement.serviceAdhesion.Id;
             }
+
+            if (service.TypeService == TypeService.Don)
+            {
+                //Abonnement Abonnement = _bddContext.Abonnements.Include(abo => abo.serviceDon).FirstOrDefault(abo => abo.Id == id);
+                ServiceDon serviceDon = _bddContext.ServicesDon.Find(id);
+                serviceDon.IsActive = true;
+                serviceDon.duree = service.duree_mois;
+                serviceDon.dateAbonnement = DateTime.Today;
+                serviceDon.dateFinAbonnement = DateTime.Today.AddDays(service.duree_mois);
+                //Abonnement.ServiceDonId = Abonnement.serviceAdhesion.Id;
+            }
+
+            if (service.TypeService == TypeService.Boutique)
+            {
+                //Abonnement Abonnement = _bddContext.Abonnements.Include(abo => abo.serviceBoutique).FirstOrDefault(abo => abo.Id == id);
+                ServiceBoutique serviceBoutique = _bddContext.ServicesBoutique.Find(id);
+                serviceBoutique.IsActive = true;
+                serviceBoutique.duree = service.duree_mois;
+                serviceBoutique.dateAbonnement = DateTime.Today;
+                serviceBoutique.dateFinAbonnement = DateTime.Today.AddDays(service.duree_mois);
+                // Abonnement.ServiceBoutiqueId = Abonnement.serviceBoutique.Id;
+            }
+            //_bddContext.ServicesAdhesion.Add(adhesion);
+            _bddContext.SaveChanges();
+    
+       
+            //_bddContext.SaveChanges();
+        }
+
+       public void ModifierServiceAdhesion(int id, ServiceAdhesion serviceAdhesion)
+        {
+            ServiceAdhesion nouveauServiceAdhesion = _bddContext.ServicesAdhesion.Find(id);
+            nouveauServiceAdhesion.IsActive = serviceAdhesion.IsActive;
+            nouveauServiceAdhesion.duree = serviceAdhesion.duree;
+            nouveauServiceAdhesion.dateAbonnement = serviceAdhesion.dateAbonnement;
+            nouveauServiceAdhesion.dateFinAbonnement = serviceAdhesion.dateFinAbonnement;
             _bddContext.SaveChanges();
         }
 
