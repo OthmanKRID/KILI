@@ -33,7 +33,12 @@ namespace Kili.Models
         {
             return _bddContext.Abonnements.Where(m => m.Id == association.AbonnementId).FirstOrDefault();
         }
- 
+
+        public Abonnement ObtenirAbonnementviaServiceDon(int id)
+        {
+            return _bddContext.Abonnements.Where(m => m.ServiceDonId == id).FirstOrDefault();
+        }
+
         //Fonction permettant de créer un abonnement
         public int CreerAbonnement()
          {

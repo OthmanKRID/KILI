@@ -27,7 +27,11 @@ namespace Kili.Controllers
                 
 
             UserAccount_Services userAccount_Services = new UserAccount_Services();
+            UserAccount verifUsername = userAccount_Services.ObtenirUserAccounts().Where(r => r.Mail == viewModel.UserAccount.Mail).FirstOrDefault();
             {
+
+                if (verifUsername == null){ 
+
                 int id = userAccount_Services.CreerUserAccount(viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Password, viewModel.UserAccount.Mail, viewModel.UserAccount.Role);
 
                 
@@ -42,9 +46,13 @@ namespace Kili.Controllers
                 var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
 
                 HttpContext.SignInAsync(userPrincipal);
-                
-                return Redirect("/home/index");
+
+                    return Redirect("/home/index");
+                    
+
                 }
+                return View(new UserAccountViewModel() { Message = "Email déjà enregistré sur le site" });
+            }
             // } return View();
         }
         
@@ -75,7 +83,7 @@ namespace Kili.Controllers
             {
                 UserAccount_Services userAccount_Services = new UserAccount_Services();
                 {
-                    userAccount_Services.ModifierUserAccount(viewModel.UserAccount.Id, viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Password, viewModel.UserAccount.Mail, viewModel.UserAccount.Role, viewModel.UserAccount.AssociationId, viewModel.UserAccount.DonateurId);
+                    userAccount_Services.ModifierUserAccount(viewModel.UserAccount.Id, viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Mail, viewModel.UserAccount.Role, viewModel.UserAccount.AssociationId, viewModel.UserAccount.DonateurId);
                     
                     return RedirectToAction("ModifierUserAccount", new { @id = viewModel.UserAccount.Id });
                 }
@@ -85,6 +93,68 @@ namespace Kili.Controllers
                 return View("Error");
             }
         }
+        
+        public IActionResult ModifierPassword(int id, string oldPassword, string newPassword, string confirmationPassword, string message)
+        {
+
+            if (id != 0)
+            {
+                UserAccount_Services userAccount_Services = new UserAccount_Services();
+                {
+                    UserAccount userAccount = userAccount_Services.ObtenirUserAccounts().Where(r => r.Id == id).FirstOrDefault();
+
+                    if (userAccount == null)
+                    {
+                        return View("Error");
+                    }
+
+                    return View(new UserAccountViewModel() { UserAccount = userAccount, Authentifie =true, OldPassword=oldPassword, NewPassword=newPassword, ConfirmationPassword = confirmationPassword, Message = message });
+                }
+
+            }
+            return View("Error");
+        }
+
+        [HttpPost]
+        public IActionResult ModifierPassword(UserAccountViewModel viewModel)
+        {
+
+            if (viewModel.UserAccount.Id != 0)
+            {
+                //On vérifie que les 2 nouveaux mots de passe correspondent
+                if (viewModel.NewPassword == viewModel.ConfirmationPassword)
+                {
+
+                    string ancienMotDePasse = UserAccount_Services.EncodeMD5(viewModel.OldPassword);
+
+                    //On vérifie que l'ancien mot de passe est bon
+                    if (ancienMotDePasse == viewModel.UserAccount.Password)
+                    {
+
+                        UserAccount_Services userAccount_Services = new UserAccount_Services();
+
+                        userAccount_Services.ModifierMotDePasse(viewModel.UserAccount.Id, viewModel.NewPassword);
+                     
+
+                        return RedirectToAction("Deconnexion", "login");
+                    }
+                    else
+                    {
+                        return View(new UserAccountViewModel() { UserAccount = viewModel.UserAccount, OldPassword = viewModel.OldPassword, NewPassword = viewModel.NewPassword, Message = "L'ancien mot de passe saisi n'est pas bon" });
+                    }
+                }
+                else
+                {
+                    return View(new UserAccountViewModel() { UserAccount = viewModel.UserAccount, OldPassword = viewModel.OldPassword, NewPassword = viewModel.NewPassword, Message = "Les mots de passe saisis ne correspond pas au mot de passe de confirmation" });
+
+                }
+            }
+            else
+            {
+                return View("Error");
+            }
+        }
+
 
         /*
         public IActionResult AfficherUserAccount(int id)

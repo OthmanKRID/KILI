@@ -8,7 +8,7 @@
  @using (Html.BeginForm())
     {
         <fieldset>
-            <legend>Modifier votre compte utilisateur </legend><br />
+            <legend>Modifier votre profil </legend><br />
             @Html.LabelFor(m => Model.UserAccount.Prenom)
             @Html.TextBoxFor(m => Model.UserAccount.Prenom)
             @Html.ValidationMessageFor(m => Model.UserAccount.Prenom)
@@ -17,25 +17,27 @@
             @Html.TextBoxFor(m => Model.UserAccount.Nom)
             @Html.ValidationMessageFor(m => Model.UserAccount.Nom)
             <br /><br />
-            <label for="pwd">Nouveau mot de passe</label>
-            <input type="password" id="pwd" name="pwd" value="@Model.UserAccount.Password" autocomplete="current-password"> 
-            @Html.ValidationMessageFor(m => Model.UserAccount.Password)
-            <br /><br />
-            <label for="pwd">Confirmer le nouveau mot de passe</label>
-            <input type="password" id="pwd" name="pwd"> 
-            @Html.ValidationMessageFor(pwd => Model.UserAccount.Password)
-            <br /><br />
             @Html.LabelFor(m => Model.UserAccount.Mail)
             @Html.TextBoxFor(m => Model.UserAccount.Mail)
             @Html.ValidationMessageFor(m => Model.UserAccount.Mail)
             <br /><br />
+            @Html.HiddenFor(pwd => Model.OldPassword)
+            @Html.HiddenFor(pwd => Model.NewPassword)
+            @Html.HiddenFor(pwd => Model.ConfirmationPassword)
+            @Html.HiddenFor(m=>Model.Message)
+
             @Html.HiddenFor(m=>Model.UserAccount.Id)
+            @Html.HiddenFor(m=>Model.UserAccount.AssociationId)
             @Html.HiddenFor(m=>Model.UserAccount.DonateurId)
+            @Html.HiddenFor(m=>Model.UserAccount.Role)
             <input type="submit" value="Modifier" />
         </fieldset>
 
         <br/>
+    @Html.ActionLink("Modifier mon mot de passe", "ModifierPassword", "UserAccount", new { id = Model.UserAccount.Id, oldPassword = Model.OldPassword, newPassword = Model.NewPassword, confirmationPassword = Model.ConfirmationPassword, message=Model.Message })
+        <br/>
     @Html.ActionLink("Supprimer mon profil", "SupprimerUserAccount", "UserAccount", new { id = Model.UserAccount.Id })
+
     }
 
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>

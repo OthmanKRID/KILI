@@ -1,4 +1,5 @@
 ﻿using Kili.Models.General;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -22,6 +23,8 @@ namespace Kili.Models.General
 
         public int? AbonnementId { get; set; }
         public virtual Abonnement Abonnement { get; set; }
+
+        public ICollection<Paiement> Paiements { get; set; }
 
         public Association()
         {

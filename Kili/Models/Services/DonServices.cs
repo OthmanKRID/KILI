@@ -37,10 +37,10 @@ namespace Kili.Models.Services
 
 
         //Fonction permettant de créer un don
-        public int CreerDon(int montant, TypeRecurrence recurrence, int? donateurId)
+        public int CreerDon(int montant, TypeRecurrence recurrence, int? donateurId, int? collecteId)
         {
             
-            Don don = new Don() { Montant = montant, Recurrence = recurrence, DonateurId = donateurId , Date = System.DateTime.Today };
+            Don don = new Don() { Montant = montant, Recurrence = recurrence, DonateurId = donateurId , CollecteId = collecteId, Date = System.DateTime.Today };
             _bddContext.Dons.Add(don);
             _bddContext.SaveChanges();
             return don.Id;
@@ -54,6 +54,16 @@ namespace Kili.Models.Services
             {
                 don.Montant = montant;
                 don.Recurrence = recurrence;
+                _bddContext.SaveChanges();
+            }
+        }
+
+        public void ModifierDonPaiementID(int id, int paiementID)
+        {
+            Don don = _bddContext.Dons.Find(id);
+            if (don != null)
+            {
+                don.PaiementId = paiementID;
                 _bddContext.SaveChanges();
             }
         }
@@ -111,11 +121,13 @@ namespace Kili.Models.Services
         // Fonction permettant de supprimer un donateur. 
         public void SupprimerDonateur(int id)
         {
-            Donateur donateur = _bddContext.Donateurs.Find(id);
+            Donateur donateur = _bddContext.Donateurs.Find(id);            
 
             if (donateur != null)
             {
+                UserAccount compte = _bddContext.UserAccounts.Where(v => v.DonateurId == donateur.Id).FirstOrDefault();
                 _bddContext.Donateurs.Remove(donateur);
+                UserAccount_Services.ModifierUserAccount(compte.Id, compte.Prenom, compte.Nom, compte.Mail, compte.Role, compte.AssociationId, null);
                 _bddContext.SaveChanges();
             }
         }
@@ -132,10 +144,10 @@ namespace Kili.Models.Services
         }
 
         //Fonction permettant de créer une collecte
-        public int CreerCollecte(string nom, int montant, string descriptif) // , DateTime date
+        public int CreerCollecte(string nom, int montant, string descriptif, int? servicedonID) // , DateTime date
         {
 
-            Collecte collecte = new Collecte() { Nom = nom, MontantCollecte = montant, Descriptif = descriptif, Date = DateTime.Today };
+            Collecte collecte = new Collecte() { Nom = nom, MontantCollecte = montant, Descriptif = descriptif, Date = DateTime.Today, ServiceDonId = servicedonID };
             _bddContext.Collectes.Add(collecte);
             _bddContext.SaveChanges();
             return collecte.Id;

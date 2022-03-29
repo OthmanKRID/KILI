@@ -27,7 +27,7 @@
             @Html.HiddenFor(a => a.ServiceAdhesion)
             @Html.HiddenFor(a => a.ServiceDon)
 
-            @if ((Model.abonnement.serviceAdhesion.IsActive == false && @service.TypeService == TypeService.Adhesion) || (Model.abonnement.serviceDon.IsActive == false && @service.TypeService == TypeService.Don))
+            @if ((Model.abonnement.serviceAdhesion.IsActive == false && @service.TypeService == TypeService.Adhesion) || (Model.abonnement.ServiceDon.IsActive == false && @service.TypeService == TypeService.Don))
             {
             <tr>
                 <th>@service.TypeService</th>

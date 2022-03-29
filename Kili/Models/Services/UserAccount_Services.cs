@@ -29,7 +29,7 @@ namespace Kili.Models
         //Fonction permettant d'obtenir un UserAccount à partir de son Id
         public UserAccount ObtenirUserAccount(int id)
         {
-            return _bddContext.UserAccounts.Include(UA => UA.Association).ThenInclude(A => A.Adresse).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceAdhesion).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceDon).Include(UA => UA.Donateur).ThenInclude(DO => DO.Dons).FirstOrDefault(UA => UA.Id == id);
+            return _bddContext.UserAccounts.Include(UA => UA.Association).ThenInclude(A => A.Adresse).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceAdhesion).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.ServiceDon).ThenInclude(SD => SD.Collectes).Include(UA => UA.Donateur).ThenInclude(DO => DO.Dons).FirstOrDefault(UA => UA.Id == id);
         }
 
         //Fonction permettant d'obtenir un UserAccount à partir de son Id
@@ -72,7 +72,7 @@ namespace Kili.Models
         }
 
 
-        public void ModifierUserAccount(int id, string prenom, string nom, string password, string email, TypeRole role, int? AssociationId, int? donateurID)
+        public void ModifierUserAccount(int id, string prenom, string nom, string email, TypeRole role, int? AssociationId, int? donateurID)
         {
             UserAccount userAccount = _bddContext.UserAccounts.Find(id);
 
@@ -80,11 +80,25 @@ namespace Kili.Models
             {
                 userAccount.Prenom = prenom;
                 userAccount.Nom = nom;
-                userAccount.Password = password;
                 userAccount.Mail = email;
                 userAccount.Role = role;
                 userAccount.AssociationId = AssociationId;
                 userAccount.DonateurId = donateurID;
+                _bddContext.SaveChanges();
+            }
+        }
+
+        public void ModifierMotDePasse(int id, string password)
+        {
+            UserAccount userAccount = _bddContext.UserAccounts.Find(id);
+
+            if (userAccount != null)
+            {
+
+                string motDePasse = EncodeMD5(password);
+
+                userAccount.Password = motDePasse;
+
                 _bddContext.SaveChanges();
             }
         }
@@ -126,10 +140,10 @@ namespace Kili.Models
             }
         }
 
-        public UserAccount Authentifier(string username, string password)
+        public UserAccount Authentifier(string email, string password)
         {
             string motDePasse = EncodeMD5(password);
-            UserAccount user = this._bddContext.UserAccounts.FirstOrDefault(u => u.Prenom == username && u.Password == motDePasse);
+            UserAccount user = this._bddContext.UserAccounts.FirstOrDefault(u => u.Mail == email && u.Password == motDePasse);
             return user;
         }
 

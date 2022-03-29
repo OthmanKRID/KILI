@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using Kili.Models.General;
+using static Kili.ViewModels.PaiementViewModel;
 
 namespace Kili.Controllers
 {
@@ -16,12 +17,12 @@ namespace Kili.Controllers
     public class DonController : Controller 
     {
 
-        public IActionResult CreerDon()
+        public IActionResult CreerDon(int idCollecte)
         {
             UserAccount_Services UserAccount_Services = new UserAccount_Services();
 
             UserAccountViewModel viewModel = new UserAccountViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
-            DonViewModel donviewModel = new DonViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
+            DonViewModel donviewModel = new DonViewModel { IdCollecte = idCollecte, Authentifie = HttpContext.User.Identity.IsAuthenticated };
             if (viewModel.Authentifie)
             {
                 if (UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).DonateurId == null)
@@ -43,9 +44,9 @@ namespace Kili.Controllers
             UserAccount_Services UserAccount_Services = new UserAccount_Services();
             DonServices donServices = new DonServices();
             {
-                int id = donServices.CreerDon(viewModel.Don.Montant, viewModel.Don.Recurrence, UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).DonateurId);               
-
-                return Redirect("/home/index");
+                int id = donServices.CreerDon(viewModel.Don.Montant, viewModel.Don.Recurrence, UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).DonateurId, viewModel.IdCollecte);               
+                
+                return RedirectToAction("creerpaiement", "paiement", new { actionID = id, montant = viewModel.Don.Montant, typeaction = TypeAction.Don });
             }
             // } return View();
         }

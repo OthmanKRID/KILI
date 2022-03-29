@@ -24,7 +24,7 @@ namespace Kili.Models
         //Fonction permettant d'obtenir la liste de tout les Associations
        public List<Association> ObtenirAssociations()
         {
-            return _bddContext.Associations.Include(A => A.Adresse).Include(A => A.Abonnement).ToList();
+            return _bddContext.Associations.Include(A => A.Adresse).Include(A => A.Abonnement).ThenInclude(A => A.ServiceDon).ThenInclude(SD => SD.Collectes).ToList();
         }
 
         public List<Association> ObtenirAssociationsParLocalisation(string Localisation)
@@ -102,7 +102,7 @@ namespace Kili.Models
             _bddContext.Associations.Add(Association);
             _bddContext.SaveChanges();
             compte.AssociationId = Association.Id;
-            _UserAccount_Services.ModifierUserAccount(compte.Id, compte.Prenom, compte.Nom, compte.Password, compte.Mail, compte.Role, compte.AssociationId, compte.DonateurId);
+            _UserAccount_Services.ModifierUserAccount(compte.Id, compte.Prenom, compte.Nom, compte.Mail, compte.Role, compte.AssociationId, compte.DonateurId);
             return Association.Id;
         }
 
@@ -153,8 +153,8 @@ namespace Kili.Models
             if (Association != null)
             {
                 _bddContext.Associations.Remove(Association);
-                _bddContext.SaveChanges();
-                _UserAccount_Services.ModifierUserAccount(compteAssocie.Id, compteAssocie.Prenom, compteAssocie.Nom, compteAssocie.Password, compteAssocie.Mail, compteAssocie.Role, null, compteAssocie.DonateurId);
+                _UserAccount_Services.ModifierUserAccount(compteAssocie.Id, compteAssocie.Prenom, compteAssocie.Nom, compteAssocie.Mail, compteAssocie.Role, null, compteAssocie.DonateurId);
+                _bddContext.SaveChanges();              
             }
         }
 

@@ -1,0 +1,123 @@
+﻿@model Kili.ViewModels.PaiementViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Réalisez votre paiement";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<div class="htmlstuff">
+
+    <div class="facture-box">
+		<table cellpadding="0" cellspacing="0">
+			<tr class="top">
+				<td colspan="2">
+					<table>
+						<tr>
+							<td class="title">
+								<!--<img src="" style="width:100%; max-width:300px;">-->
+							</td>
+
+							<td>
+								Facture N°@Model.Action<br>
+								Date: @Model.Paiement.DatePaiement.ToLongDateString()<br>							
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+			<tr class="information">
+				<td colspan="2">
+					<table>
+						<tr>
+							<td>
+								Nom<br>
+								Adresse<br>
+								Ville
+							</td>
+
+							<td>
+								Nom<br>
+								Adresse<br>
+								Ville
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+			<tr class="Entete">
+				<td>
+					Méthode de paiement
+				</td>
+
+				<td>
+					@Model.MoyenPaiement.moyenPaiement
+				</td>
+			</tr>
+
+			<!--<tr class="Entete">
+				<td>
+					Item
+				</td>
+				<td>
+					Quantity
+				</td>
+				<td>
+					Price Per Item
+				</td>
+				<td>
+					Price
+				</td>
+			</tr>
+			foreach (var item in Model.LineItems)
+			{
+				<tr class="item">
+					<td>
+						item.ItemName
+					</td>
+
+					<td>
+						item.Quantity
+					</td>
+					<td>
+						item.PricePerItem
+					</td>
+					<td>
+						item.TotalPrice
+					</td>
+				</tr>
+			}
+
+			<tr class="total">
+				<td></td>
+
+				<td>
+					Total: $ Model.TotalPrice.ToString("0.##")
+				</td>
+			</tr>-->
+		</table>
+	</div>
+
+        </div>
+
+        <div class="mt-5">
+        <button class="btn btn-primary" type="submit" id="btngenerate">Générer Pdf</button>
+        </div>
+
+
+    <script type="text/javascript">
+    $("#btngenerate").click(function () {
+
+        var htmldata = $(".htmlstuff").html();
+        htmldata = htmldata.replace(/</g, "strtTag").replace(/>/g, "EndTag");
+        window.location = window.location.origin + '/Home/GeneratePdf?html=' + htmldata;
+    });
+
+    </script>
+
+     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>

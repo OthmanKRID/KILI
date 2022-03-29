@@ -12,6 +12,7 @@
     <None Include="Views\Collecte\AfficherCollectes.cshtml" />
     <None Include="Views\Collecte\CreerCollecte.cshtml" />
     <None Include="Views\Collecte\ModifierCollecte.cshtml" />
+    <None Include="Views\Paiement\CreerPaiement.cshtml" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -23,6 +24,7 @@
 		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
 		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.5" />
+		<PackageReference Include="Select.HtmlToPdf.NetCore" Version="22.1.0" />
 	</ItemGroup>
 
 </Project>

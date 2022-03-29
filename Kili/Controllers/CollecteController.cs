@@ -22,7 +22,7 @@ namespace Kili.Controllers
 
             DonServices donServices = new DonServices();
             {
-                int id = donServices.CreerCollecte(collecte.Nom, collecte.MontantCollecte, collecte.Descriptif); // , collecte.Date
+                int id = donServices.CreerCollecte(collecte.Nom, collecte.MontantCollecte, collecte.Descriptif, collecte.ServiceDonId); // , collecte.Date
 
                 //Modifier la fonction pour faire le lien avec ServiceDon à partir de UserAccount
                 //userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association.Paiement.ServiceDon.Id;
@@ -59,6 +59,24 @@ namespace Kili.Controllers
                 List<Collecte> listcollecte = donServices.ObtenirCollectes();
 
                 return View(listcollecte);
+            }
+        }
+
+        // Liste de collecte visible par le compte utilisateur 
+        
+        public IActionResult AfficherCollectesCompteConnecte()
+        {
+            
+            UserAccount_Services UserAccount_Services = new UserAccount_Services();
+            List<Collecte> listcollecteAsso = new List<Collecte>();
+            {
+
+                foreach (Collecte collecte in UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association.Abonnement.ServiceDon.Collectes)
+                {
+                    listcollecteAsso.Add(collecte);
+                }
+
+                return View(listcollecteAsso);
             }
         }
 
