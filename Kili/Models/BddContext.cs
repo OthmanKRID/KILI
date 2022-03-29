@@ -18,6 +18,7 @@ namespace Kili.Models
         public DbSet<Cotisation> Cotisations { get; set; }
         public DbSet<ServiceAdhesion> ServicesAdhesion { get; set; }
         public DbSet<ServiceDon> ServicesDon { get; set; }
+        public DbSet<ServiceBoutique> ServicesBoutique { get; set; }
         public DbSet<Don> Dons { get; set; }
         public DbSet<Donateur> Donateurs { get; set; }
         public DbSet<Collecte> Collectes { get; set; }
@@ -54,7 +55,7 @@ namespace Kili.Models
 
             associationServices.CreerAssociation("Première Asso", new Adresse() { Numero = 1, Voie = "rue du sport", CodePostal = 34000, Ville = "Montpellier" }, ThemeAssociation.Sport, userAccountServices.ObtenirUserAccount(1) );
             associationServices.CreerAssociation("Deuxième Asso", new Adresse() { Numero = 20, Voie = "rue de la mer", CodePostal = 13000, Ville = "Marseille" }, ThemeAssociation.Arts_et_culture, userAccountServices.ObtenirUserAccount(2));
-            associationServices.CreerAssociation("Troisièeme Asso", new Adresse() { Numero = 30, Voie = "champs elysés", CodePostal = 75000, Ville = "Paris" }, ThemeAssociation.Environnement, userAccountServices.ObtenirUserAccount(3));
+            associationServices.CreerAssociation("Troisième Asso", new Adresse() { Numero = 30, Voie = "champs elysés", CodePostal = 75000, Ville = "Paris" }, ThemeAssociation.Environnement, userAccountServices.ObtenirUserAccount(3));
             associationServices.CreerAssociation("4eme Asso", new Adresse() { Numero = 1, Voie = "rue du sport", CodePostal = 34000, Ville = "Montpellier" }, ThemeAssociation.Environnement, userAccountServices.ObtenirUserAccount(4));
 
             //abonnement_Services.AjouterServiceDansOffre(19.99, 1, TypeService.Adhesion);
@@ -63,6 +64,14 @@ namespace Kili.Models
             abonnement_Services.AjouterServiceDansOffre(149.99, 12, TypeService.Don);
             //abonnement_Services.AjouterServiceDansOffre(19.99, 1, TypeService.Boutique);
             abonnement_Services.AjouterServiceDansOffre(149.99, 12, TypeService.Boutique);
+
+            abonnement_Services.AjouterService(1, abonnement_Services.ObtenirServiceDansOffre(1));
+            abonnement_Services.AjouterService(1, abonnement_Services.ObtenirServiceDansOffre(2));
+            abonnement_Services.AjouterService(1, abonnement_Services.ObtenirServiceDansOffre(3));
+            abonnement_Services.AjouterService(2, abonnement_Services.ObtenirServiceDansOffre(1));
+            abonnement_Services.AjouterService(2, abonnement_Services.ObtenirServiceDansOffre(2));
+            abonnement_Services.AjouterService(3, abonnement_Services.ObtenirServiceDansOffre(2));
+            abonnement_Services.AjouterService(3, abonnement_Services.ObtenirServiceDansOffre(3));
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

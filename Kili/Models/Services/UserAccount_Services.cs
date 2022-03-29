@@ -1,10 +1,12 @@
 ﻿using Kili.Models.Dons;
 using Kili.Models.General;
 using Kili.Models.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using static Kili.Models.General.UserAccount;
@@ -129,12 +131,11 @@ namespace Kili.Models
         public UserAccount Authentifier(string username, string password)
         {
             string motDePasse = EncodeMD5(password);
-            UserAccount user = this._bddContext.UserAccounts.FirstOrDefault(u => u.Prenom == username && u.Password == motDePasse);
+            UserAccount user = this._bddContext.UserAccounts.FirstOrDefault(u => u.Mail == username && u.Password == motDePasse);
             return user;
         }
 
-
-        public void Dispose()
+         public void Dispose()
         {
             _bddContext.Dispose();
         }

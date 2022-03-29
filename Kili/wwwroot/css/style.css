@@ -1,27 +1,27 @@
-.modal-box{ font-family: 'Poppins', sans-serif; }
+.modal-box{ 
+    font-family: 'Poppins', sans-serif; }
 .show-modal{
-    color: #fff;
-    background: #ee490e;
+    background: #f8f1ef00;
+    border: 0;
+    border-radius: 50px;
+    color: #272727;
+    font-family: 'poppinsBold';
     font-size: 18px;
-    font-weight: 600;
-    text-transform: capitalize;
-    padding: 10px 15px;
-    margin:0;
-    border: none;
-    outline: none;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    display: block;
-    transition: all 0.3s ease 0s;
+    font-weight: normal;
+    padding: 12px 30px;
+   /* transition: 0.5s 0.2s; */
 }
 .show-modal:hover,
 .show-modal:focus{
+    background: #E55E32;
     color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);*/
     outline: none;
 }
 .modal-backdrop {
-    z-index: -1;
+    z-index: 0;
     }
+
 .modal-dialog{
     width: 400px;
     margin: 70px auto 0;
@@ -29,12 +29,14 @@
 .modal-dialog{ transform: scale(0.5); }
 .modal-dialog{ transform: scale(1); }
 .modal-dialog .modal-content{
+    background: #E3D6CE;
     text-align: center;
     border: none;
+    
 }
 .modal-content .close{
-    color: #fff;
-    background: #ee490e;
+    color: #ee490e;
+    background: #E3D6CE;
     font-size: 25px;
     font-weight: 400;
     text-shadow: none;
@@ -52,7 +54,7 @@
     transition: all 0.3s;
 }
 .modal-content .close:hover{
-    color: #fff;
+    color: #ee490e;
     box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 .close:focus{ outline: none; }
@@ -63,9 +65,10 @@
     font-weight: 700;
     letter-spacing: 1px;
     margin: 0 0 10px;
+    font-family: 'poppinsBold';
 }
 .modal-body .description{
-    color: #9A9EA9;
+    color: #272727;
     font-size: 16px;
     margin: 0 0 20px;
 }
@@ -83,6 +86,7 @@
     left: 20px;
 }
 .modal-body .form-control{
+    background: #E3D6CE;
     font-size: 17px;
     height: 45px;
     width: 100%;
@@ -94,7 +98,7 @@
     outline: none;
 }
 .form-control::placeholder{
-    color: #AEAFB1;
+    color: #272727;
 }
 .form-group.checkbox{
     width: 130px;
@@ -102,14 +106,14 @@
     display: inline-block;
 }
 .form-group.checkbox label{
-    color: #9A9EA9;
+    color: #272727;
     font-weight: normal;
 }
 .form-group.checkbox input[type=checkbox]{
     margin-left: 0;
 }
 .modal-body .forgot-pass{
-    color: #7F7FD5;
+    color: #272727;
     font-size: 13px;
     text-align: right;
     width: calc(100% - 135px);
@@ -119,26 +123,45 @@
     transition: all 0.3s ease 0s;
 }
 .forgot-pass:hover{
-    color: #9A9EA9;
+    color: #1672EC;
     text-decoration: underline;
 }
+
+/*créer compte*/
+.modal-body .txtCompte{
+    color: #1672EC;
+    font-size: 13px;
+    text-align: center;
+    width: calc(100% - 135px);
+    margin-top: 25px;
+    display: inline-block;
+    vertical-align: top;
+    transition: all 0.3s ease 0s;
+    font-family: 'poppinsBold';
+}
+.txtCompte:hover{
+    color: #272727;
+   
+}
+
 .modal-content .modal-body .btn{
     color: #fff;
     background: #ee490e;
     font-size: 16px;
     font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    /*letter-spacing: 1px;
+    text-transform: uppercase;*/
     line-height: 38px;
-    width: 100%;
+    width: 60%;
     height: 40px;
     padding: 0;
     border: none;
-    border-radius: 5px;
+    border-radius: 50px;
     border: none;
     display: inline-block;
     transition: all 0.6s ease 0s;
 }
+
 .modal-content .modal-body .btn:hover{
     color: #fff;
     letter-spacing: 2px;
@@ -151,3 +174,11 @@
         padding: 60px 20px 40px !important;
     }
 }
+
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+  }

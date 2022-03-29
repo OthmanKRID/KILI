@@ -129,7 +129,6 @@ C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Kili.TagHel
 C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Kili.RazorCoreGenerate.cache
 C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\GererServices.cshtml.g.cs
 C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\ModifierAssociation.cshtml.g.cs
-C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\VoirInfosAssociation.cshtml.g.cs
 C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\VoirServices.cshtml.g.cs
 C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Donateur\CreerDonateur.cshtml.g.cs
 C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Don\AfficherDons.cshtml.g.cs
@@ -308,3 +307,11 @@ C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Kili.RazorTargetAs
 C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Kili.Views.pdb
 C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Kili.csproj.CopyComplete
 C:\Users\User\Source\Repos\Kili2\Kili\obj\Debug\netcoreapp3.1\Kili.genruntimeconfig.cache
+C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Collecte\AfficherCollectes.cshtml.g.cs
+C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Collecte\CreerCollecte.cshtml.g.cs
+C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Collecte\ModifierCollecte.cshtml.g.cs
+C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Donateur\ModifierDonateur.cshtml.g.cs
+C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Home\Explorer.cshtml.g.cs
+C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\VoirDetailsAssociation.cshtml.g.cs
+C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\ConfirmationCreationAssociation.cshtml.g.cs
+C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\VoirProfilAssociation.cshtml.g.cs

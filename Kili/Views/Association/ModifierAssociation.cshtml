@@ -34,6 +34,12 @@
         @Html.TextBoxFor(m => m.Adresse.Ville)<br /><br />
         <Label>Thème :</Label>
         @Html.DropDownListFor(m => m.Theme, new SelectList(Enum.GetValues(typeof(ThemeAssociation))), "Choisir le thème")<br /><br />
+        <Label>Description :</Label>
+        @Html.TextBoxFor(m => m.Description)<br /><br />
+
+        <input type="hidden" name="MAX_FILE_SIZE" value="4194304" />
+        <input type="file" value="fileupload"/>
+
         @Html.HiddenFor(m => m.Id);
         @Html.HiddenFor(m => m.AdresseId);
         <br />

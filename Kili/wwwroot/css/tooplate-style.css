@@ -12,8 +12,37 @@ http://www.tooplate.com/view/2106-soft-landing
     font-family: 'Open Sans', sans-serif;
     overflow-x: hidden;
     background: #f9f9f9;
-  }
+  } 
 
+  @font-face {
+    font-family: 'poppinsBlack';
+    font-style: normal;
+    font-weight: 900;
+    src: url("../fonts/Poppins-Black.ttf");
+    /* IE9 Compat Modes */ }
+
+    @font-face {
+      font-family: 'poppinsMedium';
+      font-style: normal;
+      font-weight: 300;
+      src: url("../fonts/Poppins-Medium.ttf");
+      /* IE9 Compat Modes */ }
+
+      @font-face {
+        font-family: 'poppinsBold';
+        font-style: normal;
+        font-weight: 300;
+        src: url("../fonts/Poppins-Bold.ttf");
+        /* IE9 Compat Modes */ }
+
+        @font-face {
+          font-family: 'poppinsRegular';
+          font-style: normal;
+          font-weight: 300;
+          src: url("../fonts/Poppins-Regular.ttf");
+          /* IE9 Compat Modes */ }
+
+      
 
 
   /*---------------------------------------
@@ -26,16 +55,17 @@ http://www.tooplate.com/view/2106-soft-landing
   }
 
   h1 {
-    font-size: 3em;
+    font-size: 3.3em;
+    font-family: 'poppinsBold';
   }
 
   h2 {
-    color: #353535;
+    color: #272727;
     font-size: 2em;
   }
 
   p {
-    color: #757575;
+    color: #272727;
     font-size: 14px;
     font-weight: normal;
     line-height: 24px;
@@ -64,7 +94,7 @@ http://www.tooplate.com/view/2106-soft-landing
   }
 
   a:hover, a:active, a:focus {
-    color: #ee490e;
+    color: #0eeeb6;
     outline: none;
   }
 
@@ -84,7 +114,7 @@ http://www.tooplate.com/view/2106-soft-landing
 
   section {
     position: relative;
-    padding: 100px 0;
+    padding: 40px 0;
   }
 
   #contact,
@@ -93,11 +123,11 @@ http://www.tooplate.com/view/2106-soft-landing
     text-align: center;
   }
 
-  .overlay {
-    background: #536976;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #292E49, #536976);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #292E49, #536976); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    opacity: 0.9;
+ .overlay {
+    background: #E3D6CE;  
+    /*background: -webkit-linear-gradient(to right, #da0d9c, #23d166);*/
+    background: linear-gradient(to right, #E55E32, #ffffff00); 
+    opacity: 0.3;
     position: absolute;
     top: 0;
     right: 0;
@@ -105,7 +135,7 @@ http://www.tooplate.com/view/2106-soft-landing
     left: 0;
     width: 100%;
     height: 100%;
-  }
+  } 
 
   .online-form {
     position: relative;
@@ -128,16 +158,20 @@ http://www.tooplate.com/view/2106-soft-landing
   }
 
   .online-form button {
-    background: #ee490e;
+    font-family: 'poppinsMedium';
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.2em;
+    background: #E55E32;
     border: 0;
     color: #ffffff;
     position: absolute;
-    right: 6em;
+    left: 0;
     width: 25%;
   }
 
   .online-form button:hover {
-    background: #202020;
+    background: #272727;
     color: #ffffff;
   }
 
@@ -160,7 +194,7 @@ http://www.tooplate.com/view/2106-soft-landing
 
   .section-btn:hover,
   .section-btn:focus {
-    background: #202020;
+    background: #272727;
     color: #ffffff;
   }
 
@@ -217,8 +251,10 @@ http://www.tooplate.com/view/2106-soft-landing
 
 
   /*---------------------------------------
-      MENU              
+      HEADER              
   -----------------------------------------*/
+
+ 
 
   .custom-navbar {
     border: none;
@@ -227,10 +263,9 @@ http://www.tooplate.com/view/2106-soft-landing
   }
 
   .custom-navbar .navbar-brand {
-    color: #ffffff;
-    font-size: 25px;
-    font-weight: 500;
-    letter-spacing: -1px;
+    width : 200px; 
+    height: auto;
+    padding: 0;
   }
 
   .top-nav-collapse {
@@ -242,10 +277,11 @@ http://www.tooplate.com/view/2106-soft-landing
   }
 
   .custom-navbar .nav li a {
-    font-size: 16px;
+    font-family: 'poppinsRegular';
+    font-size: 18px;
     font-weight: normal;
-    color: #f0f0f0;
-    padding-right: 22px;
+    color: #272727;
+    padding-right: 10px;
     padding-left: 22px;
   }
 
@@ -284,12 +320,13 @@ http://www.tooplate.com/view/2106-soft-landing
       background: 0 0; 
     }
 
+    /*menu en scroll*/
     .custom-navbar.top-nav-collapse {
       background: #ffffff;
       -webkit-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
       -moz-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
       box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
-      padding: 10px 0;
+      padding: 30px 0;
     }
 
     .top-nav-collapse .navbar-brand {
@@ -312,27 +349,31 @@ http://www.tooplate.com/view/2106-soft-landing
   -----------------------------------------*/
 
   #home {
-    background: url('../images/home-bg.jpg') no-repeat center center;
-    background-size: cover;
+    background: url('../images/home.png') no-repeat right ;
+    /*background: #E3D6CE;
+    background-size: cover;*/
     vertical-align: middle;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
+    /* -webkit-box-align: center;
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    min-height: 100vh;
-    position: relative;
+    text-align: center;*/
     padding-top: 12em;
-    text-align: center;
+    min-height: 90vh;
+    position: relative;
+    
   }
 
   #home h1 {
-    color: #ffffff;
+    color: #272727;
     margin-top: 10px;
     margin-bottom: 40px;
+    text-align: left;
+    line-height: 60px;
   }
 
   .home-info {
@@ -340,14 +381,22 @@ http://www.tooplate.com/view/2106-soft-landing
   }
 
   .home-info h3 {
-    color: #f0f0f0;
-    font-size: 11px;
+    font-family: 'poppinsRegular';
+    color: #272727;
+    font-size: 1.5em;
     font-weight: bold;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin: 10px 0;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    text-align: left;
   }
-  
+ 
+  .img-home {
+   max-height : 100%;
+width : auto;
+	
+  }
+
+
 
 
   /*---------------------------------------
@@ -407,6 +456,9 @@ http://www.tooplate.com/view/2106-soft-landing
     bottom: -27em;
   }
 
+ /* #feature .section-title {
+    color: #73727E;
+  }
 
 
   /*---------------------------------------
@@ -499,18 +551,23 @@ http://www.tooplate.com/view/2106-soft-landing
     background-size: cover;
     width: 100%;
     height: 65vh;
+    border-radius: 30px;
   }
 
   .testimonial-info {
-    background: #202020;
+    background: #B38F79;
     padding: 60px;
     height: 65vh;
+    border-radius: 30px;
   }
 
   .testimonial-info h3 {
-    color: #d9d9d9;
-    font-style: italic;
+    color: #ffffff;
     margin-top: 5px;
+    font-size: 18PX;
+    line-height: 1.6;
+    
+  
   }
 
   .testimonial-info .item {
@@ -545,10 +602,34 @@ http://www.tooplate.com/view/2106-soft-landing
       PRICING             
   -----------------------------------------*/
 
+  #pricing{
+    background: url('../images/back.svg') no-repeat center center ;
+    /*background: #E3D6CE;
+    background-size: cover;*/
+    vertical-align: middle;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    /* -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center;*/
+    padding-top: 12em;
+    min-height: 90vh;
+    position: relative;
+    width: auto;
+    
+  }
+  
+
   #about .section-title,
   #pricing .section-title {
     text-align: center;
+
   }
+  
 
   #pricing .col-md-4 {
     margin: 0;
@@ -567,6 +648,7 @@ http://www.tooplate.com/view/2106-soft-landing
 
   .pricing-title {
     padding-bottom: 5px;
+    color: #E55E32;
   }
 
   .pricing-info {
@@ -824,3 +906,209 @@ http://www.tooplate.com/view/2106-soft-landing
       height: 65vh;
     }
   }
+
+  /*test*/
+  html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 20px 8px;
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10PX;
+  padding-bottom: 0px;
+  
+}
+
+.container {
+  padding: 16px 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: #E55E32;
+}
+
+/*.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: rgb(143, 25, 25);
+  text-align: center;
+  cursor: pointer;
+ /* width: 100%;
+}
+
+.button:hover {
+  background-color: #555;
+} */
+
+.button {
+  background: #ee490e;
+  border: 0;
+  border-radius: 50px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: normal;
+  padding: 12px 30px;
+  transition: 0.5s 0.2s;
+  margin: 10px;
+}
+
+.button:hover {
+  background: #73727E;
+  color: #ffffff;
+}
+
+/* Carroussel */
+
+* {box-sizing: border-box}
+body {font-family: Verdana, sans-serif; margin:0}
+.mySlides {display: none}
+img {vertical-align: middle;}
+
+/* Slideshow container 
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+  max-height: 400px;*/
+}
+
+/* Next & previous buttons 
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 300px;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: rgb(199, 119, 0);
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;*/
+}
+
+/* Position the "next button" to the right 
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;*/
+}
+
+/* On hover, add a black background color with a little bit see-through 
+.prev:hover, .next:hover {
+  background-color: rgba(223, 223, 223, 0.8);*/
+}
+
+/* Caption text
+.text {
+  color: #E55E32;
+  font-size: 30px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center; 
+} */
+
+/* Number text (1/3 etc) 
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}*/
+
+/* The dots/bullets/indicators 
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin-top: 400px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #ffffff00;
+} */
+
+/* Fading animation 
+.fade {
+  animation-name: fade;
+  animation-duration: 10s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}*/
+}
+
+/* On smaller screens, decrease text size 
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}*/
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+/* Add some content at the bottom of the video/page */
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Style the button used to pause/play the video */
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: #ddd;
+  color: black;
+}

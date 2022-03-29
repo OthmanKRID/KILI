@@ -16,6 +16,10 @@ namespace Kili.Models.General
         [Required]
         public ThemeAssociation Theme { get; set; }
 
+        [MaxLength(500)]
+        public string Description { get; set; }
+
+        public string UrlPhoto { get; set; }
         public bool Actif { get; set; }
         //public int? UserAccountId { get; set; }
         //public virtual UserAccount UserAccount { get; set; }
@@ -27,6 +31,7 @@ namespace Kili.Models.General
         {
             Adresse = new Adresse();
             Abonnement = new Abonnement();
+            UrlPhoto = "/images/AssociationDefaut.png";
         }
 
     }

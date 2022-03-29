@@ -62,7 +62,7 @@ namespace Kili.Controllers
         {
             var panierId = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "cartId");
             new PanierService_Services().RemoveItem(panierId, id);
-            return View("Panier");
+            return View("../Association/PanierService", ObtenirPanierService());
         }
 
 

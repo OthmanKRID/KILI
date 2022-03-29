@@ -1,0 +1,26 @@
+﻿@using Kili.Models.General
+@model Kili.Models.General.Association
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "GererServices";
+}
+
+    <h1>
+      Félicitations, votre association @Model.Nom a bien été créée!
+    </h1>
+
+
+        <Label>Pour plus de visibilité vous avez la possibilité de compléter votre profil association en ajoutant un descriptif ou une photo d'illustration' </Label>
+        <div>@Html.ActionLink("Compléter", "ModifierAssociation", "Association")</div><br /><br />
+        
+
+        <div>@Html.ActionLink("Retour à la page d'acceuil", "Index", "Home")</div>
+
+    <br />
+
+
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+

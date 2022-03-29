@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+
 using static Kili.Models.General.UserAccount;
 
 namespace Kili.Models
@@ -22,66 +23,69 @@ namespace Kili.Models
         }
 
         //Fonction permettant d'obtenir la liste de tout les Associations
-       public List<Association> ObtenirAssociations()
+        public List<Association> ObtenirAssociations()
         {
             return _bddContext.Associations.Include(A => A.Adresse).Include(A => A.Abonnement).ToList();
         }
 
+        public List<Association> Obtenir3DernièresAssociations()
+        {
+            List<Association> associations = ObtenirAssociations();
+            List<Association> Dernieresassociations = new List<Association>();
+            for (int i = associations.Count - 3; i < associations.Count ; i++)
+            {
+                Dernieresassociations.Add(associations[i]);
+            }
+            return Dernieresassociations;
+        }
+
         public List<Association> ObtenirAssociationsParLocalisation(string Localisation)
         {
+            return _bddContext.Associations.Where(a => a.Adresse.Ville.Contains(Localisation)).Include(A => A.Adresse).ToList();
+        }
 
-            List<Association> listeTouteAssociation = ObtenirAssociations();
-            List<Association> listeParVille = new List<Association>();
-
-            foreach (Association association in listeTouteAssociation)
-            {
-                //Adresse adresse = _adresseService.ObtenirAdresse((int)association.AdresseId);
-                if (association.Adresse.Ville.Equals(Localisation))
-                {
-                    listeParVille.Add(association);
-                }
-            }
-            return listeParVille;
+        public List<Association> ObtenirAssociationsParNom(string nom)
+        {
+            return _bddContext.Associations.Where(a => a.Nom.Contains(nom)).Include(A => A.Adresse).ToList();
         }
 
         //Fonction permettant d'obtenir la liste de tout les Associations associées à un thème
         public List<Association> ObtenirAssociationsParTheme(RechercheTheme Theme)
         {
-            string sTheme = Theme.ToString();
-            List<Association> listesAssociation = _bddContext.Associations.ToList();
-            List<Association> listeTriee = new List<Association>();
-            foreach (Association association in listesAssociation)
-            {
-                if (association.Theme.ToString().Equals(sTheme))
-                {
-                    listeTriee.Add(association);
-                }
-
-            }
-            return listeTriee;
+            ThemeAssociation Themerecherche = (ThemeAssociation)Enum.Parse(typeof(ThemeAssociation), Theme.ToString());
+            return _bddContext.Associations.Where(a => a.Theme.Equals(Themerecherche)).Include(A => A.Adresse).ToList();
         }
 
         //Fonction permettant d'obtenir la liste de tout les Associations associées à un thème et une ville
         public List<Association> ObtenirAssociationsParThemeEtVille(string Localisation, RechercheTheme Theme)
         {
-            string sTheme = Theme.ToString();
-            List<Association> listetriee = new List<Association>();
-            List<Association> listeParVille = ObtenirAssociationsParLocalisation(Localisation);
-            foreach (Association association in listeParVille)
-            {
-                if (association.Theme.ToString().Equals(sTheme))
-                {
-                    listetriee.Add(association);
-                }
+            ThemeAssociation Themerecherche = (ThemeAssociation)Enum.Parse(typeof(ThemeAssociation), Theme.ToString());
+            return _bddContext.Associations.Where(a => a.Theme.Equals(Themerecherche)).Where(a => a.Adresse.Ville.Equals(Localisation)).Include(A => A.Adresse).ToList();        
+        }
 
-            }
+        public List<Association> ObtenirAssociationsParThemeEtVilleEtNom(string Localisation, string nom, RechercheTheme Theme)
+        {
+            ThemeAssociation Themerecherche = (ThemeAssociation)Enum.Parse(typeof(ThemeAssociation), Theme.ToString());
+            return _bddContext.Associations.Where(a => a.Theme.Equals(Themerecherche)).Where(a => a.Adresse.Ville.Equals(Localisation)).Include(A => A.Adresse).Where(a => a.Nom.Contains(nom)).ToList();
+        }
+
+        public List<Association> ObtenirAssociationsParThemeEtNom(string nom, RechercheTheme Theme)
+        {
+            ThemeAssociation Themerecherche = (ThemeAssociation)Enum.Parse(typeof(ThemeAssociation), Theme.ToString());
+            return _bddContext.Associations.Where(a => a.Theme.Equals(Themerecherche)).Where(a => a.Nom.Contains(nom)).Include(A => A.Adresse).ToList();
+        }
+
+        public List<Association> ObtenirAssociationsParVilleEtNom(string Localisation, string nom)
+        {
+            List<Association> listetriee = _bddContext.Associations.Where(a => a.Adresse.Ville.Equals(Localisation)).Include(A => A.Adresse).Where(a => a.Nom.Contains(nom)).ToList();
             return listetriee;
         }
+
 
         //Fonction permettant d'obtenir une association à partir de son Id
         public Association ObtenirAssociation(int id)
         {
-            return _bddContext.Associations.Find(id);
+            return _bddContext.Associations.Include(a => a.Adresse).Include(a => a.Abonnement).ThenInclude(abo => abo.serviceBoutique).Include(a => a.Abonnement).ThenInclude(abo => abo.serviceAdhesion).Include(a => a.Abonnement).ThenInclude(abo => abo.serviceDon).FirstOrDefault(x => x.Id == id); ;
         }
 
         //Fonction permettant d'obtenir une association à partir de son Id en format string
@@ -96,9 +100,9 @@ namespace Kili.Models
         }
 
         //Fonction permettant de créer une association
-        public int CreerAssociation(string nomAsso, Adresse adresse, ThemeAssociation Theme, UserAccount compte/*, int? IdCompteAsso*/)
+        public int CreerAssociation(string nomAsso, Adresse adresse, ThemeAssociation Theme, UserAccount compte)
         {
-            Association Association = new Association() { Nom = nomAsso, Adresse = adresse, Theme = Theme, Actif = false};         
+            Association Association = new Association() { Nom = nomAsso, Adresse = adresse, Theme = Theme, Actif = false };
             _bddContext.Associations.Add(Association);
             _bddContext.SaveChanges();
             compte.AssociationId = Association.Id;
@@ -107,17 +111,17 @@ namespace Kili.Models
         }
 
         //Fonction permettant de modifier une association
-        public void ModifierAssociation(int id, string nomAsso, Adresse adresse, ThemeAssociation Theme)
+        public void ModifierAssociation(Association Association)
         {
-            Association Association = _bddContext.Associations.Find(id);
+            Association AssociationModifiee = _bddContext.Associations.Find(Association.Id);
 
             if (Association != null)
             {
-                Association.Nom = nomAsso;
-                Association.Theme = Theme;
-
-                Adresse_Services Adresse_Services = new Adresse_Services();
-                Adresse_Services.ModifierAdresse(Association.AdresseId, adresse);
+                AssociationModifiee.Nom = Association.Nom;
+                AssociationModifiee.Theme = Association.Theme;
+                AssociationModifiee.Description = Association.Description;
+                AssociationModifiee.UrlPhoto = Association.UrlPhoto;
+                new Adresse_Services().ModifierAdresse(Association.AdresseId, Association.Adresse);
                 _bddContext.SaveChanges();
             }
         }
@@ -149,7 +153,7 @@ namespace Kili.Models
         public void SupprimerAssociation(int id)
         {
             Association Association = _bddContext.Associations.Find(id);
-            UserAccount compteAssocie = _bddContext.UserAccounts.Where(UA=>UA.AssociationId == Association.Id).FirstOrDefault();
+            UserAccount compteAssocie = _bddContext.UserAccounts.Where(UA => UA.AssociationId == Association.Id).FirstOrDefault();
             if (Association != null)
             {
                 _bddContext.Associations.Remove(Association);
@@ -158,10 +162,23 @@ namespace Kili.Models
             }
         }
 
-          public void Dispose()
+        public void Dispose()
         {
             _bddContext.Dispose();
         }
+
+        /*public void UploaderPhoto()
+        {
+            try
+            {
+                OpenFileDialog dialog
+            }
+            catch(Exception)
+            {
+
+            }
+        }*/
+
 
     }
 }

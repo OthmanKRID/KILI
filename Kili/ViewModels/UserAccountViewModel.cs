@@ -10,6 +10,5 @@ namespace Kili.ViewModels
     {
         public UserAccount UserAccount { get; set; }
         public bool Authentifie { get; set; }
-        //public string Urlretour { get; set; }
     }
 }
