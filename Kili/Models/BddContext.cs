@@ -4,6 +4,7 @@ using Kili.Models.GestionAdhesion;
 ﻿using Kili.Models.Dons;
 using Kili.Models.Services;
 using Microsoft.EntityFrameworkCore;
+using Kili.Models.Vente;
 
 namespace Kili.Models
 {
@@ -29,9 +30,21 @@ namespace Kili.Models
         public DbSet<MoyenPaiement> MoyenPaiements { get; set; }
 
 
+
+        //Vente 
+        public DbSet<Produit> Produits { get; set; }
+        public DbSet<Catalogue> Catalogues { get; set; }
+        public DbSet<Panier> Paniers { get; set; }
+        public DbSet<Article> Articles { get; set; }
+
+        public DbSet<Livraison> Livraisons { get; set; }
+        public DbSet<Commande> Commandes { get; set; }
+        public DbSet<CoordonneesAcheteur> CoordonneesAcheteurs { get; set; }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=Kili");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=RRRRR;database=NewBaseKILI");
         }
 
         public void InitializeDb()
@@ -52,6 +65,7 @@ namespace Kili.Models
 
 
             userAccountServices.DésactiverUserAccount(1);
+
 
             associationServices.CreerAssociation("Première Asso", new Adresse() { Numero = 1, Voie = "rue du sport", CodePostal = 34000, Ville = "Montpellier" }, ThemeAssociation.Sport, userAccountServices.ObtenirUserAccount(1) );
             associationServices.CreerAssociation("Deuxième Asso", new Adresse() { Numero = 20, Voie = "rue de la mer", CodePostal = 13000, Ville = "Marseille" }, ThemeAssociation.Arts_et_culture, userAccountServices.ObtenirUserAccount(2));
@@ -84,6 +98,79 @@ namespace Kili.Models
             userAccountServices.ModifierUserAccount(3, "Romy", "Kombet", "Romy@gmail.com", TypeRole.Utilisateur, 3, 2);
             
 
+            //Vente en ligne
+            this.Catalogues.AddRange(
+                new Catalogue
+                {
+                    CatalogueID = 01,
+                    CatalogueName = "Epices",
+                    Description = "Epices et condiments du monde",
+
+                },
+               new Catalogue
+
+               {
+                   CatalogueID = 02,
+                   CatalogueName = "Sacs et accessoires",
+                   Description = "Sacs et accessoires du monde",
+
+               }
+
+                 );
+
+            this.Produits.AddRange(
+           new Produit
+           {
+               ProduitID = 001,
+               Designation = "Pili Pili",
+               Format = "100g",
+               Description = "Piment rouge en provenance de Madagascar, pour donner goût à vos plats.",
+               PrixUnitaire = 5,
+               Devise = "EUR",
+               ImagePath = "pilipili.jpg",
+               CatalogueID = 01,
+           },
+
+           new Produit
+           {
+               ProduitID = 002,
+               Designation = "Sac croco",
+               Format = "25.5 cm * 31 cm * 15 cm",
+               Description = "Sac fabriqué à partir de la peau de crocodile du Burkina Faso.",
+               PrixUnitaire = 50,
+               Devise = "EUR",
+               ImagePath = "saccroco.jpg",
+               CatalogueID = 02,
+           }
+            );
+            this.SaveChanges();
+             this.Livraisons.AddRange(
+                 new Livraison
+                 {
+                     LivraisonID = 001,
+                     LivraisonName = "Livraison à domicile - Colissimo",
+                     LivraisonDescription = "Livré en 2 jours ouvrés si vous commandez avant 14h du lundi au vendredi",
+                     LivraisonPrice = 0,
+                     LivraisonDevise = "EUR",
+                 },
+                 new Livraison
+                 {
+                     LivraisonID = 002,
+                     LivraisonName = "Livraison à domicile - Chronopost",
+                     LivraisonDescription = "Livré avant 13h le jour suivant si vous commandez avant 11h30 du lundi au vendredi",
+                     LivraisonPrice = 9.99,
+                     LivraisonDevise = "EUR",
+                 },
+                 new Livraison
+                 {
+                     LivraisonID = 003,
+                     LivraisonName = "En point de retrait",
+                     LivraisonDescription = "Mondial Relay",
+                     LivraisonPrice = 0,
+                     LivraisonDevise = "EUR",
+                 }
+                 );
+            this.SaveChanges();
 
 
         }
@@ -116,6 +203,23 @@ namespace Kili.Models
 
             modelBuilder.Entity<Paiement>()
                 .HasIndex(p => p.MoyenPaiementId)
+                .IsUnique();
+
+            //Vene en ligne
+            modelBuilder.Entity<Catalogue>()
+                .HasIndex(p => p.CatalogueID)
+                .IsUnique();
+
+            modelBuilder.Entity<Produit>()
+                .HasIndex(p => p.ProduitID)
+                .IsUnique();
+
+            modelBuilder.Entity<Panier>()
+                .HasIndex(p => p.PanierID)
+                .IsUnique();
+
+            modelBuilder.Entity<Livraison>()
+                .HasIndex(p => p.LivraisonID)
                 .IsUnique();
         }
 

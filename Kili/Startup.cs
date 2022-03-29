@@ -18,6 +18,9 @@ namespace Kili
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
             public void ConfigureServices(IServiceCollection services)
         {
+            //Ajout le service de gestion des sessions dans le parcours de vente en ligne entre autres
+            services.AddSession();
+
             //Ajoute le service d'authentification par cookies
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
@@ -37,16 +40,21 @@ namespace Kili
 
                 _bddContext.InitializeDb();
 
-        };
+        }
+            /*using (var ctx = new BddContext())
+            {
+                ctx.InitializeDb();
+            }*/
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-           
-            app.UseStaticFiles();
+
+
             app.UseRouting();
+            app.UseStaticFiles();
 
            
 
@@ -54,6 +62,9 @@ namespace Kili
             //AJoute les fonctionnalités d'authentification
             app.UseAuthentication();
             app.UseAuthorization();
+
+            //Ajoute les fonctionnalités de sessions
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,9 +1,11 @@
 ﻿
+
 using Kili.Models.Dons;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Kili.Models.General
+
     {
         public class Paiement
         {
@@ -12,10 +14,7 @@ namespace Kili.Models.General
             public int Montant { get; set; }
             [Required]
             public DateTime DatePaiement { get; set; }
-        /*
-            public int? CarteBancaire { get; set; }
-            public virtual CarteBancaire CB { get; set; }
-        */
+ 
             public int? AssociationId { get; set; }    
             public virtual Association Association { get; set; }
 
@@ -27,4 +26,5 @@ namespace Kili.Models.General
 
         }
     }
+
 

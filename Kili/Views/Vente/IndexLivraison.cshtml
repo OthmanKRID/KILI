@@ -1,0 +1,39 @@
+﻿@model List<Kili.Models.Vente.Livraison>
+@using Kili.Models.Vente
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <h3>Choix de ma livraison</h3>
+    <table cellpadding="2" cellspacing="2" border="1">
+        <tr>
+            <th>Id</th>
+            <th>Désignation</th>
+            <th>Description</th>
+            <th>Frais de livraison</th>
+            <th>Devise</th>
+            <th>Choix de livraison</th>
+        </tr>
+
+        @foreach (var livraison in Model)
+        {
+           <tr>
+            <td>@livraison.LivraisonID</td>
+            <td>@livraison.LivraisonName</td>
+            <td>@livraison.LivraisonDescription</td>
+            <td>@livraison.LivraisonPrice</td>
+            <td>@livraison.LivraisonDevise</td>
+            <td>@Html.ActionLink("Choisir", "Choisir", "Vente", new{id = @livraison.LivraisonID})</td>
+        </tr>
+        }
+    </table>
+    </body>
+</html>
