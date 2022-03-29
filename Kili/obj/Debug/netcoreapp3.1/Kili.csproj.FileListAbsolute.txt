@@ -315,3 +315,4 @@ C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views
 C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\VoirDetailsAssociation.cshtml.g.cs
 C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\ConfirmationCreationAssociation.cshtml.g.cs
 C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\VoirProfilAssociation.cshtml.g.cs
+C:\Users\Bruno\Repository projet 2\Kili\Kili\obj\Debug\netcoreapp3.1\Razor\Views\Association\Telecharger.cshtml.g.cs

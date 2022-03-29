@@ -44,8 +44,11 @@ namespace Kili
                 app.UseDeveloperExceptionPage();
             }
 
+           
             app.UseStaticFiles();
             app.UseRouting();
+
+           
 
             app.UseSession();
             //AJoute les fonctionnalités d'authentification

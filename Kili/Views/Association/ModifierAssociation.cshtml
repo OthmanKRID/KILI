@@ -14,6 +14,8 @@
     <p>
         Compléter les champs ci-dessous :
     </p>
+
+<!--
 @using (Html.BeginForm("ModifierAssociation","Association"))
 {
     <fieldset>
@@ -37,16 +39,17 @@
         <Label>Description :</Label>
         @Html.TextBoxFor(m => m.Description)<br /><br />
 
-        <input type="hidden" name="MAX_FILE_SIZE" value="4194304" />
-        <input type="file" value="fileupload"/>
 
+        
+         
         @Html.HiddenFor(m => m.Id);
         @Html.HiddenFor(m => m.AdresseId);
         <br />
-        <input type="submit" value="Enregistrer" />
-    </fieldset>
+       <input type="submit" value="Enregistrer" />
+    </fieldset> 
 
 }
+-->
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>

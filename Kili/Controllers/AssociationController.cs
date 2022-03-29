@@ -8,6 +8,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.IO;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Kili.Controllers
 {
@@ -171,6 +173,28 @@ namespace Kili.Controllers
         {
             viewModel.ServiceDon.IsActive = true;
             return View("GererServices", viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Telecharger(IFormFile fichier)
+        {
+            if (fichier.Length > 0)
+                {
+                    var filePath = Path.GetTempFileName();
+
+                    using (var stream = System.IO.File.Create(filePath))
+                    {
+                        await fichier.CopyToAsync(stream);
+                        
+                    }
+                }
+
+            return Ok();
+        }
+
+        public IActionResult Telecharger()
+        {
+            return View();
         }
 
     }
