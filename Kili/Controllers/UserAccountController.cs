@@ -108,7 +108,7 @@ namespace Kili.Controllers
                         return View("Error");
                     }
 
-                    return View(new UserAccountViewModel() { UserAccount = userAccount, OldPassword=oldPassword, NewPassword=newPassword, ConfirmationPassword = confirmationPassword, Message = message });
+                    return View(new UserAccountViewModel() { UserAccount = userAccount, Authentifie =true, OldPassword=oldPassword, NewPassword=newPassword, ConfirmationPassword = confirmationPassword, Message = message });
                 }
 
             }
@@ -134,8 +134,9 @@ namespace Kili.Controllers
                         UserAccount_Services userAccount_Services = new UserAccount_Services();
 
                         userAccount_Services.ModifierMotDePasse(viewModel.UserAccount.Id, viewModel.NewPassword);
+                     
 
-                        return RedirectToAction("ModifierUserAccount", new { @id = viewModel.UserAccount.Id });
+                        return RedirectToAction("Deconnexion", "login");
                     }
                     else
                     {

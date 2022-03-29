@@ -70,10 +70,9 @@ namespace Kili.Controllers
                     Association association = association_Services.ObtenirAssociation(abonnement.Id);
                     paiementServices.ModifierPaiement(id, viewModel.Paiement.Montant, association.Id);
                 }
+                
 
-                var viewmodel2 = viewModel;
-
-                return RedirectToAction("creerattestation", "paiement", viewmodel2); //new { ActionID = viewModel.ActionID, Action = viewModel.Action, Paiement = new Paiement() { Montant = viewModel.Paiement.Montant, DatePaiement = viewModel.Paiement.DatePaiement }, MoyenPaiement = new MoyenPaiement() { moyenPaiement = viewModel.MoyenPaiement.moyenPaiement } }
+                return View("creerattestation", viewModel); //new { ActionID = viewModel.ActionID, Action = viewModel.Action, Paiement = new Paiement() { Montant = viewModel.Paiement.Montant, DatePaiement = viewModel.Paiement.DatePaiement }, MoyenPaiement = new MoyenPaiement() { moyenPaiement = viewModel.MoyenPaiement.moyenPaiement } }
             }
             // } return View();
         }
