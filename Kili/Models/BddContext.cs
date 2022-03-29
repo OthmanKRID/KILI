@@ -20,11 +20,16 @@ namespace Kili.Models
         public DbSet<Don> Dons { get; set; }
         public DbSet<Donateur> Donateurs { get; set; }
 
+
         //Vente 
         public DbSet<Produit> Produits { get; set; }
         public DbSet<Catalogue> Catalogues { get; set; }
         public DbSet<Panier> Paniers { get; set; }
         public DbSet<Article> Articles { get; set; }
+
+        public DbSet<Livraison> Livraisons { get; set; }
+        public DbSet<Commande> Commandes { get; set; }
+        public DbSet<CoordonneesAcheteur> CoordonneesAcheteurs { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -99,6 +104,34 @@ namespace Kili.Models
            }
             );
             this.SaveChanges();
+             this.Livraisons.AddRange(
+                 new Livraison
+                 {
+                     LivraisonID = 001,
+                     LivraisonName = "Livraison à domicile - Colissimo",
+                     LivraisonDescription = "Livré en 2 jours ouvrés si vous commandez avant 14h du lundi au vendredi",
+                     LivraisonPrice = 0,
+                     LivraisonDevise = "EUR",
+                 },
+                 new Livraison
+                 {
+                     LivraisonID = 002,
+                     LivraisonName = "Livraison à domicile - Chronopost",
+                     LivraisonDescription = "Livré avant 13h le jour suivant si vous commandez avant 11h30 du lundi au vendredi",
+                     LivraisonPrice = 9.99,
+                     LivraisonDevise = "EUR",
+                 },
+                 new Livraison
+                 {
+                     LivraisonID = 003,
+                     LivraisonName = "En point de retrait",
+                     LivraisonDescription = "Mondial Relay",
+                     LivraisonPrice = 0,
+                     LivraisonDevise = "EUR",
+                 }
+                 );
+            this.SaveChanges();
+
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -126,6 +159,14 @@ namespace Kili.Models
 
             modelBuilder.Entity<Produit>()
                 .HasIndex(p => p.ProduitID)
+                .IsUnique();
+
+            modelBuilder.Entity<Panier>()
+                .HasIndex(p => p.PanierID)
+                .IsUnique();
+
+            modelBuilder.Entity<Livraison>()
+                .HasIndex(p => p.LivraisonID)
                 .IsUnique();
         }
 

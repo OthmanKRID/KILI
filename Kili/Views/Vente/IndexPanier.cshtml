@@ -44,7 +44,11 @@
             </td>
         </tr>
     </table>
-    <br>
-    <a asp-controller="Vente" asp-action="IndexCatalogue">Continuer l'achat</a>
+    <br /><br />
+    @Html.ActionLink("Valider panier", "IndexLivraison") <br /><br />
+  
+    @Html.ActionLink("Continuer l'achat", "IndexBoutique")<br /><br />
+
+    
 </body>
 </html>

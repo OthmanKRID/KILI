@@ -8,6 +8,7 @@ using Kili.Models;
 using System.Threading.Tasks;
 using System.IO;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Kili.Models.General;
 
 namespace Kili.Controllers
 {
@@ -215,8 +216,6 @@ namespace Kili.Controllers
             return RedirectToAction("IndexPanier");
         }
 
-
-
         [HttpPost]
 
         //SupprimerArticle
@@ -240,5 +239,34 @@ namespace Kili.Controllers
             }
             return -1;
         }
+
+        //Fonctions pour la livraison
+
+        //GET Afficher le choix de livraisons possibles
+
+        public IActionResult IndexLivraison()
+        {
+            var panierID = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "panierID");
+            Panier panier;
+            if (panierID != 0)
+            {
+                panier = new PanierServices().ObtenirPanier(panierID);
+            }
+            else
+            {
+                panier = new Panier() { Articles = new List<Article>() };
+            }
+            LivraisonServices livservice = new LivraisonServices();
+            List<Livraison> livraisons = livservice.ObtenirAllLivraisons();
+            CommandeServices commandeServices = new CommandeServices();
+            commandeServices.CreerCommande(panier);
+            return View(livraisons);
+        }
+
+        //Fonctions pour la commande
+
+       
+
+
     }
 }
