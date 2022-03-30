@@ -106,7 +106,7 @@ namespace Kili.Models
             _bddContext.Associations.Add(Association);
             _bddContext.SaveChanges();
             compte.AssociationId = Association.Id;
-            _UserAccount_Services.ModifierUserAccount(compte.Id, compte.Prenom, compte.Nom, compte.Mail, compte.Role, compte.AssociationId, compte.DonateurId);
+            _UserAccount_Services.ModifierUserAccount(compte.Id, compte.Prenom, compte.Nom, compte.Mail, TypeRole.Association, compte.AssociationId, compte.DonateurId);
             return Association.Id;
         }
 

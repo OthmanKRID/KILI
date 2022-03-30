@@ -1,138 +1,18 @@
 ﻿@model Kili.ViewModels.IndexViewModel
 
-
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-
-     <title>Kili</title>
-     <!--
-
-    Template 2106 Soft Landing
-
-	http://www.tooplate.com/view/2106-soft-landing
-
-    -->
-     <meta charset="UTF-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-     <meta name="description" content="">
-     <meta name="keywords" content="">
-     <meta name="team" content="">
-     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-     <link rel="stylesheet" href="~/css/bootstrap.min.css">
-     <link rel="stylesheet" href="~/css/owl.carousel.css">
-     <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
-     <link rel="stylesheet" href="~/css/font-awesome.min.css">
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Index";
+}
 
 
-     <!-- MAIN CSS -->
-     <link rel="stylesheet" href="~/css/tooplate-style.css">
-     <link rel="stylesheet" href="~/css/style.css">
-
-</head>
-
-<body>
-
-     <!-- PRE LOADER -->
-     <section class="preloader">
-          <div class="spinner">
-
-               <span class="spinner-rotate"></span>
-
-          </div>
-     </section>
 
 
-     <!-- MENU -->
-     <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
-          <div class="container">
-
-               <div class="navbar-header">
-                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                         <span class="icon icon-bar"></span>
-                         <span class="icon icon-bar"></span>
-                         <span class="icon icon-bar"></span>
-                    </button>
-
-                    <!-- lOGO TEXT HERE -->
-                    <img src="/images/logo.png" class="navbar-brand" alt="">
-               </div>
-
-               <!-- MENU LINKS -->
-               <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-
-                         <li><a href="#about" class="smoothScroll">Les associations</a></li>
-                         <li><a href="#pricing" class="smoothScroll">Notre philosophie</a></li>
-                         <!--  <li><a href="#contact" class="smoothScroll">Connexion</a></li> -->
-
-                    </ul>
-                @if (@Model.Authentifie == false)
-                {
-                    <ul class="nav navbar-nav navbar-right">
-
-                         <button type="button" class="btn btn-primary btn-lg show-modal" data-toggle="modal"
-                              data-target="#myModal">Connexion</button>
-
-                    </ul>
-
-
-                    <!-- pop up connexion -->
-                    @using (Html.BeginForm("Authentification", "Login"))
-                    {
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content clearfix">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                             aria-hidden="true">×</span></button>
-                                    <div class="modal-body">
-                                        <h3 class="title">Connexion</h3>
-                                        <p class="description">Saisir l'email et le mot de passe ! </p>
-                                        <div class="form-group">
-                                            <span class="input-icon"><i class="fa fa-user"></i></span>
-                                            <!--<input type="email" class="form-control" placeholder="Email">-->
-                                             @Html.TextBoxFor(m => m.UserAccount.Mail,  new { @placeholder="Email" , @class="form-control", @required="required"})
-                                        </div>
-                                        <div class="form-group">
-                                            <span class="input-icon"><i class="fa fa-shield"></i></span>
-                                            <!--<input type="password" class="form-control" placeholder="Mot de passe">-->
-                                             @Html.TextBoxFor(m => m.UserAccount.Password,  new { @placeholder="Mot de passe" , @class="form-control",@required="required"})
-                                        </div>
-                                        <div class="form-group checkbox">
-                                            <input type="checkbox">
-                                            <label>Sauvegarder</label>
-                                        </div>
-                                        <a href="" class="forgot-pass">Mot de passe oublié ?</a>
-                                        <input type="submit" value="Se connecter" class="btn" name="submit" id="submit" />
-                                        <a class="txtCompte" href="Create.html">Créer un compte</a>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    }
-                }
-                @if (@Model.Authentifie == true)
-                {
-                    <ul class="nav navbar-nav navbar-right">
-
-                         <button type="button" class="btn btn-primary btn-lg show-modal" data-toggle="modal"
-                              data-target="#myModal">@Html.ActionLink("Deconnexion", "Deconnexion", "Login")</button>
-
-                    </ul>
-                    
-                }
-            </div>
-     </section>
-     <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 -->
 
      <!-- intro site -->
-     <section id="home" data-stellar-background-ratio="0.5">
+          <section id="home" data-stellar-background-ratio="0.5">
           <div class="overlay"></div>
           <div class="container">
                <div class="row">
@@ -337,7 +217,7 @@
                     </div>-->
 
           </div>
-          </div>
+        </div>
      </section>
 
 
@@ -402,7 +282,6 @@
                     </div>
                </div>
 
-          </div>
           </div>
      </section>
 
@@ -560,80 +439,6 @@
 
                </div>
           </div>
-     </section>  -->
+     </section> 
 
 
-     <!-- FOOTER -->
-     <footer id="footer" data-stellar-background-ratio="0.5">
-          <div class="container">
-               <div class="row">
-
-                    <div class="copyright-text col-md-12 col-sm-12">
-
-                         <div class="col-md-12 col-md-3">
-                              <ul>
-                                   <h3>Kili </h3>
-
-                                   <span class="glyphicon glyphicon-envelope"> contact@kili.fr</span></br>
-                                   <span class="glyphicon glyphicon-earphone"> +33 1 89 21 45 96 </span>
-                              </ul>
-                         </div>
-                         <div class="col-md-12 col-md-3">
-                              <ul>
-                                   <h3>Particulier </h3>
-                                   <a>Boutiques</a></br>
-                                   <a>Collectes</a></br>
-                                   <a>Adhésion</a></br>
-                              </ul>
-                         </div>
-                         <div class="col-md-3 col-md-3">
-                              <ul>
-                                   <h3>Associations </h3>
-                                   <a>Abonnement</a></br>
-                                   <a>Offres</a></br>
-                                   <a>Aide</a></br>
-                              </ul>
-                         </div>
-                         <div class="col-md-3 col-md-3">
-                              <ul>
-                                   <h3>A la une </h3>
-
-                                   <span class="glyphicon glyphicon-envelope"> contact@kili.fr</span></br>
-                                   <span class="glyphicon glyphicon-earphone"> +33 1 89 21 45 96 </span>
-                              </ul>
-                         </div>
-
-                         <div class="col-md-12 col-sm-12">
-                              <p>Copyright &copy; 2022 Company Kili - Project </p>
-
-                         </div>
-
-                         <div class="col-md-12 col-sm-12">
-                              <ul class="social-icon">
-                                   <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
-                                   <li><a href="#" class="fa fa-twitter"></a></li>
-                                   <li><a href="#" class="fa fa-instagram"></a></li>
-                              </ul>
-                         </div>
-                    </div>
-
-               </div>
-          </div>
-     </footer>
-
-
-     <!-- SCRIPTS -->
-     <script src="~/js/jquery.js"></script>
-     <script src="~/js/bootstrap.min.js"></script>
-     <script src="~/js/jquery.stellar.min.js"></script>
-     <script src="~/js/owl.carousel.min.js"></script>
-     <script src="~/js/smoothscroll.js"></script>
-     <script src="~/js/custom.js"></script>
-
-</body>
-
-</html>
-=======
-<div>Je suis la vue index</div>
-
->>>>>>> RAZ/Vente

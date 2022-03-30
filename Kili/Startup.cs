@@ -1,3 +1,4 @@
+using Kili.Controllers;
 using Kili.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -36,9 +37,12 @@ namespace Kili
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //new LoginController().DeconnexionDemarrage();
+
             using (BddContext _bddContext = new BddContext()) {
 
                 _bddContext.InitializeDb();
+                
 
         }
             /*using (var ctx = new BddContext())
