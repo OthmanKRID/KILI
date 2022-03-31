@@ -1,0 +1,286 @@
+@{
+    @using Kili.Models.General;
+    @using Kili.Models.Services;
+}
+
+<!DOCTYPE html>
+<html lang="fr">
+
+
+
+
+<head>
+
+     <title>Kili</title>
+  
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="team" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+     <!-- Index boostrap -->
+     <link rel="stylesheet" href="~/css/bootstrap.min.css">
+     <link rel="stylesheet" href="~/css/owl.carousel.css">
+     <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+     <link rel="stylesheet" href="~/css/font-awesome.min.css">
+     
+     <!-- Index CSS -->
+     <link rel="stylesheet" href="~/css/boutique-asso-style.css">
+     <link rel="stylesheet" href="~/css/pop-up-style.css">
+     <link rel="stylesheet" href="~/css/index-style.css">
+
+     <link rel="stylesheet" href="~/css/Assostyle.css">
+
+     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/js/jquery-ui/jquery-ui-1.10.1.custom.min.css" rel="stylesheet">
+    <link href="~/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="~/js/jvector-map/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    <link href="~/css/clndr.css" rel="stylesheet">
+    <!--clock css-->
+    <link href="~/js/css3clock/css/style.css" rel="stylesheet">
+    <!--Morris Chart CSS -->
+    <link rel="stylesheet" href="js/morris-chart/morris.css">
+    <!-- Custom styles for this template -->
+    <link href="~/css/style.css" rel="stylesheet">
+    <link href="~/css/style-responsive.css" rel="stylesheet" />
+
+      <!-- boutique CSS Bootstrap -->
+
+</head>
+
+<body>
+
+     <!-- MENU -->
+     <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
+          <div class="container">
+
+               <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    </button>
+
+                    <!-- lOGO TEXT HERE -->
+                    <a href="@Url.ActionLink("Index", "Home", new { viewModel = @Model})" class="smoothScroll">
+                        <img src="/images/logo.png" class="navbar-brand" alt="">
+                    </a>
+               </div>
+
+               <!-- MENU LINKS -->
+               <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+
+                         <li><a href="Association.html" class="smoothScroll">Les associations</a></li>
+                         <li><a href="#pricing" class="smoothScroll">Nos services</a></li>
+                        
+
+                    </ul>
+                
+                
+                @if (User.Identity.IsAuthenticated == false)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <button type="button" class="btn btn-primary btn-lg show-modal" data-toggle="modal"
+                              data-target="#myModal">Connexion</button>
+
+                    </ul>
+
+                    <!-- pop up connexion -->
+                    @using (Html.BeginForm("Authentification", "Login"))
+                    {
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content clearfix">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                             aria-hidden="true">×</span></button>
+                                    <div class="modal-body">
+                                        <h3 class="title">Connexion</h3>
+                                        <p class="description">Saisir l'email et le mot de passe ! </p>
+                                        <div class="form-group">
+                                            <span class="input-icon"><i class="fa fa-user"></i></span>
+                                            <input type="email" name="UserAccount.Mail" class="form-control" placeholder="Email" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <span class="input-icon"><i class="fa fa-shield"></i></span>
+                                            <input type="password" name="UserAccount.Password" class="form-control" placeholder="Mot de passe" required="required">
+                                        </div>
+                                        <div class="form-group checkbox">
+                                            <input type="checkbox">
+                                            <label>Sauvegarder</label>
+                                        </div>
+                                        <a href="" class="forgot-pass">Mot de passe oublié ?</a>
+                                        <input type="submit" value="Se connecter" class="btn" name="submit" id="submit" />
+
+                                        <a class="txtCompte" href="Create.html">@Html.ActionLink("Créer un compte", "CreerUtilisateur", "UserAccount")</a>
+                                        <a class="txtCompte" href="Create.html">@Html.ActionLink("Créer un compte Association", "AjouterCompteAssociation", "Association")</a>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    }
+                }
+                @if (User.Identity.IsAuthenticated == true)
+                {
+                    <div class="top-nav clearfix">
+
+                        <ul class="nav pull-right top-menu">
+
+                            <!-- user login dropdown start-->
+                    <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                    @{
+                                        UserAccount compteconnecte = new UserAccount_Services().ObtenirUserAccountConnecte(User.Identity.Name);
+                                    }
+                                      <img alt="" src=@compteconnecte.ImagePath height="20" width="20">
+                                      <span class="username">Mon compte</span>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu extended logout">
+                                    <li>@Html.ActionLink("Mon Profil", "ModifierUserAccount", "UserAccount", new {id = @compteconnecte.Id})</li>
+                                    @{
+                                        if (User.IsInRole ("Association"))
+                                    {
+                                        <li>@Html.ActionLink("Mon Association", "VoirProfilAssociation", "Association")</li>
+                                    }
+                                    <li>@Html.ActionLink("Se deconnecter", "Deconnexion", "Login")</li>
+                                    }
+                        </ul>
+                    </li>
+                    <!-- user login dropdown end -->
+                
+                </ul>
+                <!--search & user info end-->
+            </div>
+                }
+            </div>
+     </section>
+     <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+-->
+
+     <!-- intro boutique -->
+     <div>@RenderBody()</div>
+         
+         
+     <!-- FOOTER -->
+     <footer id="footer" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="copyright-text col-md-12 col-sm-12">
+
+                         <div class="col-md-12 col-md-3">
+                              <ul>
+                                   
+                                   <img src="/images/logo.png" class="logo-footer" alt="">
+                                   <span class="glyphicon glyphicon-envelope"> contact@kili.fr</span></br>
+                                   <span class="glyphicon glyphicon-envelope"> +33 1 89 21 45 96</span>
+                                   <ul class="social-icon">
+                                        <li><a href="#" class="fa fa-twitter"></a></li>
+                                        <li><a href="#" class="fa fa-instagram"></a></li>
+                                   </ul>
+                              </ul>
+                         </div>
+                         <div class="col-md-12 col-md-3">
+                              <ul>
+                                   <h3>Particuliers</h3>
+                                   <a>Boutiques</a></br>
+                                   <a>Collectes</a></br>
+                                   <a>Adhésion</a></br>
+                              </ul>
+                         </div>
+                         <div class="col-md-3 col-md-3">
+                              <ul>
+                                   <h3>Associations </h3>
+                                   <a>Abonnement</a></br>
+                                   <a>Offres</a></br>
+                                   <a>Aide</a></br>
+                              </ul>
+                         </div>
+                         <div class="col-md-3 col-md-3">
+                              <ul>
+                                   <h3>À la une </h3>
+
+                                   <div class="container-footer">
+                                        <a href="https://www.w3schools.com/howto/howto_css_image_transparent.asp"></a><img src="/images/actu-footer.jpg" alt="Notebook" style="width:100%;"></a>
+                                        <div class="content-footer">
+                                          <h1>Associations humanitaires </h1>
+                                   
+                                        </div>
+                                      </div>
+                              </ul>
+                         </div>
+                        
+                         <div class="col-md-12 col-sm-12">
+                              <img src="/images/image-footer.png" class="image-footer" alt="">
+                              <p>Copyright &copy; 2022 Company Kili - Project </p>
+
+                         </div>
+
+               
+                         
+                    </div>
+
+               </div>
+          </div>
+     </footer>
+
+
+     <!-- SCRIPTS -->
+     <script src="~/js/jquery.js"></script>
+     <script src="~/js/bootstrap.min.js"></script>
+     <script src="~/js/jquery.stellar.min.js"></script>
+     <script src="~/js/owl.carousel.min.js"></script>
+     <script src="~/js/smoothscroll.js"></script>
+     <script src="~/js/custom.js"></script>
+
+     <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
+    <script src="bs3/js/bootstrap.min.js"></script>
+    <script src="js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+    <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+    <script src="js/jquery.nicescroll.js"></script>
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
+    <script src="js/skycons/skycons.js"></script>
+    <script src="js/jquery.scrollTo/jquery.scrollTo.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="js/calendar/clndr.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+    <script src="js/calendar/moment-2.2.1.js"></script>
+    <script src="js/evnt.calendar.init.js"></script>
+    <script src="js/jvector-map/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="js/jvector-map/jquery-jvectormap-us-lcc-en.js"></script>
+    <script src="js/gauge/gauge.js"></script>
+    <!--clock init-->
+    <script src="js/css3clock/js/css3clock.js"></script>
+    <!--Easy Pie Chart-->
+    <script src="js/easypiechart/jquery.easypiechart.js"></script>
+    <!--Sparkline Chart-->
+    <script src="js/sparkline/jquery.sparkline.js"></script>
+    <!--Morris Chart-->
+    <script src="js/morris-chart/morris.js"></script>
+    <script src="js/morris-chart/raphael-min.js"></script>
+    <!--jQuery Flot Chart-->
+    <script src="js/flot-chart/jquery.flot.js"></script>
+    <script src="js/flot-chart/jquery.flot.tooltip.min.js"></script>
+    <script src="js/flot-chart/jquery.flot.resize.js"></script>
+    <script src="js/flot-chart/jquery.flot.pie.js"></script>
+    <script src="js/flot-chart/jquery.flot.animator.min.js"></script>
+    <script src="js/flot-chart/jquery.flot.growraf.js"></script>
+
+    <script src="js/dashboard.js"></script>
+    <script src="js/jquery.customSelect.min.js"></script>
+    <!--common script init for all pages-->
+    <script src="js/scripts.js"></script>
+    <!--script for this page-->
+
+
+
+</body>
+
+</html>

@@ -11,7 +11,7 @@ using System.Security.Cryptography;
 using System.Text;
 using static Kili.Models.General.UserAccount;
 
-namespace Kili.Models
+namespace Kili.Models.Services
 {
     public class UserAccount_Services
     {
@@ -31,7 +31,9 @@ namespace Kili.Models
         //Fonction permettant d'obtenir un UserAccount à partir de son Id
         public UserAccount ObtenirUserAccount(int id)
         {
-            return _bddContext.UserAccounts.Include(UA => UA.Association).ThenInclude(A => A.Adresse).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceAdhesion).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceDon).ThenInclude(SD => SD.Collectes).ThenInclude(Co => Co.Dons).Include(UA => UA.Donateur).ThenInclude(DO => DO.Dons).FirstOrDefault(UA => UA.Id == id);
+
+            return _bddContext.UserAccounts.Include(UA => UA.Association).ThenInclude(A => A.Adresse).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceAdhesion).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceBoutique).Include(UA => UA.Association).ThenInclude(A => A.Abonnement).ThenInclude(A => A.serviceDon).ThenInclude(SD => SD.Collectes).Include(UA => UA.Donateur).ThenInclude(DO => DO.Dons).FirstOrDefault(UA => UA.Id == id);
+
         }
 
         //Fonction permettant d'obtenir un UserAccount à partir de son Id
@@ -59,22 +61,36 @@ namespace Kili.Models
         }
 
         //Fonction permettant de créer un UserAccount
-        public int CreerUserAccount(string prenom, string nom, string password, string email, string telephone, TypeRole role)
+        public int CreerUserAccount(string prenom, string nom, string password, string email, TypeRole role)
         {
             string motDePasse = EncodeMD5(password);
-            UserAccount userAccount = new UserAccount() { Prenom = prenom, Nom = nom, Password = motDePasse, Mail = email, Telephone = telephone, DateCreation = System.DateTime.Today, Actif = true, Role = role};
+
+            UserAccount userAccount = new UserAccount() { Prenom = prenom, Nom = nom, Password = motDePasse, Mail = email, DateCreation = System.DateTime.Today, Actif = true, Role = role, ImagePath = "/images/UserAccount/logo.png" };
+
             _bddContext.UserAccounts.Add(userAccount);
             _bddContext.SaveChanges();
             return userAccount.Id;
         }
 
-        public int CreerAdmin(string prenom, string nom, string password, string email, string telephone)
+
+        public int CreerUtilisateur(string prenom, string nom, string password, string email)
         {
-            return CreerUserAccount(prenom, nom, password, email, telephone, TypeRole.Admin);      
+            return CreerUserAccount(prenom, nom, password, email, TypeRole.Utilisateur);
+        }
+
+        public int CreerAdmin(string prenom, string nom, string password, string email)
+        {
+            return CreerUserAccount(prenom, nom, password, email, TypeRole.Admin);
+        }
+
+        public int CreerUserAccountAssociation(string prenom, string nom, string password, string email)
+        {
+            return CreerUserAccount(prenom, nom, password, email, TypeRole.Association);      
         }
 
 
-        public void ModifierUserAccount(int id, string prenom, string nom, string email, string telephone, TypeRole role, int? AssociationId, int? donateurID, int? adresseID)
+        public void ModifierUserAccount(int id, string prenom, string nom, string email, string telephone, TypeRole role, int? AssociationId, int? donateurID, int? adresseID, string ImagePath)
+
         {
             UserAccount userAccount = _bddContext.UserAccounts.Find(id);
 
@@ -88,6 +104,8 @@ namespace Kili.Models
                 userAccount.AssociationId = AssociationId;
                 userAccount.DonateurId = donateurID;
                 userAccount.AdresseId = adresseID;
+                userAccount.ImagePath = ImagePath;
+
                 _bddContext.SaveChanges();
             }
         }

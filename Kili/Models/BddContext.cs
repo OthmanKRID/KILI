@@ -5,6 +5,11 @@ using Kili.Models.GestionAdhesion;
 using Kili.Models.Services;
 using Microsoft.EntityFrameworkCore;
 using Kili.Models.Vente;
+using System;
+using Microsoft.Extensions.Configuration;
+using System.Configuration;
+
+
 
 namespace Kili.Models
 {
@@ -44,11 +49,28 @@ namespace Kili.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=P@ssw0rd5;database=KILI");
+
+            
+
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=Kili");
+            }
+            else
+            {
+                IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+                optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"));
+            }
+
         }
 
         public void InitializeDb()
         {
+       
+
             this.Database.EnsureDeleted();
             this.Database.EnsureCreated();
             UserAccount_Services userAccountServices = new UserAccount_Services();
@@ -57,16 +79,19 @@ namespace Kili.Models
             DonServices donServices = new DonServices();
             Adresse_Services adresseService = new Adresse_Services();
 
-            userAccountServices.CreerAdmin("M.","Admin", "P@ssw0rd5", "Kili@mail.com",null);
-            userAccountServices.CreerUserAccount("Fara", "Raza", "P@ssFara1", "Fara@gmail.com",null, TypeRole.Utilisateur);
-            userAccountServices.CreerUserAccount("Romy","Kombet", "P@ssRomy1", "Romy@gmail.com", null, TypeRole.Utilisateur);
-            userAccountServices.CreerUserAccount("Othman","Krid", "P@ssOthman1", "Othman@gmail.com", null, TypeRole.Utilisateur);
+
+            userAccountServices.CreerAdmin("M.","Admin", "P@ssw0rd5", "Kili@mail.com");
+            userAccountServices.CreerUserAccount("Fara", "Raza", "P@ssFara1", "Fara@gmail.com", TypeRole.Utilisateur);
+            userAccountServices.CreerUserAccount("Romy","Kombet", "P@ssRomy1", "Romy@gmail.com", TypeRole.Utilisateur);
+            userAccountServices.CreerUserAccount("Othman","Krid", "P@ssOthman1", "Othman@gmail.com", TypeRole.Utilisateur);
 
 
-            adresseService.CreerAdresse(15, "rue","Gabriel", 93000, "Pantin");
+            adresseService.CreerAdresse(15, "rue", "Gabriel", 93000, "Pantin");
             adresseService.CreerAdresse(25, "rue", "Peri", 93100, "Romainville");
+
             donServices.CreerDonateur(1);
             donServices.CreerDonateur(2);
+
             
 
             userAccountServices.DésactiverUserAccount(1);
@@ -99,8 +124,7 @@ namespace Kili.Models
             donServices.CreerDon(2000, TypeRecurrence.Unique, 1, 2);
             donServices.CreerDon(200, TypeRecurrence.Mensuel, 2, 2);
 
-            userAccountServices.ModifierUserAccount(1, "M.", "Admin", "Kili@mail.com","0102030455", TypeRole.Admin, 1, 1,null);
-            userAccountServices.ModifierUserAccount(3, "Romy", "Kombet", "Romy@gmail.com", "0102034455", TypeRole.Utilisateur, 3, 2, null);
+
             
 
             //Vente en ligne

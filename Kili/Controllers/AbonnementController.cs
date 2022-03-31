@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Kili.Models.Services;
 using Kili.Models.General;
 using System.Collections.Generic;
+using Kili.ViewModels;
+using Kili.Models;
 
 namespace Kili.Controllers
 {
@@ -26,6 +28,22 @@ namespace Kili.Controllers
                 cart = new PanierService() { Items = new List<Item>() };
             }
             return cart;
+        }
+
+        public IActionResult ConfirmerPaiementService()
+        {
+            var cartId = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "cartId");
+            PanierService cart;
+            cart = new PanierService_Services().GetCart(cartId);
+
+
+            foreach (Item item in cart.Items)
+            {
+                new Abonnement_Services().AjouterService(new UserAccount_Services().ObtenirUserAccountConnecte(User.Identity.Name).Association.Id, item.Service);
+            }
+
+            SupprimerPanier();
+            return View("ConfirmationPaiement");
         }
 
         public IActionResult AjouterService(int id)
@@ -54,28 +72,32 @@ namespace Kili.Controllers
                     PanierService_Services.AddItem(cartId, new Item { ServiceId = id, Quantity = 1 });
                 }
             }
-            return View("../Association/PanierService", ObtenirPanierService());
+            //return View("../Association/GererServices", new ServicesViewModel());
+            //return RedirectToAction("PanierServices");
+            return RedirectToAction("GererServices", "Association");
         }
 
+        public IActionResult PanierServices()
+        {
+            return View(ObtenirPanierService());
+        }
 
         public IActionResult SupprimerServiceDansPanier(int id)
         {
             var panierId = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "cartId");
             new PanierService_Services().RemoveItem(panierId, id);
-            return View("../Association/PanierService", ObtenirPanierService());
+            
+            return RedirectToAction("PanierServices");
+
         }
 
-        private void CreerPanier()
-        {
-            var cartId = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "cartId");
-            PanierService_Services PanierService_Services = new PanierService_Services();
 
-            if (cartId == 0)
-            {
-                // Le panier n'existe pas donc on le crée en ajoutant l'item dedans
-                cartId = PanierService_Services.CreateCart();
-                SessionHelper.SetObjectAsJson(HttpContext.Session, "cartId", cartId);
-            }
+        public IActionResult SupprimerPanier()
+        {
+            var panierId = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "cartId");
+            new PanierService_Services().DeleteCart(panierId);
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cartId", 0);
+            return RedirectToAction("GererServices", "Association");
         }
 
 

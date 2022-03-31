@@ -1,5 +1,6 @@
 ﻿using Kili.Models;
 using Kili.Models.General;
+using Kili.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -26,7 +27,7 @@ namespace Kili.Controllers
             {
                 int id = adresseServices.CreerAdresse(adresse.Numero, adresse.Voie, adresse.Complement, adresse.CodePostal, adresse.Ville);
                 UserAccount ua = userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
-                userAccount_Services.ModifierUserAccount(ua.Id, ua.Prenom, ua.Nom, ua.Mail, ua.Telephone, ua.Role, ua.AssociationId, ua.DonateurId, id);
+                userAccount_Services.ModifierUserAccount(ua.Id, ua.Prenom, ua.Nom, ua.Mail, ua.Telephone, ua.Role, ua.AssociationId, ua.DonateurId, id, ua.ImagePath);
 
                 return Redirect("/");
             }

@@ -1,5 +1,6 @@
 ﻿using Kili.Models.Dons;
 using Kili.Models.General;
+using Kili.Models.GestionAdhesion;
 using System;
 using System.Collections.Generic;
 using System.Linq;

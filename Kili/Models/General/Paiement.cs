@@ -11,7 +11,7 @@ namespace Kili.Models.General
         {
             public int Id { get; set; }           
             [Required]
-            public int Montant { get; set; }
+            public double Montant { get; set; }
             [Required]
             public DateTime DatePaiement { get; set; }
  

@@ -1,8 +1,10 @@
 ﻿using Kili.Models;
 using Kili.Models.General;
+using Kili.Models.Services;
 using Kili.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
@@ -50,7 +52,7 @@ namespace Kili.Controllers
 
                     var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
 
-                    HttpContext.SignInAsync(userPrincipal);
+                    HttpContext.SignInAsync(userPrincipal, new AuthenticationProperties() { IsPersistent = false });
 
                     if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
@@ -60,15 +62,24 @@ namespace Kili.Controllers
                ModelState.AddModelError("UserAccount.UserName", "UserName et/ou mot de passe incorrect(s)");
             }
 
-            
-            //return View(viewModel);
-            return View("/");
+            viewModel.Authentifie = HttpContext.User.Identity.IsAuthenticated;
+
+            return View("../Home/Index", new IndexViewModel() { Authentifie = HttpContext.User.Identity.IsAuthenticated , Associations = new Association_Services().Obtenir3DernièresAssociations() });
+
         }
 
         public ActionResult Deconnexion()
         {
             HttpContext.SignOutAsync();
             return Redirect("/");
+        }
+
+        public void DeconnexionDemarrage()
+        {
+            try { HttpContext.SignOutAsync(); }
+            catch (Exception e)
+            {
+            }           
         }
     }
 }

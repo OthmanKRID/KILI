@@ -1,4 +1,5 @@
 ﻿using Kili.Models.Dons;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -34,8 +35,16 @@ namespace Kili.Models.General
         public int? AssociationId { get; set; }
         public virtual Association Association { get; set; }
 
+
         public int? AdresseId { get; set; }
         public virtual Adresse Adresse { get; set; }
+
+
+        public string ImagePath { get; set; }
+
+        [NotMapped]
+        public IFormFile Image { get; set; }
+
 
 
     }

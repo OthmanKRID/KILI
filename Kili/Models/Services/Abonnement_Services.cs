@@ -1,4 +1,6 @@
 ﻿using Kili.Models.General;
+using Kili.Models.GestionAdhesion;
+using Kili.Models.Services;
 using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -9,8 +11,9 @@ using static Kili.Models.General.UserAccount;
 using Microsoft.AspNetCore.Http;
 using System.Data.Entity;
 using Kili.Models.Dons;
+using Kili.Models.Vente;
 
-namespace Kili.Models
+namespace Kili.Models.Services
 {
     public class Abonnement_Services
     {
@@ -71,10 +74,11 @@ namespace Kili.Models
             {
                 //Abonnement Abonnement = _bddContext.Abonnements.Include(abo => abo.serviceAdhesion).FirstOrDefault(abo => abo.Id == id);
                 ServiceAdhesion serviceAdhesion = _bddContext.ServicesAdhesion.Find(id);
-                serviceAdhesion.IsActive = true;
+                serviceAdhesion.EstActif = true;
                 serviceAdhesion.duree = service.duree_mois;
                 serviceAdhesion.dateAbonnement = DateTime.Today;
                 serviceAdhesion.dateFinAbonnement = DateTime.Today.AddDays(service.duree_mois);
+                serviceAdhesion.montant_paye = service.prix;
                 //Abonnement.ServiceAdhesionId = Abonnement.serviceAdhesion.Id;
             }
 
@@ -82,10 +86,11 @@ namespace Kili.Models
             {
                 //Abonnement Abonnement = _bddContext.Abonnements.Include(abo => abo.serviceDon).FirstOrDefault(abo => abo.Id == id);
                 ServiceDon serviceDon = _bddContext.ServicesDon.Find(id);
-                serviceDon.IsActive = true;
+                serviceDon.EstActif = true;
                 serviceDon.duree = service.duree_mois;
                 serviceDon.dateAbonnement = DateTime.Today;
                 serviceDon.dateFinAbonnement = DateTime.Today.AddDays(service.duree_mois);
+                serviceDon.montant_paye = service.prix;
                 //Abonnement.ServiceDonId = Abonnement.serviceAdhesion.Id;
             }
 
@@ -93,10 +98,11 @@ namespace Kili.Models
             {
                 //Abonnement Abonnement = _bddContext.Abonnements.Include(abo => abo.serviceBoutique).FirstOrDefault(abo => abo.Id == id);
                 ServiceBoutique serviceBoutique = _bddContext.ServicesBoutique.Find(id);
-                serviceBoutique.IsActive = true;
+                serviceBoutique.EstActif = true;
                 serviceBoutique.duree = service.duree_mois;
                 serviceBoutique.dateAbonnement = DateTime.Today;
                 serviceBoutique.dateFinAbonnement = DateTime.Today.AddDays(service.duree_mois);
+                serviceBoutique.montant_paye = service.prix;
                 // Abonnement.ServiceBoutiqueId = Abonnement.serviceBoutique.Id;
             }
             //_bddContext.ServicesAdhesion.Add(adhesion);
@@ -109,7 +115,7 @@ namespace Kili.Models
        public void ModifierServiceAdhesion(int id, ServiceAdhesion serviceAdhesion)
         {
             ServiceAdhesion nouveauServiceAdhesion = _bddContext.ServicesAdhesion.Find(id);
-            nouveauServiceAdhesion.IsActive = serviceAdhesion.IsActive;
+            nouveauServiceAdhesion.EstActif = serviceAdhesion.EstActif;
             nouveauServiceAdhesion.duree = serviceAdhesion.duree;
             nouveauServiceAdhesion.dateAbonnement = serviceAdhesion.dateAbonnement;
             nouveauServiceAdhesion.dateFinAbonnement = serviceAdhesion.dateFinAbonnement;

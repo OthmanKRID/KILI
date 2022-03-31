@@ -8,7 +8,7 @@ using System.Text;
 using static Kili.Models.General.UserAccount;
 using static Kili.Models.GestionAdhesion.Adhesion;
 
-namespace Kili.Models
+namespace Kili.Models.Services
 {
     public class Adhesion_Services
     {

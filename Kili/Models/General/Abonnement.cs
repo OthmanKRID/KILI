@@ -1,5 +1,7 @@
 ﻿using Kili.Models;
 using Kili.Models.Dons;
+using Kili.Models.Vente;
+using Kili.Models.GestionAdhesion;
 using System.Collections.Generic;
 
 namespace Kili.Models.General
@@ -22,10 +24,12 @@ namespace Kili.Models.General
 
         public Abonnement()
         {
-            serviceAdhesion = new ServiceAdhesion() {IsActive = false};
-            serviceDon = new ServiceDon() { IsActive = false };
-            serviceBoutique = new ServiceBoutique() {IsActive = false};
+            serviceAdhesion = new ServiceAdhesion() { EstActif = false};
+            serviceDon = new ServiceDon() { EstActif = false };
+            serviceBoutique = new ServiceBoutique() { EstActif = false};
         }
+
+
         
 
 
