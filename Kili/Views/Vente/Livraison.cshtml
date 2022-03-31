@@ -64,29 +64,40 @@
                         @Html.TextBoxFor(m => Model.CoordonneesAcheteur.Useraccount.Prenom,"text", new{@id="", @name="firstname", @placeholder="Prenom"})
                         @*<input type="text" id="fname" name="firtname" placeholder="Vincent">*@
 
-                        <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.Useraccount.Telephone)">><i class="fa fa-user"></i> Telephone</label>
+                        <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.Useraccount.Telephone)"><i class="fa fa-user"></i> Telephone</label>
                         @Html.TextBoxFor(m => Model.CoordonneesAcheteur.Useraccount.Telephone, "text", new{@id="", @name = "phone", @placeholder  = "Telephone"})
                         <div class="row">
                             <div class="col-50">
-                                <label for="state"><i class="fa fa-institution"></i>voie</label>
-                                <input type="text" id="num" name="num" placeholder="25">
+                                
+                                <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Numero)"><i class="fa fa-institution"> </i>Adresse</label>
+                                @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Numero, "text", new{@id="", @name="num", @placeholder = "Numero"})
+                                 @*<input type="text" id="num" name="num" placeholder="25">*@
+
                             </div>
+                   
                             <div class="col-50">
-                                <label for="adr"><i class="fa fa-institution"></i>Adresse</label>
-                                <input type="text" id="adr" name="adr" placeholder="Rue de la république">
+                                <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Voie)">
+                                @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Voie, "text", new{@id=" ", @name="adr", @placeholder="Voie"})
+                                @*<input type="text" id="adr" name="adr" placeholder="Rue de la république">*@
                             </div>
                         </div>
-                        <label for="city"><i class="fa fa-institution"></i> Ville</label>
-                        <input type="text" id="city" name="city" placeholder="Paris">
+                                 <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Complement)">
+                                @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Complement, "text", new{@id= "", @name="compl", @placeholder="Complement"})
+                                @*<input type="text" id="city" name="city" placeholder="Paris">*@
 
                         <div class="row">
                             <div class="col-50">
-                                <label for="state">Département</label>
-                                <input type="text" id="state" name="state" placeholder="ile de France">
+
+                                <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.AdresseLivraison.CodePostal)">
+                                 @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseLivraison.CodePostal, "text", new{@id= "", @name = "zip", @placeholder="Code postal"})
+                                @*<input type="text" id="state" name="state" placeholder="ile de France">*@
+
                             </div>
                             <div class="col-50">
-                                <label for="zip">Code Postal</label>
-                                <input type="text" id="zip" name="zip" placeholder="75000">
+                                <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Ville)">
+                               @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Ville, "text", new{@id= "", @name = "city", @placeholder="Ville"})
+                               @*<input type="text" id="zip" name="zip" placeholder="75000">*@
+
                             </div>
                         </div>
                     </div>

@@ -133,19 +133,19 @@
                                     @{
                                         UserAccount compteconnecte = new UserAccount_Services().ObtenirUserAccountConnecte(User.Identity.Name);
                                     }
-                                      <img alt="" src=@compteconnecte.ImagePath height="20" width="20">
+                                      @*<img alt="" src=@compteconnecte.ImagePath height="20" width="20">*@
                                       <span class="username">Mon compte</span>
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu extended logout">
-                                    <li>@Html.ActionLink("Mon Profil", "ModifierUserAccount", "UserAccount", new {id = @compteconnecte.Id})</li>
+                                   @*@ <li>@Html.ActionLink("Mon Profil", "ModifierUserAccount", "UserAccount", new {id = @compteconnecte.Id})</li>
                                     @{
                                         if (User.IsInRole ("Association"))
                                     {
                                         <li>@Html.ActionLink("Mon Association", "VoirProfilAssociation", "Association")</li>
                                     }
                                     <li>@Html.ActionLink("Se deconnecter", "Deconnexion", "Login")</li>
-                                    }
+                                    }*@
                         </ul>
                     </li>
                     <!-- user login dropdown end -->
