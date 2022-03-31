@@ -11,8 +11,20 @@ namespace Kili.Controllers
     public class PaiementController : Controller
     {
 
+        public IActionResult CreerPaiementServices(double montant)
+        {
+            UserAccountViewModel viewModel = new UserAccountViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
+            PaiementViewModel paiementviewModel = new PaiementViewModel() { Paiement = new Paiement() { Montant = montant } };
+            if (viewModel.Authentifie)
+            {
+                return View(paiementviewModel);
+            }
+
+            return Redirect("/login/authentification");
+        }
+
         //Méthode pour créer un paiement à partir d'une vue d'un type d'action (don, achat...).
-        public IActionResult CreerPaiement(int actionID, int montant, TypeAction typeAction)
+        public IActionResult CreerPaiement(int actionID, double montant, TypeAction typeAction)
         {                   
             UserAccountViewModel viewModel = new UserAccountViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
             PaiementViewModel paiementviewModel = new PaiementViewModel() { ActionID = actionID, Paiement = new Paiement() { Montant = montant }, Action = typeAction };

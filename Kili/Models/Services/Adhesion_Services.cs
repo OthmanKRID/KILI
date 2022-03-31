@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using static Kili.Models.General.UserAccount;
 
-namespace Kili.Models
+namespace Kili.Models.Services
 {
     public class Adhesion_Services
     {

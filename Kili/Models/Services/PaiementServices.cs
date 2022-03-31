@@ -47,7 +47,7 @@ namespace Kili.Models.Services
 
 
         //Fonction permettant de créer un Paiement
-        public int CreerPaiement(int montant, int moyenPaiementID)
+        public int CreerPaiement(double montant, int moyenPaiementID)
         {
 
             Paiement Paiement = new Paiement() { Montant = montant, MoyenPaiementId =moyenPaiementID,  DatePaiement = System.DateTime.Today };
@@ -57,7 +57,7 @@ namespace Kili.Models.Services
         }
 
         // Fonction permettant de modifier un Paiement. 
-        public void ModifierPaiement(int id, int montant, int associationBeneficiaireID)
+        public void ModifierPaiement(int id, double montant, int associationBeneficiaireID)
         {
             Paiement Paiement = _bddContext.Paiements.Find(id);
             if (Paiement != null)
