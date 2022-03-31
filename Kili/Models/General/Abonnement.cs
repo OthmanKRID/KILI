@@ -1,5 +1,7 @@
 ﻿using Kili.Models;
 using Kili.Models.Dons;
+using Kili.Models.Vente;
+using Kili.Models.GestionAdhesion;
 using System.Collections.Generic;
 
 namespace Kili.Models.General

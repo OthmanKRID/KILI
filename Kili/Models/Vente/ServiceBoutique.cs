@@ -3,7 +3,7 @@ using Kili.Models.Dons;
 using System;
 using System.Collections.Generic;
 
-namespace Kili.Models.Dons
+namespace Kili.Models.Vente
 {
     public class ServiceBoutique
     {

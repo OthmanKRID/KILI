@@ -3,7 +3,7 @@ using Kili.Models.GestionAdhesion;
 using System;
 using System.Collections.Generic;
 
-namespace Kili.Models.General
+namespace Kili.Models.GestionAdhesion
 {
     public class ServiceAdhesion
     {

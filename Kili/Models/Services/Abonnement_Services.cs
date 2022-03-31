@@ -1,4 +1,5 @@
 ﻿using Kili.Models.General;
+using Kili.Models.GestionAdhesion;
 using Kili.Models.Services;
 using System;
 using Microsoft.AspNetCore.Mvc;
@@ -10,8 +11,9 @@ using static Kili.Models.General.UserAccount;
 using Microsoft.AspNetCore.Http;
 using System.Data.Entity;
 using Kili.Models.Dons;
+using Kili.Models.Vente;
 
-namespace Kili.Models
+namespace Kili.Models.Services
 {
     public class Abonnement_Services
     {

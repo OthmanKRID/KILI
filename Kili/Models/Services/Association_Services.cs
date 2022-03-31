@@ -9,7 +9,7 @@ using Kili.Models.Services;
 
 using static Kili.Models.General.UserAccount;
 
-namespace Kili.Models
+namespace Kili.Models.Services
 {
     public class Association_Services
     {

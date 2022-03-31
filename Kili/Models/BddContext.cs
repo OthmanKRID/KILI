@@ -115,8 +115,8 @@ namespace Kili.Models
             donServices.CreerDon(2000, TypeRecurrence.Unique, 1, 2);
             donServices.CreerDon(200, TypeRecurrence.Mensuel, 2, 2);
 
-            userAccountServices.ModifierUserAccount(1, "M.", "Admin", "Kili@mail.com", TypeRole.Admin, 1, 1, "/images/UserAccount/logo.png");
-            userAccountServices.ModifierUserAccount(3, "Romy", "Kombet", "Romy@gmail.com", TypeRole.Utilisateur, 3, 2, "/images/UserAccount/logo.png") ;
+//            userAccountServices.ModifierUserAccount(1, "M.", "Admin", "Kili@mail.com", TypeRole.Admin, 1, 1, "/images/UserAccount/logo.png");
+//           userAccountServices.ModifierUserAccount(3, "Romy", "Kombet", "Romy@gmail.com", TypeRole.Utilisateur, 3, 2, "/images/UserAccount/logo.png") ;
             
 
             //Vente en ligne
