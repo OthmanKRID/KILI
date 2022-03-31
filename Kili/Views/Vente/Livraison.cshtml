@@ -1,0 +1,101 @@
+﻿@model Kili.ViewModels.LivraisonViewModel;
+@using Kili.Models.Vente
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Livraison";
+}
+@section css {
+<link rel="stylesheet" href="~/css/paiement.css">
+}
+
+<section id="home" classedata-stellar-background-ratio="0.5">
+
+    <div class="row">
+        <div class="col-75">
+            <div class="container">
+
+                <div class="Liste-panier">
+                    <div class="col-xl-12 col-lg-12 col-md-10 col-sm-12 col-md-12">
+
+                        <H3 style="text-align:center"> Choix de livraison</H3>
+
+
+                        <!-- Titre du tableau----------------------------------------------------------------------->
+                        <li class="list-group-item align-items-center drag-handle">
+                            <span class="drag-indicator"></span>
+                            <div class="col-xl-8">
+                                <div class="col-md-2 col-md-8">Designation</div>
+                                <div class="col-md-2 col-md-8">Description</div>
+                                <div class="col-md-2 col-md-8">Frais de livraison</div>
+                                <div class="col-md-2 col-md-8">Devise</div>
+                                <div>choix</div>
+                            </div>
+
+                        </li>
+                        <!-- Premiere ligne colissimo ---------------------------------------------------->
+                        @foreach (var livraison in Model.Livraisons)
+                        {
+                            <li class="list-group-item align-items-center drag-handle clearfix">
+                                <span class="drag-indicator"></span>
+                                <div class="col-xl-8">
+                                    <div class="col-md-2 col-md-8">@livraison.LivraisonName</div>
+                                    <div class="col-md-2 col-md-8">@livraison.LivraisonDescription</div>
+                                    <div class="col-md-2 col-md-8">@livraison.LivraisonPrice</div>
+                                    <div class="col-md-2 col-md-8">@livraison.LivraisonDevise</div>
+                                    <div>@Html.RadioButton("Choisir", @livraison.LivraisonID, false, new { @label="Choix" })</div>
+                                </div>
+                            </li>
+                        }
+                        <!--  ligne espassement --------------------------------------------->
+                        <li class="list-group-item align-items-center drag-handle">
+                            <span class="drag-indicator"></span>
+                        </li>
+
+                        <!-- Adresse de livraison --------------------------------------------->
+                        <H3 style="text-align:center"> Adresse de livraison</H3>
+
+                        <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.Useraccount.Nom)"><i class="fa fa-user"></i> Nom</label>
+                        @Html.TextBoxFor(m => Model.CoordonneesAcheteur.Useraccount.Nom, "text", new { @id="", @name="lastname", @placeholder="Nom"})
+                        @*<label for="lname"><i class="fa fa-user"></i> Nom</label>
+                        <input type="text" id="lname" name="lastname" placeholder="Gaudel">*@
+                        
+
+                        <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.Useraccount.Prenom)"><i class="fa fa-user"></i> Prenom</label>
+                        @Html.TextBoxFor(m => Model.CoordonneesAcheteur.Useraccount.Prenom,"text", new{@id="", @name="firstname", @placeholder="Prenom"})
+                        @*<input type="text" id="fname" name="firtname" placeholder="Vincent">*@
+
+                        <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.Useraccount.Telephone)">><i class="fa fa-user"></i> Telephone</label>
+                        @Html.TextBoxFor(m => Model.CoordonneesAcheteur.Useraccount.Telephone, "text", new{@id="", @name = "phone", @placeholder  = "Telephone"})
+                        <div class="row">
+                            <div class="col-50">
+                                <label for="state"><i class="fa fa-institution"></i>voie</label>
+                                <input type="text" id="num" name="num" placeholder="25">
+                            </div>
+                            <div class="col-50">
+                                <label for="adr"><i class="fa fa-institution"></i>Adresse</label>
+                                <input type="text" id="adr" name="adr" placeholder="Rue de la république">
+                            </div>
+                        </div>
+                        <label for="city"><i class="fa fa-institution"></i> Ville</label>
+                        <input type="text" id="city" name="city" placeholder="Paris">
+
+                        <div class="row">
+                            <div class="col-50">
+                                <label for="state">Département</label>
+                                <input type="text" id="state" name="state" placeholder="ile de France">
+                            </div>
+                            <div class="col-50">
+                                <label for="zip">Code Postal</label>
+                                <input type="text" id="zip" name="zip" placeholder="75000">
+                            </div>
+                        </div>
+                    </div>
+                    @Html.ActionLink("Paiement", "Paiement", null, null, new { @class="button" })
+                    <a href="#" class="button">Retour</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

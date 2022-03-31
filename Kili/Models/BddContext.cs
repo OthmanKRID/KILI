@@ -129,7 +129,7 @@ namespace Kili.Models
                Description = "Piment rouge en provenance de Madagascar, pour donner goût à vos plats.",
                PrixUnitaire = 5,
                Devise = "EUR",
-               ImagePath = "pilipili.jpg",
+               ImagePath = "/images/pilipili.jpg",
                CatalogueID = 01,
            },
 
@@ -141,7 +141,7 @@ namespace Kili.Models
                Description = "Sac fabriqué à partir de la peau de crocodile du Burkina Faso.",
                PrixUnitaire = 50,
                Devise = "EUR",
-               ImagePath = "saccroco.jpg",
+               ImagePath = "/images/saccroco.jpg",
                CatalogueID = 02,
            }
             );
@@ -160,7 +160,7 @@ namespace Kili.Models
                      LivraisonID = 002,
                      LivraisonName = "Livraison à domicile - Chronopost",
                      LivraisonDescription = "Livré avant 13h le jour suivant si vous commandez avant 11h30 du lundi au vendredi",
-                     LivraisonPrice = 9.99,
+                     LivraisonPrice = 0,
                      LivraisonDevise = "EUR",
                  },
                  new Livraison

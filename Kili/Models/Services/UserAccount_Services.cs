@@ -74,7 +74,7 @@ namespace Kili.Models
         }
 
 
-        public void ModifierUserAccount(int id, string prenom, string nom, string email, TypeRole role, int? AssociationId, int? donateurID)
+        public void ModifierUserAccount(int id, string prenom, string nom, string telephone, string email, TypeRole role, int? AssociationId, int? donateurID)
         {
             UserAccount userAccount = _bddContext.UserAccounts.Find(id);
 
@@ -82,6 +82,7 @@ namespace Kili.Models
             {
                 userAccount.Prenom = prenom;
                 userAccount.Nom = nom;
+                userAccount.Telephone = telephone;
                 userAccount.Mail = email;
                 userAccount.Role = role;
                 userAccount.AssociationId = AssociationId;

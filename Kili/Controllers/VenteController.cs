@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.IO;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Kili.Models.General;
+using Kili.ViewModels;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Kili.Controllers
 {
@@ -17,13 +20,24 @@ namespace Kili.Controllers
         private CatalogueServices _CatalogueServices;
         private ProduitServices _ProduitServices;
         private PanierServices _PanierServices;
+        private CommandeServices _CommandeServices;
+        private LivraisonServices _LivraisonServices;
+        private CoordonneesAcheteur _CoordonneesAcheteur;
         private BddContext _bddContext;
-        public VenteController()
+        private IWebHostEnvironment _WebEnv
+;
+
+
+        public VenteController(IWebHostEnvironment webEv)
         {
             _CatalogueServices = new CatalogueServices();
             _ProduitServices = new ProduitServices();
             _PanierServices = new PanierServices();
+            _CommandeServices = new CommandeServices();
+            _LivraisonServices = new LivraisonServices();
+            _CoordonneesAcheteur = new CoordonneesAcheteur();
             _bddContext = new BddContext();
+            _WebEnv = webEv;
         }
 
         //FONCTIONS POUR LES CATALOGUES
@@ -58,12 +72,12 @@ namespace Kili.Controllers
 
         public IActionResult ModifierCatalogue(int? id)
         {
-           // int testint = (int) id;
+            // int testint = (int) id;
             if (id.HasValue)
             {
                 CatalogueServices catservice = new CatalogueServices();
-                Catalogue cata = catservice.ObtenirAllCatalogues().FirstOrDefault(c=> c.CatalogueID == id.Value);
-                if(cata == null)
+                Catalogue cata = catservice.ObtenirAllCatalogues().FirstOrDefault(c => c.CatalogueID == id.Value);
+                if (cata == null)
                     return NotFound();
                 return View(cata);
             }
@@ -73,7 +87,7 @@ namespace Kili.Controllers
 
         [HttpPost]
 
-        public IActionResult ModifierCatalogue (Catalogue catalogue)
+        public IActionResult ModifierCatalogue(Catalogue catalogue)
         {
             if (!ModelState.IsValid)
                 return View(catalogue);
@@ -85,7 +99,7 @@ namespace Kili.Controllers
 
         public IActionResult SupprimerCatalogue(int id)
         {
-            
+
             CatalogueServices catservice = new CatalogueServices();
             catservice.SupprimerCatalogue(id);
             return RedirectToAction("IndexCatalogue");
@@ -104,7 +118,7 @@ namespace Kili.Controllers
         }
         public IActionResult CreerProduit()
         {
-            
+
             CatalogueServices catservice = new CatalogueServices();
             List<Catalogue> catalogues = catservice.ObtenirAllCatalogues();
             ViewBag.Catalogue = new SelectList(catalogues, "CatalogueID", "CatalogueName"); ;
@@ -116,12 +130,34 @@ namespace Kili.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
-            ProduitServices produit_Services = new ProduitServices();
+
+            if (produit.Image.Length > 0)
             {
-                produit_Services.CreerProduit(produit.Designation, produit.Format, produit.ImagePath, produit.Description, produit.PrixUnitaire, produit.Devise, produit.CatalogueID);
+                string uploads = Path.Combine(_WebEnv.WebRootPath, "images");
+                uploads = Path.Combine(uploads, "Produit");
+                string filePath = Path.Combine(uploads, produit.Image.FileName);
+
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    produit.Image.CopyTo(stream);
+
+                }
+
+                produit.ImagePath = "/images/Produit/" + produit.Image.FileName;
+
+
+                ProduitServices produit_Services = new ProduitServices();
+
+                produit_Services.CreerProduit(produit.Designation, produit.Format, produit.Description, produit.ImagePath, produit.PrixUnitaire, produit.Devise, produit.CatalogueID);
                 return RedirectToAction("IndexProduit");
+
             }
+            return View(produit);
         }
+
+
+
+
 
         //GET Vue produit à modifier
         public IActionResult ModifierProduit(int? id)
@@ -244,7 +280,90 @@ namespace Kili.Controllers
 
         //GET Afficher le choix de livraisons possibles
 
-        public IActionResult IndexLivraison()
+        public IActionResult Livraison()
+        {
+            LivraisonServices livservice = new LivraisonServices();
+            List<Livraison> livraisons = livservice.ObtenirAllLivraisons();
+            CommandeServices commandeServices = new CommandeServices();
+            commandeServices.CreerCommande(this.getSessionCart());
+            LivraisonViewModel livraisonViewModel = new LivraisonViewModel();
+            CoordonneesAcheteur coordonneesAcheteur = new CoordonneesAcheteur();
+            livraisonViewModel.CoordonneesAcheteur = new CoordonneesAcheteur();
+            livraisonViewModel.Livraisons = livraisons;
+            return View(livraisonViewModel);
+        }
+
+        //Fonctions pour la commande
+
+        //Afficher les options de livraisons possibles
+        public IActionResult IndexCommande()
+        {
+            Livraison livraison = new Livraison();
+            CoordonneesAcheteur coordonneesAcheteur = new CoordonneesAcheteur();
+
+            CommandeViewModel cvm = new CommandeViewModel
+            {
+                Livraison = livraison
+            };
+            return View(cvm);
+
+        }
+
+        // Afficher le formulaire à remplir par l'acheteur pour commander
+        public IActionResult CoordonneesAcheteur()
+        {
+
+            return View();
+        }
+
+        //POST pour remplissage coordonnées de l'acheteur
+
+        [HttpPost]
+        public IActionResult CoordonneesAcheteur(CommandeViewModel viewModel)
+        {
+            //if (!ModelState.IsValid) { 
+            UserAccount_Services userAccount_Services = new UserAccount_Services();
+
+            CommandeServices commandeServices = new CommandeServices();
+            {
+                int id = commandeServices.CreerCoordonnees(viewModel.coordonneesAcheteur.Useraccount, viewModel.coordonneesAcheteur.AdresseLivraison,
+                    viewModel.coordonneesAcheteur.AdresseFacturation);
+                UserAccount ua = userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
+                userAccount_Services.ModifierUserAccount(ua.Id, ua.Prenom, ua.Nom,ua.Telephone, ua.Mail, ua.Role, ua.AssociationId, id);
+
+                return Redirect("/Vente/Livraison");
+            }
+        }
+
+        public IActionResult Paiement()
+        {
+            return View(this.getSessionCart());
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Telecharger(IFormFile fichier)
+        {
+            if (fichier.Length > 0)
+            {
+                var filePath = Path.GetTempFileName();
+
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    await fichier.CopyToAsync(stream);
+
+                }
+            }
+
+            return Ok();
+        }
+
+        public IActionResult Telecharger()
+        {
+            return View();
+        }
+
+        private Panier getSessionCart()
         {
             var panierID = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "panierID");
             Panier panier;
@@ -256,17 +375,10 @@ namespace Kili.Controllers
             {
                 panier = new Panier() { Articles = new List<Article>() };
             }
-            LivraisonServices livservice = new LivraisonServices();
-            List<Livraison> livraisons = livservice.ObtenirAllLivraisons();
-            CommandeServices commandeServices = new CommandeServices();
-            commandeServices.CreerCommande(panier);
-            return View(livraisons);
+            return panier;
         }
-
-        //Fonctions pour la commande
-
-       
-
 
     }
 }
+
+
