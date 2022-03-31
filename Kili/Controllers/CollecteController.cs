@@ -103,17 +103,16 @@ namespace Kili.Controllers
 
             UserAccount_Services UserAccount_Services = new UserAccount_Services();
 
-            CollecteDonViewModel collecteDonViewModel = new CollecteDonViewModel();
+            CollecteDonViewModel collecteDonViewModel = new CollecteDonViewModel() { listecollecte = new List<Collecte>(), listedon = new List<Don>(), montantglobalcollectes=0};
 
             DonServices donServices = new DonServices();
 
-            int montanttotalcollecté = 0;
 
             foreach (Collecte collecte in UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association.Abonnement.serviceDon.Collectes)
                 {
                         collecteDonViewModel.listecollecte.Add(collecte);
 
-                montanttotalcollecté += collecte.MontantCollecte;
+                collecteDonViewModel.montantglobalcollectes += collecte.MontantCollecte;
 
                 foreach (Don don in collecte.Dons) {
 
