@@ -11,7 +11,7 @@ using System.Security.Cryptography;
 using System.Text;
 using static Kili.Models.General.UserAccount;
 
-namespace Kili.Models
+namespace Kili.Models.Services
 {
     public class UserAccount_Services
     {
@@ -62,19 +62,30 @@ namespace Kili.Models
         public int CreerUserAccount(string prenom, string nom, string password, string email, TypeRole role)
         {
             string motDePasse = EncodeMD5(password);
-            UserAccount userAccount = new UserAccount() { Prenom = prenom, Nom = nom, Password = motDePasse, Mail = email, DateCreation = System.DateTime.Today, Actif = true, Role = role};
+            UserAccount userAccount = new UserAccount() { Prenom = prenom, Nom = nom, Password = motDePasse, Mail = email, DateCreation = System.DateTime.Today, Actif = true, Role = role, ImagePath = "/images/UserAccount/logo.png" };
             _bddContext.UserAccounts.Add(userAccount);
             _bddContext.SaveChanges();
             return userAccount.Id;
         }
 
+
+        public int CreerUtilisateur(string prenom, string nom, string password, string email)
+        {
+            return CreerUserAccount(prenom, nom, password, email, TypeRole.Utilisateur);
+        }
+
         public int CreerAdmin(string prenom, string nom, string password, string email)
         {
-            return CreerUserAccount(prenom, nom, password, email, TypeRole.Admin);      
+            return CreerUserAccount(prenom, nom, password, email, TypeRole.Admin);
+        }
+
+        public int CreerUserAccountAssociation(string prenom, string nom, string password, string email)
+        {
+            return CreerUserAccount(prenom, nom, password, email, TypeRole.Association);      
         }
 
 
-        public void ModifierUserAccount(int id, string prenom, string nom, string email, TypeRole role, int? AssociationId, int? donateurID)
+        public void ModifierUserAccount(int id, string prenom, string nom, string email, TypeRole role, int? AssociationId, int? donateurID, string ImagePath)
         {
             UserAccount userAccount = _bddContext.UserAccounts.Find(id);
 
@@ -86,6 +97,7 @@ namespace Kili.Models
                 userAccount.Role = role;
                 userAccount.AssociationId = AssociationId;
                 userAccount.DonateurId = donateurID;
+                userAccount.ImagePath = ImagePath;
                 _bddContext.SaveChanges();
             }
         }

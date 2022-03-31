@@ -127,7 +127,7 @@ namespace Kili.Models.Services
             {
                 UserAccount compte = _bddContext.UserAccounts.Where(v => v.DonateurId == donateur.Id).FirstOrDefault();
                 _bddContext.Donateurs.Remove(donateur);
-                UserAccount_Services.ModifierUserAccount(compte.Id, compte.Prenom, compte.Nom, compte.Mail, compte.Role, compte.AssociationId, null);
+                UserAccount_Services.ModifierUserAccount(compte.Id, compte.Prenom, compte.Nom, compte.Mail, compte.Role, compte.AssociationId, null, compte.ImagePath);
                 _bddContext.SaveChanges();
             }
         }

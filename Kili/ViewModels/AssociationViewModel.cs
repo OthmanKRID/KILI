@@ -14,7 +14,7 @@ namespace Kili.ViewModels
         public List<Association> Associations { get; set; }
         public Association association { get; set; }
 
-       // public HttpPostedFileBase file;
+        public UserAccount compteConnecte { get; set; }
 
         public bool Authentifie { get; set; }
 

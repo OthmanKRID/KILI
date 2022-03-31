@@ -1,0 +1,82 @@
+﻿
+@model Kili.Models.General.PanierService;
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Panier";
+}
+
+
+
+
+<body>
+    
+    <!-- intro boutique -->
+    <section data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+
+        <div class="container">
+            <div class="Liste-panier">
+                <div class="col-xl-12 col-lg-12 col-md-10 col-sm-12 col-md-12">
+                    <section class="card">
+                        <H3 style="text-align:center"> Panier</H3>
+                        <!------------------------------------------- Ligne du premier article-->
+                        <ul class="list-group-item align-items-center">
+                            <li class="list-group-item align-items-center drag-handle">
+                                <span class="drag-indicator"></span>
+                                <div class="col-sm-10">
+                                    <div class="col-md-2 col-md-10">IdService</div>
+                                    <div class="col-md-2 col-md-10">Produit</div>
+                                    <div class="col-md-2 col-md-10">Durée</div>
+                                    <div class="col-md-2 col-md-10">Quantité</div>
+                                    <div class="col-md-2 col-md-10">Prix</div>
+                                    <div class="col-md-2 col-md-10">Sous-Total</div>
+                                </div>
+                            </li>
+                        </ul>
+                         @foreach (var item in Model.Items)
+                         {
+                        <!------------------------------------------- Ligne du deuxieme article-->
+                        <ul class="list-group-item align-items-center drag-handle">
+                            <li class="list-group-item align-items-center drag-handle ">
+                                <span class="drag-indicator"></span>
+                                <div class="col-sm-10">
+                                    <div class="col-md-2 col-md-10">@item.Service.Id</div>
+                                    <div class="col-md-2 col-md-10">@item.Service.TypeService</div>
+                                    <div class="col-md-2 col-md-10">@item.Service.duree_mois</div>
+                                    <div class="col-md-2 col-md-10">@item.Quantity</div>
+                                    <div class="col-md-2 col-md-10">@item.Service.prix</div>
+                                    <div class="col-md-2 col-md-10">@(item.Service.prix * item.Quantity)</div>
+                                </div>
+                                <button type="button" class="button">@Html.ActionLink("Supprimer", "SupprimerServiceDansPanier", "Abonnement", new { id = @item.Id })</button>
+                            </li>
+                        </ul>
+                         }
+
+                       
+
+                        <!-------------------------------------------- ligne validation-------------->
+
+                        <ul class="list-group-item align-items-center drag-handle">
+                            <li class="list-group-item align-items-center drag-handle ">
+                                <span class="drag-indicator"></span>
+                             
+                                <button button type="button" class="button">@Html.ActionLink("Supprimer la commande", "SupprimerPanier", "Abonnement")</button>
+                                <button button type="button" class="button">@Html.ActionLink("Continuer mes achats", "GererServices", "Association")</button>
+
+                            </li>
+                        </ul>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+
+
+    </script>
+
+</body>
+
+</html>

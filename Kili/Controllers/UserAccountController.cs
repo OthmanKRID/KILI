@@ -1,10 +1,13 @@
 ﻿using Kili.Models;
 using Kili.Models.General;
+using Kili.Models.Services;
 using Kili.ViewModels;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -13,49 +16,97 @@ namespace Kili.Controllers
 {
     public class UserAccountController : Controller
     {
-        
-       public IActionResult CreerUserAccount()
+        private IWebHostEnvironment _webEnv;
+
+        public UserAccountController(IWebHostEnvironment environment)
         {
-            
+            _webEnv = environment;
+        }
+
+        public IActionResult CreerUtilisateur()
+        {
+
             return View();
         }
 
         [HttpPost]
-        public IActionResult CreerUserAccount(UserAccountViewModel viewModel)
+        public IActionResult CreerUtilisateur(UserAccountViewModel viewModel)
         {
             //if (!ModelState.IsValid) { 
-                
+
 
             UserAccount_Services userAccount_Services = new UserAccount_Services();
             UserAccount verifUsername = userAccount_Services.ObtenirUserAccounts().Where(r => r.Mail == viewModel.UserAccount.Mail).FirstOrDefault();
             {
 
-                if (verifUsername == null){ 
+                if (verifUsername == null)
+                {
 
-                int id = userAccount_Services.CreerUserAccount(viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Password, viewModel.UserAccount.Mail, viewModel.UserAccount.Role);
+                    //int id = userAccount_Services.CreerUserAccount(viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Password, viewModel.UserAccount.Mail, viewModel.UserAccount.Role);
+                    int id = userAccount_Services.CreerUtilisateur(viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Password, viewModel.UserAccount.Mail);
 
-                
-                 var userClaims = new List<Claim>()
+                    var userClaims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.Name, id.ToString()),
                         new Claim(ClaimTypes.Role, TypeRole.Utilisateur.ToString()),
                     };
 
-                var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
+                    var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
 
-                var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
+                    var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
 
-                HttpContext.SignInAsync(userPrincipal);
+                    HttpContext.SignInAsync(userPrincipal);
 
                     return Redirect("/home/index");
-                    
 
                 }
                 return View(new UserAccountViewModel() { Message = "Email déjà enregistré sur le site" });
             }
-            // } return View();
+
         }
-        
+
+        /*
+                public IActionResult CreerUserAccount()
+                {
+
+                    return View();
+                }
+
+                [HttpPost]
+                public IActionResult CreerUserAccount(UserAccountViewModel viewModel)
+                {
+                    //if (!ModelState.IsValid) { 
+
+
+                    UserAccount_Services userAccount_Services = new UserAccount_Services();
+                    UserAccount verifUsername = userAccount_Services.ObtenirUserAccounts().Where(r => r.Mail == viewModel.UserAccount.Mail).FirstOrDefault();
+                    {
+
+                        if (verifUsername == null){ 
+
+                        int id = userAccount_Services.CreerUserAccount(viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Password, viewModel.UserAccount.Mail, viewModel.UserAccount.Role);
+
+
+                         var userClaims = new List<Claim>()
+                            {
+                                new Claim(ClaimTypes.Name, id.ToString()),
+                                new Claim(ClaimTypes.Role, TypeRole.Utilisateur.ToString()),
+                            };
+
+                        var ClaimIdentity = new ClaimsIdentity(userClaims, "User Identity");
+
+                        var userPrincipal = new ClaimsPrincipal(new[] { ClaimIdentity });
+
+                        HttpContext.SignInAsync(userPrincipal);
+
+                            return Redirect("/home/index");
+
+                        }
+                        return View(new UserAccountViewModel() { Message = "Email déjà enregistré sur le site" });
+                    }
+
+                }
+          */
         public IActionResult ModifierUserAccount(int id)
         {
             if (id != 0)
@@ -78,15 +129,28 @@ namespace Kili.Controllers
         [HttpPost]
         public IActionResult ModifierUserAccount(UserAccountViewModel viewModel)
         {
-
             if (viewModel.UserAccount.Id != 0)
             {
-                UserAccount_Services userAccount_Services = new UserAccount_Services();
+                if (viewModel.UserAccount.Image != null)
                 {
-                    userAccount_Services.ModifierUserAccount(viewModel.UserAccount.Id, viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Mail, viewModel.UserAccount.Role, viewModel.UserAccount.AssociationId, viewModel.UserAccount.DonateurId);
-                    
-                    return RedirectToAction("ModifierUserAccount", new { @id = viewModel.UserAccount.Id });                 
+                    if (viewModel.UserAccount.Image.Length > 0)
+                    {
+                        string uploads = Path.Combine(_webEnv.WebRootPath, "images");
+                        uploads = Path.Combine(uploads, "UserAccount");
+                        string filePath = Path.Combine(uploads, viewModel.UserAccount.Image.FileName);
+
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            viewModel.UserAccount.Image.CopyTo(stream);
+
+                        }
+                    }
+                    viewModel.UserAccount.ImagePath = "/images/UserAccount/" + viewModel.UserAccount.Image.FileName;
                 }
+
+                UserAccount_Services userAccount_Services = new UserAccount_Services();
+                userAccount_Services.ModifierUserAccount(viewModel.UserAccount.Id, viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Mail, viewModel.UserAccount.Role, viewModel.UserAccount.AssociationId, viewModel.UserAccount.DonateurId, viewModel.UserAccount.ImagePath);
+                return RedirectToAction("ModifierUserAccount", new { @id = viewModel.UserAccount.Id });                 
             }
             else
             {

@@ -20,6 +20,7 @@
         <th>Prix</th>
         <th></th>
         </tr>
+
         @foreach(var service in Model.listesServicesProposes)
         {
         
@@ -28,19 +29,21 @@
             @Html.HiddenFor(a => a.ServiceDon)
 
 
-            @if ((Model.abonnement.serviceAdhesion.IsActive == false && @service.TypeService == TypeService.Adhesion ) || (Model.abonnement.serviceDon.IsActive == false && @service.TypeService == TypeService.Don) || (Model.abonnement.serviceBoutique.IsActive == false && @service.TypeService == TypeService.Boutique))
+            @if ((Model.abonnement.serviceAdhesion.EstActif == false && @service.TypeService == TypeService.Adhesion ) || (Model.abonnement.serviceDon.EstActif == false && @service.TypeService == TypeService.Don) || (Model.abonnement.serviceBoutique.EstActif == false && @service.TypeService == TypeService.Boutique))
 
             {
             <tr>
                 <th>@service.TypeService</th>
                 <th>@service.duree_mois mois</th>
                 <th>@service.prix €</th>
-                <th>@Html.ActionLink("Ajouter au panier", "AjouterService", "Abonnement", new { id = @service.Id})</th>
+                <th>@Html.ActionLink("Ajouter au panier", "AjouterService", "Abonnement",  new { id = @service.Id })</th>
             </tr>         
             }
         }
         </table>   
-         <input type="submit" value="Ajouter" /> <br />
+         <button button type="button" class="button">@Html.ActionLink("Accéder au panier", "PanierServices", "Abonnement")</button>
+         
+         
     <br />
 
 

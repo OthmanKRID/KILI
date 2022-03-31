@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Kili.Models.Services;
 using Kili.Models.General;
 using System.Collections.Generic;
+using Kili.ViewModels;
 
 namespace Kili.Controllers
 {
@@ -54,15 +55,22 @@ namespace Kili.Controllers
                     PanierService_Services.AddItem(cartId, new Item { ServiceId = id, Quantity = 1 });
                 }
             }
-            return View("../Association/PanierService", ObtenirPanierService());
+            //return View("../Association/GererServices", new ServicesViewModel());
+            //return RedirectToAction("PanierServices");
+            return RedirectToAction("GererServices", "Association");
         }
 
+        public IActionResult PanierServices()
+        {
+            return View(ObtenirPanierService());
+        }
 
         public IActionResult SupprimerServiceDansPanier(int id)
         {
             var panierId = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "cartId");
             new PanierService_Services().RemoveItem(panierId, id);
-            return View("../Association/PanierService", ObtenirPanierService());
+            return RedirectToAction("PanierServices");
+           // return View("../Abonnement/PanierServices", ObtenirPanierService());
         }
 
         private void CreerPanier()
@@ -76,6 +84,13 @@ namespace Kili.Controllers
                 cartId = PanierService_Services.CreateCart();
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cartId", cartId);
             }
+        }
+
+        public IActionResult SupprimerPanier()
+        {
+            var panierId = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "cartId");
+            new PanierService_Services().DeleteCart(panierId);
+            return RedirectToAction("GererServices", "Association");
         }
 
 
