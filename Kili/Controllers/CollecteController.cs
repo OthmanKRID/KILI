@@ -154,7 +154,7 @@ namespace Kili.Controllers
                 {
                     donServices.ModifierCollecte(collecte.Id, collecte.Nom, collecte.MontantCollecte, collecte.Descriptif, collecte.Date);
 
-                    return RedirectToAction("AfficherCollectes");
+                    return RedirectToAction("AfficherCollectesDonsCompteConnecte");
                 }
             }
             else

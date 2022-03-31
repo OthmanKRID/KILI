@@ -1,50 +1,297 @@
-﻿@model Kili.ViewModels.CollecteDonViewModel
-
-    @{
+﻿
+@model Kili.ViewModels.CollecteDonViewModel;
+@{
     Layout = "_Layout";
-    ViewBag.Title = "Visualisez vos information sur les collectes";
+    ViewBag.Title = "Collect";
 }
+<body>
+    <section id="container">
+        <!--barre NAV start-->
+        <header class="header fixed-top clearfix">
+            <div class="brand">
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="">
+                </a>
+            </div>
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                <ul class="nav top-menu">
+                    <!-- notification dropdown start-->
+                    <li id="header_notification_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                          <!--  <i class="fa fa-bell-o"></i>-->
+                            <span class="badge bg-warning">3</span>
+                        </a>
+                        <ul class="dropdown-menu extended notification">
+                            <li>
+                                <p>Notifications</p>
+                            </li>
+                            <li>
+                                <div class="alert alert-info clearfix">
+                                    <span class="alert-icon"><i class="fa fa-bolt"></i></span>
+                                    <div class="noti-info">
+                                        <a href="#"> Notifs #1 </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="alert alert-danger clearfix">
+                                    <span class="alert-icon"><i class="fa fa-bolt"></i></span>
+                                    <div class="noti-info">
+                                        <a href="#"> Notifs #2</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="alert alert-success clearfix">
+                                    <span class="alert-icon"><i class="fa fa-bolt"></i></span>
+                                    <div class="noti-info">
+                                        <a href="#"> Notifs #3</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- notification dropdown end -->
+                </ul>
+            </div>
+            <!--  notification end -->
 
-<div><b>Montant total collecté : @Model.montantglobalcollectes</b><br /></div>  
 
- <div><b>Liste des collectes</b><br /></div>  
-    <table class="table table-bordered table-responsive table-hover">  
-    <tr>
-        <th>Nom</th>
-        <th>Montant</th>  
-        <th>Date</th>  
-        <th>Recurrence</th>   
-    </tr>  
-    @foreach (var v in Model.listecollecte)  
-    {  
-        <tr>
-            <td>@v.Nom</td>  
-            <td>@v.MontantCollecte</td>  
-            <td>@v.Descriptif</td>
-            <td>@Html.ActionLink("Supprimer", "SupprimerCollecte", "Collecte", new { id = @v.Id })</td>
-            <td>@Html.ActionLink("Modifier", "ModifierCollecte", "Collecte", new { id = @v.Id })</td>
-        </tr>  
-    }  
-</table> 
+            <!--search & user info start-->
+            <div class="top-nav clearfix">
+                <ul class="nav pull-right top-menu">
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" src="images/avatar1_small.jpg">
+                            <span class="username">Mon compte</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            
+                            <li><a href="#"><i class=" fa fa-suitcase"></i>Ma boutique</a></li>  
+                            <li><a href="#"><i class=" fa fa-suitcase"></i>Mes collectes</a></li>  
+                            <li><a href="#"><i class=" fa fa-suitcase"></i>Mes adhésions</a></li> 
+                            <li><a href="#"><i class="fa fa-cog"></i> Mon profil</a></li>                         
+                            <li><a href="login.html"><i class="fa fa-key"></i> Se deconnecter</a></li>
+                            
+                        </ul>
+                    </li>
+                    <!-- user login dropdown end -->
+                </ul>
+                <!--search & user info end-->
+            </div>
+        </header>
+        <!--barre NAV end-->
+        <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">
+                <!--description asso-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <section class="panel">
+                            <div class="panel-body profile-information">
+                                <div class="col-md-3">
+                                    <div class="profile-pic text-center">
+                                        <img src="images/logo-asso.png" alt="" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="profile-desk">
+                                        <h1>Nom Association </h1>
+                                        <span class="text-muted">Thématique</span>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porttitor
+                                            vestibulum imperdiet. Ut auctor accumsan erat, a vulputate metus tristique
+                                            non. Aliquam aliquam vel orci quis sagittis.
+                                        </p>
+                                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModalCréa">Créer une collecte</a> <!--Création de la collect-->
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="profile-statistics">
+                                        <h1>@Model.montantglobalcollectes €</h1>
+                                        <p>Collectes des dons</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--Liste collecte start-->
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Liste des collectes
+                            </header>
+                            <div class="panel-body">
+                                <ul class="to-do-list" id="sortable-todo">
+                                    @foreach (var v in Model.listecollecte)  
+                                        {
+                                    <li class="clearfix">
+                                        <span class="drag-marker">
+                                            <i></i>
+                                        </span>
+                                        <div class="todo-check pull-left">
+                                            <input type="checkbox" value="None" id="todo-check1" />
+                                            <label for="todo-check1"></label>
+                                        </div>     
+                                        <p class="todo-title">
+                                           @v.Nom                       Montant collecté : @v.MontantCollecte      
+                                        </p>
+                                        <div class="todo-actionlist pull-right clearfix">
+                                            <a href="#" class="todo-done"><i class="fa fa-check"></i></a>
+                                            
+                                            <a href=@("/collecte/modifiercollecte/" + v.Id) class="todo-edit"><i class="ico-pencil" data-toggle="modal" data-target="#myModal"></i></a> 
+                                            <a href=@("/collecte/supprimercollecte/" + v.Id) class="todo-remove"><i class="ico-close"></i></a>
+                                        </div>
+                                    </li>}
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+    <!------------------------------------------------------------------ (POPUP) Modal  pour la création de la collect ---------------------------------------------------------->
+                 <div class="modal fade" id="myModalCréa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Créer collecte</h4>
+                            </div>
+                            <div class="modal-body row">
+                                
+                                @using (Html.BeginForm("CreerCollecte","Collecte"))
 
-     <div><b>Liste des dons</b><br /></div>  
-    <table class="table table-bordered table-responsive table-hover">  
-    <tr>
-        <th>Montant</th>  
-        <th>Date</th>  
-        <th>Recurrence</th>   
-    </tr>  
-    @foreach (var v in Model.listedon)  
-    {  
-        <tr>
-            <td>@v.Montant</td>  
-            <td>@v.Date</td>  
-            <td>@v.Recurrence</td>
-            <td>@Html.ActionLink("Supprimer", "SupprimerCollecte", "Collecte", new { id = @v.Id })</td>
-            <td>@Html.ActionLink("Modifier", "ModifierCollecte", "Collecte", new { id = @v.Id })</td>
-        </tr>  
-    }  
+                               @*<form action="/action_page.php">*@
+                                <div class="col-md-5 img-modal">
+                                    <img src="images/gallery/image1.jpg" alt="">
+                                    <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i>Insérer l'image</a>
+                                </div>
+                                {
+                                     <fieldset>
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                        <label> Nom</label>
+                                        @Html.TextBoxFor(m => Model.collecte.Nom, new {@id="name", @value="nom", @class="form-control"}) 
+                                    </div>
+                                    @*<div class="form-group">
+                                        <label> Montant</label>
+                                        <input id="title" value="Montant" class="form-control">
+                                    </div>*@
+                                    <div class="form-group">
+                                        <label> Description</label>
+                                        @Html.TextAreaFor(m => Model.collecte.Descriptif, new {@rows="2", @placeholder= "description", @class="form-control"})
+                                        @*<textarea rows="2" placeholder= "description" class="form-control"></textarea>*@
+                                    </div>
+                                    @*<div class="form-group">
+                                        
+                                            <input type="date" id="Date" name="Date" placeholder="Date de fin">
+                                   @*</form>*@
+                                                                        
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="AfficherCollectesDonsCompteConnecte"><button class="btn btn-danger" type="button">Annuler</button></a>
+                                        <input type="submit" class="btn btn-primary" value="enregistrer"/>
+                                        @*<button class="btn btn-primary" type="button">Enregistrer</button>*@
+                                    </div>
+                                    </fieldset>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--------------------------------------------------------------------- fin de modal création de la collect -------------------------------------------------------------->
+        <!------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!---------------------------------------------------------------------(POPUP) Modal  pour la modification --------------------------------------------------------------->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">Modifier collect</h4>
+                                    </div>
+                                    <div class="modal-body row">
+                                        <div class="col-md-5 img-modal">
+                                            <img src="images/gallery/image1.jpg" alt="">
+                                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Modifier l'image</a>
+                                        </div>
+                                         @using (Html.BeginForm("ModifierCollecte","Collecte"))
+                                        {
+                                     <fieldset>
+                                        <div class="col-md-7">                                       
+                                            <div class="form-group">
+                                                <label> Nom</label>
+                                                @Html.TextBoxFor(m => Model.collecte.Nom, new {@id="name", @value="nom", @class="form-control"}) 
+                                            </div>
+                                            <div class="form-group">
+                                                <label> Description</label>
+                                                @Html.TextAreaFor(m => Model.collecte.Descriptif, new {@rows="2", @placeholder= "description", @class="form-control"})
+                                            </div>
+                                            @*<div class="form-group">
+                                                <form action="/action_page.php">
+                                                    <input type="date" id="Date" name="Date" placeholder="Date de fin">
+                                                </form>
+                                            </div>*@
+                                            
+                                        
+                                            <div class="pull-right">
+                                                <button class="btn btn-danger" type="button">Supprimer la collecte</button>
+                                            <input type="submit" class="btn btn-primary" value="enregistrer"/>
+                                            @*<button class="btn btn-primary" type="button">Enregistrer</button>*@
+                                            </div>
+                                            </fieldset>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<!------------------------------------------------------------ fin de modal modification ------------------------------------------------------------------------>
 
+                </section>
+            </div>
+        </div>
+                </div>
+                <!--liste de don start-->
+                <header class="panel-heading">
+                    Liste des dons 
+                </header>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <section class="panel">
+                            <div class="panel-body">
+                                
+                                <table class="table  table-hover general-table">
+                                    <thead>
+                                        <tr>
+                                            <th> Nom de la collecte</th>
+                                            <th class="hidden-phone"> Montant</th>
+                                            <th>Récurrence</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach (var v in Model.listedon)  
+                                        {
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="#">@v.Collecte.Nom</a></td>
+                                            <td class="hidden-phone">@v.Montant</td>
+                                            <td>@v.Recurrence </td>
+                                        </tr>
+                                    </tbody>
+                                    }
+                                </table>
+                            </div>
+                            <!--liste de don end-->
+                        </section>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!--main content end-->
+    </section>
+</body>
 
-     <!-- id = 1 à changer pour l'Id de la collecte sélecionnée dans le tableau-->
-</table> 
