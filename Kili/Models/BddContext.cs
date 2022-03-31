@@ -44,7 +44,7 @@ namespace Kili.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=Kili");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=RRRRR;database=Kili");
         }
 
         public void InitializeDb()
@@ -97,8 +97,8 @@ namespace Kili.Models
             donServices.CreerDon(2000, TypeRecurrence.Unique, 1, 2);
             donServices.CreerDon(200, TypeRecurrence.Mensuel, 2, 2);
 
-            userAccountServices.ModifierUserAccount(1, "M.", "Admin", "Kili@mail.com", TypeRole.Admin, 1, 1, "/images/UserAccount/logo.png");
-            userAccountServices.ModifierUserAccount(3, "Romy", "Kombet", "Romy@gmail.com", TypeRole.Utilisateur, 3, 2, "/images/UserAccount/logo.png") ;
+            userAccountServices.ModifierUserAccount(1, "M.", "Admin", "Kili@mail.com", "0000000011", TypeRole.Admin, 1, 1, "/images/UserAccount/logo.png");
+            userAccountServices.ModifierUserAccount(3, "Romy", "Kombet", "Romy@gmail.com", "0000000002", TypeRole.Utilisateur, 3, 2, "/images/UserAccount/logo.png") ;
             
 
             //Vente en ligne
@@ -130,7 +130,7 @@ namespace Kili.Models
                Description = "Piment rouge en provenance de Madagascar, pour donner goût à vos plats.",
                PrixUnitaire = 5,
                Devise = "EUR",
-               ImagePath = "pilipili.jpg",
+               ImagePath = "/images/pilipili.jpg",
                CatalogueID = 01,
            },
 
@@ -142,7 +142,7 @@ namespace Kili.Models
                Description = "Sac fabriqué à partir de la peau de crocodile du Burkina Faso.",
                PrixUnitaire = 50,
                Devise = "EUR",
-               ImagePath = "saccroco.jpg",
+               ImagePath = "/images/saccroco.jpg",
                CatalogueID = 02,
            }
             );
@@ -161,7 +161,7 @@ namespace Kili.Models
                      LivraisonID = 002,
                      LivraisonName = "Livraison à domicile - Chronopost",
                      LivraisonDescription = "Livré avant 13h le jour suivant si vous commandez avant 11h30 du lundi au vendredi",
-                     LivraisonPrice = 9.99,
+                     LivraisonPrice = 0,
                      LivraisonDevise = "EUR",
                  },
                  new Livraison

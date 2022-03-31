@@ -107,7 +107,7 @@ namespace Kili.Models
             _bddContext.Associations.Add(Association);
             _bddContext.SaveChanges();
             compte.AssociationId = Association.Id;
-            _UserAccount_Services.ModifierUserAccount(compte.Id, compte.Prenom, compte.Nom, compte.Mail, TypeRole.Association, compte.AssociationId, compte.DonateurId, compte.ImagePath);
+            _UserAccount_Services.ModifierUserAccount(compte.Id, compte.Prenom, compte.Nom, compte.Telephone, compte.Mail, TypeRole.Association, compte.AssociationId, compte.DonateurId, compte.ImagePath);
             return Association.Id;
         }
 
@@ -158,7 +158,7 @@ namespace Kili.Models
             if (Association != null)
             {
                 _bddContext.Associations.Remove(Association);
-                _UserAccount_Services.ModifierUserAccount(compteAssocie.Id, compteAssocie.Prenom, compteAssocie.Nom, compteAssocie.Mail, compteAssocie.Role, null, compteAssocie.DonateurId, compteAssocie.ImagePath);
+                _UserAccount_Services.ModifierUserAccount(compteAssocie.Id, compteAssocie.Prenom, compteAssocie.Nom,compteAssocie.Telephone, compteAssocie.Mail, compteAssocie.Role, null, compteAssocie.DonateurId, compteAssocie.ImagePath);
                 _bddContext.SaveChanges();              
             }
         }

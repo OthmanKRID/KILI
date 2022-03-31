@@ -1,4 +1,4 @@
-﻿@model List<Kili.Models.Vente.Livraison>
+﻿@model Kili.ViewModels.LivraisonViewModel;
 @using Kili.Models.Vente
 @{
     Layout = null;
@@ -11,9 +11,10 @@
     <title>Index</title>
 </head>
 <body>
-
+ @using (Html.BeginForm("CoordonneesAcheteur","Vente"))
+  {
     <h3>Choix de ma livraison</h3>
-    <table cellpadding="2" cellspacing="2" border="1">
+    <table cellpadding="2" cellspacing="2" border="1" >
         <tr>
             <th>Id</th>
             <th>Désignation</th>
@@ -23,7 +24,7 @@
             <th>Choix de livraison</th>
         </tr>
 
-        @foreach (var livraison in Model)
+        @foreach (var livraison in Model.Livraisons)
         {
            <tr>
             <td>@livraison.LivraisonID</td>
@@ -31,9 +32,76 @@
             <td>@livraison.LivraisonDescription</td>
             <td>@livraison.LivraisonPrice</td>
             <td>@livraison.LivraisonDevise</td>
-            <td>@Html.ActionLink("Choisir", "Choisir", "Vente", new{id = @livraison.LivraisonID})</td>
-        </tr>
+            <td>@Html.RadioButton("Choisir", @livraison.LivraisonID)</td>
+           </tr>
         }
     </table>
+
+    <p>
+        Compléter vos coordonnées avec les champs ci-dessous :
+    </p>
+        <fieldset>
+            <legend>Remplissez les champs correspondants </legend><br />
+            
+                     <p>Adresse de livraison</p>
+            <br /><br />
+            @Html.LabelFor(m => Model.CoordonneesAcheteur.Useraccount.Nom)
+            @Html.TextBoxFor(m => Model.CoordonneesAcheteur.Useraccount.Nom)
+            <br /><br />
+            @Html.LabelFor(m => Model.CoordonneesAcheteur.Useraccount.Prenom)
+            @Html.TextBoxFor(m => Model.CoordonneesAcheteur.Useraccount.Prenom)
+            <br /><br />
+            @Html.LabelFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Numero)
+            @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Numero)
+            <br /><br />
+            @Html.LabelFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Voie)
+            @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Voie)
+            <br /><br />
+            @Html.LabelFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Complement)
+            @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Complement)
+            <br /><br />
+            @Html.LabelFor(m => Model.CoordonneesAcheteur.AdresseLivraison.CodePostal)
+            @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseLivraison.CodePostal)
+            <br /><br />
+            @Html.LabelFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Ville)
+            @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Ville)
+            <br /><br />
+            
+                            @*<p>Adresse de facturation</p>
+            <br /><br />
+            @Html.LabelFor(m => Model.CoordonneesAcheteur.Useraccount.Nom)
+            @Html.TextBoxFor(m => Model.CoordonneesAcheteur.Useraccount.Nom)
+            <br /><br />
+            @Html.LabelFor(m => Model.CoordonneesAcheteur.Useraccount.Prenom)
+            @Html.TextBoxFor(m => Model.CoordonneesAcheteur.Useraccount.Prenom)
+            <br /><br />
+            @Html.LabelFor(m => Model.CoordonneesAcheteur.AdresseFacturation.Numero)
+            @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseFacturation.Numero)
+            <br /><br />
+            @Html.LabelFor(m => Model.CoordonneesAcheteur.AdresseFacturation.Voie)
+            @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseFacturation.Voie)
+            <br /><br />
+            @Html.LabelFor(m => Model.CoordonneesAcheteur.AdresseFacturation.Complement)
+            @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseFacturation.Complement)
+            <br /><br />
+            @Html.LabelFor(m => Model.CoordonneesAcheteur.AdresseFacturation.CodePostal)
+            @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseFacturation.CodePostal)
+            <br /><br />
+            @Html.LabelFor(m => Model.CoordonneesAcheteur.AdresseFacturation.Ville)
+            @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseFacturation.Ville)
+            <br /><br />
+            @Html.LabelFor(m => Model.CoordonneesAcheteur.Telephone)
+            @Html.TextBoxFor(m => Model.CoordonneesAcheteur.Telephone)
+            <br /><br />
+            @Html.HiddenFor(m => Model.CoordonneesAcheteur.CoordonneesAcheteurID)*@
+
+            <input type="submit" value = "Passer au Paiement"/>
+        </fieldset>
+        <br /><br />
+
+         @Html.ActionLink("Valider Commande", "IndexPaiement")
+
+
+    }
     </body>
 </html>

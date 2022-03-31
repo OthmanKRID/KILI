@@ -2,14 +2,9 @@
     @using Kili.Models.General;
     @using Kili.Models.Services;
 }
->>>>>>> insertion_vues
 
 <!DOCTYPE html>
 <html lang="fr">
-
-
-
-
 <head>
 
      <title>Kili</title>
@@ -47,6 +42,7 @@
     <!-- Custom styles for this template -->
     <link href="~/css/style.css" rel="stylesheet">
     <link href="~/css/style-responsive.css" rel="stylesheet" />
+    @RenderSection("css", false);
 
       <!-- boutique CSS Bootstrap -->
 
@@ -164,7 +160,7 @@
 -->
 
      <!-- intro boutique -->
-     <div>@RenderBody()</div>
+     @RenderBody()
          
          
      <!-- FOOTER -->

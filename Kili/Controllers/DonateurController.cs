@@ -27,7 +27,7 @@ namespace Kili.Controllers
             {
                 int id = donServices.CreerDonateur(viewModel.Donateur.AdresseFacuration, viewModel.Donateur.Telephone);
                 UserAccount ua =  userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
-                userAccount_Services.ModifierUserAccount(ua.Id, ua.Prenom, ua.Nom, ua.Mail, ua.Role, ua.AssociationId, id, ua.ImagePath);
+                userAccount_Services.ModifierUserAccount(ua.Id, ua.Prenom,  ua.Nom, ua.Telephone, ua.Mail, ua.Role, ua.AssociationId, id, ua.ImagePath);
 
                 return Redirect("/collecte/AfficherCollectes");
             }

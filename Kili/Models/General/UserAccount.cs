@@ -14,6 +14,8 @@ namespace Kili.Models.General
         [MaxLength(25)]
         public string Nom { get; set; }
 
+        public string Telephone { get; set; }
+
         [MaxLength(50)]
         [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$", ErrorMessage = "Votre mot de passe doit avoir au moins 8 caractères dont une lettre en majuscule, un nombre et un caractère spécial")]
         public string Password { get; set; }
@@ -34,7 +36,7 @@ namespace Kili.Models.General
         public int? AssociationId { get; set; }
         public virtual Association Association { get; set; }
 
-        public string Telephone { get; set; }
+       // public string Telephone { get; set; }
 
         public string ImagePath { get; set; }
 
