@@ -65,6 +65,7 @@ namespace Kili.Controllers
             viewModel.Authentifie = HttpContext.User.Identity.IsAuthenticated;
 
             return View("../Home/Index", new IndexViewModel() { Authentifie = HttpContext.User.Identity.IsAuthenticated , Associations = new Association_Services().Obtenir3DernièresAssociations() });
+
         }
 
         public ActionResult Deconnexion()

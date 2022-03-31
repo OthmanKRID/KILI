@@ -12,7 +12,9 @@
     <None Include="Views\Collecte\AfficherCollectes.cshtml" />
     <None Include="Views\Collecte\CreerCollecte.cshtml" />
     <None Include="Views\Collecte\ModifierCollecte.cshtml" />
-    <None Include="Views\Paiement\CreerPaiement.cshtml" />
+    <None Include="Views\Paiement\CreerPaiement1.cshtml" />
+    <None Include="wwwroot\images\back.svg" />
+    <None Include="wwwroot\images\test.svg" />
   </ItemGroup>
 
 	<ItemGroup>

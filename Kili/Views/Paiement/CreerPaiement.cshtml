@@ -1,53 +1,98 @@
-﻿@model Kili.ViewModels.PaiementViewModel
-
+﻿
+@model Kili.ViewModels.PaiementViewModel
 @{
     Layout = "_Layout";
-    ViewBag.Title = "Réalisez votre paiement";
+    ViewBag.Title = "Paiement";
 }
+<
+    <body>
+        <section id="home" classedata-stellar-background-ratio="0.5">
+          
+          <div class="row">
+               <div class="col-75">
+                 <div class="container">
 
- @using (Html.BeginForm())
-    {
-        
-        <fieldset>
-            <legend>Réalisez votre paiement </legend><br />
-            @Html.LabelFor(m => Model.Paiement.Montant)
-            @Html.TextBoxFor(m => Model.Paiement.Montant, new { @readonly = true })
-            <br /><br />
-            <br /><br />
-            @Html.LabelFor(m => Model.MoyenPaiement.Identifiant)
-            @Html.TextBoxFor(m => Model.MoyenPaiement.Identifiant)
-            <br /><br />
-            <br /><br />
-            @Html.LabelFor(m => Model.MoyenPaiement.NomTitulaire)
-            @Html.TextBoxFor(m => Model.MoyenPaiement.NomTitulaire)
-            <br /><br />
-            @Html.LabelFor(m => Model.MoyenPaiement.Numero)
-            @Html.TextBoxFor(m => Model.MoyenPaiement.Numero)
-            @Html.ValidationMessageFor(m => Model.MoyenPaiement.Numero)
-            <br /><br />
-            @Html.LabelFor(m => Model.MoyenPaiement.Cryptogramme)
-            @Html.TextBoxFor(m => Model.MoyenPaiement.Cryptogramme)
-            @Html.ValidationMessageFor(m => Model.MoyenPaiement.Cryptogramme)
-            <br /><br />
-            @Html.LabelFor(m => Model.MoyenPaiement.DateExpiration)
-            @Html.TextBoxFor(m => Model.MoyenPaiement.DateExpiration)
-            @Html.ValidationMessageFor(m => Model.MoyenPaiement.DateExpiration)
-            <br /><br />
-            @Html.HiddenFor(m=>Model.Action)
+               @using (Html.BeginForm())  {
+                          
+                    <fieldset action="/action_page.php" >
+                   
+                       <div class="col-50">
+                         <h3>Paiement</h3>
+                         <label for="fname">Paiement par carte</label>
+                         <div class="icon-container">
+                           <i class="fa fa-cc-visa" style="color:navy;"></i>
+                           <i class="fa fa-cc-amex" style="color:blue;"></i>
+                           <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                           <i class="fa fa-cc-discover" style="color:orange;"></i>
+               
+                         </div>
+
+
+                         
+                         <label for="cname">Titulaire de la carte</label>
+                         @Html.TextBoxFor(m => Model.MoyenPaiement.NomTitulaire , new { @type="text", @id="cname", @name="cardname", @placeholder="Vincent Gaudel", @readonly = "true" })
+                         <label for="ccnum">Numéro de carte</label>
+                         @Html.TextBoxFor(m => Model.MoyenPaiement.Numero, new { @type="text", @id="ccnum", @name="cardnumber", @placeholder="1111-2222-3333-4444" })
+                         @Html.ValidationMessageFor(m => Model.MoyenPaiement.Numero)
+                         <label for="expmonth">Date d'expiration</label>
+                         @Html.TextBoxFor(m => Model.MoyenPaiement.DateExpiration, new { @type="text", @id="expmonth", @name="expmonth", @placeholder="04/22" })
+                        @Html.ValidationMessageFor(m => Model.MoyenPaiement.DateExpiration)
+                         <div class="row">
+                           <div class="col-50">
+                           </div>
+                           <div class="col-50">
+                             <label for="cvv">CVV</label>
+                          @Html.TextBoxFor(m => Model.MoyenPaiement.Cryptogramme, new { @type="text", @id="cvv", @name="cvv", @placeholder="352" })
+                          @Html.ValidationMessageFor(m => Model.MoyenPaiement.Cryptogramme)
+                         </div>
+                         </div>
+                       </div>
+                       <div class="col-50">
+                       <label for="fname">Paiement par Paypal</label>
+                         <div class="icon-container">
+                           <i class="fa fa-cc-paypal" style="color:rgb(0, 60, 255);"></i>
+                         </div>
+                         <label for="cname">Paypal</label>
+                         @Html.TextBoxFor(m => Model.MoyenPaiement.Identifiant, new { @type="text", @id="paypal", @name="paypal", @placeholder="Compte Paypal" })                       
+                    </div>
+                         @Html.HiddenFor(m=>Model.Action)
             @Html.HiddenFor(m=>Model.ActionID)
             @Html.HiddenFor(m=>Model.Paiement.Id)
             @Html.HiddenFor(m=>Model.Paiement.DatePaiement)
             @Html.HiddenFor(m=>Model.Paiement.AssociationId)
             @Html.HiddenFor(m=>Model.Paiement.MoyenPaiementId)
-            
+            </fieldset>
+            }
 
-            <br /><br />
-            <input type="submit" value="Réaliser le paiement" />
-        </fieldset>
+                     </div>
+                     <label>
+                       <input type="checkbox" checked="checked" name="sameadr"> Adresse de livraison même que l'adresse de facturation
+                     </label>
+                     <input type="submit" value="Valider le Paiement" class="btn"/>
+                                           
+              
+               </div>
+               </div>
+             
+               <div class="col-25">
+                 <div>
+                   <h4>Panier
+                     <span class="price" style="color:black">
+                       <i class="fa fa-shopping-cart"></i>
+                       <b>4</b>
+                     </span>
+                   </h4>
+                   <p><a href="#">Product 1</a> <span class="price">15€</span></p>
+                   <p><a href="#">Product 2</a> <span class="price">5€</span></p>
+                   <p><a href="#">Product 3</a> <span class="price">8€</span></p>
+                   <p><a href="#">Product 4</a> <span class="price">2€</span></p>
+                   <hr>
+                   <p>Total <span class="price" style="color:black"><b>30€</b></span></p>
+                 </div>
+               </div>
+             </div>
+          </div>
+     </section>
 
-        }
 
-
-    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    </body>

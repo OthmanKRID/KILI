@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Kili.Models.General;
+using static Kili.ViewModels.PaiementViewModel;
 
 namespace Kili.Controllers
 {
@@ -58,12 +59,12 @@ namespace Kili.Controllers
 
         public IActionResult ModifierCatalogue(int? id)
         {
-           // int testint = (int) id;
+            // int testint = (int) id;
             if (id.HasValue)
             {
                 CatalogueServices catservice = new CatalogueServices();
-                Catalogue cata = catservice.ObtenirAllCatalogues().FirstOrDefault(c=> c.CatalogueID == id.Value);
-                if(cata == null)
+                Catalogue cata = catservice.ObtenirAllCatalogues().FirstOrDefault(c => c.CatalogueID == id.Value);
+                if (cata == null)
                     return NotFound();
                 return View(cata);
             }
@@ -73,7 +74,7 @@ namespace Kili.Controllers
 
         [HttpPost]
 
-        public IActionResult ModifierCatalogue (Catalogue catalogue)
+        public IActionResult ModifierCatalogue(Catalogue catalogue)
         {
             if (!ModelState.IsValid)
                 return View(catalogue);
@@ -85,7 +86,7 @@ namespace Kili.Controllers
 
         public IActionResult SupprimerCatalogue(int id)
         {
-            
+
             CatalogueServices catservice = new CatalogueServices();
             catservice.SupprimerCatalogue(id);
             return RedirectToAction("IndexCatalogue");
@@ -104,7 +105,7 @@ namespace Kili.Controllers
         }
         public IActionResult CreerProduit()
         {
-            
+
             CatalogueServices catservice = new CatalogueServices();
             List<Catalogue> catalogues = catservice.ObtenirAllCatalogues();
             ViewBag.Catalogue = new SelectList(catalogues, "CatalogueID", "CatalogueName"); ;
@@ -171,6 +172,15 @@ namespace Kili.Controllers
             var bdd = new BddContext();
             return View(bdd.Produits.ToList());
         }
+
+        public IActionResult IndexBoutiqueAsso()
+        {
+            var bdd = new BddContext();
+          
+
+            return View(bdd.Produits.ToList());
+        }
+
         //Afficher panier
         public IActionResult IndexPanier()
         {
@@ -258,14 +268,41 @@ namespace Kili.Controllers
             }
             LivraisonServices livservice = new LivraisonServices();
             List<Livraison> livraisons = livservice.ObtenirAllLivraisons();
-            CommandeServices commandeServices = new CommandeServices();
-            commandeServices.CreerCommande(panier);
+            
             return View(livraisons);
         }
 
+        [HttpPost]
+        public IActionResult IndexLivraison(List<Livraison> livraisons)
+        {
+            var panierID = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "panierID");
+            Panier panier;
+            if (panierID != 0)
+            {
+                panier = new PanierServices().ObtenirPanier(panierID);
+            }
+            else
+            {
+                panier = new Panier() { Articles = new List<Article>() };
+            }
+
+            CommandeServices commandeServices = new CommandeServices();
+            int id = commandeServices.CreerCommande(panier);
+
+            commandeServices.CreerCommande(panier);
+            
+            return RedirectToAction("creerpaiement", "paiement", new { actionID = id, montant = 1000 , typeaction = TypeAction.Commande });
+
+        }
+
+ 
+
+            
+
+
         //Fonctions pour la commande
 
-       
+
 
 
     }

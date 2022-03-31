@@ -11,6 +11,8 @@ namespace Kili.Controllers
     public class PaiementController : Controller
     {
 
+
+
         public IActionResult CreerPaiementServices(double montant)
         {
             UserAccountViewModel viewModel = new UserAccountViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
@@ -25,9 +27,12 @@ namespace Kili.Controllers
 
         //Méthode pour créer un paiement à partir d'une vue d'un type d'action (don, achat...).
         public IActionResult CreerPaiement(int actionID, double montant, TypeAction typeAction)
+
         {                   
             UserAccountViewModel viewModel = new UserAccountViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
             PaiementViewModel paiementviewModel = new PaiementViewModel() { ActionID = actionID, Paiement = new Paiement() { Montant = montant }, Action = typeAction };
+           
+            // Verification que le compte est authentifié
             if (viewModel.Authentifie)
             {
                 return View(paiementviewModel);
@@ -36,16 +41,21 @@ namespace Kili.Controllers
             return Redirect("/login/authentification");
         }
 
-        
+        [ActionName("CreerPaiement")]
         [HttpPost]
-        public IActionResult CreerPaiement(PaiementViewModel viewModel)
+        public IActionResult CreerPaiementPost(PaiementViewModel viewModel)
         {
             //if (!ModelState.IsValid) { 
 
             UserAccount_Services UserAccount_Services = new UserAccount_Services();
             PaiementServices paiementServices= new PaiementServices();
+
+            viewModel.Paiement.DatePaiement = System.DateTime.Today;                       
+
             {
                 int id;
+
+                // Verifie que le champ "identifiant du formulaire est null". Si c'est la cas, cela indique que l'utilisateur a rempli les données cartes bancaire
                 if (viewModel.MoyenPaiement.Identifiant == null){
 
 
@@ -53,6 +63,7 @@ namespace Kili.Controllers
                     id = paiementServices.CreerPaiement(viewModel.Paiement.Montant, idCarte);
                     viewModel.MoyenPaiement.moyenPaiement = MoyenPaiement.TypeMoyenPaiement.CarteBancaire;
                 }
+                //Autrement il a rempli les données paypal
                 else
                 {
                     int idPaypal = paiementServices.CreerMoyenPaiement(viewModel.MoyenPaiement.Identifiant);
@@ -60,6 +71,7 @@ namespace Kili.Controllers
                     viewModel.MoyenPaiement.moyenPaiement = MoyenPaiement.TypeMoyenPaiement.Paypal;
                 }
                 
+                // Verifie le type d'action donné par la fonction qui a appelé le paiement (commande, cotisation ou don) et en fonction créé un paiement et l'associe à l'association bénéficiaire
                 if (viewModel.Action == TypeAction.Commande)
                 {
 
@@ -89,7 +101,7 @@ namespace Kili.Controllers
             // } return View();
         }
 
-
+        // Appel de la fonction attestation
         public IActionResult CreerAttestation(PaiementViewModel viewModel)
         {
 
@@ -103,96 +115,6 @@ namespace Kili.Controllers
 
             return Redirect("/login/authentification");
         }
-
-        /*
-        public IActionResult AfficherDon(int id)
-        {
-            if (id != 0)
-            {
-                DonServices donServices = new DonServices();
-                {
-                    Don don = donServices.ObtenirDon(id);
-                    if (don == null)
-                    {
-                        return View("Error");
-                    }
-                    return View(new DonViewModel() { Don = don });
-                }
-
-            }
-            return View("Error");
-        }
-
-        public IActionResult AfficherDons()
-        {
-            DonServices donServices = new DonServices();
-            {
-                List<Don> listdon = donServices.ObtenirDons();
-
-                return View(listdon);
-            }
-        }
-
-        public IActionResult ModifierDon(int id)
-        {
-            if (id != 0)
-            {
-                DonServices donServices = new DonServices();
-                {
-                    Don don = donServices.ObtenirDons().Where(r => r.Id == id).FirstOrDefault();
-
-                    if (don == null)
-                    {
-                        return View("Error");
-                    }
-                    return View(new DonViewModel() { Don = don });
-                }
-
-            }
-            return View("Error");
-        }
-
-        [HttpPost]
-        public IActionResult ModifierDon(DonViewModel viewModel)
-        {
-
-            if (viewModel.Don.Id != 0)
-            {
-                DonServices donServices = new DonServices();
-                {
-                    donServices.ModifierDon(viewModel.Don.Id, viewModel.Don.Montant, viewModel.Don.Recurrence);
-
-                    return RedirectToAction("ModifierDon", new { @id = viewModel.Don.Id });
-                }
-            }
-            else
-            {
-                return View("Error");
-            }
-        }
-
-
-
-        public IActionResult SupprimerDon(int id)
-        {
-            if (id != 0)
-            {
-                DonServices donServices = new DonServices();
-                {
-                    Don don = donServices.ObtenirDons().Where(r => r.Id == id).FirstOrDefault();
-                    if (don == null)
-                    {
-                        return View("Error");
-                    }
-                    donServices.SupprimerDon(id);
-                    return Redirect("/home/index");
-                }
-
-            }
-            return View("Error");
-        }
-
-        */
 
 
     }

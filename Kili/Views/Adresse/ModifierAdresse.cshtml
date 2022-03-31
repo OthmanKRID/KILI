@@ -1,0 +1,34 @@
+﻿@model Kili.Models.General.Adresse
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Modifiez votre adresse";
+}
+
+    <p>
+        Compléter vos coordonnées avec les champs ci-dessous :
+    </p>
+
+@using (Html.BeginForm())
+    {
+        <fieldset>
+            <legend>Remplissez les champs correspondants </legend><br />
+            @Html.LabelFor(m => Model.Numero)
+            @Html.TextBoxFor(m => Model.Numero)
+            <br /><br />
+            @Html.LabelFor(m => Model.Voie)
+            @Html.TextBoxFor(m => Model.Voie)
+            <br /><br />
+            @Html.LabelFor(m => Model.Complement)
+            @Html.TextBoxFor(m => Model.Complement)
+            <br /><br />
+            @Html.LabelFor(m => Model.CodePostal)
+            @Html.TextBoxFor(m => Model.CodePostal)
+            <br /><br />
+            @Html.LabelFor(m => Model.Ville)
+            @Html.TextBoxFor(m => Model.Ville)
+            <br /><br />
+            <input type="submit" value="Ajouter" />
+            @Html.HiddenFor(m => Model.Id)
+        </fieldset>
+    }

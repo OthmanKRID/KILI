@@ -2,6 +2,7 @@
 using Kili.Models.Dons;
 using Kili.Models.General;
 using Kili.Models.Services;
+using Kili.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -9,6 +10,8 @@ namespace Kili.Controllers
 {
     public class CollecteController : Controller
     {
+
+        // Création d'une collecte (à mettre depuis la page association)
         public IActionResult CreerCollecte()
         {
             return View();
@@ -22,16 +25,14 @@ namespace Kili.Controllers
 
             DonServices donServices = new DonServices();
             {
-                int id = donServices.CreerCollecte(collecte.Nom, collecte.MontantCollecte, collecte.Descriptif, collecte.ServiceDonId); // , collecte.Date
-
-                //Modifier la fonction pour faire le lien avec ServiceDon à partir de UserAccount
-                //userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association.Paiement.ServiceDon.Id;
+                int id = donServices.CreerCollecte(collecte.Nom, collecte.MontantCollecte, collecte.Descriptif, userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association.Abonnement.ServiceDonId); // , collecte.Date
 
                return Redirect("/home/index"); 
             }
             // } return View();
         }
 
+        // Affiche une collecte à partir de son id
         public IActionResult AfficherCollecte(int id)
         {
             if (id != 0)
@@ -50,6 +51,7 @@ namespace Kili.Controllers
             return View("Error");
         }
 
+        // Affiche la liste des collectes de la BDD
         public IActionResult AfficherCollectes()
         {
             DonServices donServices = new DonServices();
@@ -60,8 +62,25 @@ namespace Kili.Controllers
             }
         }
 
+        // Affiche la liste des collecte d'une association à partir de son Id
+        public IActionResult AfficherCollectesAssociation(int id)
+        {
+
+            UserAccount_Services UserAccount_Services = new UserAccount_Services();
+            List<Collecte> listcollecteAsso = new List<Collecte>();
+            {
+
+                foreach (Collecte collecte in UserAccount_Services.ObtenirUserAccount(id).Association.Abonnement.serviceDon.Collectes)
+                {
+                    listcollecteAsso.Add(collecte);
+                }
+
+                return View(listcollecteAsso);
+            }
+        }
+
         // Liste de collecte visible par le compte utilisateur 
-        
+
         public IActionResult AfficherCollectesCompteConnecte()
         {
             
@@ -78,6 +97,34 @@ namespace Kili.Controllers
             }
         }
 
+        // Liste de collectes et de dons visibles par le compte utilisateur
+        public IActionResult AfficherCollectesDonsCompteConnecte()
+        {
+
+            UserAccount_Services UserAccount_Services = new UserAccount_Services();
+
+            CollecteDonViewModel collecteDonViewModel = new CollecteDonViewModel() { listecollecte = new List<Collecte>(), listedon = new List<Don>(), montantglobalcollectes=0};
+
+            DonServices donServices = new DonServices();
+
+
+            foreach (Collecte collecte in UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association.Abonnement.serviceDon.Collectes)
+                {
+                        collecteDonViewModel.listecollecte.Add(collecte);
+
+                collecteDonViewModel.montantglobalcollectes += collecte.MontantCollecte;
+
+                foreach (Don don in collecte.Dons) {
+
+                    collecteDonViewModel.listedon.Add(don);                    
+                }
+                }
+
+            return View(collecteDonViewModel);
+            
+        }
+
+        // Modifie une collecte à partir de son Id
         public IActionResult ModifierCollecte(int id)
         {
             if (id != 0)
@@ -107,7 +154,7 @@ namespace Kili.Controllers
                 {
                     donServices.ModifierCollecte(collecte.Id, collecte.Nom, collecte.MontantCollecte, collecte.Descriptif, collecte.Date);
 
-                    return RedirectToAction("AfficherCollectes");
+                    return RedirectToAction("AfficherCollectesDonsCompteConnecte");
                 }
             }
             else
@@ -116,6 +163,7 @@ namespace Kili.Controllers
             }
         }
 
+        // Supprime une collecte à partir de son Id
         public IActionResult SupprimerCollecte(int id)
         {
             if (id != 0)

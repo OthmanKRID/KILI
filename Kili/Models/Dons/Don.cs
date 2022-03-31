@@ -28,7 +28,6 @@ namespace Kili.Models.Dons
     {
         Unique,
         Mensuel,
-        Trimestriel,
         Annuel
     }
 

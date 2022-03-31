@@ -29,6 +29,9 @@ namespace Kili.Models.GestionAdhesion
             }
         }
 
+        public virtual ICollection<Adherent> adherents { get; set; }
+
+        public virtual ICollection<Adhesion> adhesions { get; set; }
     }
 }
 

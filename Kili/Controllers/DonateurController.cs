@@ -25,9 +25,9 @@ namespace Kili.Controllers
             
             DonServices donServices = new DonServices();
             {
-                int id = donServices.CreerDonateur(viewModel.Donateur.AdresseFacuration, viewModel.Donateur.Telephone);
+                int id = donServices.CreerDonateur(viewModel.Donateur.AdresseID);
                 UserAccount ua =  userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
-                userAccount_Services.ModifierUserAccount(ua.Id, ua.Prenom, ua.Nom, ua.Mail, ua.Role, ua.AssociationId, id, ua.ImagePath);
+                userAccount_Services.ModifierUserAccount(ua.Id, ua.Prenom, ua.Nom, ua.Mail, ua.Telephone, ua.Role, ua.AssociationId, id, ua.AdresseId, ua.ImagePath);
 
                 return Redirect("/collecte/AfficherCollectes");
             }
@@ -90,7 +90,7 @@ namespace Kili.Controllers
             {
                 DonServices donServices = new DonServices();
                 {
-                    donServices.ModifierDonateur(viewModel.Donateur.Id, viewModel.Donateur.AdresseFacuration, viewModel.Donateur.Telephone);
+                    donServices.ModifierDonateur(viewModel.Donateur.Id, viewModel.Adresse.Id);
 
                     return RedirectToAction("ModifierDonateur", new { @id = viewModel.Donateur.Id });
                 }

@@ -25,6 +25,7 @@ namespace Kili.Models.General
 
         [EmailAddress(ErrorMessage = "L'adresse email saisie n'est pas valide")]
         public string Mail { get; set; }
+        public string Telephone { get; set; }
         public string URLPhoto { get; set; }
 
         public TypeRole Role { get; set; }
@@ -34,12 +35,16 @@ namespace Kili.Models.General
         public int? AssociationId { get; set; }
         public virtual Association Association { get; set; }
 
-        public string Telephone { get; set; }
+
+        public int? AdresseId { get; set; }
+        public virtual Adresse Adresse { get; set; }
+
 
         public string ImagePath { get; set; }
 
         [NotMapped]
         public IFormFile Image { get; set; }
+
 
 
     }

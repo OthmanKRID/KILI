@@ -9,10 +9,10 @@ namespace Kili.Models.GestionAdhesion
 
         public uint NumeroAdherent { get; set; }
 
-        public Adresse Adresse { get; set; }
-        public string Telephone { get; set; }
-
         public bool Actif { get; set; }
+
+        public int? AdresseID { get; set; }
+        public virtual Adresse Adresse { get; set; }
 
         public virtual ICollection<Cotisation> Cotisation { get; set; }
     }

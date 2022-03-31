@@ -17,17 +17,36 @@ namespace Kili.Controllers
     public class DonController : Controller 
     {
 
+        // Fonction permettant de creer un don à partir dun id de collecte.
+
         public IActionResult CreerDon(int idCollecte)
         {
             UserAccount_Services UserAccount_Services = new UserAccount_Services();
 
             UserAccountViewModel viewModel = new UserAccountViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
             DonViewModel donviewModel = new DonViewModel { IdCollecte = idCollecte, Authentifie = HttpContext.User.Identity.IsAuthenticated };
+
+            // valide si l'utilisateur est authentifié
             if (viewModel.Authentifie)
             {
-                if (UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).DonateurId == null)
+                //Regarde si l'utilisateur n'a pas d'adresse enregistrée et alors le redirige vers la création d'une adresse
+                if (UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).AdresseId == null)
                 {
-                    return Redirect("/donateur/creerdonateur");
+                    return Redirect("/adresse/creeradresse");
+                }
+
+                DonServices donservices = new DonServices();
+
+                //Regarde si l'utilisateur n'est pas enregistré comme donateur et alors crée un donateur en y associant l'Id de l'adresse
+                if (UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).DonateurId == null) { 
+                    
+                donservices.CreerDonateur(UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).AdresseId);
+                }
+
+                //Si l'utilisateur est déjà donateur, alors on modifie celui-ci en y associant l'adresse
+                else
+                {
+                    donservices.ModifierDonateur((int)UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).DonateurId, UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).AdresseId);
                 }
 
                 return View(donviewModel);
@@ -49,9 +68,11 @@ namespace Kili.Controllers
                 return RedirectToAction("creerpaiement", "paiement", new { actionID = id, montant = viewModel.Don.Montant, typeaction = TypeAction.Don });
             }
             // } return View();
+
+
         }
 
-
+        // Affiche un don à partir d'un id
         public IActionResult AfficherDon(int id)
         {
             if (id != 0)
@@ -70,6 +91,8 @@ namespace Kili.Controllers
             return View("Error");
         }
 
+
+        // Affiche l'ensemble des dons de la bdd. 
         public IActionResult AfficherDons()
         {
             DonServices donServices = new DonServices();
@@ -80,6 +103,7 @@ namespace Kili.Controllers
                 }
         }
 
+        // Modifie un don à partir de son Id. 
         public IActionResult ModifierDon(int id)
         {
             if (id != 0)
@@ -119,7 +143,7 @@ namespace Kili.Controllers
         }
 
            
-
+        // Supprimer un don à partir de son Id
             public IActionResult SupprimerDon(int id)
         {
             if (id != 0)

@@ -33,7 +33,11 @@
             <td>@livraison.LivraisonDevise</td>
             <td>@Html.ActionLink("Choisir", "Choisir", "Vente", new{id = @livraison.LivraisonID})</td>
         </tr>
+
         }
-    </table>
-    </body>
+    </table>  
+        <br />
+            <input type="submit" value="Réaliser le paiement" />
+    
+   </body>
 </html>
