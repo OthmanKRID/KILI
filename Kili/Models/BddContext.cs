@@ -28,7 +28,7 @@ namespace Kili.Models
         public DbSet<PanierService> PaniersServices { get; set; }
         public DbSet<Paiement> Paiements { get; set; }
         public DbSet<MoyenPaiement> MoyenPaiements { get; set; }
-
+    
 
 
         //Vente 
@@ -44,7 +44,7 @@ namespace Kili.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=RRRRR;database=NewBaseKILI");
+            optionsBuilder.UseMySql("server=localhost;user id=root;password=P@ssw0rd5;database=KILI");
         }
 
         public void InitializeDb()
@@ -55,14 +55,19 @@ namespace Kili.Models
             Association_Services associationServices = new Association_Services();
             Abonnement_Services abonnement_Services = new Abonnement_Services();
             DonServices donServices = new DonServices();
+            Adresse_Services adresseService = new Adresse_Services();
 
-            userAccountServices.CreerAdmin("M.","Admin", "Admin", "Kili@mail.com");
-            userAccountServices.CreerUserAccount("Fara", "Raza", "P@ssFara1", "Fara@gmail.com", TypeRole.Utilisateur);
-            userAccountServices.CreerUserAccount("Romy","Kombet", "P@ssRomy1", "Romy@gmail.com", TypeRole.Utilisateur);
-            userAccountServices.CreerUserAccount("Othman","Krid", "P@ssOthman1", "Othman@gmail.com", TypeRole.Utilisateur);
-            donServices.CreerDonateur(new Adresse() { Numero = 15, Voie = "rue Gabriel", CodePostal = 93000, Ville = "Pantin" }, "0102030708");
-            donServices.CreerDonateur(new Adresse() { Numero = 25, Voie = "rue Péri", CodePostal = 93100, Ville = "Romainville" }, "0102030406");
+            userAccountServices.CreerAdmin("M.","Admin", "P@ssw0rd5", "Kili@mail.com",null);
+            userAccountServices.CreerUserAccount("Fara", "Raza", "P@ssFara1", "Fara@gmail.com",null, TypeRole.Utilisateur);
+            userAccountServices.CreerUserAccount("Romy","Kombet", "P@ssRomy1", "Romy@gmail.com", null, TypeRole.Utilisateur);
+            userAccountServices.CreerUserAccount("Othman","Krid", "P@ssOthman1", "Othman@gmail.com", null, TypeRole.Utilisateur);
 
+
+            adresseService.CreerAdresse(15, "rue","Gabriel", 93000, "Pantin");
+            adresseService.CreerAdresse(25, "rue", "Peri", 93100, "Romainville");
+            donServices.CreerDonateur(1);
+            donServices.CreerDonateur(2);
+            
 
             userAccountServices.DésactiverUserAccount(1);
 
@@ -88,14 +93,14 @@ namespace Kili.Models
             abonnement_Services.AjouterService(3, abonnement_Services.ObtenirServiceDansOffre(2));
             abonnement_Services.AjouterService(3, abonnement_Services.ObtenirServiceDansOffre(3));
 
-            donServices.CreerCollecte("Collecte pour moi", 300000, "Une collecte intéressée", 1);
-            donServices.CreerCollecte("Collecte pour les millionnaires en détresse", 6000, "Une collecte généreuse", 3);
+            donServices.CreerCollecte("Collecte pour moi", 0, "Une collecte intéressée", 1);
+            donServices.CreerCollecte("Collecte pour les millionnaires en détresse",0, "Une collecte généreuse", 3);
             donServices.CreerDon(1000, TypeRecurrence.Unique, 1, 1);
             donServices.CreerDon(2000, TypeRecurrence.Unique, 1, 2);
             donServices.CreerDon(200, TypeRecurrence.Mensuel, 2, 2);
 
-            userAccountServices.ModifierUserAccount(1, "M.", "Admin", "Kili@mail.com", TypeRole.Admin, 1, 1);
-            userAccountServices.ModifierUserAccount(3, "Romy", "Kombet", "Romy@gmail.com", TypeRole.Utilisateur, 3, 2);
+            userAccountServices.ModifierUserAccount(1, "M.", "Admin", "Kili@mail.com","0102030455", TypeRole.Admin, 1, 1,null);
+            userAccountServices.ModifierUserAccount(3, "Romy", "Kombet", "Romy@gmail.com", "0102034455", TypeRole.Utilisateur, 3, 2, null);
             
 
             //Vente en ligne

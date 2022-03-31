@@ -2,44 +2,118 @@
 
 @{
     Layout = "_Layout";
-    ViewBag.Title = "Mon profil";
+    ViewBag.Title = "Mon user profil";
 }
 
- @using (Html.BeginForm())
-    {
-        <fieldset>
-            <legend>Modifier votre profil </legend><br />
-            @Html.LabelFor(m => Model.UserAccount.Prenom)
-            @Html.TextBoxFor(m => Model.UserAccount.Prenom)
-            @Html.ValidationMessageFor(m => Model.UserAccount.Prenom)
-            <br /><br />
-            @Html.LabelFor(m => Model.UserAccount.Nom)
-            @Html.TextBoxFor(m => Model.UserAccount.Nom)
-            @Html.ValidationMessageFor(m => Model.UserAccount.Nom)
-            <br /><br />
-            @Html.LabelFor(m => Model.UserAccount.Mail)
-            @Html.TextBoxFor(m => Model.UserAccount.Mail)
-            @Html.ValidationMessageFor(m => Model.UserAccount.Mail)
-            <br /><br />
-            @Html.HiddenFor(pwd => Model.OldPassword)
-            @Html.HiddenFor(pwd => Model.NewPassword)
-            @Html.HiddenFor(pwd => Model.ConfirmationPassword)
-            @Html.HiddenFor(m=>Model.Message)
+<section id="main-content">
+            <section class="wrapper">
+                <!-- page start-->
 
-            @Html.HiddenFor(m=>Model.UserAccount.Id)
-            @Html.HiddenFor(m=>Model.UserAccount.AssociationId)
-            @Html.HiddenFor(m=>Model.UserAccount.DonateurId)
-            @Html.HiddenFor(m=>Model.UserAccount.Role)
-            <input type="submit" value="Modifier" />
-        </fieldset>
+                <div class="row">
+                    <div class="col-md-6">
+                        <section class="panel">
+                            <div class="panel-body profile-information">
+                                <div class="col-md-3">
+                                    <div class="profile-pic text-center">
+                                        <img src="~/images/lock_thumb.jpg" alt="" />
 
-        <br/>
-    @Html.ActionLink("Modifier mon mot de passe", "ModifierPassword", "UserAccount", new { id = Model.UserAccount.Id, oldPassword = Model.OldPassword, newPassword = Model.NewPassword, confirmationPassword = Model.ConfirmationPassword, message=Model.Message })
-        <br/>
-    @Html.ActionLink("Supprimer mon profil", "SupprimerUserAccount", "UserAccount", new { id = Model.UserAccount.Id })
 
-    }
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    @using (Html.BeginForm("ModifierUserAccount","UserAccount"))
+                                            {
+                                    <div class="profile-desk">
+                                        <h1>David Jormi</h1>
+                                        
+                                        <fieldset class="form-signin" action="index.html">
+                                        
+                                            <div class="login-wrap">
+                                                @Html.TextBoxFor(m => Model.UserAccount.Prenom, new { @type="text", @class="form-control", @placeholder="Prénom", @autofocus="autofocus" })
+                                                @Html.TextBoxFor(m => Model.UserAccount.Nom, new { @type="text", @class="form-control", @placeholder="Nom", @autofocus="autofocus" })
+                                                @Html.TextBoxFor(m => Model.UserAccount.Mail, new { @type="text", @class="form-control", @placeholder="Email", @autofocus="autofocus" })
+                                                @Html.TextBoxFor(m => Model.UserAccount.Telephone, new { @type="text", @class="form-control", @placeholder="Telephone", @autofocus="autofocus" })
+                                            </div>
 
-    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+                                                    @Html.HiddenFor(pwd => Model.OldPassword)
+                                                    @Html.HiddenFor(pwd => Model.NewPassword)
+                                                    @Html.HiddenFor(pwd => Model.ConfirmationPassword)
+                                                    @Html.HiddenFor(m=>Model.Message)
+
+                                                    @Html.HiddenFor(m=>Model.UserAccount.Id)
+                                                    @Html.HiddenFor(m=>Model.UserAccount.AssociationId)
+                                                    @Html.HiddenFor(m=>Model.UserAccount.DonateurId)
+                                                    @Html.HiddenFor(m=>Model.UserAccount.Role)
+
+                                     </fieldset>
+
+                                    
+                                     
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a><input type="submit" value="Modifier mon profil" class="btn btn-primary"/></a>
+                                        <a href="#" class="btn btn-primary">Modifier mon mot de passe</a>
+                                        <form role="form" class="form-horizontal">
+                                                        <div class="form-group">
+                                                       
+                                                            <div class="col-lg-6">
+                                                                <input type="file" id="exampleInputFile"
+                                                                    class="file-pos">
+                                                            </div>
+
+
+                                    </div>
+                                </div>
+                                }
+                            </div>
+
+                        </section>
+
+                    </div>
+
+
+                    <div class="col-sm-6">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Mes activités
+
+                            </header>
+                            <div class="panel-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Activité</th>
+                                            <th>Date</th>
+                                            <th>Coût</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Adhésion</td>
+                                            <td>20/04/22</td>
+                                            <td>20€</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Adhésion</td>
+                                            <td>20/04/22</td>
+                                            <td>20€</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Adhésion</td>
+                                            <td>20/04/22</td>
+                                            <td>20€</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <!-- page end-->
+            </section>
+        </section>

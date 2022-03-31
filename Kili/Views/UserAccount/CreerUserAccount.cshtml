@@ -27,6 +27,7 @@
             @Html.TextBoxFor(m => Model.UserAccount.Mail)
             @Html.ValidationMessageFor(m => Model.UserAccount.Mail)
             <br /><br />
+            @Html.HiddenFor(m => Model.UserAccount.Telephone)
             <input type="submit" value="Créer" />
         </fieldset>
     }

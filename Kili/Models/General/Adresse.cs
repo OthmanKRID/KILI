@@ -17,5 +17,7 @@ namespace Kili.Models.General
         [Required]
         [MaxLength(30)]
         public string Ville { get; set; }
+
+        public virtual UserAccount Compte { get; set; }
     }
 }

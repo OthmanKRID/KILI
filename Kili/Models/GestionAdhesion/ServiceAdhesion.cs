@@ -14,6 +14,9 @@ namespace Kili.Models.General
         public DateTime dateFinAbonnement { get; set; }
         public int duree { get; set; }
 
+        public virtual ICollection<Adherent> adherents { get; set; }
+
+        public virtual ICollection<Adhesion> adhesions { get; set; }
     }
 
 }

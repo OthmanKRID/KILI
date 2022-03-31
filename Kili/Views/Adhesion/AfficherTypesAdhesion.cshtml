@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Kili.Models.GestionAdhesion.Adhesion>
+
+    @{
+    Layout = "_Layout";
+    ViewBag.Title = "Visualisez les collectes";
+}
+
+ <div><b>Liste de vos formats d'adhésion</b><br /></div>  
+    <table class="table table-bordered table-responsive table-hover">  
+    <tr>
+        <th>Nom</th>
+        <th>Prix</th>  
+        <th>Description</th>  
+        <th>Type d'adhesion</th>   
+    </tr>  
+    @foreach (var v in Model)  
+    {  
+        <tr>
+            <td>@v.nom</td>  
+            <td>@v.prix</td>  
+            <td>@v.description</td>  
+            <td>@v.typeAdhesion</td>
+            <td>@Html.ActionLink("Supprimer", "SupprimerCollecte", "Adhesion", new { id = @v.Id })</td>
+            <td>@Html.ActionLink("Modifier", "ModifierCollecte", "Adhesion", new { id = @v.Id })</td>
+        </tr>  
+    }  
+     <!-- id = 1 à changer pour l'Id de la collecte sélecionnée dans le tableau-->
+</table> 

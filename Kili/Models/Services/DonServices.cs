@@ -41,6 +41,14 @@ namespace Kili.Models.Services
         {
             
             Don don = new Don() { Montant = montant, Recurrence = recurrence, DonateurId = donateurId , CollecteId = collecteId, Date = System.DateTime.Today };
+
+            Collecte collecte = _bddContext.Collectes.Find(collecteId);
+            if (collecte != null)
+            {
+                collecte.MontantCollecte += montant;            
+                _bddContext.SaveChanges();
+            }
+
             _bddContext.Dons.Add(don);
             _bddContext.SaveChanges();
             return don.Id;
@@ -97,23 +105,22 @@ namespace Kili.Models.Services
         }
 
         //Fonction permettant de créer un donateur
-        public int CreerDonateur(Adresse adresse, string telephone)
+        public int CreerDonateur(int? adresseID)
         {
 
-            Donateur donateur = new Donateur() { AdresseFacuration = adresse, Telephone = telephone };
+            Donateur donateur = new Donateur() { AdresseID = adresseID};
             _bddContext.Donateurs.Add(donateur);
             _bddContext.SaveChanges();
             return donateur.Id;
         }
 
         // Fonction permettant de modifier un donateur. 
-        public void ModifierDonateur(int id, Adresse adresse, string telephone)
+        public void ModifierDonateur(int id, int? adresseID)
         {
             Donateur donateur = _bddContext.Donateurs.Find(id);
             if (donateur != null)
             {
-                donateur.AdresseFacuration = adresse;
-                donateur.Telephone = telephone;
+                donateur.AdresseID = adresseID;             
                 _bddContext.SaveChanges();
             }
         }
@@ -127,7 +134,7 @@ namespace Kili.Models.Services
             {
                 UserAccount compte = _bddContext.UserAccounts.Where(v => v.DonateurId == donateur.Id).FirstOrDefault();
                 _bddContext.Donateurs.Remove(donateur);
-                UserAccount_Services.ModifierUserAccount(compte.Id, compte.Prenom, compte.Nom, compte.Mail, compte.Role, compte.AssociationId, null);
+                UserAccount_Services.ModifierUserAccount(compte.Id, compte.Prenom, compte.Nom, compte.Mail, compte.Telephone, compte.Role, compte.AssociationId, null, compte.AssociationId);
                 _bddContext.SaveChanges();
             }
         }

@@ -41,6 +41,16 @@ namespace Kili.Models
         }
 
         //Fonction permettant de modifier une Adresse
+        public int CreerAdresse(uint numero, string voie, string complement, uint cp, string ville)
+        {
+                Adresse adresse = new Adresse() { Numero = numero, Voie = voie, Complement = complement, CodePostal = cp, Ville = ville };
+                _bddContext.Adresses.Add(adresse);         
+                _bddContext.SaveChanges();
+            
+            return adresse.Id;
+        }
+
+        //Fonction permettant de modifier une Adresse
         public void ModifierAdresse(int? id, Adresse NouvelleAdresse)
         {
             Adresse Adresse = _bddContext.Adresses.Find(id);
@@ -55,7 +65,18 @@ namespace Kili.Models
                 _bddContext.SaveChanges();
             }
         }
-        
+
+        public void SupprimerAdresse(int id)
+        {
+            Adresse adresse = _bddContext.Adresses.Find(id);
+
+            if (adresse != null)
+            {
+                _bddContext.Adresses.Remove(adresse);
+                _bddContext.SaveChanges();
+            }
+        }
+
 
         public void Dispose()
         {

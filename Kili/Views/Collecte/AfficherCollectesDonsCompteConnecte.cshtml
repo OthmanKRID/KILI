@@ -1,0 +1,50 @@
+﻿@model Kili.ViewModels.CollecteDonViewModel
+
+    @{
+    Layout = "_Layout";
+    ViewBag.Title = "Visualisez vos information sur les collectes";
+}
+
+<div><b>Montant total collecté : @Model.montantglobalcollectes</b><br /></div>  
+
+ <div><b>Liste des collectes</b><br /></div>  
+    <table class="table table-bordered table-responsive table-hover">  
+    <tr>
+        <th>Nom</th>
+        <th>Montant</th>  
+        <th>Date</th>  
+        <th>Recurrence</th>   
+    </tr>  
+    @foreach (var v in Model.listecollecte)  
+    {  
+        <tr>
+            <td>@v.Nom</td>  
+            <td>@v.MontantCollecte</td>  
+            <td>@v.Descriptif</td>
+            <td>@Html.ActionLink("Supprimer", "SupprimerCollecte", "Collecte", new { id = @v.Id })</td>
+            <td>@Html.ActionLink("Modifier", "ModifierCollecte", "Collecte", new { id = @v.Id })</td>
+        </tr>  
+    }  
+
+
+     <div><b>Liste des dons</b><br /></div>  
+    <table class="table table-bordered table-responsive table-hover">  
+    <tr>
+        <th>Montant</th>  
+        <th>Date</th>  
+        <th>Recurrence</th>   
+    </tr>  
+    @foreach (var v in Model.listedon)  
+    {  
+        <tr>
+            <td>@v.Montant</td>  
+            <td>@v.Date</td>  
+            <td>@v.Recurrence</td>
+            <td>@Html.ActionLink("Supprimer", "SupprimerCollecte", "Collecte", new { id = @v.Id })</td>
+            <td>@Html.ActionLink("Modifier", "ModifierCollecte", "Collecte", new { id = @v.Id })</td>
+        </tr>  
+    }  
+
+
+     <!-- id = 1 à changer pour l'Id de la collecte sélecionnée dans le tableau-->
+</table> 

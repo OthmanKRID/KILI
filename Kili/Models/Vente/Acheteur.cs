@@ -11,8 +11,6 @@ namespace Kili.Models.Vente
         public Adresse AdresseLivraison { get; set; }
         [MaxLength(10)]
         public Adresse AdresseFacuration { get; set; }
-        [MaxLength(10)]
-        public string Telephone { get; set; }
         
         public int? UserAccountId { get; set; }
         public virtual UserAccount UserAccount { get; set; }

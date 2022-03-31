@@ -59,8 +59,10 @@ namespace Kili.Controllers
                 }
                ModelState.AddModelError("UserAccount.UserName", "UserName et/ou mot de passe incorrect(s)");
             }
+
+            
             //return View(viewModel);
-            return View("../Home/Index");
+            return View("/");
         }
 
         public ActionResult Deconnexion()

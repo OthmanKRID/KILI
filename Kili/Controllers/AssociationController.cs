@@ -42,7 +42,7 @@ namespace Kili.Controllers
         public IActionResult AjouterCompteAssociation(UserAccountViewModel viewModelUser, string returnUrl)
         {
             Association association = new Association();
-            UserAccount_Services.CreerUserAccount(viewModelUser.UserAccount.Prenom, viewModelUser.UserAccount.Nom, viewModelUser.UserAccount.Password, viewModelUser.UserAccount.Mail, TypeRole.Association);
+            UserAccount_Services.CreerUserAccount(viewModelUser.UserAccount.Prenom, viewModelUser.UserAccount.Nom, viewModelUser.UserAccount.Password, viewModelUser.UserAccount.Mail, viewModelUser.UserAccount.Telephone, TypeRole.Association);
             UserAccount utilisateur = UserAccount_Services.Authentifier(viewModelUser.UserAccount.Mail, viewModelUser.UserAccount.Password);
             //On se connecte avec le compte créé
             if (utilisateur != null)

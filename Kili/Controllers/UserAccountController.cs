@@ -32,7 +32,7 @@ namespace Kili.Controllers
 
                 if (verifUsername == null){ 
 
-                int id = userAccount_Services.CreerUserAccount(viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Password, viewModel.UserAccount.Mail, viewModel.UserAccount.Role);
+                int id = userAccount_Services.CreerUserAccount(viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Password, viewModel.UserAccount.Mail, viewModel.UserAccount.Telephone, viewModel.UserAccount.Role);
 
                 
                  var userClaims = new List<Claim>()
@@ -83,7 +83,7 @@ namespace Kili.Controllers
             {
                 UserAccount_Services userAccount_Services = new UserAccount_Services();
                 {
-                    userAccount_Services.ModifierUserAccount(viewModel.UserAccount.Id, viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Mail, viewModel.UserAccount.Role, viewModel.UserAccount.AssociationId, viewModel.UserAccount.DonateurId);
+                    userAccount_Services.ModifierUserAccount(viewModel.UserAccount.Id, viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Mail, viewModel.UserAccount.Telephone, viewModel.UserAccount.Role, viewModel.UserAccount.AssociationId, viewModel.UserAccount.DonateurId, viewModel.UserAccount.AdresseId);
                     
                     return RedirectToAction("ModifierUserAccount", new { @id = viewModel.UserAccount.Id });                 
                 }
@@ -94,6 +94,7 @@ namespace Kili.Controllers
             }
         }
         
+        // Fonction spécifique pour modifier le password en passant qui verifie que l'ancien utilisateur connait l'ancien password et compare un nouveau password avec l'ancien en BDD.
         public IActionResult ModifierPassword(int id, string oldPassword, string newPassword, string confirmationPassword, string message)
         {
 
@@ -108,7 +109,7 @@ namespace Kili.Controllers
                         return View("Error");
                     }
 
-                    return View(new UserAccountViewModel() { UserAccount = userAccount, Authentifie =true, OldPassword=oldPassword, NewPassword=newPassword, ConfirmationPassword = confirmationPassword, Message = message });
+                    return View(new UserAccountViewModel() { UserAccount = userAccount, OldPassword=oldPassword, NewPassword=newPassword, ConfirmationPassword = confirmationPassword, Message = message });
                 }
 
             }
@@ -126,16 +127,15 @@ namespace Kili.Controllers
                 {
 
                     string ancienMotDePasse = UserAccount_Services.EncodeMD5(viewModel.OldPassword);
+                    UserAccount_Services userAccount_Services = new UserAccount_Services();
+                    UserAccount userAccount = userAccount_Services.ObtenirUserAccounts().Where(r => r.Id == viewModel.UserAccount.Id).FirstOrDefault();
 
                     //On vérifie que l'ancien mot de passe est bon
-                    if (ancienMotDePasse == viewModel.UserAccount.Password)
+                    if (ancienMotDePasse == userAccount.Password)
                     {
-
-                        UserAccount_Services userAccount_Services = new UserAccount_Services();
 
                         userAccount_Services.ModifierMotDePasse(viewModel.UserAccount.Id, viewModel.NewPassword);
                      
-
                         return RedirectToAction("Deconnexion", "login");
                     }
                     else
@@ -176,6 +176,8 @@ namespace Kili.Controllers
         }
         */
 
+
+        // Supprime un UserAccount à partir de son id
         public IActionResult SupprimerUserAccount(int id)
         {
             if (id != 0)

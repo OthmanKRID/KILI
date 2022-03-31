@@ -8,16 +8,14 @@
  <div><b>Liste des collectes</b><br /></div>  
     <table class="table table-bordered table-responsive table-hover">  
     <tr>  
-        <th>Nom</th>
-        <th>Montant</th>  
+        <th>Nom</th>      
         <th>Date</th>  
         <th>Recurrence</th>   
     </tr>  
     @foreach (var v in Model)  
     {  
         <tr>
-            <td>@v.Nom</td>  
-            <td>@v.MontantCollecte</td>  
+            <td>@v.Nom</td>   
             <td>@v.Date</td>  
             <td>@v.Descriptif</td>
             <td>@Html.ActionLink("Faire un don", "CreerDon", "Don", new { idCollecte = @v.Id })</td>

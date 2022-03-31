@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using static Kili.Models.General.UserAccount;
+using static Kili.Models.GestionAdhesion.Adhesion;
 
 namespace Kili.Models
 {
@@ -24,6 +25,16 @@ namespace Kili.Models
        {
            return _bddContext.Adhesions.Where(m => m.ServiceAdhesionId == serviceAdhesion.Id).ToList();
        }
+
+        public List<Adhesion> ObtenirTypeAdhesions(ServiceAdhesion serviceAdhesion)
+        {
+            return _bddContext.Adhesions.Where(m => m.ServiceAdhesionId == serviceAdhesion.Id).ToList();
+        }
+
+        public List<Adhesion> ObtenirTypeAdhesions()
+        {
+            return _bddContext.Adhesions.ToList();
+        }
 
         //Fonction permettant d'obtenir une adhesion à partir de son Id
         public Adhesion ObtenirTypeAdhesion(int id)
@@ -54,14 +65,74 @@ namespace Kili.Models
             return ObtenirAdherentPourAdhesion(ObtenirCotisationsPourAdhesion(adhesion));
         }
 
-        //Fonction permettant d'obtenir une association à partir de son Id
-        public int CreerAdherent(uint numeroAdherent, Adresse adresse, string telephone)
+        
+        public int CreerAdherent(uint numeroAdherent, int adresseId)
         {
-            Adherent Adherent = new Adherent() { NumeroAdherent = numeroAdherent, Adresse = adresse, Actif = true, Telephone = telephone };
+            Adherent Adherent = new Adherent() { NumeroAdherent = numeroAdherent, AdresseID = adresseId, Actif = true };
 
             _bddContext.Adherents.Add(Adherent);
             _bddContext.SaveChanges();
             return Adherent.Id;
+        }
+
+        public void ModifierAdherent(int id, uint numeroAdherent, bool activation, int? adresseId)
+        {
+            Adherent Adherent = _bddContext.Adherents.Find(id);
+            if (Adherent != null)
+            {
+                Adherent.NumeroAdherent = numeroAdherent;
+                Adherent.Actif = activation;
+                Adherent.AdresseID = adresseId;
+                _bddContext.SaveChanges();
+            }
+
+        }
+
+        public void SupprimerAdherent(int id)
+        {
+            Adherent Adherent = _bddContext.Adherents.Find(id);
+
+            if (Adherent != null)
+            {
+                _bddContext.Adherents.Remove(Adherent);
+                _bddContext.SaveChanges();
+            }
+        }
+
+        public int CreerAdhesion(string nom, double prix, int duree, string description, TypeDureeAdhesion typeAdhesion, int? serviceAdhesionId)
+        {
+            Adhesion adhesion = new Adhesion() { nom = nom, prix = prix, duree = duree, description = description, typeAdhesion = typeAdhesion, ServiceAdhesionId = serviceAdhesionId };
+
+            _bddContext.Adhesions.Add(adhesion);
+            _bddContext.SaveChanges();
+            return adhesion.Id;
+
+        }
+
+        public void ModifierAdhesion(int id, string nom, double prix, int duree, string description, TypeDureeAdhesion typeAdhesion)
+        {
+            Adhesion Adhesion = _bddContext.Adhesions.Find(id);
+            if (Adhesion != null)
+            {
+                Adhesion.nom = nom;
+                Adhesion.prix = prix;
+                Adhesion.duree = duree;
+                Adhesion.description = description;
+                Adhesion.typeAdhesion = typeAdhesion;
+                _bddContext.SaveChanges();
+            }
+
+        }
+
+        public void SupprimerAdhesion(int id)
+        {
+            Adhesion Adhesion = _bddContext.Adhesions.Find(id);
+
+            if (Adhesion != null)
+            {
+                _bddContext.Adhesions.Remove(Adhesion);
+                _bddContext.SaveChanges();
+            }
         }
 
         //Fonction permettant de faire adhérer un adhérent à un type d'adhésion
@@ -73,6 +144,19 @@ namespace Kili.Models
             _bddContext.SaveChanges();
             return cotisation.Id;
         }
+
+        public void SupprimerCotisation(int id)
+        {
+            Cotisation cotisation = _bddContext.Cotisations.Find(id);
+
+            if (cotisation != null)
+            {
+                _bddContext.Cotisations.Remove(cotisation);
+                _bddContext.SaveChanges();
+            }
+        }
+
+
 
         public void Dispose()
         {
