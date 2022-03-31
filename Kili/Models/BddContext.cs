@@ -5,6 +5,11 @@ using Kili.Models.GestionAdhesion;
 using Kili.Models.Services;
 using Microsoft.EntityFrameworkCore;
 using Kili.Models.Vente;
+using System;
+using Microsoft.Extensions.Configuration;
+using System.Configuration;
+
+
 
 namespace Kili.Models
 {
@@ -44,7 +49,20 @@ namespace Kili.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=Kili");
+            
+
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=Kili");
+            }
+            else
+            {
+                IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+                optionsBuilder.UseMySql(configuration.GetConnectionString("DefaultConnection"));
+            }
         }
 
         public void InitializeDb()
