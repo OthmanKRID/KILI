@@ -1,30 +1,452 @@
-﻿@model Kili.Models.General.Association
+﻿@model Kili.ViewModels.AssociationViewModel
 @using Kili.Models
+@using Kili.Models.General
 
 @{
     Layout = "_Layout";
     ViewBag.Title = "Détails Association";
 }
 
-    <h1>
-       Détails de l'association
-    </h1>
+ <section id="main-content">
+            <section class="wrapper">
+                <!-- MODIFIER PROFIL -->
 
-    <p>
-    
-    </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <section class="panel">
 
-        <Label>Nom de l'association : @Model.Nom</Label><br /><br />
-        <Label>Adresse de l'association : @Model.Adresse.Numero, </Label><Label>@Model.Adresse.Voie</Label><br />
-        @if (@Model.Adresse.Complement != null)
-        {
-        <Label>                           @Model.Adresse.Complement</Label><br />
-        }
-        <Label>@Model.Adresse.CodePostal @Model.Adresse.Ville</Label><br /><br /><br />
-        <Label>Thème : @Model.Theme</Label>
-        <br />
-        @Html.ActionLink("Modifier", "ModifierAssociation")
-        @Html.ActionLink("Mes services", "VoirServices")
-        @Html.ActionLink("Index", "Home")
+                            <header class="panel-heading">
+                               Mes informations
+                              
+                            </header>
+
+                            <div class="panel-body profile-information">
+                                <div class="col-md-3">
+                                    <div class="profile-pic text-center">
+                                        @*<img src="~/images/lock_thumb.jpg" alt="" />*@
+                                              <img src="@Model.compteConnecte.ImagePath" height="150" width="150" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="profile-desk">
+
+                                        <h1>@Model.compteConnecte.Nom @Model.compteConnecte.Prenom</h1>
+                                        <button type="submit" class="btn btn-primary">@Html.ActionLink("Modifier mon profil", "ModifierUserAccount", "UserAccount", new { id =@Model.compteConnecte.Id})</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <form class="form-signin" action="index.html">
+                                        <div class="login-wrap">
+
+                                            <input type="text" class="form-control" placeholder="Prénom" value="@Model.compteConnecte.Prenom" autofocus>
+                                            <input type="text" class="form-control" placeholder="Nom" value="@Model.compteConnecte.Nom" autofocus>                                           
+                                            <input type="text" class="form-control" placeholder="Numéro" value="@Model.compteConnecte.Telephone" autofocus>
+                                            <input type="email" class="form-control" placeholder="Email" value="@Model.compteConnecte.Mail" autofocus>
+                                            @*<input type="password" class="form-control" placeholder="Mot de passe" value="@Model.compteConnecte.Password" autofocus>*@
+
+                                        </div>
+                                    </form>
 
 
+                                </div>
+                            </div>
+
+                        </section>
+
+                    </div>
+                      <!-- MODIFIER PROFIL -->
+
+                        <!-- ABONNEMENT -->
+
+                    <div class="col-sm-6">
+                        <section class="panel">
+                            <header class="panel-heading">
+                               Abonnement
+                             
+                            </header>
+                            <div class="panel-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                           @* <th>Activé</th>*@
+                                            <th>Service</th>
+                                            <th>Adhésion</th>
+                                            <th>Prix</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                @if (@Model.association.Abonnement.serviceAdhesion.EstActif)
+                                {
+                                    <tr>
+                                       @* @if (@Model.association.Abonnement.serviceAdhesion.EstActif)
+                                        {
+                                            <td><a href="google.fr">oui</a></td>
+                                        }*@
+                                        <td>Adhésion</td>
+                                        <td>@Model.association.Abonnement.serviceAdhesion.dateAbonnement</td>
+                                        <td>@Model.association.Abonnement.serviceAdhesion.montant_paye €</td>
+                                    </tr>
+                                }
+                                @if (@Model.association.Abonnement.serviceDon.EstActif)
+                                {
+                                <tr>
+                                            @*<td><a href="google.fr">oui</a></td>*@
+                                            <td>Don</td>
+                                            <td>@Model.association.Abonnement.serviceDon.dateAbonnement</td>
+                                            <td>@Model.association.Abonnement.serviceDon.montant_paye €</td>
+                                        </tr>                                
+                                }
+                                @if (@Model.association.Abonnement.serviceBoutique.EstActif)
+                                { 
+                                        <tr>
+                                            @*<td><a href="google.fr">oui</a></td>*@
+                                            <td>Boutique</td>
+                                            <td>@Model.association.Abonnement.serviceBoutique.dateAbonnement</td>
+                                            <td>@Model.association.Abonnement.serviceBoutique.montant_paye €</td>
+                                        </tr>
+                                }
+                                    </tbody>
+                                </table>
+                                <div class="todo-action-bar">
+                                    <div class="row">
+                                        <div class="col-xs-4 btn-add-task">
+                                            
+                                            <button type="submit" class="btn btn-default btn-primary"><i
+                                                    class="fa fa-plus"></i>@Html.ActionLink("Ajouter un service", "GererServices") </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- ABONNEMENT -->
+
+
+                    <!-- MON HISTORIQUE  -->
+
+                            <div class="col-md-12">
+
+                                <section class="panel">
+                                    <header class="panel-heading tab-bg-dark-navy-blue">
+                                        <ul class="nav nav-tabs nav-justified ">
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#overview">
+                                                    Mon historique
+                                                </a>
+                                            </li>
+                                       
+                                     
+                                            <li>
+                                                <a data-toggle="tab" href="#settings">
+                                                    Mon association
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </header>
+                                    <div class="panel-body">
+                                        <div class="tab-content tasi-tab">
+                                            <div id="overview" class="tab-pane active">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="recent-act">
+                                                           
+                                                            <div class="activity-icon terques">
+                                                             
+                                                            </div>
+                                                            <div class="activity-desk">
+                                                                <h2>il y a 1 heure</h2>
+                                                                <p>Purchased new stationary items for head office</p>
+                                                            </div>
+                                                            <div class="activity-icon red">
+                                                                
+                                                            </div>
+                                                            <div class="activity-desk">
+                                                                <h2 class="red">il y a 2 jours</h2>
+                                                                <p>il y a 2 jours<a href="#"
+                                                                        class="terques">Stive Martin</a> regarding the
+                                                                    Product Promotion</p>
+                                                            </div>
+                                                            <div class="activity-icon purple">
+                                                               
+                                                            </div>
+                                                            <div class="activity-desk">
+                                                                <h2 class="purple">la semaine dernière</h2>
+                                                                <p>3 photo Uploaded on facebook product page</p>
+                                                                <div class="photo-gl">
+                                                                    <a href="#">
+                                                                        <img src="~/images/sm-img-1.jpg" alt="" />
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <img src="~/images/sm-img-2.jpg" alt="" />
+                                                                    </a>
+                                                                    <a href="#">
+                                                                        <img src="~/images/sm-img-3.jpg" alt="" />
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+
+                                                            
+
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div id="job-history" class="tab-pane ">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="timeline-messages">
+                                                            <h3>Take a Tour</h3>
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            13 January 2013
+                                                                        </div>
+                                                                        <div class="second bg-terques ">
+                                                                            Join as Product Asst. Manager
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            10 February 2012
+                                                                        </div>
+                                                                        <div class="second bg-red">
+                                                                            Completed Provition period and Appointed as
+                                                                            a permanent Employee
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            2 January 2011
+                                                                        </div>
+                                                                        <div class="second bg-purple">
+                                                                            Selected Employee of the Month
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            4 March 2010
+                                                                        </div>
+                                                                        <div class="second bg-green">
+                                                                            Got Promotion and become area manager of
+                                                                            California
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            3 April 2009
+                                                                        </div>
+                                                                        <div class="second bg-yellow">
+                                                                            Selected the Best Employee of the Year 2013
+                                                                            and was awarded
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            23 May 2008
+                                                                        </div>
+                                                                        <div class="second bg-terques">
+                                                                            Got Promotion and become Product Manager and
+                                                                            was transper from Branch to Head Office.
+                                                                            Lorem ipsum dolor sit amet
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            14 June 2007
+                                                                        </div>
+                                                                        <div class="second bg-blue">
+                                                                            Height Sales scored and break all of the
+                                                                            previous sales record ever in the company.
+                                                                            Awarded
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            1 January 2006
+                                                                        </div>
+                                                                        <div class="second bg-green">
+                                                                            Take 15 days leave for his wedding and
+                                                                            Honeymoon & Christmas
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+      
+
+                                            
+                                            <div id="settings" class="tab-pane ">
+                                             
+                                            @using (Html.BeginForm("ModifierAssociation","Association", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                            {
+                                                                            
+                                            @Html.HiddenFor(m => m.association.Id)
+                                            @Html.HiddenFor(m => m.association.AdresseId)
+
+                                                <div class="position-center">
+                                                    <div class="prf-contacts sttng">
+                                                        <h2> Mon association</h2>
+                                                    </div>
+                                     
+                                                     <div class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="col-lg-2 control-label"> Logo</label>
+                                                            <div class="col-lg-6">
+                                                            @Html.TextBoxFor(a => a.association.Image, new { placeholder = "Description", @type = "file", @class="file-pos", @id="exampleInputFile" })   
+                                                          </div>
+                                                        </div>
+
+                                                     <div class="text-center">
+                                                        <img src="@Model.association.ImagePath" height="400" width="400" />
+                                                    </div>
+
+                                                       <div class="form-group">
+                                                            <label class="col-lg-2 control-label">Nom</label>
+                                                            <div class="col-lg-6">
+                                                                @Html.TextBoxFor(m => m.association.Nom, new{@placeholder="", @id="c-name", @class="form-control"})
+                                                            </div>
+                                                        </div>
+
+
+                                                       
+                                                        
+                                                        
+                                                      <div class="form-group">
+                                                            <label class="col-lg-2 control-label">Description</label>
+                                                            <div class="col-lg-6">
+                                                                  @Html.TextAreaFor(m => m.association.Description, new{@rows="10", @cols="30", @id="", @class="form-control"})
+                                                             </div>
+                                                        </div>
+                                                                                      </div>
+                                                       
+                                                        
+
+                                                    <div class="prf-contacts sttng">
+                                                        <h2>Adresse de l'association</h2>
+                                                    </div>
+                                                    <div class="form-horizontal">
+                                                         <div class="form-group">
+                                                            <label class="col-lg-2 control-label">Numéro</label>
+                                                            <div class="col-lg-6">
+                                                                @Html.TextBoxFor(m => m.association.Adresse.Numero, new{@placeholder="", @id="addr1", @class="form-control"})
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-lg-2 control-label">Voie</label>
+                                                            <div class="col-lg-6">
+                                                                 @Html.TextBoxFor(m => m.association.Adresse.Voie, new{@placeholder="", @id="addr2", @class="form-control"})
+                                                        </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-lg-2 control-label">Complément</label>
+                                                            <div class="col-lg-6">
+                                                                 @Html.TextBoxFor(m => m.association.Adresse.Complement, new{@placeholder="", @id="phone", @class="form-control"})
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-lg-2 control-label">Code postal</label>
+                                                            <div class="col-lg-6">
+                                                                 @Html.TextBoxFor(m => m.association.Adresse.CodePostal, new{@placeholder="", @id="cell", @class="form-control"})
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-lg-2 control-label">Ville</label>
+                                                            <div class="col-lg-6">
+                                                                 @Html.TextBoxFor(m => m.association.Adresse.Ville, new{@placeholder="", @id="cell", @class="form-control"})
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-lg-2 control-label">Thème</label>
+                                                            <div class="col-lg-6">
+                                                                @Html.DropDownListFor(m => m.association.Theme, new SelectList(Enum.GetValues(typeof(ThemeAssociation))), "Choisir le thème", new{@placeholder="", @id="email", @class="form-control"})
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <div class="col-lg-offset-2 col-lg-10">
+                                                                <input class="btn btn-primary"
+                                                                    type="submit" value="Enregistrer"/>
+                                                                <button class="btn btn-default"
+                                                                    type="button">Cancel</button>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                </div>
+                                                }
+                                            </div>
+                                        
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                    </div>
+                    <!-- page end-->
+            </section>
+        </section>

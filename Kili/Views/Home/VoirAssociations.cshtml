@@ -34,7 +34,6 @@
                  @Html.DropDownListFor(m => m.RechercheTheme, new SelectList(Enum.GetValues(typeof(RechercheTheme))))
             </div>
                         <div class="form-submit">
-                            <!--<input type="submit" value="Reset All" class="submit" name="reset" id="reset" />-->
                             <input type="submit" value="Valider" class="submit" name="submit" id="submit" />
                         </div>
                         }
@@ -62,7 +61,7 @@
                   <div class="responsive">
                     <div class="gallery">
                       <a href="@Url.Action("VoirDetailsAssociation", "Association", new { id = @association.Id})">
-                        <img src=@association.UrlPhoto alt="Cinque Terre" width="300" height="100">
+                        <img src="@association.ImagePath" alt="Cinque Terre" width="300" height="100">
                       </a>
                       <div class="desc">@association.Nom</div>
                       <div class="desc">@association.Adresse.Ville</div>

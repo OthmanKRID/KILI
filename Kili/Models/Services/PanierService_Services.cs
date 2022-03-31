@@ -23,6 +23,14 @@ namespace Kili.Models.Services
             _context.SaveChanges();
             return PanierService.Id;
         }
+
+        public void DeleteCart(int id)
+        {
+            PanierService PanierService = new PanierService() { Items = new List<Item>() };
+            PanierService = _context.PaniersServices.Find(id);
+            _context.PaniersServices.Remove(PanierService);
+            _context.SaveChanges();
+        }
         public PanierService GetCart(int panierId)
         {
 

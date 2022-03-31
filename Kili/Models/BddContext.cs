@@ -59,9 +59,10 @@ namespace Kili.Models
             DonServices donServices = new DonServices();
 
             userAccountServices.CreerAdmin("M.","Admin", "Admin", "Kili@mail.com");
-            userAccountServices.CreerUserAccount("Fara", "Raza", "P@ssFara1", "Fara@gmail.com", TypeRole.Utilisateur);
-            userAccountServices.CreerUserAccount("Romy","Kombet", "P@ssRomy1", "Romy@gmail.com", TypeRole.Utilisateur);
-            userAccountServices.CreerUserAccount("Othman","Krid", "P@ssOthman1", "Othman@gmail.com", TypeRole.Utilisateur);
+            userAccountServices.CreerUserAccountAssociation("Fara", "Raza", "P@ssFara1", "Fara@gmail.com");
+            userAccountServices.CreerUserAccountAssociation("Othman", "Krid", "P@ssOthman1", "Othman@gmail.com");
+            userAccountServices.CreerUserAccountAssociation("Romy","Kombet", "P@ssRomy1", "Romy@gmail.com");
+
             donServices.CreerDonateur(new Adresse() { Numero = 15, Voie = "rue Gabriel", CodePostal = 93000, Ville = "Pantin" }, "0102030708");
             donServices.CreerDonateur(new Adresse() { Numero = 25, Voie = "rue Péri", CodePostal = 93100, Ville = "Romainville" }, "0102030406");
 
@@ -96,8 +97,8 @@ namespace Kili.Models
             donServices.CreerDon(2000, TypeRecurrence.Unique, 1, 2);
             donServices.CreerDon(200, TypeRecurrence.Mensuel, 2, 2);
 
-            userAccountServices.ModifierUserAccount(1, "M.", "Admin", "Kili@mail.com", TypeRole.Admin, 1, 1);
-            userAccountServices.ModifierUserAccount(3, "Romy", "Kombet", "Romy@gmail.com", TypeRole.Utilisateur, 3, 2);
+            userAccountServices.ModifierUserAccount(1, "M.", "Admin", "Kili@mail.com", TypeRole.Admin, 1, 1, "/images/UserAccount/logo.png");
+            userAccountServices.ModifierUserAccount(3, "Romy", "Kombet", "Romy@gmail.com", TypeRole.Utilisateur, 3, 2, "/images/UserAccount/logo.png") ;
             
 
             //Vente en ligne

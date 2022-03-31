@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Kili.Models.Services;
 
 using static Kili.Models.General.UserAccount;
 
@@ -102,11 +103,11 @@ namespace Kili.Models
         //Fonction permettant de créer une association
         public int CreerAssociation(string nomAsso, Adresse adresse, ThemeAssociation Theme, UserAccount compte)
         {
-            Association Association = new Association() { Nom = nomAsso, Adresse = adresse, Theme = Theme, Actif = false };
+            Association Association = new Association() { Nom = nomAsso, Adresse = adresse, Theme = Theme, Actif = false, ImagePath = "/images/Associations/AssociationDefaut.png" };
             _bddContext.Associations.Add(Association);
             _bddContext.SaveChanges();
             compte.AssociationId = Association.Id;
-            _UserAccount_Services.ModifierUserAccount(compte.Id, compte.Prenom, compte.Nom, compte.Mail, TypeRole.Association, compte.AssociationId, compte.DonateurId);
+            _UserAccount_Services.ModifierUserAccount(compte.Id, compte.Prenom, compte.Nom, compte.Mail, TypeRole.Association, compte.AssociationId, compte.DonateurId, compte.ImagePath);
             return Association.Id;
         }
 
@@ -120,7 +121,7 @@ namespace Kili.Models
                 AssociationModifiee.Nom = Association.Nom;
                 AssociationModifiee.Theme = Association.Theme;
                 AssociationModifiee.Description = Association.Description;
-                AssociationModifiee.UrlPhoto = Association.UrlPhoto;
+                AssociationModifiee.ImagePath = Association.ImagePath;
                 new Adresse_Services().ModifierAdresse(Association.AdresseId, Association.Adresse);
                 _bddContext.SaveChanges();
             }
@@ -157,7 +158,7 @@ namespace Kili.Models
             if (Association != null)
             {
                 _bddContext.Associations.Remove(Association);
-                _UserAccount_Services.ModifierUserAccount(compteAssocie.Id, compteAssocie.Prenom, compteAssocie.Nom, compteAssocie.Mail, compteAssocie.Role, null, compteAssocie.DonateurId);
+                _UserAccount_Services.ModifierUserAccount(compteAssocie.Id, compteAssocie.Prenom, compteAssocie.Nom, compteAssocie.Mail, compteAssocie.Role, null, compteAssocie.DonateurId, compteAssocie.ImagePath);
                 _bddContext.SaveChanges();              
             }
         }

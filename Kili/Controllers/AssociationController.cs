@@ -1,5 +1,6 @@
 ﻿using Kili.Models;
 using Kili.Models.General;
+using Kili.Models.Services;
 using Kili.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ using System.Web;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Kili.Controllers
 {
@@ -19,13 +21,15 @@ namespace Kili.Controllers
         private UserAccount_Services UserAccount_Services;
         private Adresse_Services Adresse_Services;
         private Abonnement_Services Abonnement_Services;
+        private IWebHostEnvironment _webEnv;
 
-        public AssociationController()
+        public AssociationController(IWebHostEnvironment environment)
         {
             Association_Services = new Association_Services();
             UserAccount_Services = new UserAccount_Services();
             Adresse_Services = new Adresse_Services();
             Abonnement_Services = new Abonnement_Services();
+            _webEnv = environment;
         }
 
 
@@ -34,7 +38,8 @@ namespace Kili.Controllers
         public IActionResult AjouterCompteAssociation()
         {
             ViewModels.UserAccountViewModel viewModelUser = new ViewModels.UserAccountViewModel() { Authentifie = HttpContext.User.Identity.IsAuthenticated, UserAccount = new UserAccount() };
-            return View("../UserAccount/CreerUserAccount", viewModelUser);
+            //return View("../UserAccount/CreerUserAccount", viewModelUser);
+            return View("../UserAccount/CreerUtilisateur", viewModelUser);
         }
 
         //Fonction POST permettant de récupérer les données du formulaire et de créer le compte associé à l'association
@@ -42,7 +47,7 @@ namespace Kili.Controllers
         public IActionResult AjouterCompteAssociation(UserAccountViewModel viewModelUser, string returnUrl)
         {
             Association association = new Association();
-            UserAccount_Services.CreerUserAccount(viewModelUser.UserAccount.Prenom, viewModelUser.UserAccount.Nom, viewModelUser.UserAccount.Password, viewModelUser.UserAccount.Mail, TypeRole.Association);
+            UserAccount_Services.CreerUserAccountAssociation(viewModelUser.UserAccount.Prenom, viewModelUser.UserAccount.Nom, viewModelUser.UserAccount.Password, viewModelUser.UserAccount.Mail);
             UserAccount utilisateur = UserAccount_Services.Authentifier(viewModelUser.UserAccount.Mail, viewModelUser.UserAccount.Password);
             //On se connecte avec le compte créé
             if (utilisateur != null)
@@ -78,12 +83,14 @@ namespace Kili.Controllers
         [HttpPost]
         public IActionResult AjouterAssociation(Association association, string returnUrl)
         {
-         
-            Association_Services.CreerAssociation(association.Nom, association.Adresse, association.Theme, UserAccount_Services.ObtenirUserAccountConnecte(HttpContext.User.Identity.Name))/*, association.UserAccountId*/;
 
-            ViewModels.UserAccountViewModel viewModelUser = new ViewModels.UserAccountViewModel() { Authentifie = HttpContext.User.Identity.IsAuthenticated/*, Urlretour = "../Association/VoirAssociation" */};
-            return View("ConfirmationCreationAssociation", association);
+            Association_Services.CreerAssociation(association.Nom, association.Adresse, association.Theme, UserAccount_Services.ObtenirUserAccountConnecte(HttpContext.User.Identity.Name));
+
+            ViewModels.UserAccountViewModel viewModelUser = new ViewModels.UserAccountViewModel() { Authentifie = HttpContext.User.Identity.IsAuthenticated };
+            //return View("ConfirmationCreationAssociation", association);
+            return RedirectToAction("VoirProfilAssociation", "Association");
         }
+
 
         public IActionResult VoirDetailsAssociation(int id)
         {
@@ -96,7 +103,8 @@ namespace Kili.Controllers
         public IActionResult VoirProfilAssociation()
         {
             UserAccount CompteConnecte = UserAccount_Services.ObtenirUserAccountConnecte(HttpContext.User.Identity.Name);
-            return View(CompteConnecte.Association);
+            AssociationViewModel viewModel = new AssociationViewModel() { compteConnecte = UserAccount_Services.ObtenirUserAccountConnecte(HttpContext.User.Identity.Name), association = CompteConnecte.Association };      
+            return View(viewModel);
 
         }
 
@@ -107,17 +115,36 @@ namespace Kili.Controllers
                                 
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                return View(CompteConnecte.Association);
+                return RedirectToAction("voirProfilAssociation");
+               // return View(CompteConnecte.Association);
             }
-            return View(CompteConnecte.Association);
+            //return View(CompteConnecte.Association);
+            return RedirectToAction("voirProfilAssociation");
         }
 
         //Fonction POST permettant de récupérer les modifications sur les informations de l'association du compte connecté
         [HttpPost]
-        public IActionResult ModifierAssociation(Association association)
+        public IActionResult ModifierAssociation(AssociationViewModel viewModel)
         {
-           Association_Services.ModifierAssociation(association);
-           return View("VoirProfilAssociation",UserAccount_Services.ObtenirUserAccountConnecte(HttpContext.User.Identity.Name).Association);
+            if (viewModel.association.Image != null)
+            {
+                if (viewModel.association.Image.Length > 0)
+                {
+                    string uploads = Path.Combine(_webEnv.WebRootPath, "images");
+                    uploads = Path.Combine(uploads, "Associations");
+                    string filePath = Path.Combine(uploads, viewModel.association.Image.FileName);
+
+                    using (var stream = System.IO.File.Create(filePath))
+                    {
+                        viewModel.association.Image.CopyTo(stream);
+
+                    }
+                }
+                viewModel.association.ImagePath = "/images/Associations/" + viewModel.association.Image.FileName;
+            }
+            Association_Services.ModifierAssociation(viewModel.association);
+            return RedirectToAction("voirProfilAssociation");
+            //return View("VoirProfilAssociation", UserAccount_Services.ObtenirUserAccountConnecte(HttpContext.User.Identity.Name).Association);
         }
 
 
@@ -171,31 +198,33 @@ namespace Kili.Controllers
 
         public IActionResult MiseAJourSouscriptionAjoutDon(ServicesViewModel viewModel)
         {
-            viewModel.ServiceDon.IsActive = true;
+            viewModel.ServiceDon.EstActif = true;
             return View("GererServices", viewModel);
         }
-
+        /*
         [HttpPost]
-        public async Task<IActionResult> Telecharger(IFormFile fichier)
+        public IActionResult Telecharger(IFormFile fichier, string chemin)
         {
+
             if (fichier.Length > 0)
+            {
+                string uploads = Path.Combine(_webEnv.WebRootPath, chemin);
+                string filePath = Path.Combine(uploads, fichier.FileName);
+
+                using (var stream = System.IO.File.Create(filePath))
                 {
-                    var filePath = Path.GetTempFileName();
+                    Image.CopyTo(stream);
 
-                    using (var stream = System.IO.File.Create(filePath))
-                    {
-                        await fichier.CopyToAsync(stream);
-                        
-                    }
                 }
+            }
 
-            return Ok();
+            return Redirect("/"); ;
         }
-
-        public IActionResult Telecharger()
+        */
+        /*public IActionResult Telecharger()
         {
             return View();
-        }
+        }*/
 
     }
 }

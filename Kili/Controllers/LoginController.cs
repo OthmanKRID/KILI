@@ -1,5 +1,6 @@
 ﻿using Kili.Models;
 using Kili.Models.General;
+using Kili.Models.Services;
 using Kili.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;

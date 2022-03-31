@@ -1,45 +1,97 @@
 ﻿@model Kili.ViewModels.UserAccountViewModel
+@using Kili.Models
+@using Kili.Models.General
 
 @{
     Layout = "_Layout";
-    ViewBag.Title = "Mon profil";
+    ViewBag.Title = "Mon user profil";
 }
 
- @using (Html.BeginForm())
-    {
-        <fieldset>
-            <legend>Modifier votre profil </legend><br />
-            @Html.LabelFor(m => Model.UserAccount.Prenom)
-            @Html.TextBoxFor(m => Model.UserAccount.Prenom)
-            @Html.ValidationMessageFor(m => Model.UserAccount.Prenom)
-            <br /><br />
-            @Html.LabelFor(m => Model.UserAccount.Nom)
-            @Html.TextBoxFor(m => Model.UserAccount.Nom)
-            @Html.ValidationMessageFor(m => Model.UserAccount.Nom)
-            <br /><br />
-            @Html.LabelFor(m => Model.UserAccount.Mail)
-            @Html.TextBoxFor(m => Model.UserAccount.Mail)
-            @Html.ValidationMessageFor(m => Model.UserAccount.Mail)
-            <br /><br />
-            @Html.HiddenFor(pwd => Model.OldPassword)
-            @Html.HiddenFor(pwd => Model.NewPassword)
-            @Html.HiddenFor(pwd => Model.ConfirmationPassword)
-            @Html.HiddenFor(m=>Model.Message)
+<section id="main-content">
+            <section class="wrapper">
+                <!-- page start-->
 
-            @Html.HiddenFor(m=>Model.UserAccount.Id)
-            @Html.HiddenFor(m=>Model.UserAccount.AssociationId)
-            @Html.HiddenFor(m=>Model.UserAccount.DonateurId)
-            @Html.HiddenFor(m=>Model.UserAccount.Role)
-            <input type="submit" value="Modifier" />
-        </fieldset>
+                <div class="row">
+                    <div class="col-md-6">
+                        <section class="panel">
+                            <div class="panel-body profile-information">
+                                <div class="col-md-3">
+                                    <div class="profile-pic text-center">
+                                        <img src="@Model.UserAccount.ImagePath" height="150" width="150" />
 
-        <br/>
-    @Html.ActionLink("Modifier mon mot de passe", "ModifierPassword", "UserAccount", new { id = Model.UserAccount.Id, oldPassword = Model.OldPassword, newPassword = Model.NewPassword, confirmationPassword = Model.ConfirmationPassword, message=Model.Message })
-        <br/>
-    @Html.ActionLink("Supprimer mon profil", "SupprimerUserAccount", "UserAccount", new { id = Model.UserAccount.Id })
 
-    }
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    @using (Html.BeginForm("ModifierUserAccount","UserAccount", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                   
+                                            {
+                                    <div class="profile-desk">
 
-    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+                                        <h1>@Model.UserAccount.Prenom @Model.UserAccount.Nom</h1>
+                                        
+                                        <fieldset class="form-signin" action="index.html">
+                                        
+                                            <div class="login-wrap">
+                                                @Html.TextBoxFor(m => Model.UserAccount.Prenom, new { @type="text", @class="form-control", @placeholder="Prénom", @autofocus="autofocus" })
+                                                @Html.TextBoxFor(m => Model.UserAccount.Nom, new { @type="text", @class="form-control", @placeholder="Nom", @autofocus="autofocus" })
+                                                @Html.TextBoxFor(m => Model.UserAccount.Mail, new { @type="text", @class="form-control", @placeholder="Email", @autofocus="autofocus" })
+                                                @Html.TextBoxFor(m => Model.UserAccount.Telephone, new { @type="text", @class="form-control", @placeholder="Telephone", @autofocus="autofocus" })
+                                            </div>
+
+                                                    @Html.HiddenFor(pwd => Model.OldPassword)
+                                                    @Html.HiddenFor(pwd => Model.NewPassword)
+                                                    @Html.HiddenFor(pwd => Model.ConfirmationPassword)
+                                                    @Html.HiddenFor(m=>Model.Message)
+
+                                                    @Html.HiddenFor(m=>Model.UserAccount.Id)
+                                                    @Html.HiddenFor(m=>Model.UserAccount.AssociationId)
+                                                    @Html.HiddenFor(m=>Model.UserAccount.DonateurId)
+                                                    @Html.HiddenFor(m=>Model.UserAccount.Role)
+
+                                     </fieldset>
+
+                                    
+                                     
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="btn btn-primary" type="submit" value="Enregistrer Modification"/>
+                                         <div class="form-group">
+                                        <div class="col-lg-6">
+                                         @Html.TextBoxFor(a => a.UserAccount.Image, new { placeholder = "Description", @type = "file", @class="file-pos", @id="exampleInputFile" })   
+                                        </div>
+                                         </div>
+
+                                </div>
+                                }
+                            </div>
+
+                        </section>
+
+                    </div>
+
+                    
+                    <div class="col-sm-6">
+                        <section class="panel">
+                            
+                            
+                                @if (@Model.UserAccount.Role == TypeRole.Association){
+                                <header class="panel-heading">Mon Association</header>
+                                <button button type="button" class="button">@Html.ActionLink("Accéder au profil de l'association", "VoirProfilAssociation", "Association")</button>
+                                }
+
+                                @if (@Model.UserAccount.Role == TypeRole.Utilisateur){
+                                <header class="panel-heading">Vous souhaitez créer votre association</header>
+                                 <button button type="button" class="button">@Html.ActionLink("C'est par ici", "AjouterAssociation", "Association")</button>
+                                }
+                                
+
+                      
+                        </section>
+                    </div>
+                        
+                </div>
+                <!-- page end-->
+            </section>
+        </section>
