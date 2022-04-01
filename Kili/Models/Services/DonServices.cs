@@ -111,6 +111,7 @@ namespace Kili.Models.Services
             Donateur donateur = new Donateur() { AdresseID = adresseID};
             _bddContext.Donateurs.Add(donateur);
             _bddContext.SaveChanges();
+            
             return donateur.Id;
         }
 
@@ -144,6 +145,28 @@ namespace Kili.Models.Services
         public List<Collecte> ObtenirCollectes()
         {
             return _bddContext.Collectes.ToList();
+
+        }
+
+
+        public List<Collecte> Obtenir3DernièresCollectes()
+        {
+            List<Collecte> collectes = ObtenirCollectes();
+            List<Collecte> Dernierescollectes = new List<Collecte>();
+
+            int nb;
+            if (collectes.Count <3) {
+                nb = collectes.Count;
+                    }
+            else {
+                nb = 3;
+                    }
+
+            for (int i = collectes.Count - nb; i < collectes.Count; i++)
+            {
+                Dernierescollectes.Add(collectes[i]);
+            }
+            return Dernierescollectes;
         }
 
         //Fonction permettant d'obtenir une collecte à partir de son Id
@@ -151,6 +174,7 @@ namespace Kili.Models.Services
         {
             return _bddContext.Collectes.Find(id);
         }
+
 
         //Fonction permettant de créer une collecte
         public int CreerCollecte(string nom, int montant, string descriptif, int? servicedonID) // , DateTime date

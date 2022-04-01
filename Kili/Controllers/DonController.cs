@@ -38,15 +38,21 @@ namespace Kili.Controllers
                 DonServices donservices = new DonServices();
 
                 //Regarde si l'utilisateur n'est pas enregistré comme donateur et alors crée un donateur en y associant l'Id de l'adresse
-                if (UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).DonateurId == null) { 
-                    
-                donservices.CreerDonateur(UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).AdresseId);
+                if (UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).DonateurId == null) {
+
+                    UserAccount ua = UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
+
+                    int id = donservices.CreerDonateur(ua.AdresseId);
+
+                    UserAccount_Services.ModifierUserAccount(ua.Id, ua.Prenom, ua.Nom, ua.Mail, ua.Telephone, ua.Role, ua.AssociationId, id, ua.AdresseId, ua.ImagePath );
+
                 }
 
                 //Si l'utilisateur est déjà donateur, alors on modifie celui-ci en y associant l'adresse
                 else
                 {
                     donservices.ModifierDonateur((int)UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).DonateurId, UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).AdresseId);
+                
                 }
 
                 return View(donviewModel);

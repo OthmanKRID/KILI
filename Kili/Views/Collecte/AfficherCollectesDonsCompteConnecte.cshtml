@@ -7,83 +7,7 @@
 <body>
     <section id="container">
         <!--barre NAV start-->
-        <header class="header fixed-top clearfix">
-            <div class="brand">
-                <a href="index.html" class="logo">
-                    <img src="images/logo.png" alt="">
-                </a>
-            </div>
-            <div class="nav notify-row" id="top_menu">
-                <!--  notification start -->
-                <ul class="nav top-menu">
-                    <!-- notification dropdown start-->
-                    <li id="header_notification_bar" class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                          <!--  <i class="fa fa-bell-o"></i>-->
-                            <span class="badge bg-warning">3</span>
-                        </a>
-                        <ul class="dropdown-menu extended notification">
-                            <li>
-                                <p>Notifications</p>
-                            </li>
-                            <li>
-                                <div class="alert alert-info clearfix">
-                                    <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                                    <div class="noti-info">
-                                        <a href="#"> Notifs #1 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="alert alert-danger clearfix">
-                                    <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                                    <div class="noti-info">
-                                        <a href="#"> Notifs #2</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="alert alert-success clearfix">
-                                    <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                                    <div class="noti-info">
-                                        <a href="#"> Notifs #3</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- notification dropdown end -->
-                </ul>
-            </div>
-            <!--  notification end -->
-
-
-            <!--search & user info start-->
-            <div class="top-nav clearfix">
-                <ul class="nav pull-right top-menu">
-                    <!-- user login dropdown start-->
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" src="images/avatar1_small.jpg">
-                            <span class="username">Mon compte</span>
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu extended logout">
-                            
-                            <li><a href="#"><i class=" fa fa-suitcase"></i>Ma boutique</a></li>  
-                            <li><a href="#"><i class=" fa fa-suitcase"></i>Mes collectes</a></li>  
-                            <li><a href="#"><i class=" fa fa-suitcase"></i>Mes adhésions</a></li> 
-                            <li><a href="#"><i class="fa fa-cog"></i> Mon profil</a></li>                         
-                            <li><a href="login.html"><i class="fa fa-key"></i> Se deconnecter</a></li>
-                            
-                        </ul>
-                    </li>
-                    <!-- user login dropdown end -->
-                </ul>
-                <!--search & user info end-->
-            </div>
-        </header>
-        <!--barre NAV end-->
+ 
         <!--main content start-->
         <section id="main-content">
             <section class="wrapper">
@@ -123,32 +47,37 @@
                     <div class="col-md-12">
                         <!--Liste collecte start-->
                         <section class="panel">
-                            <header class="panel-heading">
-                                Liste des collectes
-                            </header>
+
+
+                <header class="panel-heading">
+                    Liste des collectes 
+                </header>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <section class="panel">
                             <div class="panel-body">
-                                <ul class="to-do-list" id="sortable-todo">
+                                
+                                <table class="table  table-hover general-table">
+                                    <thead>
+                                        <tr>
+                                            <th> Nom</th>
+                                            <th class="hidden-phone"> Montant collecté</th>
+                                            <th>Description</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
                                     @foreach (var v in Model.listecollecte)  
                                         {
-                                    <li class="clearfix">
-                                        <span class="drag-marker">
-                                            <i></i>
-                                        </span>
-                                        <div class="todo-check pull-left">
-                                            <input type="checkbox" value="None" id="todo-check1" />
-                                            <label for="todo-check1"></label>
-                                        </div>     
-                                        <p class="todo-title">
-                                           @v.Nom                       Montant collecté : @v.MontantCollecte      
-                                        </p>
-                                        <div class="todo-actionlist pull-right clearfix">
-                                            <a href="#" class="todo-done"><i class="fa fa-check"></i></a>
-                                            
-                                            <a href=@("/collecte/modifiercollecte/" + v.Id) class="todo-edit"><i class="ico-pencil" data-toggle="modal" data-target="#myModal"></i></a> 
-                                            <a href=@("/collecte/supprimercollecte/" + v.Id) class="todo-remove"><i class="ico-close"></i></a>
-                                        </div>
-                                    </li>}
-                                </ul>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="#">@v.Nom</a></td>
+                                            <td class="hidden-phone">@v.MontantCollecte</td>
+                                            <td>@v.Descriptif </td>
+                                            <td><a href="#" data-elemid="@v.Id" class="todo-edit" id="LinkPopup" style="margin-right:10px;"><i class="fa fa-arrow-circle-up fa-2x" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></a><a href=@("/collecte/supprimercollecte/" + v.Id) class="todo-remove"><i class="fa fa-times-circle fa-2x" aria-hidden="true" style="color:red;"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                    }
+                                </table>
                             </div>
                         </section>
                     </div>
@@ -163,16 +92,15 @@
                             </div>
                             <div class="modal-body row">
                                 
-                                @using (Html.BeginForm("CreerCollecte","Collecte"))
-
-                               @*<form action="/action_page.php">*@
-                                <div class="col-md-5 img-modal">
-                                    <img src="images/gallery/image1.jpg" alt="">
-                                    <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i>Insérer l'image</a>
-                                </div>
+                                @using (Html.BeginForm("CreerCollecte","Collecte", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                 {
+                               @*<form action="/action_page.php">*@
+                                <div class="col-md-2 img-modal">
+                                    <img src="images/gallery/image1.jpg" alt="">                               
+                                </div>
+                                
                                      <fieldset>
-                                <div class="col-md-7">
+                                <div class="col-md-10">
                                     <div class="form-group">
                                         <label> Nom</label>
                                         @Html.TextBoxFor(m => Model.collecte.Nom, new {@id="name", @value="nom", @class="form-control"}) 
@@ -183,7 +111,7 @@
                                     </div>*@
                                     <div class="form-group">
                                         <label> Description</label>
-                                        @Html.TextAreaFor(m => Model.collecte.Descriptif, new {@rows="2", @placeholder= "description", @class="form-control"})
+                                        @Html.TextAreaFor(m => Model.collecte.Descriptif, new {@rows="2", @class="form-control"})
                                         @*<textarea rows="2" placeholder= "description" class="form-control"></textarea>*@
                                     </div>
                                     @*<div class="form-group">
@@ -192,10 +120,12 @@
                                    @*</form>*@
                                                                         
                                     </div>
-                                    <div class="pull-right">
-                                        <a href="AfficherCollectesDonsCompteConnecte"><button class="btn btn-danger" type="button">Annuler</button></a>
-                                        <input type="submit" class="btn btn-primary" value="enregistrer"/>
-                                        @*<button class="btn btn-primary" type="button">Enregistrer</button>*@
+                                    <div class="pull-down">
+                                        <input type="submit" class="btn btn-primary" value="Valider"/>
+                                        @*
+                                        <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i>Insérer l'image</a>
+                                        <a href="AfficherCollectesDonsCompteConnecte"><button class="btn btn-danger" type="button">Annuler</button></a>                                   
+                                        <button class="btn btn-primary" type="button">Enregistrer</button>*@
                                     </div>
                                     </fieldset>
                                     }
@@ -219,17 +149,18 @@
                                             <img src="images/gallery/image1.jpg" alt="">
                                             <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Modifier l'image</a>
                                         </div>
-                                         @using (Html.BeginForm("ModifierCollecte","Collecte"))
+                                         @using (Html.BeginForm("ModifierCollecte","Collecte", FormMethod.Post,new{@id="updateformcollect"}))
                                         {
                                      <fieldset>
                                         <div class="col-md-7">                                       
                                             <div class="form-group">
                                                 <label> Nom</label>
                                                 @Html.TextBoxFor(m => Model.collecte.Nom, new {@id="name", @value="nom", @class="form-control"}) 
+                                                @Html.HiddenFor(m=> Model.collecte.Id)
                                             </div>
                                             <div class="form-group">
                                                 <label> Description</label>
-                                                @Html.TextAreaFor(m => Model.collecte.Descriptif, new {@rows="2", @placeholder= "description", @class="form-control"})
+                                                @Html.TextAreaFor(m => Model.collecte.Descriptif, new {@rows="2", @class="form-control"})
                                             </div>
                                             @*<div class="form-group">
                                                 <form action="/action_page.php">
@@ -239,9 +170,9 @@
                                             
                                         
                                             <div class="pull-right">
-                                                <button class="btn btn-danger" type="button">Supprimer la collecte</button>
-                                            <input type="submit" class="btn btn-primary" value="enregistrer"/>
-                                            @*<button class="btn btn-primary" type="button">Enregistrer</button>*@
+                                                @*<button class="btn btn-danger" type="button">Supprimer la collecte</button>
+                                                <button class="btn btn-primary" type="button">Enregistrer</button>*@
+                                                <input type="submit" class="btn btn-primary" value="Valider"/>
                                             </div>
                                             </fieldset>
                                             }

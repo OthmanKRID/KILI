@@ -33,7 +33,18 @@ namespace Kili.Models.Services
         {
             List<Association> associations = ObtenirAssociations();
             List<Association> Dernieresassociations = new List<Association>();
-            for (int i = associations.Count - 3; i < associations.Count ; i++)
+
+            int nb;
+            if (associations.Count < 3)
+            {
+                nb = associations.Count;
+            }
+            else
+            {
+                nb = 3;
+            }
+
+            for (int i = associations.Count - nb; i < associations.Count ; i++)
             {
                 Dernieresassociations.Add(associations[i]);
             }

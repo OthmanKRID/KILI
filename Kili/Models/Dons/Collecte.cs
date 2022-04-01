@@ -8,9 +8,9 @@ namespace Kili.Models.Dons
     {
         public int Id { get; set; }
         [MaxLength(150)]
-        public string Nom { get; set; }
-        public int MontantCollecte { get; set; }
         [Required]
+        public string Nom { get; set; }
+        public int MontantCollecte { get; set; }      
         public string  Descriptif { get; set; }
         
         public DateTime Date { get; set; }

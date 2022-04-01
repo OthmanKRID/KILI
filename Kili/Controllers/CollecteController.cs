@@ -27,7 +27,7 @@ namespace Kili.Controllers
             {
                 int id = donServices.CreerCollecte(collecte.Nom, collecte.MontantCollecte, collecte.Descriptif, userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association.Abonnement.ServiceDonId); // , collecte.Date
 
-               return Redirect("/home/index"); 
+               return Redirect("/collecte/AfficherCollectesDonsCompteConnecte"); 
             }
             // } return View();
         }
@@ -114,11 +114,13 @@ namespace Kili.Controllers
 
                 collecteDonViewModel.montantglobalcollectes += collecte.MontantCollecte;
 
+               if (collecte.Dons != null) {     
                 foreach (Don don in collecte.Dons) {
 
                     collecteDonViewModel.listedon.Add(don);                    
                 }
                 }
+            }
 
             return View(collecteDonViewModel);
             
@@ -176,7 +178,7 @@ namespace Kili.Controllers
                         return View("Error");
                     }
                     donServices.SupprimerCollecte(id);
-                    return Redirect("AfficherCollectes");
+                    return RedirectToAction("AfficherCollectesDonsCompteConnecte");
                 }
 
             }

@@ -15,6 +15,7 @@ namespace Kili.Controllers
         private UserAccount_Services UserAccount_Services;
         private Adresse_Services Adresse_Services;
         private Abonnement_Services Abonnement_Services;
+        private DonServices Don_Services;
 
         public HomeController()
         {            
@@ -22,6 +23,7 @@ namespace Kili.Controllers
             UserAccount_Services = new UserAccount_Services();
             Adresse_Services = new Adresse_Services();
             Abonnement_Services = new Abonnement_Services();
+            Don_Services = new DonServices();
         }
 
         public IActionResult Index(IndexViewModel viewModel)
@@ -29,6 +31,8 @@ namespace Kili.Controllers
             viewModel.Authentifie = HttpContext.User.Identity.IsAuthenticated;
 
             viewModel.Associations = Association_Services.Obtenir3DernièresAssociations();
+
+            viewModel.Collectes = Don_Services.Obtenir3DernièresCollectes();
 
             var Role = User.FindFirst(ClaimTypes.Role);
 
