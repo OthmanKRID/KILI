@@ -6,6 +6,7 @@ namespace Kili.ViewModels
     {
         public Don Don { get; set; }
         public int IdCollecte { get; set; }
+        public Collecte Collecte { get; set; }  
         public bool Authentifie { get; set; }
 
     }

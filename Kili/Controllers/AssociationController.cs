@@ -105,8 +105,8 @@ namespace Kili.Controllers
         public IActionResult VoirProfilAssociation()
         {
             UserAccount CompteConnecte = UserAccount_Services.ObtenirUserAccountConnecte(HttpContext.User.Identity.Name);
-            AssociationViewModel viewModel = new AssociationViewModel() { compteConnecte = UserAccount_Services.ObtenirUserAccountConnecte(HttpContext.User.Identity.Name), association = CompteConnecte.Association };      
-            return View(viewModel);
+            AssociationViewModel viewModel = new AssociationViewModel() { compteConnecte = UserAccount_Services.ObtenirUserAccountConnecte(HttpContext.User.Identity.Name), association = CompteConnecte.Association };
+                        return View(viewModel);
 
         }
 

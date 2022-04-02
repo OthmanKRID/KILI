@@ -16,5 +16,7 @@ namespace Kili.ViewModels
         public string NewPassword { get; set; }
         public string Message { get; set; }
 
+        public string returnUrl { get; set; }
+
     }
 }

@@ -79,12 +79,8 @@
                                 @if (@Model.association.Abonnement.serviceAdhesion.EstActif)
                                 {
                                     <tr>
-                                       @* @if (@Model.association.Abonnement.serviceAdhesion.EstActif)
-                                        {
-                                            <td><a href="google.fr">oui</a></td>
-                                        }*@
                                         <td>Adhésion</td>
-                                        <td>@Model.association.Abonnement.serviceAdhesion.dateAbonnement</td>
+                                        <td>@Model.association.Abonnement.serviceAdhesion.dateAbonnement.ToString().Substring(0,10)</td>
                                         <td>@Model.association.Abonnement.serviceAdhesion.montant_paye €</td>
                                         <td><button type="submit" class="btn btn-default btn-primary"><i
                                                     class="fa fa-plus"></i>@Html.ActionLink("Gérer mes Adhésions", "GererServices") </button></td>
@@ -434,7 +430,7 @@
                                                                 @Html.DropDownListFor(m => m.association.Theme, new SelectList(Enum.GetValues(typeof(ThemeAssociation))), "Choisir le thème", new{@placeholder="", @id="email", @class="form-control"})
                                                             </div>
                                                         </div>
-
+                                                        @Html.HiddenFor(m => m.association.ImagePath)
 
                                                         <div class="form-group">
                                                             <div class="col-lg-offset-2 col-lg-10">

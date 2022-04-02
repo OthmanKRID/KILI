@@ -28,6 +28,8 @@
             @Html.ValidationMessageFor(m => Model.UserAccount.Mail)
             <br /><br />
             @Html.HiddenFor(m => Model.UserAccount.Telephone)
+            <br>
+            <label style="color:red">@Model.Message</label>
             <input type="submit" value="Créer" />
         </fieldset>
     }
