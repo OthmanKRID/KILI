@@ -35,21 +35,28 @@ namespace Kili.Controllers
         // Affiche une collecte à partir de son id
         public IActionResult AfficherCollecte(int id)
         {
-            if (id != 0)
-            {
-                DonServices donServices = new DonServices();
-                {
-                    Collecte collecte = donServices.ObtenirCollecte(id);
-                    if (collecte == null)
-                    {
-                        return View("Error");
-                    }
-                    return View(collecte);
-                }
-
+            Collecte collecte = new DonServices().ObtenirCollecte(id);
+            if (collecte != null)
+            {            
+                DonViewModel viewModel = new DonViewModel() { Don = new Don(), Collecte =collecte, IdCollecte = collecte.Id};
+                return View(viewModel);
             }
             return View("Error");
         }
+
+        [HttpPost]
+        public IActionResult AfficherCollecte(DonViewModel viewModel)
+        {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            { 
+            return RedirectToAction("CreerPaiement", "Paiement", new { actionID = viewModel.Don.Id, montant = viewModel.Don.Montant, typeAction = PaiementViewModel.TypeAction.Don });
+            }
+            else
+            {
+                return RedirectToAction("Authentification", "Login");
+            }
+        }
+
 
         // Affiche la liste des collectes de la BDD
         public IActionResult AfficherCollectes()
@@ -117,15 +124,20 @@ namespace Kili.Controllers
 
                 collecteDonViewModel.montantglobalcollectes += collecte.MontantCollecte;
 
-               if (collecte.Dons != null) {     
+
+                if (collecte.Dons != null)
+                {
+
                 foreach (Don don in collecte.Dons) {
 
                     collecteDonViewModel.listedon.Add(don);                    
                     }         
                 }
-            }
-            return View(collecteDonViewModel);
+
+                }
             
+
+            return View(collecteDonViewModel);            
         }
 
         // Modifie une collecte à partir de son Id

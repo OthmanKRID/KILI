@@ -52,7 +52,7 @@
                                                     @Html.HiddenFor(m=>Model.UserAccount.AssociationId)
                                                     @Html.HiddenFor(m=>Model.UserAccount.DonateurId)
                                                     @Html.HiddenFor(m=>Model.UserAccount.Role)
-
+                                                    @Html.HiddenFor(m=>Model.UserAccount.ImagePath)
                                      </fieldset>
 
                                     
@@ -61,7 +61,8 @@
                                     </div>
                                     <div class="col-md-3">
 
-                                        <input class="btn btn-primary" type="submit" value="Enregistrer Modification"/>
+                                        <input class="btn btn-primary" type="submit" value="Enregistrer Modification"/><br>
+                                        <label style="color:red">@Model.Message</label>
                                          <div class="form-group">
                                         <div class="col-lg-6">
                                          @Html.TextBoxFor(a => a.UserAccount.Image, new { placeholder = "Description", @type = "file", @class="file-pos", @id="exampleInputFile" })   

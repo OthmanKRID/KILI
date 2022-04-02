@@ -7,8 +7,15 @@
 <body>
     <section id="container">
         <!--barre NAV start-->
+<<<<<<< HEAD
 
 
+=======
+        <!--barre NAV end-->
+        <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">
+>>>>>>> 8143e4a2c3e17a400b7b9ff61dbce464986a3afa
                 <!--description asso-->
                 <div class="row">
                     <div class="col-md-12">
@@ -90,7 +97,9 @@
                             </div>
                             <div class="modal-body row">
                                 
+
                                 @using (Html.BeginForm("CreerCollecte","Collecte", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
                                 {
                                @*<form action="/action_page.php">*@
                                 <div class="col-md-2 img-modal">
@@ -118,12 +127,14 @@
                                    @*</form>*@
                                                                         
                                     </div>
+
                                     <div class="pull-down">
                                         <input type="submit" class="btn btn-primary" value="Valider"/>
                                         @*
                                         <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i>Insérer l'image</a>
                                         <a href="AfficherCollectesDonsCompteConnecte"><button class="btn btn-danger" type="button">Annuler</button></a>                                   
                                         <button class="btn btn-primary" type="button">Enregistrer</button>*@
+
                                     </div>
                                     </fieldset>
                                     }

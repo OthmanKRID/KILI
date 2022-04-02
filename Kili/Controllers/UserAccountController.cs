@@ -130,36 +130,47 @@ namespace Kili.Controllers
         [HttpPost]
         public IActionResult ModifierUserAccount(UserAccountViewModel viewModel)
         {
-            if (viewModel.UserAccount.Id != 0)
-            {
-                if (viewModel.UserAccount.Image != null)
+            UserAccount_Services userAccount_Services = new UserAccount_Services();
+            UserAccount verifUsername = userAccount_Services.ObtenirUserAccounts().Where(r => r.Mail == viewModel.UserAccount.Mail).FirstOrDefault();
+
+            if (verifUsername == null || verifUsername.Mail.Equals(new UserAccount_Services().ObtenirUserAccountConnecte(User.Identity.Name).Mail))
                 {
 
-                    if (viewModel.UserAccount.Image.Length > 0)
+                    if (viewModel.UserAccount.Id != 0)
                     {
-                        string uploads = Path.Combine(_webEnv.WebRootPath, "images");
-                        uploads = Path.Combine(uploads, "UserAccount");
-                        string filePath = Path.Combine(uploads, viewModel.UserAccount.Image.FileName);
-
-                        using (var stream = System.IO.File.Create(filePath))
+                        if (viewModel.UserAccount.Image != null)
                         {
-                            viewModel.UserAccount.Image.CopyTo(stream);
+
+                            if (viewModel.UserAccount.Image.Length > 0)
+                            {
+                                string uploads = Path.Combine(_webEnv.WebRootPath, "images");
+                                uploads = Path.Combine(uploads, "UserAccount");
+                                string filePath = Path.Combine(uploads, viewModel.UserAccount.Image.FileName);
+
+                                using (var stream = System.IO.File.Create(filePath))
+                                {
+                                    viewModel.UserAccount.Image.CopyTo(stream);
+
+                                }
+                            }
+                            viewModel.UserAccount.ImagePath = "/images/UserAccount/" + viewModel.UserAccount.Image.FileName;
 
                         }
+                    //else { viewModel.UserAccount.ImagePath = }
+
+                        //UserAccount_Services userAccount_Services = new UserAccount_Services();
+                        userAccount_Services.ModifierUserAccount(viewModel.UserAccount.Id, viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Mail, viewModel.UserAccount.Telephone, viewModel.UserAccount.Role, viewModel.UserAccount.AssociationId, viewModel.UserAccount.DonateurId, viewModel.UserAccount.AdresseId, viewModel.UserAccount.ImagePath);
+                        return RedirectToAction("ModifierUserAccount", new { @id = viewModel.UserAccount.Id });
                     }
-                    viewModel.UserAccount.ImagePath = "/images/UserAccount/" + viewModel.UserAccount.Image.FileName;
-
+                    else
+                    {
+                        return View("Error");
+                    }
                 }
-
-                UserAccount_Services userAccount_Services = new UserAccount_Services();
-                userAccount_Services.ModifierUserAccount(viewModel.UserAccount.Id, viewModel.UserAccount.Prenom, viewModel.UserAccount.Nom, viewModel.UserAccount.Mail, viewModel.UserAccount.Telephone, viewModel.UserAccount.Role, viewModel.UserAccount.AssociationId, viewModel.UserAccount.DonateurId, viewModel.UserAccount.AdresseId, viewModel.UserAccount.ImagePath);
-                return RedirectToAction("ModifierUserAccount", new { @id = viewModel.UserAccount.Id });                 
-            }
-            else
-            {
-                return View("Error");
-            }
+            viewModel.Message = "Email déjà enregistré sur le site";
+            return View(viewModel);
         }
+    
         
         // Fonction spécifique pour modifier le password en passant qui verifie que l'ancien utilisateur connait l'ancien password et compare un nouveau password avec l'ancien en BDD.
         public IActionResult ModifierPassword(int id, string oldPassword, string newPassword, string confirmationPassword, string message)

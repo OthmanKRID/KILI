@@ -20,10 +20,10 @@ namespace Kili.Controllers
         }
 
 
-        public IActionResult Authentification()
+        public IActionResult Authentification(UserAccountViewModel viewModel)
         {
                 
-                UserAccountViewModel viewModel = new UserAccountViewModel { Authentifie = HttpContext.User.Identity.IsAuthenticated };
+               viewModel.Authentifie = HttpContext.User.Identity.IsAuthenticated ;
                 if (viewModel.Authentifie)
                 {
                     viewModel.UserAccount = UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
@@ -54,17 +54,21 @@ namespace Kili.Controllers
 
                     HttpContext.SignInAsync(userPrincipal, new AuthenticationProperties() { IsPersistent = false });
 
-                    if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+                   /* if (returnUrl != null)
+                        return Redirect(returnUrl);*/
+                   if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
 
                     return Redirect("/");
                 }
-               ModelState.AddModelError("UserAccount.UserName", "UserName et/ou mot de passe incorrect(s)");
+                ModelState.AddModelError("UserAccount.UserName", "UserName et/ou mot de passe incorrect(s)");
+                return RedirectToAction("Authentification", ModelState);
             }
+            ModelState.AddModelError("UserAccount.UserName", "UserName et/ou mot de passe incorrect(s)");
+            return RedirectToAction("Authentification");
+            //viewModel.Authentifie = HttpContext.User.Identity.IsAuthenticated;
 
-            viewModel.Authentifie = HttpContext.User.Identity.IsAuthenticated;
-
-            return View("../Home/Index", new IndexViewModel() { Authentifie = HttpContext.User.Identity.IsAuthenticated , Associations = new Association_Services().Obtenir3DernièresAssociations() });
+            //return View("../Home/Index", new IndexViewModel() { Authentifie = HttpContext.User.Identity.IsAuthenticated , Associations = new Association_Services().Obtenir3DernièresAssociations() });
 
         }
 
