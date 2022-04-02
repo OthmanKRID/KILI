@@ -1,0 +1,45 @@
+﻿@model Kili.ViewModels.AssociationViewModel
+@using Kili.Models.General
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Détails Association";
+}
+
+    <h1>
+       Rechercher une association
+    </h1>
+
+@using (Html.BeginForm("VoirAssociations","Home"))
+                        {
+                        <fieldset class="register-form" id="register-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.association.Nom);
+                                @Html.TextBoxFor(m => m.association.Nom,  new { @id="nomAsso", @placeholder="Nom de l'association"})
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.association.Adresse.Ville);
+                                @Html.TextBoxFor(m => m.association.Adresse.Ville,  new { @id="villeAsso", @placeholder="Localisation"})                        
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="form-select">
+                                @Html.LabelFor(m => m.RechercheTheme);
+                                @Html.DropDownListFor(m => m.RechercheTheme, new SelectList(Enum.GetValues(typeof(RechercheTheme))), new { @id="course"})<br /><br />
+                                <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                            </div>
+                         </div>
+                            <div class="form-submit">
+                            <input type="submit" value="Valider" class="submit" name="submit" id="submit" />
+                        </div>
+
+                        </fieldset>
+
+}

@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Association\AjouterAssociation_old.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Views\Collecte\AfficherCollectes.cshtml" />
     <None Include="Views\Collecte\CreerCollecte.cshtml" />
     <None Include="Views\Collecte\ModifierCollecte.cshtml" />

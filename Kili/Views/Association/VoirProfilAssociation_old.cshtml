@@ -7,7 +7,7 @@
     ViewBag.Title = "Détails Association";
 }
 
- <section id="section-admin">
+ <section id="main-content">
             <section class="wrapper">
                 <!-- MODIFIER PROFIL -->
 
@@ -38,10 +38,10 @@
                                     <form class="form-signin" action="index.html">
                                         <div class="login-wrap">
 
-                                            <input type="text" class="form-control" placeholder="Prénom" value="@Model.compteConnecte.Prenom" autofocus>
-                                            <input type="text" class="form-control" placeholder="Nom" value="@Model.compteConnecte.Nom" autofocus>                                           
-                                            <input type="text" class="form-control" placeholder="Numéro" value="@Model.compteConnecte.Telephone" autofocus>
-                                            <input type="email" class="form-control" placeholder="Email" value="@Model.compteConnecte.Mail" autofocus>
+                                            <input type="text" class="form-control" placeholder="Prénom" value="@Model.compteConnecte.Prenom" readonly autofocus>
+                                            <input type="text" class="form-control" placeholder="Nom" value="@Model.compteConnecte.Nom" readonly autofocus>                                           
+                                            <input type="text" class="form-control" placeholder="Numéro" value="@Model.compteConnecte.Telephone" readonly autofocus>
+                                            <input type="email" class="form-control" placeholder="Email" value="@Model.compteConnecte.Mail" readonly autofocus>
                                             @*<input type="password" class="form-control" placeholder="Mot de passe" value="@Model.compteConnecte.Password" autofocus>*@
 
                                         </div>
@@ -79,14 +79,10 @@
                                 @if (@Model.association.Abonnement.serviceAdhesion.EstActif)
                                 {
                                     <tr>
-                                       @* @if (@Model.association.Abonnement.serviceAdhesion.EstActif)
-                                        {
-                                            <td><a href="google.fr">oui</a></td>
-                                        }*@
                                         <td>Adhésion</td>
                                         <td>@Model.association.Abonnement.serviceAdhesion.dateAbonnement.ToString().Substring(0,10)</td>
                                         <td>@Model.association.Abonnement.serviceAdhesion.montant_paye €</td>
-                                                                                <td><button type="submit" class="btn btn-default btn-primary"><i
+                                        <td><button type="submit" class="btn btn-default btn-primary"><i
                                                     class="fa fa-plus"></i>@Html.ActionLink("Gérer mes Adhésions", "GererServices") </button></td>
                                     </tr>
                                 }
@@ -97,9 +93,10 @@
                                             <td>Don</td>
                                             <td>@Model.association.Abonnement.serviceDon.dateAbonnement.ToString().Substring(0,10)</td>
                                             <td>@Model.association.Abonnement.serviceDon.montant_paye €</td>
-                                                                                        <td><button type="submit" class="btn btn-default btn-primary"><i
+                                            <td><button type="submit" class="btn btn-default btn-primary"><i
                                                     class="fa fa-plus"></i>@Html.ActionLink("Gérer Mes collectes", "AfficherCollectesDonsCompteConnecte", "Collecte") </button></td>
-                                        </tr>                                
+                                            </tr>
+                             
                                 }
                                 @if (@Model.association.Abonnement.serviceBoutique.EstActif)
                                 { 
@@ -107,10 +104,10 @@
                                             @*<td><a href="google.fr">oui</a></td>*@
                                             <td>Boutique</td>
                                             <td>@Model.association.Abonnement.serviceBoutique.dateAbonnement.ToString().Substring(0,10)</td>
-                                            <td>@Model.association.Abonnement.serviceBoutique.montant_paye €</td>
-                                                                                        <td><button type="submit" class="btn btn-default btn-primary"><i
+                                            <td>@Model.association.Abonnement.serviceBoutique.montant_paye €</td> 
+                                            <td><button type="submit" class="btn btn-default btn-primary"><i
                                                     class="fa fa-plus"></i>@Html.ActionLink("Gérer Ma Boutique", "GererServices") </button></td>
-                                        </tr>
+                                            </tr>
                                 }
                                     </tbody>
                                 </table>
@@ -137,13 +134,6 @@
                                 <section class="panel">
                                     <header class="panel-heading tab-bg-dark-navy-blue">
                                         <ul class="nav nav-tabs nav-justified ">
-
-                                             <li>
-                                                <a data-toggle="tab" href="#settings">
-                                                    Mon association
-                                                </a>
-                                            </li>
-
                                             <li class="active">
                                                 <a data-toggle="tab" href="#overview">
                                                     Mon historique
@@ -151,13 +141,16 @@
                                             </li>
                                        
                                      
-                                           
+                                            <li>
+                                                <a data-toggle="tab" href="#settings">
+                                                    Mon association
+                                                </a>
+                                            </li>
                                         </ul>
                                     </header>
-
                                     <div class="panel-body">
                                         <div class="tab-content tasi-tab">
-                                            <div id="overview" class="tab-pane ">
+                                            <div id="overview" class="tab-pane active">
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="recent-act">
@@ -204,9 +197,152 @@
                                                     
                                                 </div>
                                             </div>
-                                          
-                                           
-                                            <div id="settings" class="tab-pane active" >
+                                            <div id="job-history" class="tab-pane ">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="timeline-messages">
+                                                            <h3>Take a Tour</h3>
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            13 January 2013
+                                                                        </div>
+                                                                        <div class="second bg-terques ">
+                                                                            Join as Product Asst. Manager
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            10 February 2012
+                                                                        </div>
+                                                                        <div class="second bg-red">
+                                                                            Completed Provition period and Appointed as
+                                                                            a permanent Employee
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            2 January 2011
+                                                                        </div>
+                                                                        <div class="second bg-purple">
+                                                                            Selected Employee of the Month
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            4 March 2010
+                                                                        </div>
+                                                                        <div class="second bg-green">
+                                                                            Got Promotion and become area manager of
+                                                                            California
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            3 April 2009
+                                                                        </div>
+                                                                        <div class="second bg-yellow">
+                                                                            Selected the Best Employee of the Year 2013
+                                                                            and was awarded
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            23 May 2008
+                                                                        </div>
+                                                                        <div class="second bg-terques">
+                                                                            Got Promotion and become Product Manager and
+                                                                            was transper from Branch to Head Office.
+                                                                            Lorem ipsum dolor sit amet
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            14 June 2007
+                                                                        </div>
+                                                                        <div class="second bg-blue">
+                                                                            Height Sales scored and break all of the
+                                                                            previous sales record ever in the company.
+                                                                            Awarded
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+                                                            <!-- Comment -->
+                                                            <div class="msg-time-chat">
+                                                                <div class="message-body msg-in">
+                                                                    <span class="arrow"></span>
+                                                                    <div class="text">
+                                                                        <div class="first">
+                                                                            1 January 2006
+                                                                        </div>
+                                                                        <div class="second bg-green">
+                                                                            Take 15 days leave for his wedding and
+                                                                            Honeymoon & Christmas
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /comment -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+      
+
+                                            
+                                            <div id="settings" class="tab-pane ">
                                              
                                             @using (Html.BeginForm("ModifierAssociation","Association", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                             {
@@ -296,13 +432,12 @@
                                                         </div>
                                                         @Html.HiddenFor(m => m.association.ImagePath)
 
-
                                                         <div class="form-group">
                                                             <div class="col-lg-offset-2 col-lg-10">
                                                                 <input class="btn btn-primary"
                                                                     type="submit" value="Enregistrer"/>
                                                                 <button class="btn btn-default"
-                                                                    type="button">Annuler</button>
+                                                                    type="button">Cancel</button>
                                                             </div>
                                                         </div>
                                                         </div>

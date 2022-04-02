@@ -6,48 +6,57 @@
     Layout = "_Layout";
     ViewBag.Title = "GererServices";
 }
+<section id="section-kili">
+    <div class="container">
+        <div class="row">
 
-    <h1>
-       Gestion des services
-    </h1>
+            <div class="col-md-12 col-sm-12">
+                <div class="section-title">
+                    <h1> Des services dédiés aux associations  </h1>
+                    <div class="pricing-info">
+                        <p>
+                            Rejoignez les 187 261 associations et clubs déjà présents sur Kili.
+                            Grâce à notre modèle alternatif et solidaire, bénéficiez gratuitement de tous nos outils et de l’accompagnement
+                            de notre équipe pour développer
+                            et financer votre association.
+                        </p>
+                    </div>
 
+                </div>
+            </div>
 
-        <Label>Listes des Services Proposés :</Label>
-        <table border=1> 
-        <tr>
-        <th>Type de Service</th>
-        <th>Durée de l'abonnement</th>
-        <th>Prix</th>
-        <th></th>
-        </tr>
-
-        @foreach(var service in Model.listesServicesProposes)
-        {
-        
-            @Html.HiddenFor(a => a.abonnement)
-            @Html.HiddenFor(a => a.ServiceAdhesion)
-            @Html.HiddenFor(a => a.ServiceDon)
-
-
-            @if ((Model.abonnement.serviceAdhesion.EstActif == false && @service.TypeService == TypeService.Adhesion ) || (Model.abonnement.serviceDon.EstActif == false && @service.TypeService == TypeService.Don) || (Model.abonnement.serviceBoutique.EstActif == false && @service.TypeService == TypeService.Boutique))
-
+            @foreach (var service in Model.listesServicesProposes)
             {
-            <tr>
-                <th>@service.TypeService</th>
-                <th>@service.duree_mois mois</th>
-                <th>@service.prix €</th>
-                <th>@Html.ActionLink("Ajouter au panier", "AjouterService", "Abonnement",  new { id = @service.Id })</th>
-            </tr>         
+                @Html.HiddenFor(a => a.abonnement)
+                @Html.HiddenFor(a => a.ServiceAdhesion)
+                @Html.HiddenFor(a => a.ServiceDon)
+
+                @if ((Model.abonnement.serviceAdhesion.EstActif == false && @service.TypeService == TypeService.Adhesion) || (Model.abonnement.serviceDon.EstActif == false && @service.TypeService == TypeService.Don) || (Model.abonnement.serviceBoutique.EstActif == false && @service.TypeService == TypeService.Boutique))
+
+                {
+                    <div class="column">
+                        <div class="card-services">
+
+                            <div class="container">
+                                <h2>@service.TypeService</h2>
+                                <p class="title">@service.duree_mois mois</p>
+                                <p>@service.prix €</p>
+                                <button class="button" id="btn-val">@Html.ActionLink("Ajouter", "AjouterService", "Abonnement",  new { id = @service.Id })</button>
+                            </div>
+                        </div>
+                    </div>
+                }
             }
-        }
-        </table>   
-         <button button type="button" class="button">@Html.ActionLink("Accéder au panier", "PanierServices", "Abonnement")</button>
-         
-         
-    <br />
 
 
-    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+            <button button type="button" class="button-services">@Html.ActionLink("Accéder au panier", "PanierServices", "Abonnement")</button>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 

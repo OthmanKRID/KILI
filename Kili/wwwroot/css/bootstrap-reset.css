@@ -1,25 +1,72 @@
+
+body {
+    font-family: 'poppinsRegular';
+    overflow-x: hidden;
+    background: #f9f9f9;
+}
+
+@font-face {
+    font-family: 'poppinsBlack';
+    font-style: normal;
+    font-weight: 900;
+    src: url("../fonts/Poppins-Black.ttf");
+    /* IE9 Compat Modes */
+}
+
+@font-face {
+    font-family: 'poppinsMedium';
+    font-style: normal;
+    font-weight: 300;
+    src: url("../fonts/Poppins-Medium.ttf");
+    /* IE9 Compat Modes */
+}
+
+@font-face {
+    font-family: 'poppinsBold';
+    font-style: normal;
+    font-weight: 300;
+    src: url("../fonts/Poppins-Bold.ttf");
+    /* IE9 Compat Modes */
+}
+
+@font-face {
+    font-family: 'poppinsRegular';
+    font-style: normal;
+    font-weight: 300;
+    src: url("../fonts/Poppins-Regular.ttf");
+    /* IE9 Compat Modes */
+}
+
+      
+
+
 /*anchor*/
 a {
     color: #32323A;
 }
 
-a:hover {
-    color: #222227;
-}
+    a:hover {
+        color: #eff2f7;
+    }
 
 /*panel*/
 .panel {
     border: none;
     box-shadow: none;
+    background: #fafafa;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .panel-heading {
-    border-color:#eff2f7 ;
-    font-size: 13px;
+    border-color: #eff2f7;
+    font-size: 16px;
     font-weight: 400;
     background: #fafafa;
-    text-transform: uppercase;
-    padding: 15px;
+
+    padding: 16px;
+    font-family: 'poppinsBold';
 }
 
 .panel-title {
@@ -120,7 +167,7 @@ a:hover {
 .form-control {
     border: 1px solid #e2e2e4;
     box-shadow: none;
-    color: #c2c2c2;
+    color: #32323A;
 }
 
 
@@ -148,7 +195,7 @@ ul {
 
 .btn-default {
     background-color: #c7cbd6;
-    border-color: #c7cbd6;
+    border-radius: 50px;
     color: #fff;
 }
 
@@ -165,16 +212,18 @@ ul {
 }
 
 .btn-primary {
-    background-color: #1fb5ad;
-    border-color: #1fb5ad;
+    background-color: #F3D0A1;
+    border: none;
     color: #FFFFFF;
+    border-radius: 50px;
+    margin : 10px;
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
-    background-color: #1ca59e;
-    border-color: #1ca59e;
-    color: #FFFFFF;
-}
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+        background-color: #29ca8e;
+        color: #FFFFFF;
+        border: none;
+    }
 
 .btn-success {
     background-color: #95b75d;
@@ -257,6 +306,7 @@ ul {
     background-color: #FFFFFF;
     border-color: rgba(150, 160, 180, 0.3);
     box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.05) inset;
+    
 }
 
 /*breadcrumbs*/
