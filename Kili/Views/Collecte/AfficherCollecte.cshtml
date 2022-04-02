@@ -1,0 +1,63 @@
+﻿@model Kili.ViewModels.DonViewModel
+@using Kili.Models
+@using Kili.Models.Dons
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Index";
+}
+
+
+     <link rel="stylesheet" href="~/css/Vignettestyle.css">
+     <link rel="stylesheet" href="~/css/ModalCot.css">
+
+<body>
+
+     
+
+<section data-stellar-background-ratio="0.5">
+          <div class="overlay"></div>
+          <p style="color:transparent">----------------------------------------------------</p>
+          <p style="color:transparent">----------------------------------------------------</p>
+          <div class="container">
+               <div class="row">
+                    <div class="col-md-12">
+                         <div class="col-md-6 col-md-6">
+                                   <h1>@Model.Collecte.Nom</h1>
+                                   <br>
+                                   <p>@Model.Collecte.Descriptif</p><br>
+
+                                    <p>Faire un don</p><br>
+                                    <p>@Model.Collecte.Descriptif</p><br>
+                                   
+                                    @using (Html.BeginForm())
+                                    {
+                                    <fieldset class="register-form" id="register-form">
+                                    @Html.TextBoxFor(m => m.Don.Montant,  new { @id="montantDon", @placeholder="" , @required="required" })
+
+                                    <div class="form-submit">                            
+                                     <input type="submit" value="Valider Don" class="submit" name="submit" id="submit" />
+                                    </div>
+                                    </fieldset>
+
+                                    }
+                     </div>
+              </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!-- SCRIPTS -->
+<script src="~/js/jquery.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/jquery.stellar.min.js"></script>
+<script src="~/js/owl.carousel.min.js"></script>
+<script src="~/js/smoothscroll.js"></script>
+<script src="~/js/custom.js"></script>
+<script>src="~/js/ModalCOT.js"</script>
+
+</body>

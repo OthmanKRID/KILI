@@ -12,6 +12,7 @@ namespace Kili.Models.Dons
         [Required]
         public int Montant { get; set; }
         [Column(TypeName = "date")]
+
         public DateTime Date { get; set; }
         [Required]
         public TypeRecurrence Recurrence { get; set; }

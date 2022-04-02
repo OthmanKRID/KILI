@@ -7,82 +7,6 @@
 <body>
     <section id="container">
         <!--barre NAV start-->
-        <header class="header fixed-top clearfix">
-            <div class="brand">
-                <a href="index.html" class="logo">
-                    <img src="images/logo.png" alt="">
-                </a>
-            </div>
-            <div class="nav notify-row" id="top_menu">
-                <!--  notification start -->
-                <ul class="nav top-menu">
-                    <!-- notification dropdown start-->
-                    <li id="header_notification_bar" class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                          <!--  <i class="fa fa-bell-o"></i>-->
-                            <span class="badge bg-warning">3</span>
-                        </a>
-                        <ul class="dropdown-menu extended notification">
-                            <li>
-                                <p>Notifications</p>
-                            </li>
-                            <li>
-                                <div class="alert alert-info clearfix">
-                                    <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                                    <div class="noti-info">
-                                        <a href="#"> Notifs #1 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="alert alert-danger clearfix">
-                                    <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                                    <div class="noti-info">
-                                        <a href="#"> Notifs #2</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="alert alert-success clearfix">
-                                    <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                                    <div class="noti-info">
-                                        <a href="#"> Notifs #3</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- notification dropdown end -->
-                </ul>
-            </div>
-            <!--  notification end -->
-
-
-            <!--search & user info start-->
-            <div class="top-nav clearfix">
-                <ul class="nav pull-right top-menu">
-                    <!-- user login dropdown start-->
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" src="images/avatar1_small.jpg">
-                            <span class="username">Mon compte</span>
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu extended logout">
-                            
-                            <li><a href="#"><i class=" fa fa-suitcase"></i>Ma boutique</a></li>  
-                            <li><a href="#"><i class=" fa fa-suitcase"></i>Mes collectes</a></li>  
-                            <li><a href="#"><i class=" fa fa-suitcase"></i>Mes adhésions</a></li> 
-                            <li><a href="#"><i class="fa fa-cog"></i> Mon profil</a></li>                         
-                            <li><a href="login.html"><i class="fa fa-key"></i> Se deconnecter</a></li>
-                            
-                        </ul>
-                    </li>
-                    <!-- user login dropdown end -->
-                </ul>
-                <!--search & user info end-->
-            </div>
-        </header>
         <!--barre NAV end-->
         <!--main content start-->
         <section id="main-content">
@@ -163,13 +87,13 @@
                             </div>
                             <div class="modal-body row">
                                 
-                                @using (Html.BeginForm("CreerCollecte","Collecte"))
 
                                @*<form action="/action_page.php">*@
-                                <div class="col-md-5 img-modal">
+                                @*<div class="col-md-5 img-modal">
                                     <img src="images/gallery/image1.jpg" alt="">
                                     <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i>Insérer l'image</a>
-                                </div>
+                                </div>*@
+                               @using (Html.BeginForm("CreerCollecte","Collecte"))
                                 {
                                      <fieldset>
                                 <div class="col-md-7">
@@ -194,7 +118,9 @@
                                     </div>
                                     <div class="pull-right">
                                         <a href="AfficherCollectesDonsCompteConnecte"><button class="btn btn-danger" type="button">Annuler</button></a>
-                                        <input type="submit" class="btn btn-primary" value="enregistrer"/>
+
+                                        <input class="btn btn-primary" type="submit" value="Créer"/>
+                                        @*<input type="submit" class="btn btn-primary" value="enregistrer"/>*@
                                         @*<button class="btn btn-primary" type="button">Enregistrer</button>*@
                                     </div>
                                     </fieldset>

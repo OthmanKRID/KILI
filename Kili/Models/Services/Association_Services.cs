@@ -86,7 +86,7 @@ namespace Kili.Models.Services
         //Fonction permettant d'obtenir une association à partir de son Id
         public Association ObtenirAssociation(int id)
         {
-            return _bddContext.Associations.Include(a => a.Adresse).Include(a => a.Abonnement).ThenInclude(abo => abo.serviceBoutique).Include(a => a.Abonnement).ThenInclude(abo => abo.serviceAdhesion).Include(a => a.Abonnement).ThenInclude(abo => abo.serviceDon).FirstOrDefault(x => x.Id == id); ;
+            return _bddContext.Associations.Include(a => a.Adresse).Include(a => a.Abonnement).ThenInclude(abo => abo.serviceBoutique).Include(a => a.Abonnement).ThenInclude(abo => abo.serviceAdhesion).Include(a => a.Abonnement).ThenInclude(abo => abo.serviceDon).ThenInclude(s => s.Collectes).FirstOrDefault(x => x.Id == id); ;
         }
 
         //Fonction permettant d'obtenir une association à partir de son Id en format string
