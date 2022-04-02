@@ -41,9 +41,9 @@ namespace Kili.Controllers
             return Redirect("/login/authentification");
         }
 
-        [ActionName("CreerPaiement")]
+        //[ActionName("CreerPaiement")]
         [HttpPost]
-        public IActionResult CreerPaiementPost(PaiementViewModel viewModel)
+        public IActionResult CreerPaiement(PaiementViewModel viewModel)
         {
             //if (!ModelState.IsValid) { 
 
@@ -94,11 +94,19 @@ namespace Kili.Controllers
                     Association association = association_Services.ObtenirAssociation(abonnement.Id);
                     paiementServices.ModifierPaiement(id, viewModel.Paiement.Montant, association.Id);
                 }
-                
 
-                return View("creerattestation", viewModel); //new { ActionID = viewModel.ActionID, Action = viewModel.Action, Paiement = new Paiement() { Montant = viewModel.Paiement.Montant, DatePaiement = viewModel.Paiement.DatePaiement }, MoyenPaiement = new MoyenPaiement() { moyenPaiement = viewModel.MoyenPaiement.moyenPaiement } }
+
+                //return View("creerattestation", viewModel); //new { ActionID = viewModel.ActionID, Action = viewModel.Action, Paiement = new Paiement() { Montant = viewModel.Paiement.Montant, DatePaiement = viewModel.Paiement.DatePaiement }, MoyenPaiement = new MoyenPaiement() { moyenPaiement = viewModel.MoyenPaiement.moyenPaiement } }
+
+                return View("Merci");
             }
             // } return View();
+        }
+
+        public IActionResult Merci()
+
+        {
+            return Redirect("/home/index");
         }
 
         // Appel de la fonction attestation

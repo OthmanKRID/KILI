@@ -115,6 +115,17 @@ namespace Kili.Models.Services
             return donateur.Id;
         }
 
+        //Fonction permettant de créer un donateur
+        public int CreerDonateur()
+        {
+
+            Donateur donateur = new Donateur() ;
+            _bddContext.Donateurs.Add(donateur);
+            _bddContext.SaveChanges();
+
+            return donateur.Id;
+        }
+
         // Fonction permettant de modifier un donateur. 
         public void ModifierDonateur(int id, int? adresseID)
         {

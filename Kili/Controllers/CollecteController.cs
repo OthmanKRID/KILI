@@ -5,6 +5,7 @@ using Kili.Models.Services;
 using Kili.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using static Kili.ViewModels.PaiementViewModel;
 
 namespace Kili.Controllers
 {
@@ -39,7 +40,9 @@ namespace Kili.Controllers
             if (collecte != null)
             {            
                 DonViewModel viewModel = new DonViewModel() { Don = new Don(), Collecte =collecte, IdCollecte = collecte.Id};
+
                 return View(viewModel);
+
             }
             return View("Error");
         }
@@ -47,9 +50,46 @@ namespace Kili.Controllers
         [HttpPost]
         public IActionResult AfficherCollecte(DonViewModel viewModel)
         {
+            UserAccount_Services UserAccount_Services = new UserAccount_Services();
+
             if (HttpContext.User.Identity.IsAuthenticated)
-            { 
-            return RedirectToAction("CreerPaiement", "Paiement", new { actionID = viewModel.Don.Id, montant = viewModel.Don.Montant, typeAction = PaiementViewModel.TypeAction.Don });
+            {
+                DonServices donservices = new DonServices();
+
+                //Fonction plus utilisé car nous ne requèrons finalement pas un champ adresse pour etre donateur. 
+                /*
+                //Regarde si l'utilisateur n'a pas d'adresse enregistrée et alors le redirige vers la création d'une adresse
+                if (UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).AdresseId == null)
+                {
+                    return Redirect("/adresse/creeradresse");
+                }
+                */
+
+                //Regarde si l'utilisateur n'est pas enregistré comme donateur et alors crée un donateur en y associant l'Id de l'adresse
+                if (UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).DonateurId == null)
+                {
+
+                    UserAccount ua = UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
+
+                    // ATTENTION FONCTION A TESTER : il s'agit d'une rustine temporaire du fait qu'une adresse n'est plus nécessaire.
+                    int idtemp = donservices.CreerDonateur();
+
+                    UserAccount_Services.ModifierUserAccount(ua.Id, ua.Prenom, ua.Nom, ua.Mail, ua.Telephone, ua.Role, ua.AssociationId, idtemp, ua.AdresseId, ua.ImagePath);
+
+                }
+
+                //Fonction plus utilisée car on ne demande plus nécessairement l'adresse.
+                /*
+               //Si l'utilisateur est déjà donateur, alors on modifie celui-ci en y associant l'adresse
+               else
+               {
+                   donservices.ModifierDonateur((int)UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).DonateurId, UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).AdresseId);
+
+               }*/
+
+                int id = donservices.CreerDon(viewModel.Don.Montant, viewModel.Don.Recurrence, UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).DonateurId, viewModel.IdCollecte);
+
+                return RedirectToAction("CreerPaiement", "Paiement", new { actionID = id, montant = viewModel.Don.Montant, typeaction = TypeAction.Don });
             }
             else
             {

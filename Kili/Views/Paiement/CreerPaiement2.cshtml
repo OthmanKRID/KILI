@@ -1,0 +1,89 @@
+﻿
+@model Kili.ViewModels.PaiementViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Paiement";
+}
+<
+    <body>
+
+        <section id="home" classedata-stellar-background-ratio="0.5">
+
+
+          <div class="row">
+               <div class="col-75">
+                 <div class="container" style="margin:200px;">
+
+               @using (Html.BeginForm())  {
+                          
+                    <fieldset action="/action_page.php" >
+                   
+                       <div class="col-50">
+                         <h3>Montant : @Model.Paiement.Montant €</h3>
+                         <br/>
+                         <h4 style="margin-left:8px; margin-bottom:10px;"><label for="fname">Paiement par carte</label></h4>
+                         
+                         @*<div class="icon-container">
+                           <i class="fa fa-cc-visa" style="color:navy;"></i>
+                           <i class="fa fa-cc-amex" style="color:blue;"></i>
+                           <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                           <i class="fa fa-cc-discover" style="color:orange;"></i>
+               
+                         </div>*@
+                         <div class="row">
+                         <label for="cname" style="margin-left:20px; margin-right:20px;">Titulaire de la carte</label>
+                         @Html.TextBoxFor(m => Model.MoyenPaiement.NomTitulaire , new { @type="text", @id="cname", @name="cardname", @placeholder="Vincent Gaudel" })
+                         </div>
+                         <div class="row">
+                         <label for="ccnum" style="margin-left:20px; margin-right:35px;">Numéro de carte</label>
+                         @Html.TextBoxFor(m => Model.MoyenPaiement.Numero, new { @type="text", @id="ccnum", @name="cardnumber", @placeholder="1111-2222-3333-4444" })
+                         @Html.ValidationMessageFor(m => Model.MoyenPaiement.Numero)
+                         
+                         </div>
+                         <div class="row">
+                           <div class="col-50">
+                          <label for="expmonth" style="margin-left:20px; margin-right:32px;">Date d'expiration</label>
+                            @Html.TextBoxFor(m => Model.MoyenPaiement.DateExpiration, new { @type="text", @id="expmonth", @name="expmonth", @placeholder="04/22" })
+                            @Html.ValidationMessageFor(m => Model.MoyenPaiement.DateExpiration)                           
+                         </div>
+                         </div>
+                         <div class="row">
+                           <div class="col-50">
+                             <label for="cvv" style="margin-left:20px; margin-right:123px;">CVV</label>
+                            @Html.TextBoxFor(m => Model.MoyenPaiement.Cryptogramme, new { @type="text", @id="cvv", @name="cvv", @placeholder="352" })
+                            @Html.ValidationMessageFor(m => Model.MoyenPaiement.Cryptogramme)
+                         </div>
+                         </div>
+                       </div>
+                       <br/>
+                       <div class="col-50">
+                           <h4 style="margin-bottom:10px;"><label for="fname">Paiement par Paypal</label></h4>                      
+                         <label for="cname" style="margin-right:108px;">Paypal</label>
+                         @Html.TextBoxFor(m => Model.MoyenPaiement.Identifiant, new { @type="text", @id="paypal", @name="Identifiant", @placeholder="Compte Paypal" })                       
+                    </div>
+                            @Html.HiddenFor(m=>Model.Action)
+                            @Html.HiddenFor(m=>Model.ActionID)
+                            @Html.HiddenFor(m=>Model.Paiement.Id)
+                            @Html.HiddenFor(m=>Model.Paiement.DatePaiement)
+                            @Html.HiddenFor(m=>Model.Paiement.AssociationId)
+                            @Html.HiddenFor(m=>Model.Paiement.MoyenPaiementId)
+            </fieldset>
+            
+                     <input type="submit" value="Valider le Paiement" class="button" style="margin-top:20px;"/>}
+                     </div>
+                     @*<label>
+                       <input type="checkbox" checked="checked" name="sameadr"> Adresse de livraison même que l'adresse de facturation
+                     </label>*@
+
+            
+                      
+
+              
+          </div>
+         </div>
+
+
+     </section>
+
+
+    </body>

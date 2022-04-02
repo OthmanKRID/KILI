@@ -4,22 +4,23 @@
     Layout = "_Layout";
     ViewBag.Title = "Paiement";
 }
-<
+    <link rel="stylesheet" href="~/css/Paidstyle.css">
+
     <body>
         <section id="home" classedata-stellar-background-ratio="0.5">
           
           <div class="row">
-               <div class="col-75">
+               <div class="col-75paid">
                  <div class="container">
 
                @using (Html.BeginForm())  {
                           
                     <fieldset action="/action_page.php" >
                    
-                       <div class="col-50">
+                       <div class="col-50paid">
                          <h3>Paiement</h3>
                          <label for="fname">Paiement par carte</label>
-                         <div class="icon-container">
+                         <div class="icon-container1">
                            <i class="fa fa-cc-visa" style="color:navy;"></i>
                            <i class="fa fa-cc-amex" style="color:blue;"></i>
                            <i class="fa fa-cc-mastercard" style="color:red;"></i>
@@ -30,26 +31,20 @@
 
                          
                          <label for="cname">Titulaire de la carte</label>
-                         @Html.TextBoxFor(m => Model.MoyenPaiement.NomTitulaire , new { @type="text", @id="cname", @name="cardname", @placeholder="Vincent Gaudel", @readonly = "true" })
+                         @Html.TextBoxFor(m => Model.MoyenPaiement.NomTitulaire , new { @type="text", @id="cname", @name="cardname", @placeholder="Vincent Gaudel" })
                          <label for="ccnum">Numéro de carte</label>
                          @Html.TextBoxFor(m => Model.MoyenPaiement.Numero, new { @type="text", @id="ccnum", @name="cardnumber", @placeholder="1111-2222-3333-4444" })
                          @Html.ValidationMessageFor(m => Model.MoyenPaiement.Numero)
                          <label for="expmonth">Date d'expiration</label>
                          @Html.TextBoxFor(m => Model.MoyenPaiement.DateExpiration, new { @type="text", @id="expmonth", @name="expmonth", @placeholder="04/22" })
                         @Html.ValidationMessageFor(m => Model.MoyenPaiement.DateExpiration)
-                         <div class="row">
-                           <div class="col-50">
-                           </div>
-                           <div class="col-50">
-                             <label for="cvv">CVV</label>
+                         <label for="cvv">CVV</label>
                           @Html.TextBoxFor(m => Model.MoyenPaiement.Cryptogramme, new { @type="text", @id="cvv", @name="cvv", @placeholder="352" })
-                          @Html.ValidationMessageFor(m => Model.MoyenPaiement.Cryptogramme)
-                         </div>
-                         </div>
+                          @Html.ValidationMessageFor(m => Model.MoyenPaiement.Cryptogramme)                        
                        </div>
-                       <div class="col-50">
+                       <div class="col-50paid">
                        <label for="fname">Paiement par Paypal</label>
-                         <div class="icon-container">
+                         <div class="icon-container1">
                            <i class="fa fa-cc-paypal" style="color:rgb(0, 60, 255);"></i>
                          </div>
                          <label for="cname">Paypal</label>
@@ -66,32 +61,15 @@
 
                      </div>
                      <label>
-                       <input type="checkbox" checked="checked" name="sameadr"> Adresse de livraison même que l'adresse de facturation
+                       @*<input type="checkbox" checked="checked" name="sameadr"> Adresse de livraison même que l'adresse de facturation*@
                      </label>
-                     <input type="submit" value="Valider le Paiement" class="btn"/>
+                     <input type="submit" value="Valider le Paiement" class="button" style="margin-left:20px;"/>
                                            
               
                </div>
                </div>
              
-               <div class="col-25">
-                 <div>
-                   <h4>Panier
-                     <span class="price" style="color:black">
-                       <i class="fa fa-shopping-cart"></i>
-                       <b>4</b>
-                     </span>
-                   </h4>
-                   <p><a href="#">Product 1</a> <span class="price">15€</span></p>
-                   <p><a href="#">Product 2</a> <span class="price">5€</span></p>
-                   <p><a href="#">Product 3</a> <span class="price">8€</span></p>
-                   <p><a href="#">Product 4</a> <span class="price">2€</span></p>
-                   <hr>
-                   <p>Total <span class="price" style="color:black"><b>30€</b></span></p>
-                 </div>
-               </div>
-             </div>
-          </div>
+
      </section>
 
 

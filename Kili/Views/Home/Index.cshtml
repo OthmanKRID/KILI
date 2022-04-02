@@ -69,7 +69,7 @@
                                                        <div class="container">
                                                             <h2>@association.Nom</h2>
                                                             <p class="title">@association.Theme</p>
-                                                            <p>@association.Description</p>
+                                                            @*<p >@association.Description</p>*@
                                                             <p>@association.Adresse.Ville</p>
                                                             <p><button class="button">@Html.ActionLink("Découvrir", "VoirDetailsAssociation", "Association" , new { id = @association.Id})</button></p>
                                                        </div>
