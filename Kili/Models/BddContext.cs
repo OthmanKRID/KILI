@@ -54,7 +54,7 @@ namespace Kili.Models
 
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                optionsBuilder.UseMySql("server=localhost;user id=root;password=P@ssw0rd5;database=Kili");
+                optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=Kili");
             }
             else
             {

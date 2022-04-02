@@ -1,18 +1,10 @@
-/*
-
-Template 2106 Soft Landing
-
-http://www.tooplate.com/view/2106-soft-landing
-	
-*/
  
-  @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400');
 
-  body {
-    font-family: 'Open Sans', sans-serif;
+body {
+    font-family: 'poppinsRegular';
     overflow-x: hidden;
     background: #f9f9f9;
-  } 
+} 
 
   @font-face {
     font-family: 'poppinsBlack';
@@ -70,10 +62,11 @@ http://www.tooplate.com/view/2106-soft-landing
     font-size: 14px;
     font-weight: normal;
     line-height: 24px;
-    font-family: 'poppinsRegular';
-    
+    font-family: 'poppinsRegular';   
 
   }
+
+
 
 
 
@@ -86,7 +79,7 @@ http://www.tooplate.com/view/2106-soft-landing
   }
 
   a {
-    color: #202020;
+    color: #ffffff;
     text-decoration: none !important;
   }
 
@@ -117,10 +110,31 @@ http://www.tooplate.com/view/2106-soft-landing
     padding-bottom: 40px;
   }
 
+
+/*UPDATE*/
   section {
     position: relative;
     padding: 40px 0;
+
   }
+/*UPDATE*/
+#section-kili {
+    padding-top: 12em;
+    min-height: 90vh;
+    position: relative;
+    background: url('../images/back.svg') no-repeat right;
+    background-size :cover;
+}
+
+#section-admin {
+    padding-top: 12em;
+    min-height: 90vh;
+    position: relative;
+    background: linear-gradient(to right, #E55E32, #ffffff00);
+    background: #E3D6CE;
+    background: url('../images/back.svg') no-repeat right;
+    background-size: cover;
+}
 
   #contact,
   footer {
@@ -316,6 +330,18 @@ http://www.tooplate.com/view/2106-soft-landing
     position: relative;
     
   }
+
+#home-explorer {
+    background: url('../images/home-asso.png') no-repeat right;
+    vertical-align: middle;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding-top: 12em;
+    min-height: 90vh;
+    position: relative;
+}
 
   #home h1 {
     color: #272727;
@@ -821,10 +847,17 @@ text-align: center;
 }
 
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 10PX;
-  padding-bottom: 0px;
-  
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10PX;
+    padding-bottom: 0px;
+    background: #ffffffa4;
+}
+
+.card-services {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10PX;
+    padding-bottom: 0px;
+    background: #ffffffef;
 }
 
 .container {
@@ -853,7 +886,111 @@ text-align: center;
   margin: 10px;
 }
 
+.button-services {
+    background: #e55e32;
+    border: 0;
+    border-radius: 50px;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: normal;
+    padding: 12px 30px;
+    transition: 0.5s 0.2s;
+    margin: 10px;
+}
+
 .button:hover {
   background: #272727;
   color: #ffffff;
+}
+
+#btn-supp {
+    border: 0;
+    border-radius: 50px;
+    color: #272727;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 12px 30px;
+    transition: 0.5s 0.2s;
+}
+
+    #btn-supp:hover {
+        background: #ee490e;
+        color: #ffffff;
+    }
+
+
+#btn-val {
+    background: #E55E32;
+    border: 0;
+    border-radius: 50px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 12px 30px;
+    transition: 0.5s 0.2s;
+    margin: 10px;
+}
+
+#btn-val:hover {
+    background: #29ca8e;
+    color: #ffffff;
+}
+
+
+
+.wrapper {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin : 20px;
+}
+
+.search_box {
+    background: #E55E32;
+    position: relative;
+    padding: 15px;
+    border-radius: 50px;
+    display: flex;
+    width: 50%;
+    margin: 20px;
+    margin-left : 0px;
+}
+
+.search_box_2 {
+    background: #E55E32;
+    position: relative;
+    padding: 15px;
+    border-radius: 50px;
+    display: flex;
+    width: 90%;
+    margin: 20px;
+    margin-left: 0px;
+}
+
+.search_box_2 .input_search {
+    outline: none;
+    border: 0;
+    background: #e97953;
+    border-radius: 50px;
+    padding: 15px 20px;
+    width: 50%;
+    height: 50px;
+    color: #fff;
+    margin : 5px;
+}
+
+.search_box .input_search {
+    outline: none;
+    border: 0;
+    background: #e97953;
+    border-radius: 50px;
+    padding: 15px 20px;
+    width: 300px;
+    height: 50px;
+    color: #fff;
+    
+}
+
+::placeholder {
+    color: #fff;
 }

@@ -50,12 +50,3 @@ div.pic img {
     text-align: center;
 
     }
-    .signup-img {
-      width: 50%;
-      margin-bottom: 0px;
-      margin: 0px 0px 0px 0px;}
-      
-/* @extend display-flex; */
-display-flex, .signup-content, .form-row, .form-radio, .select-icon, .select-icon i {
-  display: flex;
-  display: -webkit-flex; }    

@@ -24,8 +24,7 @@
 
 
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="~/css/user-account-style.css">
-   
+    <link rel="stylesheet" href="~/css/formulaire-style.css">
 
 </head>
 
@@ -34,18 +33,17 @@
     <div class="main">
 
         <div class="container">
-            <input type="button" value="fermer" name="submit" id="btn-supp-form" />
+            <input type="button" value="fermer" class="submit" name="submit" id="submit" />
             <div class="signup-content">
 
                 <div class="signup-img">
-                    <img src="~/images/img-user_account.png" alt="">
+                    <img src="~/images/image.png" alt="">
                     <div class="form-submit">
 
                     </div>
 
                 </div>
                 <div class="signup-form">
-                    <img src="~/images/logo.png" class="logo" alt="">
 
                       @using (Html.BeginForm())
                     {
@@ -83,7 +81,7 @@
 
 
                             <div class="form-submit">
-                                <input type="submit" value="Valider" class="submit" name="submit" id="btn-val" />
+                                <input type="submit" value="Valider" class="submit" name="submit" id="submit" />
                             </div>
                         </fieldset>
 
