@@ -84,23 +84,33 @@ namespace Kili.Models
             userAccountServices.CreerUserAccount("Fara", "Raza", "P@ssFara1", "Fara@gmail.com", TypeRole.Utilisateur);
             userAccountServices.CreerUserAccount("Romy","Kombet", "P@ssRomy1", "Romy@gmail.com", TypeRole.Utilisateur);
             userAccountServices.CreerUserAccount("Othman","Krid", "P@ssOthman1", "Othman@gmail.com", TypeRole.Utilisateur);
-
+            userAccountServices.CreerUserAccount("De Maillard", "François", "P@ssw0rd5", "François@gmail.fr", TypeRole.Utilisateur);
+            userAccountServices.CreerUserAccount("Frelon", "Eric", "P@ssw0rd5", "Rico@hotmail.com", TypeRole.Utilisateur);
+            userAccountServices.CreerUserAccount("Neveu", "Anne-Lucie", "P@ssw0rd5", "Luciole@gmail.fr", TypeRole.Utilisateur);
+            userAccountServices.CreerUserAccount("Costes", "Celine", "P@ssw0rd5", "Crapounette@gmail.fr", TypeRole.Utilisateur);
+            userAccountServices.CreerUserAccount("Planchais", "Pascal", "P@ssw0rd5", "pascal@gmail.fr", TypeRole.Utilisateur);
 
             adresseService.CreerAdresse(15, "rue", "Gabriel", 93000, "Pantin");
             adresseService.CreerAdresse(25, "rue", "Peri", 93100, "Romainville");
-
-            donServices.CreerDonateur(1);
-            donServices.CreerDonateur(2);
-
-            
-
-            userAccountServices.DésactiverUserAccount(1);
 
 
             associationServices.CreerAssociation("Première Asso", new Adresse() { Numero = 1, Voie = "rue du sport", CodePostal = 34000, Ville = "Montpellier" }, ThemeAssociation.Sport, userAccountServices.ObtenirUserAccount(1) );
             associationServices.CreerAssociation("Deuxième Asso", new Adresse() { Numero = 20, Voie = "rue de la mer", CodePostal = 13000, Ville = "Marseille" }, ThemeAssociation.Arts_et_culture, userAccountServices.ObtenirUserAccount(2));
             associationServices.CreerAssociation("Troisième Asso", new Adresse() { Numero = 30, Voie = "champs elysés", CodePostal = 75000, Ville = "Paris" }, ThemeAssociation.Environnement, userAccountServices.ObtenirUserAccount(3));
             associationServices.CreerAssociation("4eme Asso", new Adresse() { Numero = 1, Voie = "rue du sport", CodePostal = 34000, Ville = "Montpellier" }, ThemeAssociation.Environnement, userAccountServices.ObtenirUserAccount(4));
+
+
+
+            associationServices.CreerAssociation("Les amateurs de Bordeaux", new Adresse() { Numero = 5, Voie = "rue du Laos", CodePostal = 75019, Ville = "Bordeaux" }, ThemeAssociation.Arts_et_culture, userAccountServices.ObtenirUserAccount(5));
+            associationServices.CreerAssociation("Basket & Backgammon", new Adresse() { Numero = 20, Voie = "rue de la mer", CodePostal = 13000, Ville = "Marseille" }, ThemeAssociation.Sport, userAccountServices.ObtenirUserAccount(6));
+            associationServices.CreerAssociation("Les Amis des Peoples", new Adresse() { Numero = 30, Voie = "rue Gabriel", CodePostal = 75017, Ville = "Paris" }, ThemeAssociation.Arts_et_culture, userAccountServices.ObtenirUserAccount(7));
+            associationServices.CreerAssociation("Réunion Randonnnées", new Adresse() { Numero = 35, Voie = "rue du soleil", CodePostal = 97490, Ville = "Saint-Denis" }, ThemeAssociation.Sport, userAccountServices.ObtenirUserAccount(8));
+            associationServices.CreerAssociation("Paris 20e Solidaire", new Adresse() { Numero = 85, Voie = "rue Jean Lolive", CodePostal = 75020, Ville = "Paris" }, ThemeAssociation.Humanitaire_caritative, userAccountServices.ObtenirUserAccount(9));
+            associationServices.ModifierAssociationDescriptifImage(5, "Les amateurs de Bordeaux est une association qui fédère les acteurs de la vigne de la région Bordelaise. Sa mission est de promouvoir une consommation alliant plaisir et responsabilité dans la dégustation, grâce à des actions ciblées.","/images/degustationvin.jpg");
+            associationServices.ModifierAssociationDescriptifImage(6, "Le basket-ball et le backgammon proposé par notre association se veut en priorité un lieu de convivialité et d’échanges. L’objectif principal est centré sur le plaisir. Dès 18 ans, débutant comme confirmé, vous êtes les bienvenus.", "/images/basket.jpg");
+            associationServices.ModifierAssociationDescriptifImage(7, "L’Association Littéraire et Artistique Les Amis des Peoples est une société savante et indépendante qui se destine à l’étude et à la discussion des problèmes existentiels des Peoples et de leur impact sur notre société. La vie des célébrités participe aujourd’hui à la protection des droits fondamentaux de l’homme.", "/images/livre.jpg");
+            associationServices.ModifierAssociationDescriptifImage(8, "Réunion Randonnée est une association proposant principalement des sorties de randonnées pédestres sur notre belle ile de La Réunion. Elle peut toutefois proposer des sorties pour d’autres activités de plein air ou culturelles. Réunion Randonnée est affiliée à la Fédération Française de la Randonnée Pédestre(FFRandonnée).", " /images/randonnee.jpg");
+            associationServices.ModifierAssociationDescriptifImage(9, "Paris 20e Solidaire a été créée en 1935 pour réaliser des actions de solidarités avec les personnes démunies et isolées. L'activité de domiciliation est est au coeur de notre association.Elle est ouverte à toute personne et à toute famille sans domicile ou en difficulté.", " /images/solidaire.jpg");
 
             //abonnement_Services.AjouterServiceDansOffre(19.99, 1, TypeService.Adhesion);
             abonnement_Services.AjouterServiceDansOffre(149.99, 12, TypeService.Adhesion);
@@ -118,10 +128,23 @@ namespace Kili.Models
             abonnement_Services.AjouterService(3, abonnement_Services.ObtenirServiceDansOffre(2));
             abonnement_Services.AjouterService(3, abonnement_Services.ObtenirServiceDansOffre(3));
 
-            donServices.CreerCollecte("Collecte pour moi", 0, "Une collecte intéressée", 1);
-            donServices.CreerCollecte("Collecte pour les millionnaires en détresse",0, "Une collecte généreuse", 3);
-            donServices.CreerDon(1000, TypeRecurrence.Unique, 1, 1);
-            donServices.CreerDon(2000, TypeRecurrence.Unique, 1, 2);
+            abonnement_Services.AjouterService(5, abonnement_Services.ObtenirServiceDansOffre(1));
+            abonnement_Services.AjouterService(5, abonnement_Services.ObtenirServiceDansOffre(2));
+            abonnement_Services.AjouterService(8, abonnement_Services.ObtenirServiceDansOffre(2));
+            abonnement_Services.AjouterService(8, abonnement_Services.ObtenirServiceDansOffre(3));
+            abonnement_Services.AjouterService(9, abonnement_Services.ObtenirServiceDansOffre(1));
+            abonnement_Services.AjouterService(9, abonnement_Services.ObtenirServiceDansOffre(2));
+            abonnement_Services.AjouterService(9, abonnement_Services.ObtenirServiceDansOffre(3));
+
+            donServices.CreerCollecte("Collecte de lutte contre la pauvreté à Pantin", 0, "Lutter contre la pauvreté, c'est possible ! Vous pouvez participer au financement de denrées alimentaires et de vêtements à destination d'une épicerie solidaire pour les personnes en situation de précarité.", 9);
+            donServices.CreerCollecte("Collecte : sorties pour les personnes âgées précaires", 0, "Lutter contre l'isolement des personnes âgées, c'est possible ! Vous pouvez participer au financement de sortie pour les personnes au minimum vieillesse .", 9);
+            donServices.CreerCollecte("Collecte pour financer des équipements de randonnée pour les personnes en situation de handicap ",0, "La nature doit est accessible à tous, y compris aux personnes en situation de handicap. Cette collecte permettra de financer des équipements aidant les personnes à mobilité réduite", 8);
+            donServices.CreerCollecte("Collecte pour notre ami Francis, vigneron en difficulté", 0, "Collecte pour notre ami Francis, vigneron en difficulté à Pessac suite à l'incendie qui a ravagé une partie de ses vignes", 5);
+
+            donServices.CreerDonateur(5);
+            donServices.CreerDonateur(6);
+            donServices.CreerDon(100, TypeRecurrence.Unique, 1, 1);
+            donServices.CreerDon(20, TypeRecurrence.Unique, 1, 2);
             donServices.CreerDon(200, TypeRecurrence.Mensuel, 2, 2);
 
 

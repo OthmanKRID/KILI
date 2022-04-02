@@ -140,6 +140,18 @@ namespace Kili.Models.Services
             }
         }
 
+        public void ModifierAssociationDescriptifImage(int id, string description, string image)
+        {
+            Association AssociationModifiee = _bddContext.Associations.Find(id);
+
+            if (AssociationModifiee != null)
+            {
+                AssociationModifiee.Description = description;
+                AssociationModifiee.ImagePath = image;
+                _bddContext.SaveChanges();
+            }
+        }
+
         //Fonction permettant d'activer une association
         public void ActiverAssociation(int id)
         {

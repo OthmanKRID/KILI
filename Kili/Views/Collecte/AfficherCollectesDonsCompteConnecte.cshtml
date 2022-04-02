@@ -7,10 +7,8 @@
 <body>
     <section id="container">
         <!--barre NAV start-->
- 
-        <!--main content start-->
-        <section id="main-content">
-            <section class="wrapper">
+
+
                 <!--description asso-->
                 <div class="row">
                     <div class="col-md-12">
@@ -49,12 +47,12 @@
                         <section class="panel">
 
 
-                <header class="panel-heading">
-                    Liste des collectes 
+                <header class="panel-heading" style="text-align:center; font-size:large">
+                    <b>Liste des collectes</b>
                 </header>
                 <div class="row">
                     <div class="col-sm-12">
-                        <section class="panel">
+                        <section class="panel" style="padding-top:6px;">
                             <div class="panel-body">
                                 
                                 <table class="table  table-hover general-table">
@@ -73,7 +71,7 @@
                                             <td><a href="#">@v.Nom</a></td>
                                             <td class="hidden-phone">@v.MontantCollecte</td>
                                             <td>@v.Descriptif </td>
-                                            <td><a href="#" data-elemid="@v.Id" class="todo-edit" id="LinkPopup" style="margin-right:10px;"><i class="fa fa-arrow-circle-up fa-2x" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></a><a href=@("/collecte/supprimercollecte/" + v.Id) class="todo-remove"><i class="fa fa-times-circle fa-2x" aria-hidden="true" style="color:red;"></i></a></td>
+                                            <td><a href="#" data-elemid="@v.Id" class="todo-edit LinkPopup" style="margin-right:10px;"><i class="fa fa-arrow-circle-up fa-2x" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></a><a href=@("/collecte/supprimercollecte/" + v.Id) class="todo-remove"><i class="fa fa-times-circle fa-2x" aria-hidden="true" style="color:red;"></i></a></td>
                                         </tr>
                                     </tbody>
                                     }
@@ -145,14 +143,14 @@
                                         <h4 class="modal-title">Modifier collect</h4>
                                     </div>
                                     <div class="modal-body row">
-                                        <div class="col-md-5 img-modal">
+                                        <div class="col-md-2 img-modal">
                                             <img src="images/gallery/image1.jpg" alt="">
                                             <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Modifier l'image</a>
                                         </div>
                                          @using (Html.BeginForm("ModifierCollecte","Collecte", FormMethod.Post,new{@id="updateformcollect"}))
                                         {
                                      <fieldset>
-                                        <div class="col-md-7">                                       
+                                        <div class="col-md-10">                                       
                                             <div class="form-group">
                                                 <label> Nom</label>
                                                 @Html.TextBoxFor(m => Model.collecte.Nom, new {@id="name", @value="nom", @class="form-control"}) 
@@ -167,9 +165,9 @@
                                                     <input type="date" id="Date" name="Date" placeholder="Date de fin">
                                                 </form>
                                             </div>*@
-                                            
+                                            </div>
                                         
-                                            <div class="pull-right">
+                                            <div class="pull-down">
                                                 @*<button class="btn btn-danger" type="button">Supprimer la collecte</button>
                                                 <button class="btn btn-primary" type="button">Enregistrer</button>*@
                                                 <input type="submit" class="btn btn-primary" value="Valider"/>
@@ -184,16 +182,14 @@
 <!------------------------------------------------------------ fin de modal modification ------------------------------------------------------------------------>
 
                 </section>
-            </div>
-        </div>
-                </div>
+
                 <!--liste de don start-->
-                <header class="panel-heading">
-                    Liste des dons 
+                <header class="panel-heading" style="text-align:center; font-size:large">
+                    <b>Liste des dons </b>
                 </header>
                 <div class="row">
                     <div class="col-sm-12">
-                        <section class="panel">
+                        <section class="panel" style="padding-top:6px;">
                             <div class="panel-body">
                                 
                                 <table class="table  table-hover general-table">
@@ -202,6 +198,7 @@
                                             <th> Nom de la collecte</th>
                                             <th class="hidden-phone"> Montant</th>
                                             <th>Récurrence</th>
+                                            <th>Date</th>
                                         </tr>
                                     </thead>
                                     @foreach (var v in Model.listedon)  
@@ -211,6 +208,7 @@
                                             <td><a href="#">@v.Collecte.Nom</a></td>
                                             <td class="hidden-phone">@v.Montant</td>
                                             <td>@v.Recurrence </td>
+                                            <td>@v.Date.ToLongDateString() </td>
                                         </tr>
                                     </tbody>
                                     }
@@ -220,9 +218,7 @@
                         </section>
                     </div>
                 </div>
-            </section>
-        </section>
-        <!--main content end-->
-    </section>
+
+        <!--main content end-->    
 </body>
 

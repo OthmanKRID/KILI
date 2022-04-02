@@ -1,1 +1,1 @@
-﻿$("#LinkPopup").click(function () {       var id = $(this).attr('data-elemid');    var form = $("#updateformcollect");    form.attr("action", "/collecte/modifiercollecte/" + id);    $("#collecte_Id").attr("value", id);});
+﻿$(".LinkPopup").click(function () {       var id = $(this).attr('data-elemid');    var form = $("#updateformcollect");    form.attr("action", "/collecte/modifiercollecte/" + id);    $("#collecte_Id").attr("value", id);});

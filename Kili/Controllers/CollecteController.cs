@@ -56,7 +56,7 @@ namespace Kili.Controllers
         {
             DonServices donServices = new DonServices();
             {
-                List<Collecte> listcollecte = donServices.ObtenirCollectes();
+                List<Collecte> listcollecte = donServices.ObtenirCollectesActives();
 
                 return View(listcollecte);
             }
@@ -110,7 +110,10 @@ namespace Kili.Controllers
 
             foreach (Collecte collecte in UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association.Abonnement.serviceDon.Collectes)
                 {
-                        collecteDonViewModel.listecollecte.Add(collecte);
+                
+                if (collecte.Actif == true) { 
+                   collecteDonViewModel.listecollecte.Add(collecte);
+                }
 
                 collecteDonViewModel.montantglobalcollectes += collecte.MontantCollecte;
 
@@ -118,10 +121,9 @@ namespace Kili.Controllers
                 foreach (Don don in collecte.Dons) {
 
                     collecteDonViewModel.listedon.Add(don);                    
-                }
+                    }         
                 }
             }
-
             return View(collecteDonViewModel);
             
         }
@@ -177,7 +179,7 @@ namespace Kili.Controllers
                     {
                         return View("Error");
                     }
-                    donServices.SupprimerCollecte(id);
+                    donServices.DesactiverCollecte(id);
                     return RedirectToAction("AfficherCollectesDonsCompteConnecte");
                 }
 
