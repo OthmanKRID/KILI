@@ -33,7 +33,18 @@ namespace Kili.Models.Services
         {
             List<Association> associations = ObtenirAssociations();
             List<Association> Dernieresassociations = new List<Association>();
-            for (int i = associations.Count - 3; i < associations.Count ; i++)
+
+            int nb;
+            if (associations.Count < 3)
+            {
+                nb = associations.Count;
+            }
+            else
+            {
+                nb = 3;
+            }
+
+            for (int i = associations.Count - nb; i < associations.Count ; i++)
             {
                 Dernieresassociations.Add(associations[i]);
             }
@@ -125,6 +136,18 @@ namespace Kili.Models.Services
                 AssociationModifiee.Description = Association.Description;
                 AssociationModifiee.ImagePath = Association.ImagePath;
                 new Adresse_Services().ModifierAdresse(Association.AdresseId, Association.Adresse);
+                _bddContext.SaveChanges();
+            }
+        }
+
+        public void ModifierAssociationDescriptifImage(int id, string description, string image)
+        {
+            Association AssociationModifiee = _bddContext.Associations.Find(id);
+
+            if (AssociationModifiee != null)
+            {
+                AssociationModifiee.Description = description;
+                AssociationModifiee.ImagePath = image;
                 _bddContext.SaveChanges();
             }
         }

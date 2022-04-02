@@ -1,4 +1,5 @@
-﻿using Kili.Models.General;
+﻿using Kili.Models.Dons;
+using Kili.Models.General;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace Kili.ViewModels
         public bool Authentifie { get; set; }
         public List<Association> Associations { get; set; }
         public Association association { get; set; }
+        public List<Collecte> Collectes { get; set; }
+        public Association collecte { get; set; }
     }
 }

@@ -97,33 +97,13 @@
 
                               
                               <div class="tab-pane" id="tab02" role="tabpanel">
+                                  @foreach (var collecte in Model.Collectes)
+                                {
                                    <div class="tab-pane-item">
-                                        <h2>Collecte pour les orphelins</h2>
-                                        <p>Notre mission est de prendre en charge des fratries. En France, ce sont des
-                                             enfants qui nous sont confiés par l’Aide Sociale à l’Enfance
-                                             dans le cadre d’une mesure judiciaire. Dans le monde, ce sont des enfants
-                                             orphelins ou abandonnés.</p>
-                                        <a href="https://www.w3schools.com/">Visit W3Schools.com!</a>
-                                   </div>
-                                   <div class="tab-pane-item">
-                                        <h2>Une deuxième collecte à la une </h2>
-                                        <p>Nous avons ainsi pour vocation de sauvegarder les liens fraternels, qui,
-                                             après la séparation d’avec les parents,
-                                             sont fondamentaux pour l’évolution de chaque enfant. Ce faisant, nous nous
-                                             assurons toujours que le vécu familial
-                                             permet un maintien sous le même toit de l’ensemble de la fratrie et ne
-                                             présente aucun risque pour un ou plusieurs des enfants.</p>
-                                   </div>
-                                   <div class="tab-pane-item">
-                                        <h2>Une troisème collecte à la une</h2>
-                                        <p>Acteurs de la protection de l’enfance, profondément attachés à la défense des
-                                             droits de l’enfant,
-                                             nous militons pour que ce droit soit reconnu et appliqué et au-delà,
-                                             qu’il soit amélioré. Notre longue expérience d’accompagnement d’enfants,
-                                             ainsi que notre travail autour de l’amélioration de nos pratiques peuvent
-                                             contribuer aux débats et aux réflexions engagés
-                                             dans le domaine de la protection de l’enfance.</p>
-                                   </div>
+                                        <h2>@collecte.Nom</h2>
+                                        <p>@collecte.Descriptif</p>
+                                        <p><button class="button">@Html.ActionLink("Découvrir", "AfficherCollecte", "Collecte" , new { id = @collecte.Id})</button></p>
+                                   </div> }                                
                               </div>
 
                               <!--  <div class="tab-pane" id="tab03" role="tabpanel">

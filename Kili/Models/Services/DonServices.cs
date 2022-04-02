@@ -111,6 +111,7 @@ namespace Kili.Models.Services
             Donateur donateur = new Donateur() { AdresseID = adresseID};
             _bddContext.Donateurs.Add(donateur);
             _bddContext.SaveChanges();
+            
             return donateur.Id;
         }
 
@@ -144,6 +145,35 @@ namespace Kili.Models.Services
         public List<Collecte> ObtenirCollectes()
         {
             return _bddContext.Collectes.ToList();
+
+        }
+
+        public List<Collecte> ObtenirCollectesActives()
+        {
+
+            return _bddContext.Collectes.Where(v => v.Actif == true).ToList();
+
+        }
+
+
+        public List<Collecte> Obtenir3DernièresCollectes()
+        {
+            List<Collecte> collectes = ObtenirCollectesActives();
+            List<Collecte> Dernierescollectes = new List<Collecte>();
+
+            int nb;
+            if (collectes.Count <3) {
+                nb = collectes.Count;
+                    }
+            else {
+                nb = 3;
+                    }
+
+            for (int i = collectes.Count - nb; i < collectes.Count; i++)
+            {
+                Dernierescollectes.Add(collectes[i]);
+            }
+            return Dernierescollectes;
         }
 
         //Fonction permettant d'obtenir une collecte à partir de son Id
@@ -152,11 +182,12 @@ namespace Kili.Models.Services
             return _bddContext.Collectes.Find(id);
         }
 
+
         //Fonction permettant de créer une collecte
         public int CreerCollecte(string nom, int montant, string descriptif, int? servicedonID) // , DateTime date
         {
 
-            Collecte collecte = new Collecte() { Nom = nom, MontantCollecte = montant, Descriptif = descriptif, Date = DateTime.Today, ServiceDonId = servicedonID };
+            Collecte collecte = new Collecte() { Nom = nom, MontantCollecte = montant, Descriptif = descriptif, Date = DateTime.Today, ServiceDonId = servicedonID, Actif = true };
             _bddContext.Collectes.Add(collecte);
             _bddContext.SaveChanges();
             return collecte.Id;
@@ -172,6 +203,17 @@ namespace Kili.Models.Services
                 collecte.MontantCollecte = montant;
                 collecte.Descriptif = descriptif;
                 collecte.Date = date;
+                _bddContext.SaveChanges();
+            }
+        }
+
+        public void DesactiverCollecte(int id)
+        {
+            Collecte collecte = _bddContext.Collectes.Find(id);
+
+            if (collecte != null)
+            {
+                collecte.Actif = false;
                 _bddContext.SaveChanges();
             }
         }

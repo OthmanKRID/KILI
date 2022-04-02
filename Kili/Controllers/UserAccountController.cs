@@ -168,7 +168,7 @@ namespace Kili.Controllers
                     }
                 }
             viewModel.Message = "Email déjà enregistré sur le site";
-            return View(new UserAccountViewModel() { Message = "Email déjà enregistré sur le site" });
+            return View(viewModel);
         }
     
         

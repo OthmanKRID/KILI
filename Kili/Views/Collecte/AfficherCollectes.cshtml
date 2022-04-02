@@ -16,7 +16,7 @@
     {  
         <tr>
             <td>@v.Nom</td>   
-            <td>@v.Date</td>  
+            <td>@v.Date.ToLongDateString()</td>  
             <td>@v.Descriptif</td>
             <td>@Html.ActionLink("Faire un don", "CreerDon", "Don", new { idCollecte = @v.Id })</td>
         </tr>  

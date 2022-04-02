@@ -38,10 +38,10 @@
                                     <form class="form-signin" action="index.html">
                                         <div class="login-wrap">
 
-                                            <input type="text" class="form-control" placeholder="Prénom" value="@Model.compteConnecte.Prenom" autofocus>
-                                            <input type="text" class="form-control" placeholder="Nom" value="@Model.compteConnecte.Nom" autofocus>                                           
-                                            <input type="text" class="form-control" placeholder="Numéro" value="@Model.compteConnecte.Telephone" autofocus>
-                                            <input type="email" class="form-control" placeholder="Email" value="@Model.compteConnecte.Mail" autofocus>
+                                            <input type="text" class="form-control" placeholder="Prénom" value="@Model.compteConnecte.Prenom" readonly autofocus>
+                                            <input type="text" class="form-control" placeholder="Nom" value="@Model.compteConnecte.Nom" readonly autofocus>                                           
+                                            <input type="text" class="form-control" placeholder="Numéro" value="@Model.compteConnecte.Telephone" readonly autofocus>
+                                            <input type="email" class="form-control" placeholder="Email" value="@Model.compteConnecte.Mail" readonly autofocus>
                                             @*<input type="password" class="form-control" placeholder="Mot de passe" value="@Model.compteConnecte.Password" autofocus>*@
 
                                         </div>
@@ -91,7 +91,7 @@
                                 <tr>
                                             @*<td><a href="google.fr">oui</a></td>*@
                                             <td>Don</td>
-                                            <td>@Model.association.Abonnement.serviceDon.dateAbonnement</td>
+                                            <td>@Model.association.Abonnement.serviceDon.dateAbonnement.ToString().Substring(0,10)</td>
                                             <td>@Model.association.Abonnement.serviceDon.montant_paye €</td>
                                             <td><button type="submit" class="btn btn-default btn-primary"><i
                                                     class="fa fa-plus"></i>@Html.ActionLink("Gérer Mes collectes", "AfficherCollectesDonsCompteConnecte", "Collecte") </button></td>
@@ -103,7 +103,7 @@
                                         <tr>
                                             @*<td><a href="google.fr">oui</a></td>*@
                                             <td>Boutique</td>
-                                            <td>@Model.association.Abonnement.serviceBoutique.dateAbonnement</td>
+                                            <td>@Model.association.Abonnement.serviceBoutique.dateAbonnement.ToString().Substring(0,10)</td>
                                             <td>@Model.association.Abonnement.serviceBoutique.montant_paye €</td> 
                                             <td><button type="submit" class="btn btn-default btn-primary"><i
                                                     class="fa fa-plus"></i>@Html.ActionLink("Gérer Ma Boutique", "GererServices") </button></td>
