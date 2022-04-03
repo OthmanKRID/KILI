@@ -29,11 +29,15 @@
                                     <div class="col-md-2 col-md-10">Prix</div>
                                     <div class="col-md-2 col-md-10">Sous-Total</div>
                                 </div>
+                                <button style="color:transparent;background-color:transparent;border:none;">ce bouton est pour la mise en page il ne sert a rien </button>
+
                             </li>
                         </ul>
+						
                            @{
                                 double total = 0;
                             }
+
                          @foreach (var item in Model.Items)
                          {
                         <!------------------------------------------- Ligne du deuxieme article-->
@@ -47,6 +51,7 @@
                                     <div class="col-md-2 col-md-10">@item.Quantity</div>
                                     <div class="col-md-2 col-md-10">@item.Service.prix</div>
                                     <div class="col-md-2 col-md-10">@(item.Service.prix * item.Quantity)</div>
+
                                                                                 @{
                                                 total = total + (item.Service.prix * item.Quantity);
                                             }
@@ -62,19 +67,15 @@
 
                       <!-------------------------------------------- ligne Total-------------->
 
-                      <ul class="list-group-item align-items-center">
-                            <li class="list-group-item align-items-center drag-handle">
-                                <span class="drag-indicator"></span>
-                                <div class="col-sm-10">
-                                    <div class="col-md-2 col-md-10">Total</div>
-                                    <div class="col-md-2 col-md-10"></div>
-                                    <div class="col-md-2 col-md-10"></div>
-                                    <div class="col-md-2 col-md-10"></div>
-                                    <div class="col-md-2 col-md-10"></div>
-                                    <div class="col-md-2 col-md-10">@total</div>
                                 </div>
+
+                                <button type="button" class="btn btn-default">@Html.ActionLink("Supprimer", "SupprimerServiceDansPanier", "Abonnement", new { id = @item.Id })</button>
+
+                                
+
                             </li>
                         </ul>
+                         }
 
                        
 

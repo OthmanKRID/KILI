@@ -8,39 +8,43 @@
 }
 
      <!-- FEATURE -->
-     <section  id="ImgAsso"  data-stellar-background-ratio="0.5">
-         <div class="container">
-        <div class="row"> 
-        <div class="col-6 col-md-6"> 
+    <section id="home-explorer" data-stellar-background-ratio="0.5">
+          <div class="overlay"></div>
+          <div class="container">
+               <div class="row">
+                    <div class="col-sm-7">
+                         <div class="home-info"> 
             
                 <h1> Découvrez les différentes associations</h1>
                 <p> Description DescriptionDescriptionDescriptionDescription
                   DescriptionDescriptionDescriptionDescriptionDescription
                   DescriptionDescriptionDescriptionDescription
                   DescriptionDescriptionDescription
-                </p> <br><br><br>
-  
-                <a href="Create.html"> Vous êtes une association ?</a>
-    
+
+                </p> 
+            
+             
 
                             @using (Html.BeginForm("VoirAssociationsTriees","Home"))
                         {
-            <div>
-                @Html.TextBoxFor(m => m.association.Nom,  new { @id="nomAsso", @placeholder="Nom de l'association" , @class="form-control"})
+                           
+
+            <div class="search_box">
+                @Html.TextBoxFor(m => m.association.Nom,  new { @id="nomAsso", @placeholder="Nom de l'association" , @class="input_search"})
             </div>
-            <div>
-                
-                 @Html.TextBoxFor(m => m.association.Adresse.Ville,  new { @id="villeAsso", @placeholder="Ville" }) 
-                 @Html.DropDownListFor(m => m.RechercheTheme, new SelectList(Enum.GetValues(typeof(RechercheTheme))))
+            <div class="search_box_2">              
+                 @Html.TextBoxFor(m => m.association.Adresse.Ville,  new { @id="villeAsso", @placeholder="Ville", @class="input_search" }) 
+                 @Html.DropDownListFor(m => m.RechercheTheme, new SelectList(Enum.GetValues(typeof(RechercheTheme))),new{@class="input_search"})
             </div>
                         <div class="form-submit">
-                            <input type="submit" value="Valider" class="submit" name="submit" id="submit" />
+                            <input type="submit" value="Valider" class="submit" name="submit" id="btn-val" />
                         </div>
                         }
         </div> 
-      
-    </div>
-    </div>
+         </div>
+                    </div>
+               </div>
+          </div>
      </section>
 
 
@@ -58,7 +62,8 @@
 
            @foreach(var association in Model.Associations)
         {
-                  <div class="responsive">
+                 
+            <div class="responsive">
                     <div class="gallery">
                       <a href="@Url.Action("VoirDetailsAssociation", "Association", new { id = @association.Id})">
                         <img src="@association.ImagePath" alt="Cinque Terre" width="300" height="100">
@@ -90,7 +95,4 @@
      </section>   
 
 
-     <!-- CONTACT -->
-     <section id="contact" data-stellar-background-ratio="0.5">
-          
-     </section>       
+       

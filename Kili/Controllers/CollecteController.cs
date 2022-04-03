@@ -3,14 +3,23 @@ using Kili.Models.Dons;
 using Kili.Models.General;
 using Kili.Models.Services;
 using Kili.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
 using static Kili.ViewModels.PaiementViewModel;
 
 namespace Kili.Controllers
 {
     public class CollecteController : Controller
     {
+
+        private IWebHostEnvironment _webEnv;
+
+        public CollecteController(IWebHostEnvironment environment)
+        {
+            _webEnv = environment;
+        }
 
         // Création d'une collecte (à mettre depuis la page association)
         public IActionResult CreerCollecte()
@@ -26,7 +35,25 @@ namespace Kili.Controllers
 
             DonServices donServices = new DonServices();
             {
-                int id = donServices.CreerCollecte(collecte.Nom, collecte.MontantCollecte, collecte.Descriptif, userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association.Abonnement.ServiceDonId); // , collecte.Date
+
+                if (collecte.Image != null)
+                {
+                    if (collecte.Image.Length != 0)
+                    {
+                        string uploads = Path.Combine(_webEnv.WebRootPath, "images");
+                        string filePath = Path.Combine(uploads, collecte.Image.FileName);
+                        using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            collecte.Image.CopyTo(fileStream);
+                        }
+
+                        donServices.CreerCollecte(collecte.Nom, collecte.MontantCollecte, collecte.Descriptif, userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association.Abonnement.ServiceDonId, "/images/" + collecte.Image.FileName);
+                                            }
+                }
+                else
+                {
+                    donServices.CreerCollecte(collecte.Nom, collecte.MontantCollecte, collecte.Descriptif, userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association.Abonnement.ServiceDonId,null);
+                }
 
                return Redirect("/collecte/AfficherCollectesDonsCompteConnecte"); 
             }
@@ -152,8 +179,7 @@ namespace Kili.Controllers
 
             CollecteDonViewModel collecteDonViewModel = new CollecteDonViewModel() { listecollecte = new List<Collecte>(), listedon = new List<Don>(), montantglobalcollectes=0};
 
-            DonServices donServices = new DonServices();
-
+            collecteDonViewModel.association = UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association;
 
             foreach (Collecte collecte in UserAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name).Association.Abonnement.serviceDon.Collectes)
                 {
@@ -207,11 +233,28 @@ namespace Kili.Controllers
             if (collecte.Id != 0)
             {
                 DonServices donServices = new DonServices();
-                {
-                    donServices.ModifierCollecte(collecte.Id, collecte.Nom, collecte.MontantCollecte, collecte.Descriptif, collecte.Date);
 
-                    return RedirectToAction("AfficherCollectesDonsCompteConnecte");
+
+                if (collecte.Image != null)
+                {
+                    if (collecte.Image.Length != 0)
+                    {
+                        string uploads = Path.Combine(_webEnv.WebRootPath, "images");
+                        string filePath = Path.Combine(uploads, collecte.Image.FileName);
+                        using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            collecte.Image.CopyTo(fileStream);
+                        }
+                        donServices.ModifierCollecte(collecte.Id, collecte.Nom, collecte.MontantCollecte, collecte.Descriptif, collecte.Date, "/images/" + collecte.Image.FileName);
+                    }
                 }
+                else
+                {
+                    donServices.ModifierCollecte(collecte.Id, collecte.Nom, collecte.MontantCollecte, collecte.Descriptif, collecte.Date, collecte.ImagePath);
+                }
+       
+                return RedirectToAction("AfficherCollectesDonsCompteConnecte");
+               
             }
             else
             {

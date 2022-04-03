@@ -853,12 +853,26 @@ text-align: center;
     background: #ffffffa4;
 }
 
+
+
 .card-services {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 10PX;
     padding-bottom: 0px;
     background: #ffffffef;
 }
+
+.card-text {
+    max-width: 300px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: scroll !important;
+}
+
+    .card-text::-webkit-scrollbar {
+        display: none;
+    }
 
 .container {
   padding: 16px 16px;

@@ -178,3 +178,5 @@
     min-width: 100%;
     min-height: 100%;
   }
+
+::-webkit-file-upload-button{background:#ee490e;color:white;border-radius:10px;}

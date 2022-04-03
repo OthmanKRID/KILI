@@ -6,9 +6,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-
-
-
 <head>
 
      <title>Kili</title>
@@ -36,7 +33,7 @@
      <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/js/jquery-ui/jquery-ui-1.10.1.custom.min.css" rel="stylesheet">
     <link href="~/css/bootstrap-reset.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="~/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="~/js/jvector-map/jquery-jvectormap-1.2.2.css" rel="stylesheet">
     <link href="~/css/clndr.css" rel="stylesheet">
     <!--clock css-->
@@ -46,6 +43,8 @@
     <!-- Custom styles for this template -->
     <link href="~/css/style.css" rel="stylesheet">
     <link href="~/css/style-responsive.css" rel="stylesheet" />
+   
+
 
       <!-- boutique CSS Bootstrap -->
 
@@ -72,7 +71,7 @@
                     <ul class="nav navbar-nav">
 
                          <li><a href="Association.html" class="smoothScroll">Les associations</a></li>
-                         <li><a href="#pricing" class="smoothScroll">Nos services</a></li>
+                         <li><a href="#services" class="smoothScroll">Nos services</a></li>
                         
 
                     </ul>
@@ -100,11 +99,11 @@
                                         <p class="description">Saisir l'email et le mot de passe ! </p>
                                         <div class="form-group">
                                             <span class="input-icon"><i class="fa fa-user"></i></span>
-                                            <input type="email" name="UserAccount.Mail" class="form-control" placeholder="Email" required="required">
+                                            <input type="email" name="UserAccount.Mail" class="form-control" placeholder="Email" required="required" >
                                         </div>
                                         <div class="form-group">
                                             <span class="input-icon"><i class="fa fa-shield"></i></span>
-                                            <input type="password" name="UserAccount.Password" class="form-control" placeholder="Mot de passe" required="required">
+                                            <input type="password" name="UserAccount.Password" class="form-control" placeholder="Mot de passe" required="required">                               
                                         </div>
                                         <div class="form-group checkbox">
                                             <input type="checkbox">
@@ -229,6 +228,22 @@
           </div>
      </footer>
 
+@*
+
+            @if(ViewBag.Message != null)
+            {
+                <script>
+
+                $(document).ready(function(){
+
+                alert('@ViewBag.Message');
+
+                });
+
+                </script>
+
+            }
+*@
 
      <!-- SCRIPTS -->
      <script src="~/js/jquery.js"></script>

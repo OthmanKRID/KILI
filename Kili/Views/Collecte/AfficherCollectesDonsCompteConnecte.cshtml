@@ -1,4 +1,5 @@
-﻿
+﻿@using System.Security.Policy
+
 @model Kili.ViewModels.CollecteDonViewModel;
 @{
     Layout = "_Layout";
@@ -14,25 +15,23 @@
                             <div class="panel-body profile-information">
                                 <div class="col-md-3">
                                     <div class="profile-pic text-center">
-                                        <img src="images/logo-asso.png" alt="" />
+                                        <img src="@Model.association.ImagePath" alt="" height="250" width="250" style="border-radius: 10%;"/>                                   
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="profile-desk">
-                                        <h1>Nom Association </h1>
-                                        <span class="text-muted">Thématique</span>
+                                        <h1>@Model.association.Nom</h1>
+                                        <span class="text-muted">@Model.association.Theme</span>
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porttitor
-                                            vestibulum imperdiet. Ut auctor accumsan erat, a vulputate metus tristique
-                                            non. Aliquam aliquam vel orci quis sagittis.
+                                            @Model.association.Description
                                         </p>
                                         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModalCréa">Créer une collecte</a> <!--Création de la collect-->
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <div class="profile-statistics">
+                                    <div class="profile-statistics" style="text-align:center;">
                                         <h1>@Model.montantglobalcollectes €</h1>
-                                        <p>Collectes des dons</p>
+                                        <p>Montant total des collectes</p>
                                     </div>
                                 </div>
                             </div>
@@ -56,19 +55,21 @@
                                 <table class="table  table-hover general-table">
                                     <thead>
                                         <tr>
-                                            <th> Nom</th>
-                                            <th class="hidden-phone"> Montant collecté</th>
+                                            <th></th>
+                                            <th>Nom</th>
                                             <th>Description</th>
+                                            <th class="hidden-phone"> Montant collecté</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     @foreach (var v in Model.listecollecte)  
                                         {
                                     <tbody>
-                                        <tr>
-                                            <td><a href="#">@v.Nom</a></td>
-                                            <td class="hidden-phone">@v.MontantCollecte</td>
+                                        <tr>                                 
+                                            <td><img src="@v.ImagePath" height="25" width="25" style="border-radius: 10%;" /></td>
+                                            <td><a href=@Url.Action("AfficherCollecte", "Collecte", new { id = @v.Id})>@v.Nom</a>
                                             <td>@v.Descriptif </td>
+                                            <td class="hidden-phone">@v.MontantCollecte</td>
                                             <td><a href="#" data-elemid="@v.Id" class="todo-edit LinkPopup" style="margin-right:10px;"><i class="fa fa-arrow-circle-up fa-2x" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></a><a href=@("/collecte/supprimercollecte/" + v.Id) class="todo-remove"><i class="fa fa-times-circle fa-2x" aria-hidden="true" style="color:red;"></i></a></td>
                                         </tr>
                                     </tbody>
@@ -93,12 +94,12 @@
 
                                 {
                                @*<form action="/action_page.php">*@
-                                <div class="col-md-2 img-modal">
+                                <div>
                                     <img src="images/gallery/image1.jpg" alt="">                               
                                 </div>
                                 
                                      <fieldset>
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label> Nom</label>
                                         @Html.TextBoxFor(m => Model.collecte.Nom, new {@id="name", @value="nom", @class="form-control"}) 
@@ -120,6 +121,8 @@
                                     </div>
 
                                     <div class="pull-down">
+                                           @Html.TextBoxFor(a => a.collecte.Image, new { @type = "file", @class="file-pos", @id="exampleInputFile" })
+                                           @Html.HiddenFor(a=>a.collecte.ImagePath)
                                         <input type="submit" class="btn btn-primary" value="Valider"/>
                                         @*
                                         <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i>Insérer l'image</a>
@@ -145,14 +148,15 @@
                                         <h4 class="modal-title">Modifier collect</h4>
                                     </div>
                                     <div class="modal-body row">
-                                        <div class="col-md-2 img-modal">
+                                        <div>
+                                            @*
                                             <img src="images/gallery/image1.jpg" alt="">
-                                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Modifier l'image</a>
+                                            <a href="#" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Modifier l'image</a>*@
                                         </div>
-                                         @using (Html.BeginForm("ModifierCollecte","Collecte", FormMethod.Post,new{@id="updateformcollect"}))
+                                         @using (Html.BeginForm("ModifierCollecte","Collecte", FormMethod.Post,new{enctype = "multipart/form-data"})) 
                                         {
                                      <fieldset>
-                                        <div class="col-md-10">                                       
+                                        <div class="col-md-12">                                       
                                             <div class="form-group">
                                                 <label> Nom</label>
                                                 @Html.TextBoxFor(m => Model.collecte.Nom, new {@id="name", @value="nom", @class="form-control"}) 
@@ -172,6 +176,8 @@
                                             <div class="pull-down">
                                                 @*<button class="btn btn-danger" type="button">Supprimer la collecte</button>
                                                 <button class="btn btn-primary" type="button">Enregistrer</button>*@
+                                                @Html.TextBoxFor(a => a.collecte.Image, new { @type = "file", @class="file-pos", @id="exampleInputFile" })
+                                                @Html.HiddenFor(a=>a.collecte.ImagePath)
                                                 <input type="submit" class="btn btn-primary" value="Valider"/>
                                             </div>
                                             </fieldset>
@@ -198,9 +204,9 @@
                                     <thead>
                                         <tr>
                                             <th> Nom de la collecte</th>
-                                            <th class="hidden-phone"> Montant</th>
-                                            <th>Récurrence</th>
                                             <th>Date</th>
+                                            <th>Récurrence</th>
+                                            <th class="hidden-phone"> Montant</th>                                           
                                         </tr>
                                     </thead>
                                     @foreach (var v in Model.listedon)  
@@ -208,9 +214,9 @@
                                     <tbody>
                                         <tr>
                                             <td><a href="#">@v.Collecte.Nom</a></td>
-                                            <td class="hidden-phone">@v.Montant</td>
-                                            <td>@v.Recurrence </td>
                                             <td>@v.Date.ToLongDateString() </td>
+                                            <td>@v.Recurrence </td>
+                                            <td class="hidden-phone">@v.Montant</td>
                                         </tr>
                                     </tbody>
                                     }

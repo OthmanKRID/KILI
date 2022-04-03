@@ -120,7 +120,7 @@
                         <div style="display: flex;">
                             <div style="width: 25%;">
                                 <a href="@Url.ActionLink("AfficherCollecte", "Collecte", @*new {collecte = collecte}*@ new {id=@collecte.Id})">
-                                    <img src="/images/BoutiqueAsso.png" alt="Cinque Terre" height="250">
+                                    <img src="@collecte.ImagePath" alt="Cinque Terre" height="250">
                                 </a>
                             </div>
                             <div style="width: 75%;" class="description">
