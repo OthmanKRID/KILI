@@ -99,21 +99,24 @@
                                         <p class="description">Saisir l'email et le mot de passe ! </p>
                                         <div class="form-group">
                                             <span class="input-icon"><i class="fa fa-user"></i></span>
-                                            <input type="email" name="UserAccount.Mail" class="form-control" placeholder="Email" required="required" >
+                                            <input type="email" name="UserAccount.Mail" class="form-control" placeholder="Email" required="required">
                                         </div>
                                         <div class="form-group">
                                             <span class="input-icon"><i class="fa fa-shield"></i></span>
-                                            <input type="password" name="UserAccount.Password" class="form-control" placeholder="Mot de passe" required="required">                               
+                                            <input type="password" name="UserAccount.Password" class="form-control" placeholder="Mot de passe" required="required">
                                         </div>
                                         <div class="form-group checkbox">
                                             <input type="checkbox">
                                             <label>Sauvegarder</label>
                                         </div>
+
                                         <a href="" class="forgot-pass">Mot de passe oublié ?</a>
                                         <input type="submit" value="Se connecter" class="btn" name="submit" id="submit" />
 
-                                        <a class="txtCompte" href="Create.html">@Html.ActionLink("Créer un compte", "CreerUtilisateur", "UserAccount")</a>
-                                        <a class="txtCompte" href="Create.html">@Html.ActionLink("Créer un compte Association", "AjouterCompteAssociation", "Association")</a>
+                                        <div class="form-group-connex">
+                                     <a  href="Create.html" >@Html.ActionLink("Créer un compte", "CreerUtilisateur", "UserAccount")</a> <br><br>
+                                        <a  href="Create.html"><strong>@Html.ActionLink("Inscrire votre association", "AjouterCompteAssociation", "Association")</strong></a>
+                                         </div>
 
                                     </div>
                                 </div>
@@ -202,7 +205,7 @@
                          </div>
                          <div class="col-md-3 col-md-3">
                               <ul>
-                                   <h3>À la une </h3>
+                                   <h3>L'équipe Kili </h3>
 
                                    <div class="container-footer">
                                         <a href="https://www.w3schools.com/howto/howto_css_image_transparent.asp"></a><img src="/images/actu-footer.jpg" alt="Notebook" style="width:100%;"></a>
@@ -228,22 +231,6 @@
           </div>
      </footer>
 
-@*
-
-            @if(ViewBag.Message != null)
-            {
-                <script>
-
-                $(document).ready(function(){
-
-                alert('@ViewBag.Message');
-
-                });
-
-                </script>
-
-            }
-*@
 
      <!-- SCRIPTS -->
      <script src="~/js/jquery.js"></script>

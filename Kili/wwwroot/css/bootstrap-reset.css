@@ -170,6 +170,12 @@ a {
     color: #32323A;
 }
 
+.form-control-asso {
+    border: 1px solid #fafafa;
+    box-shadow: none;
+    color: #32323A;
+}
+
 
 .form-control:focus, #focusedInput {
     border: 1px solid #00A8B3;

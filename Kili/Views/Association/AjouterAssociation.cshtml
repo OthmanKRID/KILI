@@ -57,7 +57,7 @@
 
                         <div class="form-row">
                             <div class="form-group">
-                                @Html.TextBoxFor(m => m.Adresse.Numero,  new { @id="numAsso", @placeholder="Nom de l'association", @required="required", @Type="number" })                        
+                                @Html.TextBoxFor(m => m.Adresse.Numero,  new { @id="numAsso", @placeholder="Numéro", @required="required", @Type="number" })                        
                             </div>
                             <div class="form-group">
                                  @Html.TextBoxFor(m => m.Adresse.Voie,  new { @id="voieAsso", @placeholder="Voie", @required="required" }) 
@@ -87,7 +87,9 @@
                         @Html.HiddenFor(m => m.AbonnementId);
                         <div class="form-submit">
                             <!--<input type="submit" value="Reset All" class="submit" name="reset" id="reset" />-->
+                             <input type="button" value="précédent" name="submit" id="btn-supp-form" />
                             <input type="submit" value="Valider" class="submit" name="submit" id="btn-val" />
+                               
                         </div>
                         </fieldset>
 
