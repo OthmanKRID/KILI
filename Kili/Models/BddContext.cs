@@ -46,7 +46,7 @@ namespace Kili.Models
         public DbSet<Commande> Commandes { get; set; }
         public DbSet<CoordonneesAcheteur> CoordonneesAcheteurs { get; set; }
 
-
+        public DbSet<ServiceBoutique> ServiceBoutiques { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
@@ -54,7 +54,7 @@ namespace Kili.Models
 
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=Kili");
+                optionsBuilder.UseMySql("server=localhost;user id=root;password=RRRRR;database=Kili");
             }
             else
             {
@@ -81,7 +81,7 @@ namespace Kili.Models
 
 
             userAccountServices.CreerAdmin("M.","Admin", "P@ssw0rd5", "Kili@mail.com");
-            userAccountServices.CreerUserAccount("Fara", "Raza", "P@ssFara1", "Fara@gmail.com", TypeRole.Utilisateur);
+            userAccountServices.CreerUserAccount("Fara", "Raza", "123456", "Fara@gmail.com", TypeRole.Utilisateur);
             userAccountServices.CreerUserAccount("Romy","Kombet", "P@ssRomy1", "Romy@gmail.com", TypeRole.Utilisateur);
             userAccountServices.CreerUserAccount("Othman","Krid", "P@ssOthman1", "Othman@gmail.com", TypeRole.Utilisateur);
 
@@ -132,45 +132,144 @@ namespace Kili.Models
                 new Catalogue
                 {
                     CatalogueID = 01,
-                    CatalogueName = "Epices",
-                    Description = "Epices et condiments du monde",
+                    CatalogueName = "Montres et bracelets",
+                    Description = "Bracelet made in france",
 
                 },
                new Catalogue
 
                {
                    CatalogueID = 02,
-                   CatalogueName = "Sacs et accessoires",
-                   Description = "Sacs et accessoires du monde",
+                   CatalogueName = "Chaussures et ceintures",
+                   Description = "Chaussures made in france",
+
+               },
+               new Catalogue
+
+               {
+                   CatalogueID = 03,
+                   CatalogueName = "Sacs et tote bags",
+                   Description = "Sacs made in france"
 
                }
+               ,
+               new Catalogue
 
+               {
+                   CatalogueID = 04,
+                   CatalogueName = "Echarpes et foulards",
+                   Description = "Echarpes made in france"
+
+               }
                  );
 
             this.Produits.AddRange(
            new Produit
            {
                ProduitID = 001,
-               Designation = "Pili Pili",
-               Format = "100g",
-               Description = "Piment rouge en provenance de Madagascar, pour donner goût à vos plats.",
-               PrixUnitaire = 5,
+               DateCreation = "01/04/2022",
+               Designation = "Bracelet pour homme",
+               Format = "22 à 25 cm",
+               Description = "Bracelet Sequoia - beige.Fabriqué à la main en France dans Aveyron.",
+               PrixUnitaire = 39,
                Devise = "EUR",
-               ImagePath = "pilipili.jpg",
+               ImagePath = "/images-boutique/bracelet.jpg",
                CatalogueID = 01,
            },
 
            new Produit
            {
                ProduitID = 002,
-               Designation = "Sac croco",
-               Format = "25.5 cm * 31 cm * 15 cm",
-               Description = "Sac fabriqué à partir de la peau de crocodile du Burkina Faso.",
-               PrixUnitaire = 50,
+               DateCreation = "01/04/2022",
+               Designation = "Espadrilles pour femme",
+               Format = "Pointure 36",
+               Description = "Espadrilles marinières fabriquées de manière artisanale en France.",
+               PrixUnitaire = 28,
                Devise = "EUR",
-               ImagePath = "saccroco.jpg",
+               ImagePath = "/images-boutique/espadrille.jpg",
                CatalogueID = 02,
            }
+            
+            ,
+            new Produit
+            {
+                ProduitID = 004,
+                DateCreation = "01/02/2022",
+                Designation = "Écharpe pour hommes",
+                Format = "100cm * 65cm",
+                Description = "Écharpe unique fabriquée à la main",
+                PrixUnitaire = 44,
+                Devise = "EUR",
+                ImagePath = "/images-boutique/echarpe-homme.jpg",
+                CatalogueID = 04,
+            },
+
+            new Produit
+            {
+                ProduitID = 005,
+                DateCreation = "01/02/2022",
+                Designation = "Montre skateboard",
+                Format = "Poids inférieur à 25 Grammes",
+                Description = "Bracelet cuir : brun ou noir",
+                PrixUnitaire = 280,
+                Devise = "EUR",
+                ImagePath = "/images-boutique/montre.jpg",
+                CatalogueID = 01,
+            },
+
+            new Produit
+            {
+                ProduitID = 006,
+                DateCreation = "01/02/2022",
+                Designation = "Sac Messenger pour homme",
+                Format = "41x33x13cm",
+                Description = "Sac d'épaule en toie, grand compartiment pour les livres et ordinateur portable",
+                PrixUnitaire = 65,
+                Devise = "EUR",
+                ImagePath = "/images-boutique/messenger.jpg",
+                CatalogueID = 02,
+            },
+
+            new Produit
+            {
+                ProduitID = 007,
+                Designation = "Papillon pour femme",
+                DateCreation = "01/02/2022",
+                Format = "Pointure 39",
+                Description = "Fait main. 100% française",
+                PrixUnitaire = 135,
+                Devise = "EUR",
+                ImagePath = "/images-boutique/papillon.jpg",
+                CatalogueID = 02,
+            },
+
+            new Produit
+            {
+                ProduitID = 008,
+                Designation = "Ceinture en Cuir pour homme",
+                DateCreation = "01/02/2022",
+                Format = "Taille 56-64",
+                Description = "Ceinture Classique, Must de Cartier, Métal Doré, Made in France",
+                PrixUnitaire = 195,
+                Devise = "EUR",
+                ImagePath = "/images-boutique/ceinture.jpg",
+                CatalogueID = 02,
+            }
+            ,
+            new Produit
+            {
+                ProduitID = 003,
+                DateCreation = "01/03/2022",
+                Designation = "Tote bag Mojito",
+                Format = "37cm x 40cm. Anses de 64cm",
+                Description = "Tissé et imprimé en France. Sac résistant en coton avec impression",
+                PrixUnitaire = 15,
+                Devise = "EUR",
+                ImagePath = "/images-boutique/mojito.jpg",
+                CatalogueID = 03,
+            }
+
+
             );
             this.SaveChanges();
              this.Livraisons.AddRange(
@@ -187,7 +286,7 @@ namespace Kili.Models
                      LivraisonID = 002,
                      LivraisonName = "Livraison à domicile - Chronopost",
                      LivraisonDescription = "Livré avant 13h le jour suivant si vous commandez avant 11h30 du lundi au vendredi",
-                     LivraisonPrice = 9.99,
+                     LivraisonPrice = 0,
                      LivraisonDevise = "EUR",
                  },
                  new Livraison

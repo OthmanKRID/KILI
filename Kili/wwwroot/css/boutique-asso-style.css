@@ -638,3 +638,7 @@ text-align: center;
   background: #272727;
   color: #ffffff;
 }
+
+#home {
+    justify-content: center;
+}

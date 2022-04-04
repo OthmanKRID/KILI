@@ -1,0 +1,74 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+    <!--/.carousel-indicator -->
+    <ol class="carousel-indicators">
+        <li data-target="#header-carousel" data-slide-to="0" class="active"><span class="small-circle"></span></li>
+        <li data-target="#header-carousel" data-slide-to="1"><span class="small-circle"></span></li>
+        <li data-target="#header-carousel" data-slide-to="2"><span class="small-circle"></span></li>
+    </ol><!-- /ol-->
+    <!--/.carousel-indicator -->
+    <!--/.carousel-inner -->
+    <div class="carousel-inner" role="listbox">
+        @{
+            int i = 0;
+        }
+        @foreach (var prod in ViewBag.Produits)
+        {
+            <!-- .item -->
+            <div class="item @(i == 0 ? "active" : "")">
+
+                <div class="single-slide-item slide1">
+
+                    <div class="container">
+                        <div class="welcome-hero-content">
+
+                            <div class="row">
+
+                                <div class="col-sm-7">
+                                    <div class="single-welcome-hero">
+                                        <div class="welcome-hero-txt">
+                                            <h4>Produits d'exception</h4>
+
+                                            <h2>@prod.Designation </h2>
+                                            <p>
+                                                @prod.Description
+                                            </p>
+                                            <div class="packages-price">
+                                                <p>
+                                                    € @prod.PrixUnitaire
+            
+                                                </p>
+                                            </div>
+                                            @Html.ActionLink("Acheter", "Acheter", "Vente", new { id = @prod.ProduitID, @class="btn btn-success", @label="Add to cart" })
+                                            @*<button class="btn-cart welcome-add-cart" onclick="window.location.href='#'">
+                                                <span class="lnr lnr-plus-circle"></span>
+                                                add <span>to</span> cart
+                                                </button>*@
+                                            @*<button class="btn-cart welcome-add-cart welcome-more-info" onclick="window.location.href='#'">
+                                                more info
+                                            </button>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="single-welcome-hero">
+                                        <div class="welcome-hero-img">
+                                            <img src="@prod.ImagePath" alt="slider image">
+                                        </div><!--/.welcome-hero-txt-->
+                                </div><!--/.single-welcome-hero-->
+                            </div><!--/.col-->
+                        </div><!--/.row-->
+                    </div>
+                    </div>
+                </div>
+
+            </div>
+            i++;
+        }
+    </div>
+</div>

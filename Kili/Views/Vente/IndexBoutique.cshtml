@@ -1,39 +1,47 @@
-﻿@model List<Kili.Models.Vente.Produit>
-
+﻿@model Kili.Models.Vente.Panier;
 @{
-    Layout = null;
+    Layout = "_LayoutBoutique";
+    ViewBag.Title = "Ma boutique";
+    ViewBag.IsIndexBoutique = true;
 }
+@section extraheader {
+    @await Html.PartialAsync("~/Views/Shared/_ProductCarouselPartial.cshtml")
+}
+<!--new-arrivals start -->
+<section id="new-arrivals" class="new-arrivals">
+    <div class="container">
+        <div class="section-header">
+            <h2>Nos Produits</h2>
+        </div><!--/.section-header-->
+        <div class="new-arrivals-content">
+            <div class="row">
+               @foreach (var prod in ViewBag.Produits)
+               { <div class="col-md-3 col-sm-4">
+                    <div class="single-new-arrival">
+                        <div class="single-new-arrival-bg">
+                            <img src="@prod.ImagePath" alt="new-arrivals images">
+                            <div class="single-new-arrival-bg-overlay"></div>
+                            <div class="sale bg-1">
+                                <p>sale</p>
+                            </div>
+                            <div class="new-arrival-cart">
+                                <p>
+                                    <span class="lnr lnr-cart"></span>
+                                    @Html.ActionLink("Acheter", "Acheter", "Vente", new { id = @prod.ProduitID, @label="Add to cart" })
+                                </p>
+                                <p class="arrival-review pull-right">
+                                    <span class="lnr lnr-heart"></span>
+                                    <span class="lnr lnr-frame-expand"></span>
+                                </p>
+                            </div>
+                        </div>
+                         <h3><a href="#">@prod.Designation</a></h3> 
+                        <p class="arrival-product-price">@prod.PrixUnitaire @prod.Devise</p>
+                    </div>
+                </div>}
+            </div>
+        </div>
+    </div><!--/.container-->
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Nos arrivages</title>
-</head>
-<body>
-
-    <h3>Bienvenue dans notre boutique</h3>
-    <table cellpadding="2" cellspacing="2" border="1">
-        <tr>
-            <th>Id</th>
-            <th>Désignation</th>
-            <th>Prix</th>
-            <th>Devise</th>
-            <th>Shopping</th>
-        </tr>
-        @foreach(var produit in Model)
-        {
-            <tr>
-                <td>@produit.ProduitID</td>
-                <td>@produit.Designation</td>
-                <td>@produit.PrixUnitaire</td>
-                <td>@produit.Devise</td>
-                <td align="center">
-                    @Html.ActionLink("Acheter", "Acheter", "Vente", new { id = @produit.ProduitID })
-                </td>
-            </tr>
-        }
-    </table>
- </body>
-</html>
+</section><!--/.new-arrivals-->
+<!--new-arrivals end -->

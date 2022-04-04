@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Kili.Models.Vente;
 
 namespace Kili.Models.General
 {
@@ -45,9 +46,12 @@ namespace Kili.Models.General
         [NotMapped]
         public IFormFile Image { get; set; }
 
+        public int? CoordonneesAcheteurID { get; set; }
+        public virtual CoordonneesAcheteur CoordonneesAcheteur  { get; set; }
 
 
-    }
+
+}
 
     public enum TypeRole
     {

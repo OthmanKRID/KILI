@@ -1,0 +1,81 @@
+﻿@model Kili.Models.Vente.Panier;
+@using Kili.Models.General;
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Paiement";
+}
+@section css {
+<link rel="stylesheet" href="~/css/paiement.css">
+}
+<section id="home" classedata-stellar-background-ratio="0.5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Paiement</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="fname">Paiement par carte</label>
+                <div class="icon-container">
+                    <i class="fa fa-cc-visa" style="color:navy;"></i>
+                    <i class="fa fa-cc-amex" style="color:blue;"></i>
+                    <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                    <i class="fa fa-cc-discover" style="color:orange;"></i>
+
+                </div>
+
+                @*<label for="cname">Titulaire de la carte</label>
+                    <input type="text" id="cname" name="cardname" placeholder="Vincent Gaudel">*@
+                <label for="@Html.DisplayNameFor(m => Model.MoyenPaiement.NomTitulaire)"></label>
+                @Html.TextBoxFor(m => Model.MoyenPaiement.NomTitulaire, new { @id="cname", @name="cardname", @placeholder="Votre Nom"})
+
+                @*<label for="ccnum">Numéro de carte</label>
+                    <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">*@
+
+                <label for="@Html.DisplayNameFor(m => Model.MoyenPaiement.Numero)"></label>
+                @Html.TextBoxFor(m => Model.MoyenPaiement.NomTitulaire, new{@id="ccnum", @name="cardnumber", @placeholder="Votre numero de carte" })
+                <div class="row">
+                    <div class="col-md-8">
+                        <label for="@Html.DisplayNameFor(m => Model.MoyenPaiement.DateExpiration)"></label>
+                        @Html.TextBoxFor(m => Model.MoyenPaiement.NomTitulaire, new {@id="expmonth", @name="expmonth", @placeholder="Date d'expiration"})
+
+                    </div>
+                    <div class="col-md-4">
+                        <label for="@Html.DisplayNameFor(m => Model.MoyenPaiement.Cryptogramme)"></label>
+                        @Html.TextBoxFor(m => Model.MoyenPaiement.Cryptogramme, new {@id="cvv", @name="cvv", @placeholder="CVV"})
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="fname">Paiement par Paypal</label>
+                <div class="icon-container">
+                    <i class="fa fa-cc-paypal" style="color:rgb(0, 60, 255);"></i>
+                </div>
+                <label for="cname">Paypal</label>
+                @Html.TextBoxFor(m => Model.MoyenPaiement.Identifiant, new { @type="text", @id="paypal", @name="paypal", @placeholder="Compte Paypal" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label for="fname">Panier</label>
+
+                <span class="price" style="color:black">
+                    <i class="fa fa-shopping-cart"></i>
+                    <b>@Model.Articles.Count</b>
+                </span>
+            </div>
+
+            @foreach (var article in Model.Articles)
+            {
+            <p><a href="#">@article.Produit.Designation</a> <span class="price">@article.Produit.PrixUnitaire &euro;</span></p>
+            }
+
+            <hr>
+            <p>Total <span class="price" style="color:black"><b>@(Model.Articles.Sum(article => article.Produit.PrixUnitaire * article.Quantite)) &euro;</b></span></p>
+
+            @Html.ActionLink("Valider le paiement", "Paiement", null, null, new { @class="button" })
+        </div>
+    </div>
+</section>

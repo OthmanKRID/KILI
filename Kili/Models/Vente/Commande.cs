@@ -20,7 +20,7 @@ namespace Kili.Models.Vente
 
         [ForeignKey("LivraisonID")]
         public int? LivraisonID { get; set; }
-        
+
 
         public virtual Livraison Livraison { get; set; }
 

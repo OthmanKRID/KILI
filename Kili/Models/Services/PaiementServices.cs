@@ -29,6 +29,12 @@ namespace Kili.Models.Services
             return _bddContext.Paiements.Include(p => p.Don).ThenInclude(Do=>Do.Collecte).ThenInclude(Co => Co.ServiceDon).ThenInclude(Sd => Sd.Abonnement).ThenInclude(Ab => Ab.Association).FirstOrDefault(p => p.Id == id);
         }
 
+        //Fonction permettant d'obtenir un Paiement de Vente en ligne à partir de son Id
+        public Paiement ObtenirPaiementBoutique(int id)
+        {
+            return _bddContext.Paiements.Include(c => c.Panier).ThenInclude(x=>x.ServiceBoutique).ThenInclude(y=> y.Abonnement).ThenInclude(a=>a.Association).FirstOrDefault(c=> c.Id == id);
+        }
+
 
         //Fonction permettant d'otenir la liste des paiements du useraccount
 
@@ -43,6 +49,7 @@ namespace Kili.Models.Services
             }
 
             return paiements;
+
         }
 
 

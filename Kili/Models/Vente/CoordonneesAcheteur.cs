@@ -7,14 +7,9 @@ namespace Kili.Models.Vente
     public class CoordonneesAcheteur
     {
         public int CoordonneesAcheteurID { get; set; }
-        public string Firstname { get; set; }
-
-        public string Lastname { get; set; }
-
+        public UserAccount Useraccount { get; set; }
         public virtual Adresse AdresseLivraison { get; set; }
         public virtual Adresse AdresseFacturation { get; set; }
 
-        [MaxLength(10)]
-        public string Telephone { get; set; }
     }
 }

@@ -4,7 +4,7 @@
     Layout = null;
     
 }
-@using (Html.BeginForm())
+@using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <fieldset>
         <legend>Créer votre produit </legend><br />
@@ -20,6 +20,23 @@
         @Html.TextAreaFor(p=> p.Description)
         @Html.ValidationMessageFor(p=> p.Description)
         <br /><br />
+        <form enctype="multipart/form-data"  method="post">
+            <dl>
+                <dt>
+                    <label for="fichier">Image produit</label>
+                </dt>
+                <dd>
+                    @*<input id="fichier" type="file" 
+                        name="fichier" />*@
+      @Html.TextBoxFor(a => a.Image, new { placeholder = "Description", @type = "file", @class="file-pos", @id="exampleInputFile" })
+
+                </dd>
+            </dl>
+
+            <div style="margin-top:15px">
+                <output name="result"></output>
+            </div>
+        </form>
         @Html.LabelFor(p=> p.PrixUnitaire)
         @Html.TextBoxFor(p=> p.PrixUnitaire)
         @Html.ValidationMessageFor(p=>p.PrixUnitaire)
@@ -32,7 +49,10 @@
         @Html.DropDownListFor(p => p.CatalogueID, (SelectList)ViewBag.Catalogue, "Sélectionner un catalogue")<br /><br />
 
         <input type="submit" value="Créer" />
-
+    
+        @section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 
     </fieldset>
     <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>

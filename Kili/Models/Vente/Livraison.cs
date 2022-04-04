@@ -18,7 +18,7 @@ namespace Kili.Models.Vente
         [Display(Name = "Devise")]
         public string LivraisonDevise { get; set; }
 
-        public int? CoordonneesAcheteurID { get; set; }  
+        public int? CoordonneesAcheteurID { get; set; }
         public virtual CoordonneesAcheteur CoordonneesAcheteur { get; set; }
     }
 }

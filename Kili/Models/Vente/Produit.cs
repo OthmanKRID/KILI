@@ -1,10 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Kili.Models.Vente
 {
     public class Produit
     {
         public int ProduitID { get; set; }
+
+        public string DateCreation { get; set; }
 
         [Required, StringLength(100), Display(Name = "Désignation")]
         public string Designation { get; set; }
@@ -18,6 +23,11 @@ namespace Kili.Models.Vente
 
         public string ImagePath { get; set; }
 
+
+        [NotMapped]
+        public IFormFile Image { get; set; }
+
+
         [Display(Name = "Prix")]
         public double PrixUnitaire { get; set; }
 
@@ -25,7 +35,6 @@ namespace Kili.Models.Vente
         [Display(Name = "Devise")]
         public string Devise { get; set; }
 
-        [Required]
         [Display(Name = "Catalogue")]
         public int CatalogueID { get; set; }
 

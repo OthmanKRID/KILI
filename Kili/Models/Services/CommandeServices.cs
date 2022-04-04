@@ -22,28 +22,6 @@ namespace Kili.Models.Services
             return _bddContext.Commandes.ToList();
         }
 
-        //Fonction permettant d'obtenir une Commande à partir de son Id
-        /*public Commande ObtenirCommande(int id)
-        {
-            return _bddContext.Commandes.Find(id);
-        }*/
-
-        //Fonction permettant de créer une Commande
-        /*public void CreerCommande()
-        {
-            Commande commande = new Commande() { DetailCommande = new List<DetailCommande>() };
-            _bddContext.Commandes.Add(commande);
-            _bddContext.SaveChanges();
-            return commande.CommandeID;
-        }*/
-        /*public int CreerCommande(string lastname, string firstname, Adresse adresselivraison, Adresse adressefacturation, string telephone, DateTime date)
-        {
-            Commande commande = new Commande() { LastName = lastname,Firstname = firstname, AdresseLivraison = adresselivraison, AdresseFacturation = adressefacturation, Telephone = telephone, Date = date};
-            _bddContext.Commandes.Add(commande);
-            _bddContext.SaveChanges();
-            return commande.CommandeID;
-        }*/
-
         public int CreerCommande(Panier panier)
         {
             Commande commande = new Commande() { PanierID = panier.PanierID };
@@ -66,48 +44,29 @@ namespace Kili.Models.Services
             _bddContext.SaveChanges();
         }
 
-        /*public Commande ObtenirCommande(int commandeID)
-        {
-            return _bddContext.Commandes.Include(c=> c.DetailCommandes).ThenInclude(pp=>pp.Produit).Where(x=> x.CommandeID == commandeID).FirstOrDefault();
-        }
+        //Fonction permettant de créer les coordonnées d'un acheteur
 
-        public void AjouterDetailCommande(int commandeID, DetailCommande detailCommande)
+        public int CreerCoordonnees(UserAccount useraccount, Adresse adresselivraison, Adresse adressefacturation)
         {
-            Commande commande = _bddContext.Commandes.Find(commandeID);
-            commande.DetailCommandes.Add(detailCommande);
 
+            CoordonneesAcheteur coordonneesAcheteur = new CoordonneesAcheteur() { Useraccount = useraccount, AdresseLivraison = adresselivraison, AdresseFacturation = adressefacturation };
+            _bddContext.CoordonneesAcheteurs.Add(coordonneesAcheteur);
             _bddContext.SaveChanges();
+            return coordonneesAcheteur.CoordonneesAcheteurID;
         }
 
-        public void MettreAjourQuantiteDetailCommande(int DetailCommandeID)
+        /*public int CreerCoordonnées(int? adresseID)
         {
-            var detailcommande = _bddContext.DetailsCommandes.Find(DetailCommandeID);
-            if(detailcommande != null)
-            {
-                detailcommande.Quantite += 1;
-                _bddContext.SaveChanges();
-            }
-        }
 
-        public void SupprimerDetailCommande(int CommandeID, int DetailCommandeID)
-        {
-            Commande commande = ObtenirCommande(CommandeID);
-            DetailCommande detailCommande = commande.DetailCommandes.Where(xx => xx.DetailCommandeID == DetailCommandeID).FirstOrDefault();
-            commande.DetailCommandes.Remove(detailCommande);
+            CoordonneesAcheteur coordonneesAcheteur = new CoordonneesAcheteur() { AdresseID = adresseID };
+            _bddContext.CoordonneesAcheteurs.Add(coordonneesAcheteur);
             _bddContext.SaveChanges();
+            return coordonneesAcheteur.CoordonneesAcheteurID;
         }*/
 
-
-        //Fonction permettant d'obtenir la liste de tous les détails commandes
-        /*public List<DetailCommande> ObtenirAllDetailCommandes()
+        public CoordonneesAcheteur ObtenirCoorCoordonneesAcheteur(int Id)
         {
-            return _bddContext.DetailsCommandes.ToList();
-        }*/
-
-        //Fonction permettant d'obtenir un détail de Commande à partir de son Id
-        /*public List<DetailCommande> ObtenirDetailCommande(int id)
-        {
-            return _bddContext.DetailsCommandes.Find(id);  
-        }*/
+            return _bddContext.CoordonneesAcheteurs.Find(Id);
+        }
     }
 }

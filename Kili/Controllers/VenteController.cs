@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 using System.IO;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Kili.Models.General;
-using static Kili.ViewModels.PaiementViewModel;
-
+using Kili.ViewModels;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
 namespace Kili.Controllers
 {
     public class VenteController : Controller
@@ -18,13 +19,24 @@ namespace Kili.Controllers
         private CatalogueServices _CatalogueServices;
         private ProduitServices _ProduitServices;
         private PanierServices _PanierServices;
+        private CommandeServices _CommandeServices;
+        private LivraisonServices _LivraisonServices;
+        private CoordonneesAcheteur _CoordonneesAcheteur;
         private BddContext _bddContext;
-        public VenteController()
+        private IWebHostEnvironment _WebEnv
+;
+
+
+        public VenteController(IWebHostEnvironment webEv)
         {
             _CatalogueServices = new CatalogueServices();
             _ProduitServices = new ProduitServices();
             _PanierServices = new PanierServices();
+            _CommandeServices = new CommandeServices();
+            _LivraisonServices = new LivraisonServices();
+            _CoordonneesAcheteur = new CoordonneesAcheteur();
             _bddContext = new BddContext();
+            _WebEnv = webEv;
         }
 
         //FONCTIONS POUR LES CATALOGUES
@@ -117,12 +129,34 @@ namespace Kili.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
-            ProduitServices produit_Services = new ProduitServices();
+
+            if (produit.Image.Length > 0)
             {
-                produit_Services.CreerProduit(produit.Designation, produit.Format, produit.ImagePath, produit.Description, produit.PrixUnitaire, produit.Devise, produit.CatalogueID);
+                string uploads = Path.Combine(_WebEnv.WebRootPath, "images");
+                uploads = Path.Combine(uploads, "Produit");
+                string filePath = Path.Combine(uploads, produit.Image.FileName);
+
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    produit.Image.CopyTo(stream);
+
+                }
+
+                produit.ImagePath = "/images/Produit/" + produit.Image.FileName;
+
+
+                ProduitServices produit_Services = new ProduitServices();
+
+                produit_Services.CreerProduit(produit.DateCreation, produit.Designation, produit.Format, produit.Description, produit.ImagePath, produit.PrixUnitaire, produit.Devise, produit.CatalogueID);
                 return RedirectToAction("IndexProduit");
+
             }
+            return View(produit);
         }
+
+
+
+
 
         //GET Vue produit à modifier
         public IActionResult ModifierProduit(int? id)
@@ -150,7 +184,7 @@ namespace Kili.Controllers
             if (!ModelState.IsValid)
                 return View(produit);
             ProduitServices produitServices = new ProduitServices();
-            produitServices.ModifierProduit(produit.ProduitID, produit.Designation, produit.Format, produit.ImagePath, produit.Description, produit.PrixUnitaire, produit.Devise);
+            produitServices.ModifierProduit(produit.ProduitID, produit.DateCreation, produit.Designation, produit.Format, produit.ImagePath, produit.Description, produit.PrixUnitaire, produit.Devise);
             return RedirectToAction("IndexProduit");
         }
 
@@ -170,19 +204,12 @@ namespace Kili.Controllers
         public IActionResult IndexBoutique()
         {
             var bdd = new BddContext();
-            return View(bdd.Produits.ToList());
+            var produits = bdd.Produits.ToList();
+            ViewBag.Produits = produits;
+            return View();
         }
-
-        public IActionResult IndexBoutiqueAsso()
-        {
-            var bdd = new BddContext();
-          
-
-            return View(bdd.Produits.ToList());
-        }
-
         //Afficher panier
-        public IActionResult IndexPanier()
+        public IActionResult Panier()
         {
             var panierID = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "panierID");
             Panier panier;
@@ -223,17 +250,14 @@ namespace Kili.Controllers
                     panierServices.AjouterArticle(panierID, new Article { ProduitID = id, Quantite = 1 });
                 }
             }
-            return RedirectToAction("IndexPanier");
+            return RedirectToAction("Panier");
         }
 
-        [HttpPost]
-
-        //SupprimerArticle
         public IActionResult SupprimerArticle(int id)
         {
             var panierID = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "panierID");
             new PanierServices().SupprimerArticle(panierID, id);
-            return RedirectToAction("IndexPanier");
+            return RedirectToAction("Panier");
         }
 
         //Renvoyer ArticleID si le produit est dans l'article, sinon renvoyer -1
@@ -254,56 +278,140 @@ namespace Kili.Controllers
 
         //GET Afficher le choix de livraisons possibles
 
-        public IActionResult IndexLivraison()
+        public IActionResult Livraison()
         {
-            var panierID = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "panierID");
-            Panier panier;
-            if (panierID != 0)
-            {
-                panier = new PanierServices().ObtenirPanier(panierID);
-            }
-            else
-            {
-                panier = new Panier() { Articles = new List<Article>() };
-            }
+            UserAccount_Services userAccount_Services = new UserAccount_Services();
+            UserAccount ua = userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
             LivraisonServices livservice = new LivraisonServices();
-            List<Livraison> livraisons = livservice.ObtenirAllLivraisons();
-            
-            return View(livraisons);
-        }
-
-        [HttpPost]
-        public IActionResult IndexLivraison(List<Livraison> livraisons)
-        {
-            var panierID = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "panierID");
-            Panier panier;
-            if (panierID != 0)
-            {
-                panier = new PanierServices().ObtenirPanier(panierID);
-            }
-            else
-            {
-                panier = new Panier() { Articles = new List<Article>() };
-            }
-
             CommandeServices commandeServices = new CommandeServices();
-            int id = commandeServices.CreerCommande(panier);
+            commandeServices.CreerCommande(this.GetSessionCart());
 
-            commandeServices.CreerCommande(panier);
-            
-            return RedirectToAction("creerpaiement", "paiement", new { actionID = id, montant = 1000 , typeaction = TypeAction.Commande });
-
+            LivraisonViewModel livraisonViewModel = new LivraisonViewModel();
+            CoordonneesAcheteur coordonneesAcheteur = new CoordonneesAcheteur();
+            coordonneesAcheteur.Useraccount = HttpContext.User.Identity.IsAuthenticated ? ua : new UserAccount();
+            livraisonViewModel.CoordonneesAcheteur = coordonneesAcheteur;
+            livraisonViewModel.Livraisons = livservice.ObtenirAllLivraisons();
+            return View(livraisonViewModel);
         }
-
- 
-
-            
-
 
         //Fonctions pour la commande
 
+        //Afficher les options de livraisons possibles
+        public IActionResult IndexCommande()
+        {            
+            Livraison livraison = new Livraison();
+            CommandeViewModel cvm = new CommandeViewModel
+            {
+                Livraison = livraison
+            };
+            return View(cvm);
+        }
+
+        //POST pour remplissage coordonnées de l'acheteur
+
+        [HttpPost]
+        public IActionResult Livraison(CommandeViewModel viewModel)
+        {
+            //if (!ModelState.IsValid) { 
+            if (!HttpContext.User.Identity.IsAuthenticated)
+            {
+                return Redirect("Livraison");
+            }
+            CommandeServices commandeServices = new CommandeServices();
+            {
+                int id = commandeServices.CreerCoordonnees(viewModel.coordonneesAcheteur.Useraccount, viewModel.coordonneesAcheteur.AdresseLivraison,
+                    viewModel.coordonneesAcheteur.AdresseFacturation);
+                    
+
+                return Redirect("Paiement");
+            }
+        }
+        /*{
+            UserAccount_Services userAccount_Services = new UserAccount_Services();
+            CommandeServices commandeServices = new CommandeServices();
+            {
+                int id = commandeServices.CreerCoordonnées(viewModel.coordonneesAcheteur.AdresseID);
+                 
+                UserAccount ua = userAccount_Services.ObtenirUserAccount(HttpContext.User.Identity.Name);
+                userAccount_Services.ModifierUserAccount(ua.Id, ua.Prenom, ua.Nom, ua.Mail, ua.Telephone, ua.Role, ua.AssociationId, id, ua.AdresseId, ua.ImagePath);
+                return Redirect("/Vente/Livraison");
+            }
+        }*/
+
+        public IActionResult Paiement()
+        {
+            return View(this.GetSessionCart());
+        }
 
 
+        [HttpPost]
+        public async Task<IActionResult> Telecharger(IFormFile fichier)
+        {
+            if (fichier.Length > 0)
+            {
+                var filePath = Path.GetTempFileName();
+
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    await fichier.CopyToAsync(stream);
+
+                }
+            }
+
+            return Ok();
+        }
+
+        public IActionResult Telecharger()
+        {
+            return View();
+        }
+
+        private Panier GetSessionCart()
+        {
+            var panierID = SessionHelper.GetObjectFromJson<int>(HttpContext.Session, "panierID");
+            Panier panier;
+            if (panierID != 0)
+            {
+                panier = new PanierServices().ObtenirPanier(panierID);
+            }
+            else
+            {
+                panier = new Panier() { Articles = new List<Article>() };
+            }
+            return panier;
+        }
+
+        [ActionName("CreerPaiement")]
+        [HttpPost]
+        public IActionResult PayerAchat(Paiement paiement)
+        {
+            UserAccount_Services UserAccount_Services = new UserAccount_Services();
+            PanierServices panierServices = new PanierServices();
+            PaiementServices paiementServices = new PaiementServices();
+
+            paiement.DatePaiement = System.DateTime.Today;
+            {
+                int id;
+                if(paiement.MoyenPaiement.Identifiant == null)
+                {
+                    int idCarte = paiementServices.CreerMoyenPaiement(paiement.MoyenPaiement.NomTitulaire, paiement.MoyenPaiement.Numero, paiement.MoyenPaiement.Cryptogramme,
+                        paiement.MoyenPaiement.DateExpiration);
+                    id = paiementServices.CreerPaiement(paiement.Montant, idCarte);
+                    paiement.MoyenPaiement.moyenPaiement = MoyenPaiement.TypeMoyenPaiement.CarteBancaire;
+                }
+                else
+                {
+                    int idPaypal = paiementServices.CreerMoyenPaiement(paiement.MoyenPaiement.Identifiant);
+                    id = paiementServices.CreerPaiement(paiement.Montant, idPaypal);
+                    paiement.MoyenPaiement.moyenPaiement = MoyenPaiement.TypeMoyenPaiement.Paypal;
+                }
+
+                return Redirect("/Vente/Paiement");
+            }
+            
+        }
 
     }
 }
+
+

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Kili.Models.Vente;
+using System;
 
 namespace Kili.Models.Services
 {
@@ -23,10 +24,11 @@ namespace Kili.Models.Services
         }
 
         //Fonction permettant de créer un Produit
-        public int CreerProduit(string designationproduit, string formatproduit, string descriptionproduit, string imagepathproduit, double prixunitaireproduit, string deviseproduit, int catalogueidproduit)
+        public int CreerProduit(string datecreation, string designationproduit, string formatproduit, string descriptionproduit, string imagepathproduit, double prixunitaireproduit, string deviseproduit, int catalogueidproduit)
         {
             Produit produit = new Produit()
             {
+                DateCreation = datecreation,
                 Designation = designationproduit,
                 Format = formatproduit,
                 Description = descriptionproduit,
@@ -58,11 +60,12 @@ namespace Kili.Models.Services
         }
 
         //Fonction permettant de modifier un produit
-        public void ModifierProduit(int produitid, string designationproduit, string formatproduit, string descriptionproduit, string imagepathproduit, double prixunitaireproduit, string deviseproduit)
+        public void ModifierProduit(int produitid, string datecreation, string designationproduit, string formatproduit, string descriptionproduit, string imagepathproduit, double prixunitaireproduit, string deviseproduit)
         {
             Produit produit = this._bddContext.Produits.Find(produitid);
             if (produit != null)
             {
+                produit.DateCreation = datecreation;
                 produit.Designation = designationproduit;
                 produit.Format = formatproduit;
                 produit.Description = descriptionproduit;
@@ -84,11 +87,11 @@ namespace Kili.Models.Services
             this._bddContext.SaveChanges();
         }
 
-        public void SupprimerProduit(string designationproduit, string formatproduit, string descriptionproduit, string imagepathproduit, double prixunitaireproduit, string deviseproduit, int catalogueidproduit)
+        public void SupprimerProduit(string datecreation, string designationproduit, string formatproduit, string descriptionproduit, string imagepathproduit, double prixunitaireproduit, string deviseproduit, int catalogueidproduit)
         {
-           Produit produit = this._bddContext.Produits.Where(produit => produit.Designation == designationproduit && produit.Format == formatproduit && produit.Description == descriptionproduit &&
-           produit.ImagePath == imagepathproduit && produit.PrixUnitaire == prixunitaireproduit && produit.Devise == deviseproduit && produit.CatalogueID == catalogueidproduit).FirstOrDefault();
-            if(produit != null)
+            Produit produit = this._bddContext.Produits.Where(produit => produit.DateCreation == datecreation && produit.Designation == designationproduit && produit.Format == formatproduit && produit.Description == descriptionproduit &&
+            produit.ImagePath == imagepathproduit && produit.PrixUnitaire == prixunitaireproduit && produit.Devise == deviseproduit && produit.CatalogueID == catalogueidproduit).FirstOrDefault();
+            if (produit != null)
             {
                 this._bddContext.Produits.Remove(produit);
                 this._bddContext.SaveChanges();
@@ -96,11 +99,11 @@ namespace Kili.Models.Services
         }
     }
 }
-        
-            
-    
- 
 
-        
-  
+
+
+
+
+
+
 

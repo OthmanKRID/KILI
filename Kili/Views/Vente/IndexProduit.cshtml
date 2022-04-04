@@ -5,7 +5,7 @@
 <h1> Vos produits </h1>
 <table border ="1">
     <tr>
-        <th>Id</th>
+        <th>Image</th>
         <th>Désignation</th>
         <th>Format</th>
         <th>Description</th>
@@ -16,7 +16,7 @@
     @foreach(var prod in Model)
     {
         <tr>
-            <td>@prod.ProduitID</td>
+            <td>@prod.ImagePath</td>
             <td>@prod.Designation</td>
             <td>@prod.Format</td>
             <td>@prod.Description</td>

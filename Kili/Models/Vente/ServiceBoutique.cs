@@ -1,7 +1,7 @@
-﻿using Kili.Models;
-using Kili.Models.Dons;
+﻿
 using System;
 using System.Collections.Generic;
+using Kili.Models.General;
 
 namespace Kili.Models.Vente
 {
@@ -12,6 +12,8 @@ namespace Kili.Models.Vente
         public DateTime dateAbonnement { get; set; }
         public DateTime dateFinAbonnement { get; set; }
         public int duree { get; set; }
+
+        public virtual Abonnement Abonnement { get; set; }
         public double montant_paye { get; set; }
 
         public bool IsActif()

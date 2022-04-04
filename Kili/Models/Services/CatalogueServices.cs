@@ -31,7 +31,7 @@ namespace Kili.Models.Services
         }
 
         //Fonction permettant d'obtenir un catalogue à partir de son Id en format string
-        public Catalogue ObtenirCatalogue (string idstr)
+        public Catalogue ObtenirCatalogue(string idstr)
         {
             int id;
             if (int.TryParse(idstr, out id))
@@ -42,7 +42,7 @@ namespace Kili.Models.Services
         }
 
         //Fonction permettant de créer un Catalogue
-        public int CreerCatalogue(string cataloguename, string cataloguedescription)  
+        public int CreerCatalogue(string cataloguename, string cataloguedescription)
         {
             Catalogue catalogue = new Catalogue()
             {
@@ -56,7 +56,7 @@ namespace Kili.Models.Services
         }
 
         //Fonction permettant de modifier un catalogue
-        public void ModifierCatalogue (int catalogueid, string cataloguename, string cataloguedescription)
+        public void ModifierCatalogue(int catalogueid, string cataloguename, string cataloguedescription)
         {
             Catalogue catalogue = this._bddContext.Catalogues.Find(catalogueid);
             if (catalogue != null)
@@ -66,28 +66,28 @@ namespace Kili.Models.Services
                 this._bddContext.SaveChanges();
 
             }
-            
+
         }
 
         //Fonction permettant de supprimer un catalogue
 
         public void SupprimerCatalogue(int id)
         {
-            Catalogue catalogue = this._bddContext.Catalogues.Find (id);
+            Catalogue catalogue = this._bddContext.Catalogues.Find(id);
             this._bddContext.Catalogues.Remove(catalogue);
             this._bddContext.SaveChanges();
         }
 
         public void SupprimerCatalogue(string cataloguename, string cataloguedescription)
         {
-            Catalogue catalogue = this._bddContext.Catalogues.Where( c => c.CatalogueName == cataloguename && c.Description == cataloguedescription ).FirstOrDefault();
-            if(catalogue != null)
+            Catalogue catalogue = this._bddContext.Catalogues.Where(c => c.CatalogueName == cataloguename && c.Description == cataloguedescription).FirstOrDefault();
+            if (catalogue != null)
             {
-                this._bddContext.Catalogues.Remove (catalogue);
-                this._bddContext.SaveChanges() ;
+                this._bddContext.Catalogues.Remove(catalogue);
+                this._bddContext.SaveChanges();
             }
         }
 
-        
+
     }
 }

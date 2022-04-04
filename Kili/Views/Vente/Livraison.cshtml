@@ -1,0 +1,162 @@
+﻿@model Kili.ViewModels.LivraisonViewModel;
+@using Kili.Models.Vente
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Livraison";
+}
+
+@section css {
+    <link rel="stylesheet" href="~/css/paiement.css">
+}
+
+<section id="home" classedata-stellar-background-ratio="0.5">
+    @using (Html.BeginForm())  {
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <H3 style="text-align:center"> Choix de livraison</H3>
+
+                <ul>
+                    <!-- Titre du tableau----------------------------------------------------------------------->
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div class="col-xl-8">
+                            <div class="col-md-2 col-md-8">Designation</div>
+                            <div class="col-md-2 col-md-8">Description</div>
+                            <div class="col-md-2 col-md-8">Frais de livraison</div>
+                            <div class="col-md-2 col-md-8">Devise</div>
+                            <div>choix</div>
+                        </div>
+
+                    </li>
+                    <!-- Premiere ligne colissimo ---------------------------------------------------->
+                    @foreach (var livraison in Model.Livraisons)
+                    {
+                        <li class="list-group-item align-items-center drag-handle clearfix">
+                            <span class="drag-indicator"></span>
+                            <div class="col-xl-8">
+                                <div class="col-md-2 col-md-8">@livraison.LivraisonName</div>
+                                <div class="col-md-2 col-md-8">@livraison.LivraisonDescription</div>
+                                <div class="col-md-2 col-md-8">@livraison.LivraisonPrice</div>
+                                <div class="col-md-2 col-md-8">@livraison.LivraisonDevise</div>
+                                <div>@Html.RadioButton("Choisir", @livraison.LivraisonID, false, new { @label="Choix" })</div>
+                            </div>
+                        </li>
+                    }
+                    <!--  ligne espassement --------------------------------------------->
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                    </li>
+                </ul>
+                <!-- Adresse de livraison --------------------------------------------->
+                <H3 class="text-center"> Adresse de livraison</H3>
+                <div class="form-group">
+                    <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.Useraccount.Nom)"><i class="fa fa-user"></i> Nom</label>
+                    @Html.TextBoxFor(m => Model.CoordonneesAcheteur.Useraccount.Nom, new { @id="", @name="lastname", @placeholder="Nom", @class="form-control"})
+                </div>
+                
+                @*<label for="lname"><i class="fa fa-user"></i> Nom</label>
+                    <input type="text" id="lname" name="lastname" placeholder="Gaudel">*@
+
+                <div class="form-group">
+                    <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.Useraccount.Prenom)"><i class="fa fa-user"></i> Prenom</label>
+                    @Html.TextBoxFor(m => Model.CoordonneesAcheteur.Useraccount.Prenom, new{@id="", @name="firstname", @placeholder="Prenom", @class="form-control" })
+                    @*<input type="text" id="fname" name="firtname" placeholder="Vincent">*@
+                </div>
+                <div class="form-group">
+                <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.Useraccount.Telephone)"><i class="fa fa-user"></i> Telephone</label>
+                @Html.TextBoxFor(m => Model.CoordonneesAcheteur.Useraccount.Telephone, new{@id="", @name = "phone", @placeholder  = "Telephone", @class="form-control" })
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Numero)"><i class="fa fa-institution"> </i>Adresse</label>
+                        @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Numero, new{@id="", @name="num", @placeholder = "Numero", @class="form-control" })
+                        @*<input type="text" id="num" name="num" placeholder="25">*@
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Voie)">&nbsp;</label>
+                        @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Voie, new{@id=" ", @name="adr", @placeholder="Voie", @class="form-control" })
+                        @*<input type="text" id="adr" name="adr" placeholder="Rue de la république">*@
+                    </div>
+                </div>
+                <div class="form-group">
+                <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Complement)"></label>
+                @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Complement, new{@id= "", @name="compl", @placeholder="Complement", @class="form-control" })
+                @*<input type="text" id="city" name="city" placeholder="Paris">*@
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.AdresseLivraison.CodePostal)"></label>
+                        @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseLivraison.CodePostal, new{@id= "", @name = "zip", @placeholder="Code postal", @class="form-control" })
+                        @*<input type="text" id="state" name="state" placeholder="ile de France">*@
+
+                    </div>
+                    <div class="col-md-6">
+                        <label for="@Html.DisplayNameFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Ville)"></label>
+                        @Html.TextBoxFor(m => Model.CoordonneesAcheteur.AdresseLivraison.Ville, new{@id= "", @name = "city", @placeholder="Ville", @class="form-control" })
+                        @*<input type="text" id="zip" name="zip" placeholder="75000">*@
+
+                        @Html.HiddenFor(m => Model.CoordonneesAcheteur.CoordonneesAcheteurID)
+
+                        <label>
+                            <input type="checkbox" checked="checked" name="sameadr"> Adresse de livraison même que l'adresse de facturation
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success">Valider le paiement</button>
+
+                @*<button type="button" class="btn btn-primary btn-lg show-modal" data-toggle="modal"
+                              data-target="#myModal">Connexion</button>*@
+                @*@Html.ActionLink("Valider commande", "CoordonneesAcheteur", "Vente", null, new { @class="button" })*@
+                @Html.ActionLink("Continuer ses achats", "IndexBoutique", null, null, new { @class="btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    }
+
+    @*@using (Html.BeginForm("Authentification", "Login"))
+    {
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content clearfix">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">×</span></button>
+                    <div class="modal-body">
+                        <h3 class="title">Connexion</h3>
+                        <p class="description">Saisir l'email et le mot de passe ! </p>
+                        <div class="form-group">
+                            <span class="input-icon"><i class="fa fa-user"></i></span>
+                            <input type="email" name="UserAccount.Mail" class="form-control" placeholder="Email" required="required">
+                        </div>
+                        <div class="form-group">
+                            <span class="input-icon"><i class="fa fa-shield"></i></span>
+                            <input type="password" name="UserAccount.Password" class="form-control" placeholder="Mot de passe" required="required">
+                        </div>
+                        <div class="form-group checkbox">
+                            <input type="checkbox">
+                            <label>Sauvegarder</label>
+                        </div>
+                        <a href="" class="forgot-pass">Mot de passe oublié ?</a>
+                        <input type="submit" value="Se connecter" class="btn" name="submit" id="submit" />
+
+                        <a class="txtCompte" href="Create.html">@Html.ActionLink("Créer un compte", "CreerUtilisateur", "UserAccount")</a>
+                        <a class="txtCompte" href="Create.html">@Html.ActionLink("Créer un compte Association", "AjouterCompteAssociation", "Association")</a>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    }*@
+</section>

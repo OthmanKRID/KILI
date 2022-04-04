@@ -1,0 +1,264 @@
+﻿@model List<Kili.Models.Vente.Catalogue>
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Catalogue";
+}
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <title>Ajouter produit</title>
+
+    <!--Core CSS NE PAS TOUCHER-->
+    <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-reset.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <!--icheckNE PAS TOUCHER-->
+    <link href="js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
+    <link href="js/iCheck/skins/minimal/red.css" rel="stylesheet">
+    <link href="js/iCheck/skins/minimal/green.css" rel="stylesheet">
+    <link href="js/iCheck/skins/minimal/blue.css" rel="stylesheet">
+    <link href="js/iCheck/skins/minimal/yellow.css" rel="stylesheet">
+    <link href="js/iCheck/skins/minimal/purple.css" rel="stylesheet">
+
+    <link href="js/iCheck/skins/square/square.css" rel="stylesheet">
+    <link href="js/iCheck/skins/square/red.css" rel="stylesheet">
+    <link href="js/iCheck/skins/square/green.css" rel="stylesheet">
+    <link href="js/iCheck/skins/square/blue.css" rel="stylesheet">
+    <link href="js/iCheck/skins/square/yellow.css" rel="stylesheet">
+    <link href="js/iCheck/skins/square/purple.css" rel="stylesheet">
+
+    <link href="js/iCheck/skins/flat/grey.css" rel="stylesheet">
+    <link href="js/iCheck/skins/flat/red.css" rel="stylesheet">
+    <link href="js/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link href="js/iCheck/skins/flat/blue.css" rel="stylesheet">
+    <link href="js/iCheck/skins/flat/yellow.css" rel="stylesheet">
+    <link href="js/iCheck/skins/flat/purple.css" rel="stylesheet">
+
+    <!-- Custom styles for this template NE PAS TOUCHER-->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+
+    <section id="container">
+        <!--barre de NAV-->
+        <header class="header fixed-top clearfix">
+            <div class="brand">
+
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="">
+                </a>
+
+            </div>
+
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                <ul class="nav top-menu">
+
+                    <!-- notification dropdown start-->
+                    <li id="header_notification_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+                            <i class="fa fa-bell-o"></i>
+                            <span class="badge bg-warning">3</span>
+                        </a>
+                        <ul class="dropdown-menu extended notification">
+                            <li>
+                                <p>Notifications</p>
+                            </li>
+                            <li>
+                                <div class="alert alert-info clearfix">
+                                    <span class="alert-icon"><i class="fa fa-bolt"></i></span>
+                                    <div class="noti-info">
+                                        <a href="#"> Notifs #1 </a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="alert alert-danger clearfix">
+                                    <span class="alert-icon"><i class="fa fa-bolt"></i></span>
+                                    <div class="noti-info">
+                                        <a href="#"> Notifs #2</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="alert alert-success clearfix">
+                                    <span class="alert-icon"><i class="fa fa-bolt"></i></span>
+                                    <div class="noti-info">
+                                        <a href="#"> Notifs #3</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <!-- notification dropdown end -->
+                </ul>
+
+            </div>
+            <!--  notification end -->
+
+
+            <!--mon compte start-->
+            <div class="top-nav clearfix">
+
+                <ul class="nav pull-right top-menu">
+
+                    <!-- mon compte dropdown -->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" src="images/avatar1_small.jpg">
+                            <span class="username">Mon compte</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+
+                            <li><a href="#"><i class=" fa fa-suitcase"></i>Ma boutique</a></li>
+                            <li><a href="#"><i class=" fa fa-suitcase"></i>Mes collectes</a></li>
+                            <li><a href="#"><i class=" fa fa-suitcase"></i>Mes adhésions</a></li>
+                            <li><a href="#"><i class="fa fa-cog"></i> Mon profil</a></li>
+                            <li><a href="login.html"><i class="fa fa-key"></i> Se deconnecter</a></li>
+
+                        </ul>
+                    </li>
+                    <!--  mon compte  dropdown end -->
+
+                </ul>
+                <!-- mon compte  info end-->
+            </div>
+        </header>
+        <!--barre NAV end-->
+
+        <!--main content start-->
+        <section id="main-content" class="">
+            <section class="wrapper">
+
+                <!-- FORMULAIRE start-->
+                <!-- NOM-->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Nom du catalogue
+                            </header>
+                            <div class="panel-body">
+                                <div class="position-center">
+                                    <form role="form">
+                                        <div class="form-group">
+
+                                            <input type="text" class="form-control" placeholder="Désignation">
+
+
+
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                            </div>
+                        </section>
+
+                        <!-- NOM-->
+
+                        <!-- DESCRIPTION-->
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <section class="panel">
+                                    <header class="panel-heading">
+                                        Description du Catalogue
+                                    </header>
+                                    <div class="panel-body">
+                                        <form class="form-horizontal bucket-form" method="get">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Ajouter ici des élements de
+                                                    détails</label>
+                                                <div class="col-sm-6">
+                                                    <textarea class="form-control" rows="6"></textarea>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- DESCRIPTION-->
+
+                       
+
+
+
+
+
+
+               
+                <!-- BOUTON-->
+                <section class="panel">
+                    <header class="panel-heading">
+                        @*Enregistrer les modifications*@
+
+                    </header>
+                    <div class="panel-body">
+                        <button type="button" class="btn btn-success btn-lg btn-block">Créer Catalogue</button>
+
+                    </div>
+                </section>
+
+                <!-- BOUTON-->
+
+                </div>
+                </div>
+              
+
+
+                <!-- FORMULAIRE  end-->
+            </section>
+        </section>
+        <!--main content end-->
+
+
+    </section>
+
+    <!-- Placed js at the end of the document so the pages load faster -->
+
+    <!--Core js-->
+    <script src="js/jquery.js"></script>
+    <script src="bs3/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+    <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+    <script src="js/jquery.nicescroll.js"></script>
+    <!--Easy Pie Chart-->
+    <script src="js/easypiechart/jquery.easypiechart.js"></script>
+    <!--Sparkline Chart-->
+    <script src="js/sparkline/jquery.sparkline.js"></script>
+    <!--jQuery Flot Chart-->
+    <script src="js/flot-chart/jquery.flot.js"></script>
+    <script src="js/flot-chart/jquery.flot.tooltip.min.js"></script>
+    <script src="js/flot-chart/jquery.flot.resize.js"></script>
+    <script src="js/flot-chart/jquery.flot.pie.resize.js"></script>
+
+    <script src="js/iCheck/jquery.icheck.js"></script>
+
+    <script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
+
+    <!--common script init for all pages-->
+    <script src="js/scripts.js"></script>
+
+    <!--icheck init -->
+    <script src="js/icheck-init.js"></script>
+
+</body>
+
+</html>

@@ -21,6 +21,7 @@ namespace Kili
         {
             //Ajout le service de gestion des sessions dans le parcours de vente en ligne entre autres
             services.AddSession();
+            services.AddHttpContextAccessor();
 
             //Ajoute le service d'authentification par cookies
 

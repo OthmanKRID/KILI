@@ -1,6 +1,7 @@
 ﻿
 
 using Kili.Models.Dons;
+using Kili.Models.Vente;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -22,6 +23,8 @@ namespace Kili.Models.General
             public virtual MoyenPaiement MoyenPaiement { get; set; }
 
             public virtual Don Don { get; set; }
+
+            public virtual Panier Panier { get; set; }
 
 
         }
