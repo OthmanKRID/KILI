@@ -8,7 +8,7 @@ namespace Kili.Models.Dons
     {
         public int Id { get; set; }
 
-        [Required]
+        //[Required]
         public int? AdresseID { get; set; }
         public virtual Adresse Adresse { get; set; }
 

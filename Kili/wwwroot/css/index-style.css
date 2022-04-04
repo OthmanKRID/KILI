@@ -126,6 +126,24 @@ body {
     background-size :cover;
 }
 
+#section-kili-asso {
+    padding-top: 12em;
+    min-height: 90vh;
+    position: relative;
+    background: url('../images/details_asso_1.svg') no-repeat right;
+    background-size: cover;
+}
+
+#section-kili-asso-2 {
+    padding-top: 12em;
+    min-height: 90vh;
+    position: relative;
+    background: url('../images/detail_asso_2.svg') no-repeat right;
+    background-size: cover;
+}
+
+
+
 #section-admin {
     padding-top: 12em;
     min-height: 90vh;
@@ -853,12 +871,26 @@ text-align: center;
     background: #ffffffa4;
 }
 
+
+
 .card-services {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 10PX;
     padding-bottom: 0px;
     background: #ffffffef;
 }
+
+.card-text {
+    max-width: 300px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: scroll !important;
+}
+
+    .card-text::-webkit-scrollbar {
+        display: none;
+    }
 
 .container {
   padding: 16px 16px;
@@ -967,17 +999,18 @@ text-align: center;
     margin-left: 0px;
 }
 
-.search_box_2 .input_search {
-    outline: none;
-    border: 0;
-    background: #e97953;
-    border-radius: 50px;
-    padding: 15px 20px;
-    width: 50%;
-    height: 50px;
-    color: #fff;
-    margin : 5px;
-}
+    .search_box_2 .input_search {
+        font-family: 'poppinsRegular';
+        outline: none;
+        border: 0;
+        background: #e97953;
+        border-radius: 50px;
+        padding: 15px 20px;
+        width: 50%;
+        height: 50px;
+        color: #fff;
+        margin: 5px;
+    }
 
 .search_box .input_search {
     outline: none;

@@ -1,0 +1,37 @@
+﻿
+@model Kili.ViewModels.PaiementViewModel
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Paiement";
+}
+<
+    <body>
+
+        <section id="home" classedata-stellar-background-ratio="0.5">
+
+
+          <div class="row">
+               <div class="col-75">
+                 <div class="container" style="margin:200px;">
+
+                   
+                       <div class="col-50">
+                         <h1>Merci pour votre achat !</h1>
+
+                    <a href="@Url.ActionLink("Index", "Home", new { viewModel = @Model})" class="smoothScroll">
+                        <input type="button" value="Retour à l'accueil" class="button">
+                    </a>
+
+
+                       </div>
+
+                     </div>
+        
+          </div>
+         </div>
+
+
+     </section>
+
+
+    </body>

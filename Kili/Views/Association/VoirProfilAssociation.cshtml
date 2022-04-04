@@ -38,11 +38,18 @@
                                     <form class="form-signin" action="index.html">
                                         <div class="login-wrap">
 
-                                            <input type="text" class="form-control" placeholder="Prénom" value="@Model.compteConnecte.Prenom" autofocus>
-                                            <input type="text" class="form-control" placeholder="Nom" value="@Model.compteConnecte.Nom" autofocus>                                           
-                                            <input type="text" class="form-control" placeholder="Numéro" value="@Model.compteConnecte.Telephone" autofocus>
-                                            <input type="email" class="form-control" placeholder="Email" value="@Model.compteConnecte.Mail" autofocus>
-                                            @*<input type="password" class="form-control" placeholder="Mot de passe" value="@Model.compteConnecte.Password" autofocus>*@
+
+                                            <p>@Model.compteConnecte.Prenom<p/>
+                                            <p>@Model.compteConnecte.Nom<p/>
+                                            <p>@Model.compteConnecte.Telephone<p/>
+                                            <p>@Model.compteConnecte.Mail<p/>
+                                            @*
+                                            <input type="text" class="form-control-asso" placeholder="Prénom" value="@Model.compteConnecte.Prenom" readonly autofocus>
+                                            <input type="text" class="form-control-asso"  placeholder="Nom" value="@Model.compteConnecte.Nom" readonly autofocus>                                           
+                                            <input type="text" class="form-control-asso"  placeholder="Numéro" value="@Model.compteConnecte.Telephone" readonly autofocus>
+                                            <input type="email" class="form-control-asso"  placeholder="Email" value="@Model.compteConnecte.Mail" readonly autofocus>
+                                            <input type="password" class="form-control" placeholder="Mot de passe" value="@Model.compteConnecte.Password" autofocus>*@
+
 
                                         </div>
                                     </form>
@@ -138,20 +145,25 @@
                                     <header class="panel-heading tab-bg-dark-navy-blue">
                                         <ul class="nav nav-tabs nav-justified ">
 
-                                             <li>
+
+                                             <li class="active">
                                                 <a data-toggle="tab" href="#settings">
                                                     Mon association
                                                 </a>
                                             </li>
 
-                                            <li class="active">
+
+                                            <li>
+
                                                 <a data-toggle="tab" href="#overview">
                                                     Mon historique
                                                 </a>
                                             </li>
                                        
                                      
-                                           
+
+                                            
+
                                         </ul>
                                     </header>
 
@@ -166,33 +178,31 @@
                                                              
                                                             </div>
                                                             <div class="activity-desk">
-                                                                <h2>il y a 1 heure</h2>
-                                                                <p>Purchased new stationary items for head office</p>
+                                                                <h2>Il y a 1 heure</h2>
+                                                                <p>Modification de la description association</p>
                                                             </div>
                                                             <div class="activity-icon red">
                                                                 
                                                             </div>
                                                             <div class="activity-desk">
                                                                 <h2 class="red">il y a 2 jours</h2>
-                                                                <p>il y a 2 jours<a href="#"
-                                                                        class="terques">Stive Martin</a> regarding the
-                                                                    Product Promotion</p>
+                                                                <p>Ajout de la photo de profil association</p>
                                                             </div>
                                                             <div class="activity-icon purple">
                                                                
                                                             </div>
                                                             <div class="activity-desk">
-                                                                <h2 class="purple">la semaine dernière</h2>
-                                                                <p>3 photo Uploaded on facebook product page</p>
+                                                                <h2 class="purple">La semaine dernière</h2>
+                                                                <p>Ajout de 3 photos au profil association</p>
                                                                 <div class="photo-gl">
                                                                     <a href="#">
-                                                                        <img src="~/images/sm-img-1.jpg" alt="" />
+                                                                        <img src="~/images/asso1.jpg" alt="" />
                                                                     </a>
                                                                     <a href="#">
-                                                                        <img src="~/images/sm-img-2.jpg" alt="" />
+                                                                        <img src="~/images/asso2.jpg" alt="" />
                                                                     </a>
                                                                     <a href="#">
-                                                                        <img src="~/images/sm-img-3.jpg" alt="" />
+                                                                        <img src="~/images/asso3.jpg" alt="" />
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -207,6 +217,7 @@
                                           
                                            
                                             <div id="settings" class="tab-pane active" >
+
                                              
                                             @using (Html.BeginForm("ModifierAssociation","Association", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                             {

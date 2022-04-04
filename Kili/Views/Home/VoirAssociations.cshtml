@@ -8,65 +8,73 @@
 }
 
      <!-- FEATURE -->
-     <section  id="ImgAsso"  data-stellar-background-ratio="0.5">
-         <div class="container">
-        <div class="row"> 
-        <div class="col-6 col-md-6"> 
+    <section id="home-explorer" data-stellar-background-ratio="0.5">
+          <div class="overlay"></div>
+          <div class="container">
+               <div class="row">
+                    <div class="col-sm-7">
+                         <div class="home-info"> 
             
                 <h1> Découvrez les différentes associations</h1>
                 <p> Description DescriptionDescriptionDescriptionDescription
                   DescriptionDescriptionDescriptionDescriptionDescription
                   DescriptionDescriptionDescriptionDescription
                   DescriptionDescriptionDescription
-                </p> <br><br><br>
-  
-                <a href="Create.html"> Vous êtes une association ?</a>
-    
+
+                </p> 
+            
+             
 
                             @using (Html.BeginForm("VoirAssociationsTriees","Home"))
                         {
-            <div>
-                @Html.TextBoxFor(m => m.association.Nom,  new { @id="nomAsso", @placeholder="Nom de l'association" , @class="form-control"})
+                           
+
+            <div class="search_box">
+                @Html.TextBoxFor(m => m.association.Nom,  new { @id="nomAsso", @placeholder="Nom de l'association" , @class="input_search"})
             </div>
-            <div>
-                
-                 @Html.TextBoxFor(m => m.association.Adresse.Ville,  new { @id="villeAsso", @placeholder="Ville" }) 
-                 @Html.DropDownListFor(m => m.RechercheTheme, new SelectList(Enum.GetValues(typeof(RechercheTheme))))
+            <div class="search_box_2">              
+                 @Html.TextBoxFor(m => m.association.Adresse.Ville,  new { @id="villeAsso", @placeholder="Ville", @class="input_search" }) 
+                 @Html.DropDownListFor(m => m.RechercheTheme, new SelectList(Enum.GetValues(typeof(RechercheTheme))),new{@class="input_search"})
             </div>
                         <div class="form-submit">
-                            <input type="submit" value="Valider" class="submit" name="submit" id="submit" />
+                            <input type="submit" value="Valider" class="submit" name="submit" id="btn-val" />
                         </div>
                         }
         </div> 
-      
-    </div>
-    </div>
+         </div>
+                    </div>
+               </div>
+          </div>
      </section>
 
 
      <!-- Liste Association -->
 
-     <section >
-        <div class="sec2Asso">
+     <section id="section-kili-asso-2" data-stellar-background-ratio="0.5" >
+       <div class="sec2Asso">
             <h2>@Model.Associations.Count() Résultats pour votre recherche </h2><br><br>
-            <a href="">Tout</a> 
+           <!-- <a href="">Tout</a> 
             <a href="">Associations</a>
-            <a href="">Activités</a> <br><br>  
+            <a href="">Activités</a> <br><br>  --> 
 
         </div> 
 <div class="container">
 
            @foreach(var association in Model.Associations)
         {
-                  <div class="responsive">
+                 
+            <div class="responsive">
                     <div class="gallery">
                       <a href="@Url.Action("VoirDetailsAssociation", "Association", new { id = @association.Id})">
-                        <img src="@association.ImagePath" alt="Cinque Terre" width="300" height="100">
+                        <img src="@association.ImagePath" alt="Cinque Terre" style="width:271px; height:155px;">
                       </a>
                       <div class="desc">@association.Nom</div>
-                      <div class="desc">@association.Adresse.Ville</div>
-                      <div class="desc">@association.Theme</div>
-                      <div class="desc">@association.Description</div>
+                      <div class="desc" style="color:#ee490e;">@association.Theme</div>
+                      <div class="desc overflow-clip-ellipsis" style="width: 250px; overflow: hidden; text-overflow: clip ellipsis;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">@association.Description</div>
+                      
+                      <div class="desc" style="color:#ee490e;">@association.Adresse.Ville</div>
+                      
+                                                           
                     </div>
                   </div>
         }
@@ -77,20 +85,17 @@
              
      </section>
 
-     <!-- Kili QUESACO -->
+     <!-- Kili QUESACO
      <section id="img5">
         <div class="container">
             <div class="">
                 
             </div>
         </div>
-     </section>
+     </section>  -->
 
      
      </section>   
 
 
-     <!-- CONTACT -->
-     <section id="contact" data-stellar-background-ratio="0.5">
-          
-     </section>       
+       

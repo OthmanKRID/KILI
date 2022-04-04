@@ -27,21 +27,27 @@
                                    <br>
                                    <p>@Model.Collecte.Descriptif</p><br>
 
-                                    <p>Faire un don</p><br>
-                                    <p>@Model.Collecte.Descriptif</p><br>
+                                    <p>Faire un don à cette collecte</p>
                                    
                                     @using (Html.BeginForm())
                                     {
                                     <fieldset class="register-form" id="register-form">
                                     @Html.TextBoxFor(m => m.Don.Montant,  new { @id="montantDon", @placeholder="" , @required="required" })
 
+                                    @Html.DropDownListFor(m => Model.Don.Recurrence, new SelectList(Enum.GetValues(typeof(Kili.Models.Dons.TypeRecurrence))), "Sélectionner une récurrence")
+
+                                    @Html.HiddenFor(m => Model.IdCollecte)
+                                    
                                     <div class="form-submit">                            
-                                     <input type="submit" value="Valider Don" class="submit" name="submit" id="submit" />
+                                    <br><input type="submit" value="Donner" class="submit button" name="submit" id="submit" />
                                     </div>
                                     </fieldset>
 
                                     }
                      </div>
+                      <div class="col-md-6 col-md-6">
+                              <img src="@Model.Collecte.ImagePath" alt="AssoSoleil" height="500" width="750" style="border-radius: 10%;">
+                         </div>
               </div>
         </div>
     </div>

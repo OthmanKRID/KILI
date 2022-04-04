@@ -115,6 +115,17 @@ namespace Kili.Models.Services
             return donateur.Id;
         }
 
+        //Fonction permettant de créer un donateur
+        public int CreerDonateur()
+        {
+
+            Donateur donateur = new Donateur() ;
+            _bddContext.Donateurs.Add(donateur);
+            _bddContext.SaveChanges();
+
+            return donateur.Id;
+        }
+
         // Fonction permettant de modifier un donateur. 
         public void ModifierDonateur(int id, int? adresseID)
         {
@@ -184,17 +195,17 @@ namespace Kili.Models.Services
 
 
         //Fonction permettant de créer une collecte
-        public int CreerCollecte(string nom, int montant, string descriptif, int? servicedonID) // , DateTime date
+        public int CreerCollecte(string nom, int montant, string descriptif, int? servicedonID, string ImagePath) // , DateTime date
         {
 
-            Collecte collecte = new Collecte() { Nom = nom, MontantCollecte = montant, Descriptif = descriptif, Date = DateTime.Today, ServiceDonId = servicedonID, Actif = true };
+            Collecte collecte = new Collecte() { Nom = nom, MontantCollecte = montant, Descriptif = descriptif, Date = DateTime.Today, ServiceDonId = servicedonID, ImagePath = ImagePath, Actif = true };
             _bddContext.Collectes.Add(collecte);
             _bddContext.SaveChanges();
             return collecte.Id;
         }
 
         // Fonction permettant de modifier une collecte 
-        public void ModifierCollecte(int id, string nom, int montant, string descriptif, DateTime date)
+        public void ModifierCollecte(int id, string nom, int montant, string descriptif, DateTime date, string ImagePath)
         {
             Collecte collecte = _bddContext.Collectes.Find(id);
             if (collecte != null)
@@ -203,6 +214,7 @@ namespace Kili.Models.Services
                 collecte.MontantCollecte = montant;
                 collecte.Descriptif = descriptif;
                 collecte.Date = date;
+                collecte.ImagePath = ImagePath;
                 _bddContext.SaveChanges();
             }
         }
