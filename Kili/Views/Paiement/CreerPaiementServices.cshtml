@@ -28,15 +28,15 @@
                                 </div>
 
                                 <label for="cname">Titulaire de la carte</label>
-                                @Html.TextBoxFor(m => Model.MoyenPaiement.NomTitulaire , new { @type="text", @id="cname", @name="cardname", @placeholder="Vincent Gaudel" })
+                                @Html.TextBoxFor(m => Model.MoyenPaiement.NomTitulaire , new { @type="text", @id="cname", @name="cardname", @placeholder="Vincent Gaudel", @required="required" })
                                 <label for="ccnum">Numéro de carte</label>
-                                @Html.TextBoxFor(m => Model.MoyenPaiement.Numero, new { @type="text", @id="ccnum", @name="cardnumber", @placeholder="1111-2222-3333-4444" })
+                                @Html.TextBoxFor(m => Model.MoyenPaiement.Numero, new { @type="text", @id="ccnum", @name="cardnumber", @placeholder="1111-2222-3333-4444", @required="required" })
                                 @Html.ValidationMessageFor(m => Model.MoyenPaiement.Numero)
                                 <label for="expmonth">Date d'expiration</label>
-                                @Html.TextBoxFor(m => Model.MoyenPaiement.DateExpiration, new { @type="text", @id="expmonth", @name="expmonth", @placeholder="04/22" })
+                                @Html.TextBoxFor(m => Model.MoyenPaiement.DateExpiration, new { @type="text", @id="expmonth", @name="expmonth", @placeholder="04/22", @required="required" })
                                 @Html.ValidationMessageFor(m => Model.MoyenPaiement.DateExpiration)
                                 <label for="cvv">CVV</label>
-                                @Html.TextBoxFor(m => Model.MoyenPaiement.Cryptogramme, new { @type="text", @id="cvv", @name="cvv", @placeholder="352" })
+                                @Html.TextBoxFor(m => Model.MoyenPaiement.Cryptogramme, new { @type="text", @id="cvv", @name="cvv", @placeholder="352", @required="required" })
                                 @Html.ValidationMessageFor(m => Model.MoyenPaiement.Cryptogramme)
                             <br></br>
                             <br></br>
