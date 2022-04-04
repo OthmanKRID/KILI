@@ -67,6 +67,13 @@ div.desc {
     margin-right: auto;
     margin-left: auto;
 }
+
+.container-spe {
+    padding-right: 690px;
+    padding-left: 15px;
+    margin-right: 200px;
+    margin-left: auto;
+}
 #img5{
     background: url('../images/test.svg') no-repeat center center;
     background-size: cover;

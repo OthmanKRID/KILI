@@ -38,18 +38,17 @@
                                     <form class="form-signin" action="index.html">
                                         <div class="login-wrap">
 
-
-                                            <p>@Model.compteConnecte.Prenom<p/>
-                                            <p>@Model.compteConnecte.Nom<p/>
-                                            <p>@Model.compteConnecte.Telephone<p/>
-                                            <p>@Model.compteConnecte.Mail<p/>
+                                            <p>@Model.compteConnecte.Prenom</p>
+                                            <p>@Model.compteConnecte.Nom</p>
+                                            <p>@Model.compteConnecte.Telephone</p>
+                                            <p>@Model.compteConnecte.Mail</p>
+                                           
                                             @*
                                             <input type="text" class="form-control-asso" placeholder="Prénom" value="@Model.compteConnecte.Prenom" readonly autofocus>
                                             <input type="text" class="form-control-asso"  placeholder="Nom" value="@Model.compteConnecte.Nom" readonly autofocus>                                           
                                             <input type="text" class="form-control-asso"  placeholder="Numéro" value="@Model.compteConnecte.Telephone" readonly autofocus>
                                             <input type="email" class="form-control-asso"  placeholder="Email" value="@Model.compteConnecte.Mail" readonly autofocus>
                                             <input type="password" class="form-control" placeholder="Mot de passe" value="@Model.compteConnecte.Password" autofocus>*@
-
 
                                         </div>
                                     </form>
@@ -86,15 +85,10 @@
                                 @if (@Model.association.Abonnement.serviceAdhesion.EstActif)
                                 {
                                     <tr>
-                                       @* @if (@Model.association.Abonnement.serviceAdhesion.EstActif)
-                                        {
-                                            <td><a href="google.fr">oui</a></td>
-                                        }*@
                                         <td>Adhésion</td>
                                         <td>@Model.association.Abonnement.serviceAdhesion.dateAbonnement.ToString().Substring(0,10)</td>
                                         <td>@Model.association.Abonnement.serviceAdhesion.montant_paye €</td>
-                                                                                <td><button type="submit" class="btn btn-default btn-primary"><i
-                                                    class="fa fa-plus"></i>@Html.ActionLink("Gérer mes Adhésions", "GererServices") </button></td>
+                                        <td><button type="submit" class="btn btn-default btn-primary">@Html.ActionLink("Gérer mes Adhésions", "GererServices") </button></td>
                                     </tr>
                                 }
                                 @if (@Model.association.Abonnement.serviceDon.EstActif)
@@ -104,9 +98,9 @@
                                             <td>Don</td>
                                             <td>@Model.association.Abonnement.serviceDon.dateAbonnement.ToString().Substring(0,10)</td>
                                             <td>@Model.association.Abonnement.serviceDon.montant_paye €</td>
-                                                                                        <td><button type="submit" class="btn btn-default btn-primary"><i
-                                                    class="fa fa-plus"></i>@Html.ActionLink("Gérer Mes collectes", "AfficherCollectesDonsCompteConnecte", "Collecte") </button></td>
-                                        </tr>                                
+                                            <td><button type="submit" class="btn btn-default btn-primary">@Html.ActionLink("Gérer Mes collectes", "AfficherCollectesDonsCompteConnecte", "Collecte") </button></td>
+                                            </tr>
+                             
                                 }
                                 @if (@Model.association.Abonnement.serviceBoutique.EstActif)
                                 { 
@@ -114,10 +108,9 @@
                                             @*<td><a href="google.fr">oui</a></td>*@
                                             <td>Boutique</td>
                                             <td>@Model.association.Abonnement.serviceBoutique.dateAbonnement.ToString().Substring(0,10)</td>
-                                            <td>@Model.association.Abonnement.serviceBoutique.montant_paye €</td>
-                                                                                        <td><button type="submit" class="btn btn-default btn-primary"><i
-                                                    class="fa fa-plus"></i>@Html.ActionLink("Gérer Ma Boutique", "GererServices") </button></td>
-                                        </tr>
+                                            <td>@Model.association.Abonnement.serviceBoutique.montant_paye €</td> 
+                                            <td><button type="submit" class="btn btn-default btn-primary">@Html.ActionLink("Gérer Ma Boutique", "GererServices") </button></td>
+                                            </tr>
                                 }
                                     </tbody>
                                 </table>
@@ -145,31 +138,28 @@
                                     <header class="panel-heading tab-bg-dark-navy-blue">
                                         <ul class="nav nav-tabs nav-justified ">
 
-
                                              <li class="active">
+                                                  <a data-toggle="tab" href="#overview">
+                                                    Mon historique
+                                                </a>
+                                                
+                                            </li>
+
+                                            <li>
+                                               
+
                                                 <a data-toggle="tab" href="#settings">
                                                     Mon association
                                                 </a>
                                             </li>
-
-
-                                            <li>
-
-                                                <a data-toggle="tab" href="#overview">
-                                                    Mon historique
-                                                </a>
-                                            </li>
                                        
                                      
-
                                             
-
                                         </ul>
                                     </header>
-
                                     <div class="panel-body">
                                         <div class="tab-content tasi-tab">
-                                            <div id="overview" class="tab-pane ">
+                                            <div id="overview" class="tab-pane active">
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="recent-act">
@@ -214,10 +204,10 @@
                                                     
                                                 </div>
                                             </div>
-                                          
-                                           
-                                            <div id="settings" class="tab-pane active" >
 
+                                           
+                                            
+                                            <div id="settings" class="tab-pane">
                                              
                                             @using (Html.BeginForm("ModifierAssociation","Association", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                             {
@@ -307,13 +297,12 @@
                                                         </div>
                                                         @Html.HiddenFor(m => m.association.ImagePath)
 
-
                                                         <div class="form-group">
                                                             <div class="col-lg-offset-2 col-lg-10">
                                                                 <input class="btn btn-primary"
                                                                     type="submit" value="Enregistrer"/>
                                                                 <button class="btn btn-default"
-                                                                    type="button">Annuler</button>
+                                                                    type="button">Cancel</button>
                                                             </div>
                                                         </div>
                                                         </div>

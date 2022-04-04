@@ -45,6 +45,10 @@ namespace Kili.Controllers
            return View(new AssociationViewModel());
         }
 
+        public IActionResult Team()
+        {
+            return View();
+        }
 
         public IActionResult VoirAssociations(AssociationViewModel viewModel)
         {

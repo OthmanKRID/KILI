@@ -4,38 +4,115 @@
     ViewBag.Title = "Authentification";
 }
 
-@if (Model.Authentifie)
-{
-    <h3>
 
-        Vous êtes déjà authentifié en tant que :
+
+<section id="section-admin">
+
+    <body class="login-body">
+
+        <div class="container">
+
+             @using (Html.BeginForm("Authentification", "Login"))
+                {      
+            <form class="form-signin" action="index.html">
+                
+       
+                <div class="login-wrap">
+                    <h3>
+                        Veuillez vous authentifier :
+                    </h3>
+
+
+
+
+
+                    <div class="user-login-info">
+                        <input type="email" name="UserAccount.Mail" class="form-control" placeholder="Email" required="required">
+                        <input type="password" name="UserAccount.Password" class="form-control" placeholder="Mot de passe" required="required">
+                    </div>
+                    <label class="checkbox">
+                        @*<input type="checkbox" value="remember-me"> Sauvegarder*@
+                        <span class="pull-right">
+                            <a data-toggle="modal" href="#myModal"> Mot de passe oublié ?</a>
+
+                        </span>
+                    </label>
+                 
+                    <input type="submit" value="Se connecter" class="submit button" name="submit" id="submit" />
+                   
+                    <div class="registration">
+
+                        <a  href="Create.html" >@Html.ActionLink("Créer un compte", "CreerUtilisateur", "UserAccount")</a> 
+                             <a href="Create.html"><strong>@Html.ActionLink("Inscrire votre association", "AjouterCompteAssociation", "Association")</strong></a>
+
+                    </div> 
+
+                </div> 
+                
+                <!-- Modal -->
+
+                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Forgot Password ?</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Enter your e-mail address below to reset your password.</p>
+                                <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+
+                            </div>
+                            <div class="modal-footer">
+                                <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                                <button class="btn btn-success" type="button">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- modal -->
+
+            </form>}
+
+        </div>
+
+
+    </body>
+</section>
+
+<!--@if (Model.Authentifie)
+{
+        <h3>
+
+            Vous êtes déjà authentifié en tant que :
         @Model.UserAccount.Prenom @Model.UserAccount.Nom
 
-     <br/>
-    @Html.ActionLink("Mon profil", "ModifierUserAccount", "UserAccount",new { id = Model.UserAccount.Id })
-        </h3>
+         <br/>
+        @Html.ActionLink("Mon profil", "ModifierUserAccount", "UserAccount",new { id = Model.UserAccount.Id })
+            </h3>
     @Html.ActionLink("Voulez-vous vous déconnecter ?", "Deconnexion")
 }
 else
 {
-    <p>
-        Veuillez vous authentifier :
-    </p>
-<section>
-@using (Html.BeginForm(new {returnUrl = @Model.returnUrl}))
-{
-    <fieldset>
-        <legend>Connexion : </legend>
-        @Html.LabelFor(m => m.UserAccount.Mail)
-        @Html.TextBoxFor(m => m.UserAccount.Mail)
-        @Html.ValidationMessageFor(m => m.UserAccount.Mail)
-        <br />
-        @Html.LabelFor(m => m.UserAccount.Password)
-        @Html.PasswordFor(m => m.UserAccount.Password)
-        @Html.ValidationMessageFor(m => m.UserAccount.Password)
-        <br />
-        <input type="submit" value="Se Connecter..." />
-    </fieldset>
-}
-</section>
-}
+        <h3>
+            Veuillez vous authentifier :
+        </h3>
+
+    <section>
+        @using (Html.BeginForm(new { returnUrl = @Model.returnUrl }))
+        {
+            <fieldset>
+                <legend>Connexion : </legend>
+                @Html.LabelFor(m => m.UserAccount.Mail)
+                @Html.TextBoxFor(m => m.UserAccount.Mail)
+                @Html.ValidationMessageFor(m => m.UserAccount.Mail)
+                <br />
+                @Html.LabelFor(m => m.UserAccount.Password)
+                @Html.PasswordFor(m => m.UserAccount.Password)
+                @Html.ValidationMessageFor(m => m.UserAccount.Password)
+                <br />
+                <input type="submit" value="Se Connecter..." />
+            </fieldset>
+        }
+    </section>
+}-->

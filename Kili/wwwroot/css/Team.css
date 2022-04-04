@@ -1,26 +1,25 @@
 
 
-  /*--- Css pour les fleches DOWN et UP---------------------------------------------------*/
-  .bubble-text::after{
-    content:""; 
-    border-left:20px solid transparent;
-    border-right:20px solid transparent;
-    border-top: 20px solid #ee490e;
+  /*--- Css pour les fleches DOWN et UP---------------------------------------------------
+.bubble-text::after {
+    content: "";
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #f4f4f4;
     position: absolute;
     margin-left: 80px;
-    }
-    .bubble-text1::after{
-         width: 0;
-        height: 0;
-        border-left: 18px solid transparent;
-        border-right: 18px solid transparent;
-        border-bottom: 30px solid rgb(222, 143, 47);
-    content:""; 
-    
+}
+.bubble-text1::after {
+    width: 0;
+    height: 0;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-bottom: 30px solid  #f4f4f4;
+    content: "";
     position: absolute;
     margin-left: 80px;
     margin-bottom: 30px;
-    }
+}
     /*---css pour le text animé---------------------------------------------------*/
     
     

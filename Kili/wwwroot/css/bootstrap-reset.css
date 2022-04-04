@@ -59,6 +59,27 @@ a {
     margin-right: 50px;
 }
 
+.panel-team {
+    border: none;
+    box-shadow: none;
+    background: #fafafa;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 100px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    border-radius : 20px;
+}
+
+.img-team {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+
 .panel-heading {
     border-color: #eff2f7;
     font-size: 16px;
@@ -170,6 +191,15 @@ a {
     color: #32323A;
 }
 
+.form-control-3 {
+    border: 1px solid #e2e2e4;
+    box-shadow: none;
+    color: #32323A;
+    margin : 50px;
+    background : #FF6C60;
+
+}
+
 .form-control-asso {
     border: 1px solid #fafafa;
     box-shadow: none;
@@ -220,9 +250,17 @@ ul {
 .btn-primary {
     background-color: #F3D0A1;
     border: none;
-    color: #FFFFFF;
+    color: #32323A;
     border-radius: 50px;
     margin : 10px;
+}
+
+.btn-primary-2 {
+    background-color: #FF6C60;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 50px;
+    margin: 10px;
 }
 
     .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
