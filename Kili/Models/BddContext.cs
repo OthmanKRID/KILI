@@ -54,7 +54,7 @@ namespace Kili.Models
 
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                optionsBuilder.UseMySql("server=localhost;user id=root;password=P@ssw0rd5;database=Kili");
+                optionsBuilder.UseMySql("server=localhost;user id=root;password=rrrrr;database=Kili");
             }
             else
             {
@@ -99,17 +99,17 @@ namespace Kili.Models
 
             associationServices.CreerAssociation("Première Asso", new Adresse() { Numero = 1, Voie = "rue du sport", CodePostal = 34000, Ville = "Montpellier" }, ThemeAssociation.Sport, userAccountServices.ObtenirUserAccount(1) );
             associationServices.CreerAssociation("Hello cartel", new Adresse() { Numero = 20, Voie = "rue de la mer", CodePostal = 13000, Ville = "Marseille" }, ThemeAssociation.Environnement, userAccountServices.ObtenirUserAccount(2));
-            associationServices.CreerAssociation("Paris Motorcycle Club", new Adresse() { Numero = 30, Voie = "rue Jean Jaurès ", CodePostal = 75010, Ville = "Paris" }, ThemeAssociation.club_de_loisirs, userAccountServices.ObtenirUserAccount(3));
+            associationServices.CreerAssociation("Paris Motorcycle Club", new Adresse() { Numero = 30, Voie = "rue Jean Jaurès ", CodePostal = 75010, Ville = "Paris" }, ThemeAssociation.Loisirs, userAccountServices.ObtenirUserAccount(3));
             associationServices.CreerAssociation("4eme Asso", new Adresse() { Numero = 1, Voie = "rue du sport", CodePostal = 34000, Ville = "Montpellier" }, ThemeAssociation.Environnement, userAccountServices.ObtenirUserAccount(4));
 
 
-            associationServices.CreerAssociation("Les amateurs de Bordeaux", new Adresse() { Numero = 5, Voie = "rue du Laos", CodePostal = 75019, Ville = "Bordeaux" }, ThemeAssociation.Arts_et_culture, userAccountServices.ObtenirUserAccount(5));
+            associationServices.CreerAssociation("Les amateurs de Bordeaux", new Adresse() { Numero = 5, Voie = "rue du Laos", CodePostal = 75019, Ville = "Bordeaux" }, ThemeAssociation.Culture, userAccountServices.ObtenirUserAccount(5));
             associationServices.CreerAssociation("Basket & Backgammon", new Adresse() { Numero = 20, Voie = "rue de la mer", CodePostal = 13000, Ville = "Marseille" }, ThemeAssociation.Sport, userAccountServices.ObtenirUserAccount(6));
-            associationServices.CreerAssociation("Les Amis des Peoples", new Adresse() { Numero = 30, Voie = "rue Gabriel", CodePostal = 75017, Ville = "Paris" }, ThemeAssociation.Arts_et_culture, userAccountServices.ObtenirUserAccount(7));
+            associationServices.CreerAssociation("Les Amis des Peoples", new Adresse() { Numero = 30, Voie = "rue Gabriel", CodePostal = 75017, Ville = "Paris" }, ThemeAssociation.Culture, userAccountServices.ObtenirUserAccount(7));
             associationServices.CreerAssociation("Réunion Randonnées", new Adresse() { Numero = 35, Voie = "rue du soleil", CodePostal = 97490, Ville = "Saint-Denis" }, ThemeAssociation.Sport, userAccountServices.ObtenirUserAccount(8));
-            associationServices.CreerAssociation("Paris 20e Solidaire", new Adresse() { Numero = 85, Voie = "rue Jean Lolive", CodePostal = 75020, Ville = "Paris" }, ThemeAssociation.Humanitaire_caritative, userAccountServices.ObtenirUserAccount(9));
-            associationServices.CreerAssociation("Club des petits loups", new Adresse() { Numero = 3, Voie = "rue du Manin", CodePostal = 75019, Ville = "Paris" }, ThemeAssociation.club_de_loisirs, userAccountServices.ObtenirUserAccount(10));
-            associationServices.CreerAssociation("La course du coeur", new Adresse() { Numero = 85, Voie = "rue Jean Lolive", CodePostal = 75020, Ville = "Paris" }, ThemeAssociation.Humanitaire_caritative, userAccountServices.ObtenirUserAccount(11));
+            associationServices.CreerAssociation("Paris 20e Solidaire", new Adresse() { Numero = 85, Voie = "rue Jean Lolive", CodePostal = 75020, Ville = "Paris" }, ThemeAssociation.Caritative, userAccountServices.ObtenirUserAccount(9));
+            associationServices.CreerAssociation("Club des petits loups", new Adresse() { Numero = 3, Voie = "rue du Manin", CodePostal = 75019, Ville = "Paris" }, ThemeAssociation.Loisirs, userAccountServices.ObtenirUserAccount(10));
+            associationServices.CreerAssociation("La course du coeur", new Adresse() { Numero = 85, Voie = "rue Jean Lolive", CodePostal = 75020, Ville = "Paris" }, ThemeAssociation.Caritative, userAccountServices.ObtenirUserAccount(11));
             associationServices.ModifierAssociationDescriptifImage(1, "Association visant le bien commun et la production d'herbes arromatiques aux bienfaits reconnus. Nous sommes un acteur international mobilisé pour le droit et la justice", "/images/Hello.png");
             associationServices.ModifierAssociationDescriptifImage(2, "Association visant le bien commun et la production d'herbes arromatiques aux bienfaits reconnus. Nous sommes un acteur international mobilisé pour le droit et la justice", "/images/Hello.png");
             associationServices.ModifierAssociationDescriptifImage(3, "Paris Motorcycle Club est The club qui regroupe les amateurs de moto américaine, de tatouages et de bottes en cuir.", "/images/Harley.png");

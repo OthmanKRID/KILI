@@ -69,7 +69,7 @@
                                                     <td><img src="@v.ImagePath" height="25" width="25" style="border-radius: 10%;" /></td>
                                                     <td><a href=@Url.Action("AfficherCollecte", "Collecte", new { id = @v.Id})>@v.Nom</a>
                                                     <td>@v.Descriptif </td>
-                                                    <td class="hidden-phone">@v.MontantCollecte</td>
+                                                    <td class="hidden-phone">@v.MontantCollecte €</td>
                                                     <td><a href="#" data-elemid="@v.Id" class="todo-edit LinkPopup" style="margin-right:10px;"><i class="fa fa-arrow-circle-up fa-2x" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></a><a href=@("/collecte/supprimercollecte/" + v.Id) class="todo-remove"><i class="fa fa-times-circle fa-2x" aria-hidden="true" style="color:red;"></i></a></td>
                                                 </tr>
                                             </tbody>
@@ -219,7 +219,7 @@
                                             <td><a href="#">@v.Collecte.Nom</a></td>
                                             <td>@v.Date.ToLongDateString() </td>
                                             <td>@v.Recurrence </td>
-                                            <td class="hidden-phone">@v.Montant</td>
+                                            <td class="hidden-phone">@v.Montant €</td>
                                         </tr>
                                     </tbody>
                                 }

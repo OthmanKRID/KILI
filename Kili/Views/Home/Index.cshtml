@@ -224,7 +224,23 @@ J'ai un métier très prenant et un enfant en bas âge mais ça ne m'empêche pa
                     </div>
                     <div class="pricing-bottom">
                         <span class="pricing-dollar">19,99€/mois</span>
-                        <a href="#" class="section-btn pricing-btn">Souscrire</a>
+                        @*<a href="#" class="section-btn pricing-btn">Souscrire</a>*@
+
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Association"))
+                        {
+                            <button button type="button" class="section-btn pricing-btn">@Html.ActionLink("Souscrire", "GererServices", "Association")</button>
+                        }
+                        @if (User.Identity.IsAuthenticated == false)
+                        {
+                            <button button type="button" class="section-btn pricing-btn">@Html.ActionLink("Souscrire", "Authentification", "Login")</button>
+                        }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Association") == false)
+                        {
+                            <button button type="button" class="section-btn pricing-btn">@Html.ActionLink("Souscrire", "AjouterAssociation", "Association")</button>
+                        }
+ 
+
+
                     </div>
                 </div>
             </div>
@@ -243,7 +259,21 @@ J'ai un métier très prenant et un enfant en bas âge mais ça ne m'empêche pa
                     </div>
                     <div class="pricing-bottom">
                         <span class="pricing-dollar">19,99€/mois</span>
-                        <a href="#" class="section-btn pricing-btn">Souscrire</a>
+                        @*<a href="#" class="section-btn pricing-btn">Souscrire</a>*@
+                                                @if (User.Identity.IsAuthenticated && User.IsInRole("Association"))
+                        {
+                            <button button type="button" class="section-btn pricing-btn">@Html.ActionLink("Souscrire", "GererServices", "Association")</button>
+                        }
+                        @if (User.Identity.IsAuthenticated == false)
+                        {
+                            <button button type="button" class="section-btn pricing-btn">@Html.ActionLink("Souscrire", "Authentification", "Login")</button>
+                        }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Association") == false)
+                        {
+                            <button button type="button" class="section-btn pricing-btn">@Html.ActionLink("Souscrire", "AjouterAssociation", "Association")</button>
+                        }
+
+
                     </div>
                 </div>
             </div>
@@ -261,7 +291,19 @@ J'ai un métier très prenant et un enfant en bas âge mais ça ne m'empêche pa
                     </div>
                     <div class="pricing-bottom">
                         <span class="pricing-dollar">19,99€/mois</span>
-                        <a href="#" class="section-btn pricing-btn">Souscrire</a>
+                        @*<a href="#" class="section-btn pricing-btn">Souscrire</a>*@
+                                                @if (User.Identity.IsAuthenticated && User.IsInRole("Association"))
+                        {
+                            <button button type="button" class="section-btn pricing-btn">@Html.ActionLink("Souscrire", "GererServices", "Association")</button>
+                        }
+                        @if (User.Identity.IsAuthenticated == false)
+                        {
+                            <button button type="button" class="section-btn pricing-btn">@Html.ActionLink("Souscrire", "Authentification", "Login")</button>
+                        }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Association") == false)
+                        {
+                            <button button type="button" class="section-btn pricing-btn">@Html.ActionLink("Souscrire", "AjouterAssociation", "Association")</button>
+                        }
                     </div>
                 </div>
             </div>

@@ -71,8 +71,8 @@
                <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
 
-                         <li><a href="Association.html" class="smoothScroll">Les associations</a></li>
-                         <li><a href="#services" class="smoothScroll">Nos services</a></li>
+                         <li><a href=@Url.ActionLink("VoirAssociations", "Home") class="smoothScroll">Les associations</a></li>
+                         <li><a href="#pricing" class="smoothScroll">Nos services</a></li>
                         
 
                     </ul>
@@ -139,7 +139,7 @@
                                     @{
                                         UserAccount compteconnecte = new UserAccount_Services().ObtenirUserAccountConnecte(User.Identity.Name);
                                     }
-                                      <img alt="" src=@compteconnecte.ImagePath height="20" width="20">
+                                      <img alt="" src=@compteconnecte.ImagePath height="20" width="20" style="border-radius:10%">
                                       <span class="username">Mon compte</span>
                                     <b class="caret"></b>
                                 </a>
