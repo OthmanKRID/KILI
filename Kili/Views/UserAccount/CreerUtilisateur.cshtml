@@ -72,7 +72,7 @@
                                     @Html.TextBoxFor(m => m.UserAccount.Mail, new { @id = "mailUser", @placeholder = "mail", @required = "required" })
                                 </div>
                                 <div class="form-group">
-                                    @Html.TextBoxFor(m => m.UserAccount.Password, new { @id = "passwordUser", @placeholder = "Password", @required = "required" })
+                                    @Html.TextBoxFor(m => m.UserAccount.Password, new {@type="Password", @id = "passwordUser", @placeholder = "Password", @required = "required" })
                                 </div>
                             </div>
 

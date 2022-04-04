@@ -140,7 +140,7 @@
                                         UserAccount compteconnecte = new UserAccount_Services().ObtenirUserAccountConnecte(User.Identity.Name);
                                     }
                                       <img alt="" src=@compteconnecte.ImagePath height="20" width="20" style="border-radius:10%">
-                                      <span class="username">Mon compte</span>
+                                      <span class="username">@compteconnecte.Prenom</span>
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu extended logout">
