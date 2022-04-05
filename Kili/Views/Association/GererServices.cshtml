@@ -41,16 +41,31 @@
                                 <h2>@service.TypeService</h2>
                                 <p class="title">@service.duree_mois mois</p>
                                 <p>@service.prix €</p>
-                                <button class="button" id="btn-val">@Html.ActionLink("Ajouter", "AjouterService", "Abonnement",  new { id = @service.Id })</button>
+                                 <button class="button" id="btn-val">@Html.ActionLink("Ajouter", "AjouterService", "Abonnement",  new { id = @service.Id })</button>
                             </div>
                         </div>
                     </div>
                 }
+
+                 @if ((Model.abonnement.serviceAdhesion.EstActif == true && @service.TypeService == TypeService.Adhesion) || (Model.abonnement.serviceDon.EstActif == true && @service.TypeService == TypeService.Don) || (Model.abonnement.serviceBoutique.EstActif == true && @service.TypeService == TypeService.Boutique))
+                {
+                  <div class="column">
+                        <div class="card-services">
+
+                            <div class="container">
+                                <h2>@service.TypeService</h2>
+                                <p class="title">@service.duree_mois mois</p>
+                                <p>Déjà compris dans votre abonnement</p>
+                            </div>
+                        </div>
+                    </div>                    
+                }
+
+
             }
-
-
-            <button button type="button" class="button-services">@Html.ActionLink("Accéder au panier", "PanierServices", "Abonnement")</button>
+          
         </div>
+         <button button type="button" class="button-services">@Html.ActionLink("Accéder au panier", "PanierServices", "Abonnement")</button>
     </div>
 </section>
 

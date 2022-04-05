@@ -88,7 +88,7 @@
                                         <td>Adhésion</td>
                                         <td>@Model.association.Abonnement.serviceAdhesion.dateAbonnement.ToString().Substring(0,10)</td>
                                         <td>@Model.association.Abonnement.serviceAdhesion.montant_paye €</td>
-                                        <td><button type="submit" class="btn btn-default btn-primary">@Html.ActionLink("Gérer mes Adhésions", "GererServices") </button></td>
+                                        <td><button type="submit" class="btn btn-default btn-primary">@Html.ActionLink("Gérer mes adhésions", "EnDeveloppment", "Home") </button></td>
                                     </tr>
                                 }
                                 @if (@Model.association.Abonnement.serviceDon.EstActif)
@@ -109,7 +109,7 @@
                                             <td>Boutique</td>
                                             <td>@Model.association.Abonnement.serviceBoutique.dateAbonnement.ToString().Substring(0,10)</td>
                                             <td>@Model.association.Abonnement.serviceBoutique.montant_paye €</td> 
-                                            <td><button type="submit" class="btn btn-default btn-primary">@Html.ActionLink("Gérer Ma Boutique", "GererServices") </button></td>
+                                            <td><button type="submit" class="btn btn-default btn-primary">@Html.ActionLink("Gérer ma boutique", "EnDeveloppment", "Home") </button></td>
                                             </tr>
                                 }
                                     </tbody>
@@ -226,10 +226,10 @@
                                                             <div class="col-lg-6">
                                                             @Html.TextBoxFor(a => a.association.Image, new { placeholder = "Description", @type = "file", @class="file-pos", @id="exampleInputFile" })   
                                                           </div>
-                                                        </div>
+                                                        </div><br>
 
                                                      <div class="text-center">
-                                                        <img src="@Model.association.ImagePath" height="400" width="400" />
+                                                        <img src="@Model.association.ImagePath" height="400" width="400" style="border-radius:10%" />
                                                     </div>
 
                                                        <div class="form-group">

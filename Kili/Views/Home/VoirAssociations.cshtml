@@ -65,7 +65,7 @@
                     <a href="@Url.Action("VoirDetailsAssociation", "Association", new { id = @association.Id})">
                         <img src="@association.ImagePath" alt="Cinque Terre" style="width:271px; height:155px;">
                     </a>
-                    <div class="desc">@association.Nom</div>
+                    <div class="desc" style="font-weight:bold">@association.Nom</div>
                     <div class="desc" style="color:#ee490e;">@association.Theme</div>
                     <div class="desc overflow-clip-ellipsis" style="width: 250px; overflow: hidden; text-overflow: clip ellipsis;display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">@association.Description</div>
 

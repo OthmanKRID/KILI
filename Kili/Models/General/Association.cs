@@ -50,27 +50,27 @@ namespace Kili.Models.General
     public enum ThemeAssociation
     {
         Sport,
-        [Display(Name = "Arts et culture")]
-        Arts_et_culture,
+        //[Display(Name = "Arts et culture")]
+        Culture,
         Environnement,
-        [Display(Name = "Humanitaire - caritative")]
-        Humanitaire_caritative,
-        [Display(Name = "Club de loisirs")]
-        club_de_loisirs,
-        étudiante
+        //[Display(Name = "Humanitaire - caritative")]
+        Caritative,
+        //[Display(Name = "Club de loisirs")]
+        Loisirs,
+        Etudiante
     }
 
     public enum RechercheTheme
     {
         Tous,
         Sport,
-        [Display(Name = "Arts et culture")]
-        Arts_et_culture,
+        //[Display(Name = "Arts et culture")]
+        Culture,
         Environnement,
-        [Display(Name = "Humanitaire - caritative")]
-        Humanitaire_caritative,
-        [Display(Name = "Club de loisirs")]
-        club_de_loisirs,
-        étudiante
+        //[Display(Name = "Humanitaire - caritative")]
+        Caritative,
+        //[Display(Name = "Club de loisirs")]
+        Loisirs,
+        Etudiante
     }
 }

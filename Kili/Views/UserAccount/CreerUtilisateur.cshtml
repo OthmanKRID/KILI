@@ -34,7 +34,8 @@
     <div class="main">
 
         <div class="container">
-            <input type="button" value="fermer" name="submit" id="btn-supp-form" />
+            @*<input type="button" value="fermer" name="submit" id="btn-supp-form" />*@
+             <button button type="button"id="btn-supp-form" class="section-btn pricing-btn">@Html.ActionLink("fermer", "Index", "Home")</button>
             <div class="signup-content">
 
                 <div class="signup-img">
@@ -71,13 +72,13 @@
                                     @Html.TextBoxFor(m => m.UserAccount.Mail, new { @id = "mailUser", @placeholder = "mail", @required = "required" })
                                 </div>
                                 <div class="form-group">
-                                    @Html.TextBoxFor(m => m.UserAccount.Password, new { @id = "passwordUser", @placeholder = "Password", @required = "required" })
+                                    @Html.TextBoxFor(m => m.UserAccount.Password, new {@type="Password", @id = "passwordUser", @placeholder = "Password", @required = "required" })
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    @Html.TextBoxFor(m => m.UserAccount.Telephone, new { @id = "mailUser", @placeholder = "mail", @required = "required" })
+                                    @Html.TextBoxFor(m => m.UserAccount.Telephone, new { @id = "mailUser", @placeholder = "Téléphone", @required = "required" })
                                 </div>
                              </div>
 
